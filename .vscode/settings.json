@@ -43,7 +43,8 @@
 		"xtree": "cpp",
 		"ctime": "cpp",
 		"map": "cpp",
-		"stack": "cpp"
+		"stack": "cpp",
+		"atomic": "cpp"
 	},
 	"C_Cpp.errorSquiggles": "Disabled",
 	"git.ignoreLimitWarning": true
