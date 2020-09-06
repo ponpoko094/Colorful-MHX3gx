@@ -1,2 +1,2 @@
-# CTRPluginFramework-BlankTemplate
-A blank CTRPF plugin for Luma3DS
+# MHX3gx
+MHXの3gxです！
