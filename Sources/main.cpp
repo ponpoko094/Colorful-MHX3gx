@@ -758,7 +758,7 @@ namespace CTRPluginFramework
     int main()
     {
         // タイトルやAbout等作成
-        PluginMenu *menu = new PluginMenu(title, 0, 9, 4, about);
+        PluginMenu *menu = new PluginMenu(title, 0, 7, 0, about);
 
         // Synchronize the menu with frame event
         menu->SynchronizeWithFrame(true);
