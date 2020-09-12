@@ -304,6 +304,7 @@ namespace CTRPluginFramework
 	void MealSkill2Change(MenuEntry *entry);
 	void MealSkill3Change(MenuEntry *entry);
 	void Teleport(MenuEntry *entry);
+	void LocalTimeDisplay(MenuEntry *entry);
 	void Clean(void);
 
 } // namespace CTRPluginFramework

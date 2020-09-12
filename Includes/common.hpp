@@ -5,13 +5,14 @@
 #include "csvc.h"
 #include "CTRPluginFramework.hpp"
 #include "cheats.hpp"
-#include "list.hpp"
+#include "patch.hpp"
 #include "Helpers.hpp"
 #include "Unicode.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
 #include <cstdio>
+#include <ctime>
 #include <string>
 #include <ctime>
 #include <cmath>
