@@ -4271,86 +4271,16 @@ namespace CTRPluginFramework
     static int palicoChoice;
     void PalicoChoice(MenuEntry *entry)
     {
-        std::string name1, name2, name3, name4, name5, name6, name7, name8, name9, name10;
-        std::string name11, name12, name13, name14, name15, name16, name17, name18, name19, name20;
-        std::string name21, name22, name23, name24, name25, name26, name27, name28, name29, name30;
-        std::string name31, name32, name33, name34, name35, name36, name37, name38, name39, name40;
-        std::string name41, name42, name43, name44, name45, name46, name47, name48, name49, name50;
-        std::string name51, name52, name53, name54, name55, name56, name57, name58, name59, name60;
+        std::string name[60];
+        std::vector<std::string> nameSave;
 
-        Process::ReadString(0 * 0x494 + 0x8338AFE, name1, 30, StringFormat::Utf8);
-        Process::ReadString(1 * 0x494 + 0x8338AFE, name2, 30, StringFormat::Utf8);
-        Process::ReadString(2 * 0x494 + 0x8338AFE, name3, 30, StringFormat::Utf8);
-        Process::ReadString(3 * 0x494 + 0x8338AFE, name4, 30, StringFormat::Utf8);
-        Process::ReadString(4 * 0x494 + 0x8338AFE, name5, 30, StringFormat::Utf8);
-        Process::ReadString(5 * 0x494 + 0x8338AFE, name6, 30, StringFormat::Utf8);
-        Process::ReadString(6 * 0x494 + 0x8338AFE, name7, 30, StringFormat::Utf8);
-        Process::ReadString(7 * 0x494 + 0x8338AFE, name8, 30, StringFormat::Utf8);
-        Process::ReadString(8 * 0x494 + 0x8338AFE, name9, 30, StringFormat::Utf8);
-        Process::ReadString(9 * 0x494 + 0x8338AFE, name10, 30, StringFormat::Utf8);
-        Process::ReadString(10 * 0x494 + 0x8338AFE, name11, 30, StringFormat::Utf8);
-        Process::ReadString(11 * 0x494 + 0x8338AFE, name12, 30, StringFormat::Utf8);
-        Process::ReadString(12 * 0x494 + 0x8338AFE, name13, 30, StringFormat::Utf8);
-        Process::ReadString(13 * 0x494 + 0x8338AFE, name14, 30, StringFormat::Utf8);
-        Process::ReadString(14 * 0x494 + 0x8338AFE, name15, 30, StringFormat::Utf8);
-        Process::ReadString(15 * 0x494 + 0x8338AFE, name16, 30, StringFormat::Utf8);
-        Process::ReadString(16 * 0x494 + 0x8338AFE, name17, 30, StringFormat::Utf8);
-        Process::ReadString(17 * 0x494 + 0x8338AFE, name18, 30, StringFormat::Utf8);
-        Process::ReadString(18 * 0x494 + 0x8338AFE, name19, 30, StringFormat::Utf8);
-        Process::ReadString(19 * 0x494 + 0x8338AFE, name20, 30, StringFormat::Utf8);
-        Process::ReadString(20 * 0x494 + 0x8338AFE, name21, 30, StringFormat::Utf8);
-        Process::ReadString(21 * 0x494 + 0x8338AFE, name22, 30, StringFormat::Utf8);
-        Process::ReadString(22 * 0x494 + 0x8338AFE, name23, 30, StringFormat::Utf8);
-        Process::ReadString(23 * 0x494 + 0x8338AFE, name24, 30, StringFormat::Utf8);
-        Process::ReadString(24 * 0x494 + 0x8338AFE, name25, 30, StringFormat::Utf8);
-        Process::ReadString(25 * 0x494 + 0x8338AFE, name26, 30, StringFormat::Utf8);
-        Process::ReadString(26 * 0x494 + 0x8338AFE, name27, 30, StringFormat::Utf8);
-        Process::ReadString(27 * 0x494 + 0x8338AFE, name28, 30, StringFormat::Utf8);
-        Process::ReadString(28 * 0x494 + 0x8338AFE, name29, 30, StringFormat::Utf8);
-        Process::ReadString(29 * 0x494 + 0x8338AFE, name30, 30, StringFormat::Utf8);
-        Process::ReadString(30 * 0x494 + 0x8338AFE, name31, 30, StringFormat::Utf8);
-        Process::ReadString(31 * 0x494 + 0x8338AFE, name32, 30, StringFormat::Utf8);
-        Process::ReadString(32 * 0x494 + 0x8338AFE, name33, 30, StringFormat::Utf8);
-        Process::ReadString(33 * 0x494 + 0x8338AFE, name34, 30, StringFormat::Utf8);
-        Process::ReadString(34 * 0x494 + 0x8338AFE, name35, 30, StringFormat::Utf8);
-        Process::ReadString(35 * 0x494 + 0x8338AFE, name36, 30, StringFormat::Utf8);
-        Process::ReadString(36 * 0x494 + 0x8338AFE, name37, 30, StringFormat::Utf8);
-        Process::ReadString(37 * 0x494 + 0x8338AFE, name38, 30, StringFormat::Utf8);
-        Process::ReadString(38 * 0x494 + 0x8338AFE, name39, 30, StringFormat::Utf8);
-        Process::ReadString(39 * 0x494 + 0x8338AFE, name40, 30, StringFormat::Utf8);
-        Process::ReadString(40 * 0x494 + 0x8338AFE, name41, 30, StringFormat::Utf8);
-        Process::ReadString(41 * 0x494 + 0x8338AFE, name42, 30, StringFormat::Utf8);
-        Process::ReadString(42 * 0x494 + 0x8338AFE, name43, 30, StringFormat::Utf8);
-        Process::ReadString(43 * 0x494 + 0x8338AFE, name44, 30, StringFormat::Utf8);
-        Process::ReadString(44 * 0x494 + 0x8338AFE, name45, 30, StringFormat::Utf8);
-        Process::ReadString(45 * 0x494 + 0x8338AFE, name46, 30, StringFormat::Utf8);
-        Process::ReadString(46 * 0x494 + 0x8338AFE, name47, 30, StringFormat::Utf8);
-        Process::ReadString(47 * 0x494 + 0x8338AFE, name48, 30, StringFormat::Utf8);
-        Process::ReadString(48 * 0x494 + 0x8338AFE, name49, 30, StringFormat::Utf8);
-        Process::ReadString(49 * 0x494 + 0x8338AFE, name50, 30, StringFormat::Utf8);
-        Process::ReadString(50 * 0x494 + 0x8338AFE, name51, 30, StringFormat::Utf8);
-        Process::ReadString(51 * 0x494 + 0x8338AFE, name52, 30, StringFormat::Utf8);
-        Process::ReadString(52 * 0x494 + 0x8338AFE, name53, 30, StringFormat::Utf8);
-        Process::ReadString(53 * 0x494 + 0x8338AFE, name54, 30, StringFormat::Utf8);
-        Process::ReadString(54 * 0x494 + 0x8338AFE, name55, 30, StringFormat::Utf8);
-        Process::ReadString(55 * 0x494 + 0x8338AFE, name56, 30, StringFormat::Utf8);
-        Process::ReadString(56 * 0x494 + 0x8338AFE, name57, 30, StringFormat::Utf8);
-        Process::ReadString(57 * 0x494 + 0x8338AFE, name58, 30, StringFormat::Utf8);
-        Process::ReadString(58 * 0x494 + 0x8338AFE, name59, 30, StringFormat::Utf8);
-        Process::ReadString(59 * 0x494 + 0x8338AFE, name60, 30, StringFormat::Utf8);
-        Keyboard keyboard("ねこを選択してください。",
-                          {name1, name2, name3, name4, name5,
-                           name6, name7, name8, name9, name10,
-                           name11, name12, name13, name14, name15,
-                           name16, name17, name18, name19, name20,
-                           name21, name22, name23, name24, name25,
-                           name26, name27, name28, name29, name30,
-                           name31, name32, name33, name34, name35,
-                           name36, name37, name38, name39, name40,
-                           name41, name42, name43, name44, name45,
-                           name46, name47, name48, name49, name50,
-                           name51, name52, name53, name54, name55,
-                           name56, name57, name58, name59, name60});
+        nameSave.clear();
+        for (int i = 0; i < 60; i++)
+        {
+            Process::ReadString(i * 0x494 + 0x8338AFE, name[i], 30, StringFormat::Utf8);
+            nameSave.push_back(name[i]);
+        }
+        Keyboard keyboard("ねこを選択してください。", nameSave);
         if (keyboard.Open() != -1)
             palicoChoice = keyboard.Open();
     }

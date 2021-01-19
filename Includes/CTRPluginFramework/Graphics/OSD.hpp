@@ -20,6 +20,11 @@ namespace CTRPluginFramework
         u32       BytesPerPixel;
         GSPFormat Format;
 
+		/**
+		 * \brief Flushes the framebuffers, mandatory if you want to read from screen, such as alpha blend!
+		 */
+		void    FlushFramebuffer() const;
+
         /**
          * \brief Get a pointer to the screen's framebuffer
          * \param posX The position on the screen to point to
@@ -77,9 +82,9 @@ namespace CTRPluginFramework
          */
         void    ReadPixel(u32 posX, u32 posY, Color &pixel, bool fromRightFb = false) const;
 
-//	private:
-//	friend class OSDImpl;
-//		Screen() {};
+    private:
+        friend class OSDImpl;
+        Screen() {};
     };
 
     using OSDCallback = bool(*)(const Screen &);

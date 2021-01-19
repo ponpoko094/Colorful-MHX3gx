@@ -23,7 +23,7 @@ namespace CTRPluginFramework
 
         friend      Time Seconds(float amount);
         friend      Time Milliseconds(int amount);
-        friend      Time Microseconds(s64 amount);
+        friend      Time Microseconds(s64 amount);   
 
         explicit    Time(s64 microseconds);
 
@@ -33,24 +33,24 @@ namespace CTRPluginFramework
         s64     _microseconds;
     };
 
-
+  
     Time Seconds(float amount);
 
-
+ 
     Time Milliseconds(int amount);
 
-
+ 
     Time Microseconds(s64 amount);
-
+ 
     bool operator ==(Time left, Time right);
 
-
+  
     bool operator !=(Time left, Time right);
 
-
+ 
     bool operator <(Time left, Time right);
 
-
+ 
     bool operator >(Time left, Time right);
 
 

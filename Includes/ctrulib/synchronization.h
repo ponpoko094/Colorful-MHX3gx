@@ -18,7 +18,7 @@ typedef _LOCK_RECURSIVE_T RecursiveLock;
 
 /// A light event.
 typedef struct
-{
+{   
 	s32 state;      ///< State of the event: -2=cleared sticky, -1=cleared oneshot, 0=signaled oneshot, 1=signaled sticky
 	LightLock lock; ///< Lock used for sticky timer operation
 } LightEvent;

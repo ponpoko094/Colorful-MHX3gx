@@ -2,27 +2,6 @@
 
 namespace CTRPluginFramework
 {
-
-    std::string title = "MHX3gx";
-    std::string about = "ソース記述の人\n"
-                        " ぽんぽこ\n"
-                        "サーチした人\n"
-                        " ぽんぽこ\n"
-                        " 舞姫氏\n"
-                        " ymyn氏\n"
-                        " Fort42氏\n"
-                        "プラグイン作成において、ヒントを頂いた人\n"
-                        " Naoki氏\n"
-                        " クレラビ氏\n"
-                        " だいち村長氏\n"
-                        " けんじい氏\n"
-                        "参考にしたサイト\n"
-                        " mhgen.kiranico.com\n"
-                        " www.sejuku.net/blog/24934\n"
-                        "整合性チェックは行っていません。\n"
-                        "データのバックアップは取ってください。\n"
-                        "プラグインを楽しんでください。";
-
     // This patch the NFC disabling the touchscreen when scanning an amiibo, which prevents ctrpf to be used
     static void ToggleTouchscreenForceOn()
     {
@@ -709,7 +688,7 @@ namespace CTRPluginFramework
             *bonus += new MenuEntry("3DSの情報を確認", nullptr, Information, "3DSの情報を確認できます。");
         }
         menu += bonus;
-    } // namespace CTRPluginFramework
+    }
 
     void TeamAndConditions()
     {
@@ -757,8 +736,28 @@ namespace CTRPluginFramework
     // Plugin menu
     int main()
     {
+        std::string title = "MHX3gx";
+        std::string about = "ソース記述の人\n"
+                            " ぽんぽこ\n"
+                            "サーチした人\n"
+                            " ぽんぽこ\n"
+                            " 舞姫氏\n"
+                            " ymyn氏\n"
+                            " Fort42氏\n"
+                            "プラグイン作成において、ヒントを頂いた人\n"
+                            " Naoki氏\n"
+                            " クレラビ氏\n"
+                            " だいち村長氏\n"
+                            " けんじい氏\n"
+                            "参考にしたサイト\n"
+                            " mhgen.kiranico.com\n"
+                            " www.sejuku.net/blog/24934\n"
+                            "整合性チェックは行っていません。\n"
+                            "データのバックアップは取ってください。\n"
+                            "プラグインを楽しんでください。";
+
         // タイトルやAbout等作成
-        PluginMenu *menu = new PluginMenu(title, 0, 7, 0, about);
+        PluginMenu *menu = new PluginMenu(title, 0, 7, 0, about, 1);
 
         // Synchronize the menu with frame event
         menu->SynchronizeWithFrame(true);

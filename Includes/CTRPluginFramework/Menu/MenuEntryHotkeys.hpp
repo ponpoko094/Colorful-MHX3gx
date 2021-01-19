@@ -10,7 +10,7 @@ namespace CTRPluginFramework
 {
     class MenuEntry;
     class Hotkey
-    {
+    {      
     public:
 
         Hotkey();
@@ -74,7 +74,7 @@ namespace CTRPluginFramework
     {
     public:
         /**
-         *  \brief A callback type, the args are:
+         *  \brief A callback type, the args are: 
          *  MenuEntry *: the entry that own the Hotkey
          *  int : the index in the HotkeyManager of the hotkey that changed
          */
