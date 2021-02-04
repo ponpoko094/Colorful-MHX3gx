@@ -9,14 +9,6 @@ namespace CTRPluginFramework
     u16 data16 = 0, cmp16 = 0;
     u8 data8 = 0, cmp8 = 0;
 
-    // キーボード作成
-    Keyboard *KB = new Keyboard("ダミー");
-    Keyboard *OptionsKB = new Keyboard("ダミー");
-
-    std::vector<std::string> listToggle{
-        "はい",
-        "いいえ"};
-
     std::vector<std::string> listAmuletSkill{
         "スキル無し",
         "毒",
@@ -368,50 +360,26 @@ namespace CTRPluginFramework
         "ネコ式火竜車の技",
         "透明"};
 
-    bool SetKeyboard(const std::string &Message, bool Hexadecimal, const int Length, u32 &Output, u32 Define, OnInputChange CallBack)
-    {
-        Sleep(Milliseconds(100));
-        KB->GetMessage() = Message;
-        KB->IsHexadecimal(Hexadecimal);
-        KB->SetMaxLength(Length);
-        KB->OnInputChange(CallBack);
-        return KB->Open(Output, Define) == 0;
-    }
+    StringVector listToggle{
+        "はい",
+        "いいえ"};
 
     // スーパーノヴァ連射等
     void NoMotion(MenuEntry *entry)
     {
-        Keyboard keyboard("モーションを無くしますか？", listToggle);
-        int choice = keyboard.Open();
-        if (choice == 0)
-        {
-            Process::Write32(0xAF55A8, 0xE3A00001);
-        }
-        if (choice == 1)
-        {
-            Process::Write32(0xAF55A8, 0x13A00001);
-        }
+        KBD::Toggle32("モーションを無くしますか？", 0xAF55A8, 0xE3A00001, 0x13A00001);
     }
 
     // クエスト時間停止
     void QuestTimeStop(MenuEntry *entry)
     {
-        Keyboard keyboard("クエスト時間を停止しますか？", listToggle);
-        int choice = keyboard.Open();
-        if (choice == 0)
-        {
-            Process::Write32(0x90E5BC, 0xEA000008);
-        }
-        if (choice == 1)
-        {
-            Process::Write32(0x90E5BC, 0xBA000008);
-        }
+        KBD::Toggle32("クエスト時間を停止しますか？", 0x90E5BC, 0xEA000008, 0xBA000008);
     }
 
     // 名前変更
     void HunterNameChange(MenuEntry *entry)
     {
-        std::vector<std::string> listFixKeyboard{
+        StringVector listFixKeyboard{
             "定型文",
             "キーボード"};
         std::string hunterNameFix, hunterNameNow, hunterNameKeyboard;
@@ -5769,9 +5737,4 @@ namespace CTRPluginFramework
         });
     }
 
-    void Clean()
-    {
-        delete KB;
-        delete OptionsKB;
-    }
 } // namespace CTRPluginFramework

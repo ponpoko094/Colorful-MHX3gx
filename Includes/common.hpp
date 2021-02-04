@@ -6,6 +6,7 @@
 #include "CTRPluginFramework.hpp"
 #include "cheats.hpp"
 #include "patch.hpp"
+#include "keyboard.hpp"
 #include "Helpers.hpp"
 #include "Unicode.h"
 #include <stdio.h>
@@ -34,7 +35,8 @@
 
 namespace CTRPluginFramework
 {
-    using OnInputChange = void (*)(Keyboard &keyboard, InputChangeEvent &event);
+    using CallbackPointer = void (*)(void);
+    using StringVector = std::vector<std::string>;
 } // namespace CTRPluginFramework
 
 #endif
