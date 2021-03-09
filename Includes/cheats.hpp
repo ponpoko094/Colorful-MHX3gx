@@ -59,10 +59,8 @@ namespace CTRPluginFramework
 	void GunlanceHeatGageFix(MenuEntry *entry);
 	void AmuletCreate(MenuEntry *entry);
 	void AmuletTypeChange(MenuEntry *entry);
-	void AmuletSkill1Change(MenuEntry *entry);
-	void AmuletSkill1PointChange(MenuEntry *entry);
-	void AmuletSkill2Change(MenuEntry *entry);
-	void AmuletSkill2PointChange(MenuEntry *entry);
+	void AmuletSkillChange(MenuEntry *entry);
+	void AmuletSkillPointChange(MenuEntry *entry);
 	void AmuletSlotChange(MenuEntry *entry);
 	void ChatInfinite(MenuEntry *entry);
 	void OtherPlayerEquipmentCopy(MenuEntry *entry);
@@ -300,9 +298,7 @@ namespace CTRPluginFramework
 	void MealThunderResistanceUp(MenuEntry *entry);
 	void MealIceResistanceUp(MenuEntry *entry);
 	void MealDragonResistanceUp(MenuEntry *entry);
-	void MealSkill1Change(MenuEntry *entry);
-	void MealSkill2Change(MenuEntry *entry);
-	void MealSkill3Change(MenuEntry *entry);
+	void MealSkillChange(MenuEntry *entry);
 	void Teleport(MenuEntry *entry);
 	void LocalTimeDisplay(MenuEntry *entry);
 	void Clean(void);
