@@ -733,7 +733,7 @@ namespace CTRPluginFramework
                             "Twitter @ponpoko094";
 
         // タイトルやAbout等作成
-        PluginMenu *menu = new PluginMenu(title, 0, 7, 0, about, 0);
+        PluginMenu *menu = new PluginMenu(title, 1, 0, 0, about, 0);
 
         // Synchronize the menu with frame event
         menu->SynchronizeWithFrame(true);
