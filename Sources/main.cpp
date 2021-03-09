@@ -91,8 +91,8 @@ namespace CTRPluginFramework
     {
         ToggleTouchscreenForceOn();
         // プラグインの設定
-        settings.AllowActionReplay = false;   // アクションリプレイ
-        settings.AllowSearchEngine = false;   // サーチ
+        settings.AllowActionReplay = true;    // アクションリプレイ
+        settings.AllowSearchEngine = true;    // サーチ
         settings.WaitTimeToBoot = Seconds(3); // 起動時間
         // UIの色
         // settings.MainTextColor = Color(colorUiMainText);                       // テキストの色
@@ -194,13 +194,7 @@ namespace CTRPluginFramework
                     }
                     *meal += mealStatus;
 
-                    MenuFolder *mealSkill = new MenuFolder("スキル");
-                    {
-                        *mealSkill += new MenuEntry("スキル1", nullptr, MealSkill1Change, "食事スキルの1番目を変更します。");
-                        *mealSkill += new MenuEntry("スキル2", nullptr, MealSkill2Change, "食事スキルの2番目を変更します。");
-                        *mealSkill += new MenuEntry("スキル3", nullptr, MealSkill3Change, "食事スキルの3番目を変更します。");
-                    }
-                    *meal += mealSkill;
+                    *meal += new MenuEntry("スキル", nullptr, MealSkillChange, "食事スキルを変更します。");
                 }
                 *playerChange += meal;
 
@@ -215,25 +209,25 @@ namespace CTRPluginFramework
             }
             *player += playerChange;
 
-            *player += new MenuEntry("攻撃力倍率変更", PlayerAttackPowerMagnificationChange, PlayerAttackPowerMagnificationOption, "Y+UPでON、Y+DOWNでOFF\n攻撃力の倍率を変更します。\nCode by ymyn");
-            *player += new MenuEntry("防御力倍率変更", playerDefencePowerMagnificationChange, PlayerDefencePowerMagnificationOption, "X+UPでON、X+DOWNでOFF\n防御力の倍率を変更します。\nCode by ymyn");
-            *player += new MenuEntry("速度変更", PlayerSpeedChange, PlayerSpeedOption, "SELECT+LでON、SELECT+RでOFF\n速度を変更します。\nCode by ymyn");
+            *player += new MenuEntry("攻撃力倍率変更", PlayerAttackPowerMagnificationChange, PlayerAttackPowerMagnificationOption, "Y+UPでON、Y+DOWNでOFF\n攻撃力の倍率を変更します。");
+            *player += new MenuEntry("防御力倍率変更", playerDefencePowerMagnificationChange, PlayerDefencePowerMagnificationOption, "X+UPでON、X+DOWNでOFF\n防御力の倍率を変更します。");
+            *player += new MenuEntry("速度変更", PlayerSpeedChange, PlayerSpeedOption, "SELECT+LでON、SELECT+RでOFF\n速度を変更します。");
             *player += new MenuEntry("プレイヤー座標移動", PlayerCoordinateModifier, "A+十字キーで移動できます。");
             *player += new MenuEntry("ムーンジャンプ", PlayerMoonJump, "R+Bでジャンプできます。\n上がり続けるにはリピートムーブもオンにして、R+B+Yを押してください。");
             *player += new MenuEntry("保存式テレポート", Teleport, "R + → 現在位置を読み込む。\nR + ← 現在位置に書き込む");
             *player += new MenuEntry("他プレイヤーストーカー", stalker, "R+十字キーで追跡設定ができます。\nR↑ P1を追跡有効\nR+→ P2を追跡有効\nR+↓ P3を追跡有効\nR+←で追跡無効にできます。");
             *player += new MenuEntry("リピートムーブ", Repeatmove, "B+Yで動きを繰り返します。");
-            *player += new MenuEntry("狩技解放", HunterArtRelease, "狩技を全て解放します。\nCode by ymyn");
+            *player += new MenuEntry("狩技解放", HunterArtRelease, "狩技を全て解放します。");
             *player += new MenuEntry("腹減り無効", HungryInvalid, "時間経過でスタミナが減らなくなります。");
             *player += new MenuEntry("プレイヤーサイズ変更", HunterSizeChange, HunterSizeOption, "ハンターのサイズを変更できます。");
-            *player += new MenuEntry("HP無限", nullptr, InfiniteHP, "HPを無限にします。\nCode by ymyn");
-            *player += new MenuEntry("無敵", nullptr, Invincible, "無敵になります。\nCode by ymyn");
-            *player += new MenuEntry("スーパーアーマー", nullptr, SuperArmor, "スーパーアーマーになります。\nCode by ymyn");
-            *player += new MenuEntry("スタミナ無限", nullptr, InfiniteStamina, "スタミナを無限にします。\nCode by ymyn");
-            *player += new MenuEntry("狩技ゲージ無限", nullptr, InfiniteHunterArt, "狩技ゲージが無限になります。\nCode by ymyn");
-            *player += new MenuEntry("全スタイルで狩技3つ装着可能", nullptr, Always3HunterArtEquip, "全スタイルで狩技を3つ装着可能になります。\nCode by ymyn");
-            *player += new MenuEntry("常時地図表示", nullptr, AlwaysDisplayMap, "常に地図を表示します。\nCode by ymyn");
-            *player += new MenuEntry("常にモンスターペイント", nullptr, AlwaysPaint, "常にマップにモンスターが表示されます。\nCode by ymyn");
+            *player += new MenuEntry("HP無限", nullptr, InfiniteHP, "HPを無限にします。");
+            *player += new MenuEntry("無敵", nullptr, Invincible, "無敵になります。");
+            *player += new MenuEntry("スーパーアーマー", nullptr, SuperArmor, "スーパーアーマーになります。");
+            *player += new MenuEntry("スタミナ無限", nullptr, InfiniteStamina, "スタミナを無限にします。");
+            *player += new MenuEntry("狩技ゲージ無限", nullptr, InfiniteHunterArt, "狩技ゲージが無限になります。");
+            *player += new MenuEntry("全スタイルで狩技3つ装着可能", nullptr, Always3HunterArtEquip, "全スタイルで狩技を3つ装着可能になります。");
+            *player += new MenuEntry("常時地図表示", nullptr, AlwaysDisplayMap, "常に地図を表示します。");
+            *player += new MenuEntry("常にモンスターペイント", nullptr, AlwaysPaint, "常にマップにモンスターが表示されます。");
             *player += new MenuEntry("スピードハック", nullptr, SpeedHack, "速度の変更ができます。");
             *player += new MenuEntry("クエスト中スピードハック", nullptr, InQuestSpeedHack, "クエスト中での速度を変更できます。");
             *player += new MenuEntry("走った時にムーンウォーク", nullptr, IfRunMoonWalk, "走った時にムーンウォークをします。");
@@ -249,10 +243,8 @@ namespace CTRPluginFramework
                 {
                     *amulet += new MenuEntry("新護石作成", nullptr, AmuletCreate, "新たに護石を作成できます。");
                     *amulet += new MenuEntry("護石種類変更", nullptr, AmuletTypeChange, "護石の種類を変更します。");
-                    *amulet += new MenuEntry("第一スキル変更", nullptr, AmuletSkill1Change, "第一スキルを変更します。");
-                    *amulet += new MenuEntry("第二スキル変更", nullptr, AmuletSkill2Change, "第二スキルを変更します。");
-                    *amulet += new MenuEntry("第一スキルポイント変更", nullptr, AmuletSkill1PointChange, "第一スキルポイントを変更します。");
-                    *amulet += new MenuEntry("第二スキルポイント変更", nullptr, AmuletSkill2PointChange, "第二スキルポイントを変更します。");
+                    *amulet += new MenuEntry("スキル変更", nullptr, AmuletSkillChange, "スキルを変更します。");
+                    *amulet += new MenuEntry("スキルポイント変更", nullptr, AmuletSkillPointChange, "スキルポイントを変更します。");
                     *amulet += new MenuEntry("スロット数変更", nullptr, AmuletSlotChange, "スロット数を変更します。");
                 }
                 *equipment += amulet;
@@ -280,15 +272,15 @@ namespace CTRPluginFramework
             *item += new MenuEntry("たんほれアイテムセット", TanhoreItemSet, "ポーチの\n1枠目を 燃石炭\n2枠目を ネコタクチケット\n3枠目を モドリ玉\nにします。");
             *item += new MenuEntry("所持金最大", nullptr, MoneyChange, "所持金を変更できます。");
             *item += new MenuEntry("龍歴院ポイント最大", nullptr, WycademyPointChange, "龍歴院ポイントを変更できます。");
-            *item += new MenuEntry("アイテム&弾丸無限", nullptr, infitemammo, "アイテムと弾丸を無限にします。\nしゃがみの弾は無限になりません。\nCode by ymyn");
-            *item += new MenuEntry("素材無しで調合可能", nullptr, NoMaterialCompound, "素材無しで調合を可能にします。\nCode by ymyn");
-            *item += new MenuEntry("運搬物を持たずにポーチに入れる", nullptr, CargoPutInPorch, "運搬物がポーチに入ります。\nCode by ymyn");
-            *item += new MenuEntry("採取無限", nullptr, InfiniteCollect, "採集ポイントで無限に採取ができます。\nCode by ymyn");
-            *item += new MenuEntry("装備を素材無しで作れる", nullptr, NoMaterialEquipmentCreate, "素材なしで装備生産をすることができます。\nCode by ymyn");
-            *item += new MenuEntry("装備欄全て解放", nullptr, EquipmentAllRelease, "装備生産リストを全て解放します。\nCode by ymyn");
-            *item += new MenuEntry("全てのアイテム販売", nullptr, AllItemSold, "全てのアイテムがギルドストアや雑貨屋に売り出されます。\nCode by ymyn");
-            *item += new MenuEntry("ボックス1400個に拡張", nullptr, ItemBox1400Expansion, "ボックスのページを1400個に拡張します。\nCode by ymyn");
-            *item += new MenuEntry("持てるアイテム99個", nullptr, HaveItem99, "持てるアイテムの最大数を99個にします。\nCode by ymyn");
+            *item += new MenuEntry("アイテム&弾丸無限", nullptr, infitemammo, "アイテムと弾丸を無限にします。\nしゃがみの弾は無限になりません。");
+            *item += new MenuEntry("素材無しで調合可能", nullptr, NoMaterialCompound, "素材無しで調合を可能にします。");
+            *item += new MenuEntry("運搬物を持たずにポーチに入れる", nullptr, CargoPutInPorch, "運搬物がポーチに入ります。");
+            *item += new MenuEntry("採取無限", nullptr, InfiniteCollect, "採集ポイントで無限に採取ができます。");
+            *item += new MenuEntry("装備を素材無しで作れる", nullptr, NoMaterialEquipmentCreate, "素材なしで装備生産をすることができます。");
+            *item += new MenuEntry("装備欄全て解放", nullptr, EquipmentAllRelease, "装備生産リストを全て解放します。");
+            *item += new MenuEntry("全てのアイテム販売", nullptr, AllItemSold, "全てのアイテムがギルドストアや雑貨屋に売り出されます。");
+            *item += new MenuEntry("ボックス1400個に拡張", nullptr, ItemBox1400Expansion, "ボックスのページを1400個に拡張します。");
+            *item += new MenuEntry("持てるアイテム99個", nullptr, HaveItem99, "持てるアイテムの最大数を99個にします。");
             *item += new MenuEntry("アイテムボックス編集", nullptr, ItemBoxEdit, "アイテムボックスの編集をします。");
             *item += new MenuEntry("アイテムマイセットをポーチにコピー", nullptr, MySetToPorchItemCopy, "アイテムマイセットに登録されているアイテムを、アイテムポーチにコピーします。");
             *item += new MenuEntry("納品アイテムをポーチにコピー", nullptr, DeliveryItemToPorchCopy, "納品アイテムを、アイテムポーチの1番目と2番目にコピーします。\n空きを作ってください。");
@@ -332,13 +324,13 @@ namespace CTRPluginFramework
             *weapon += weaponType;
 
             *weapon += new MenuEntry("属性値変更", nullptr, AttributePointChange, "属性値を変更できます。");
-            *weapon += new MenuEntry("モーション無し", nullptr, NoMotion, "モーションを無くします。\nCode by 舞姫");
-            *weapon += new MenuEntry("会心率100%", nullptr, CriticalRate100, "会心率が100%になります。\nCode by Fort42");
-            *weapon += new MenuEntry("ボウガン自動装填", nullptr, BowgunAutoReload, "ボウガンの弾が自動で装填されます。\nCode by ymyn");
-            *weapon += new MenuEntry("斬れ味無限", nullptr, InfiniteSharpness, "斬れ味が無限になります。\nCode by ymyn");
-            *weapon += new MenuEntry("斬れ味+2", nullptr, SharpnessPlus2, "斬れ味レベル+2の効果を付与します。\nCode by Fort42");
-            *weapon += new MenuEntry("高速溜め短縮", nullptr, ChargeSpeedUp, "大剣等の溜めが短縮されます。\nCode by Fort42");
-            *weapon += new MenuEntry("チャージゲージ最大", nullptr, ChargeGageMax, "チャージゲージが最大になります。\nCode by Fort42");
+            *weapon += new MenuEntry("モーション無し", nullptr, NoMotion, "モーションを無くします。");
+            *weapon += new MenuEntry("会心率100%", nullptr, CriticalRate100, "会心率が100%になります。");
+            *weapon += new MenuEntry("ボウガン自動装填", nullptr, BowgunAutoReload, "ボウガンの弾が自動で装填されます。");
+            *weapon += new MenuEntry("斬れ味無限", nullptr, InfiniteSharpness, "斬れ味が無限になります。");
+            *weapon += new MenuEntry("斬れ味+2", nullptr, SharpnessPlus2, "斬れ味レベル+2の効果を付与します。");
+            *weapon += new MenuEntry("高速溜め短縮", nullptr, ChargeSpeedUp, "大剣等の溜めが短縮されます。");
+            *weapon += new MenuEntry("チャージゲージ最大", nullptr, ChargeGageMax, "チャージゲージが最大になります。");
         }
         menu += weapon;
 
@@ -366,7 +358,7 @@ namespace CTRPluginFramework
             *monster += new MenuEntry("1番目と2番目のモンスター常時麻痺", Monster1And2AlwaysParalysis, "1番目と2番目のモンスターのサイズの変更ができます。");
             *monster += new MenuEntry("1番目と2番目のモンスター常時睡眠", Monster1And2AlwaysSleep, "1番目と2番目のモンスターのサイズの変更ができます。");
             *monster += new MenuEntry("1番目と2番目のモンスター透明化", nullptr, Monster1And2AlwaysInvisible, "1番目と2番目のモンスターのサイズの変更ができます。");
-            *monster += new MenuEntry("瞬殺", nullptr, OneAttackKill, "モンスターを瞬殺できます。\nCode by 舞姫");
+            *monster += new MenuEntry("瞬殺", nullptr, OneAttackKill, "モンスターを瞬殺できます。");
         }
         menu += monster;
 
@@ -502,8 +494,8 @@ namespace CTRPluginFramework
             }
             *palico += palicoEdit;
 
-            *palico += new MenuEntry("ねこの攻撃力倍率変更", PalicoAttackPowerMagnificationChange, PalicoAttackPowerMagnificationOption, "Y+UPでON、Y+DOWNでOFF\nねこの攻撃力の倍率を変更します。\nCode by Fort42");
-            *palico += new MenuEntry("ねこの防御力倍率変更", PalicoDefencePowerMagnificationChange, PalicoDefencePowerMagnificationOption, "X+UPでON、X+DOWNでOFF\nねこの防御力変更の倍率を変更します。\nCode by Fort42");
+            *palico += new MenuEntry("ねこの攻撃力倍率変更", PalicoAttackPowerMagnificationChange, PalicoAttackPowerMagnificationOption, "Y+UPでON、Y+DOWNでOFF\nねこの攻撃力の倍率を変更します。");
+            *palico += new MenuEntry("ねこの防御力倍率変更", PalicoDefencePowerMagnificationChange, PalicoDefencePowerMagnificationOption, "X+UPでON、X+DOWNでOFF\nねこの防御力変更の倍率を変更します。");
             *palico += new MenuEntry("ねこ吸収", PalicoAbsorption, "ねこをハンターに吸収させます。\n他プレイヤーからは見えません。");
             *palico += new MenuEntry("サポートゲージ最大", ProwlerSupportGageMax, "ニャンターのサポートゲージを最大にします。");
         }
@@ -549,7 +541,7 @@ namespace CTRPluginFramework
                 *quest += new MenuEntry("現在のダウン回数変更", QuestDownNowChange, QuestDownNowOption, "現在のダウン回数を変更します。");
                 *quest += new MenuEntry("クエスト残り時間表示", QuestTimeDisplay, "QT = Quest Timeです。\n時:分:秒:フレーム\nと表示します。");
                 *quest += new MenuEntry("選択肢を固定", SaveScreenFix, SaveScreenOption, "Rボタンを押すと固定できます。");
-                *quest += new MenuEntry("クエスト時間停止", nullptr, QuestTimeStop, "クエスト時間を停止します。\nCode by 舞姫");
+                *quest += new MenuEntry("クエスト時間停止", nullptr, QuestTimeStop, "クエスト時間を停止します。");
                 *quest += new MenuEntry("全クエストクリア変更", nullptr, AllQuestClearChange, "ストーリーに不具合が起きる可能性があります。\n予めバックアップを取ったり、サブキャラクターで実行してください。");
             }
             *other += quest;
@@ -586,10 +578,8 @@ namespace CTRPluginFramework
             *other += base;
 
             *other += new MenuEntry("画面に集会所のパス表示", DisplayBasePassword, "現在の部屋のパスワードを表示します。");
-            *other += new MenuEntry("パスワード無効", "荒らしが可能となるので入れていません。");
-            *other += new MenuEntry("主権限を自プレイヤーに変更", "荒らしが可能となるので入れていません。");
             *other += new MenuEntry("プレイヤーの現在座標表示", DisplayPlayerCoordinate, "プレイヤーの現在座標を表示します。");
-            *other += new MenuEntry("宙に浮くバグ", FloatBug, "L+Selectでオン、R+Selectでオフにできます。\n高確率でエラーになります。注意してオンにしてください。\nCode by 舞姫");
+            *other += new MenuEntry("宙に浮くバグ", FloatBug, "L+Selectでオン、R+Selectでオフにできます。\n高確率でエラーになります。注意してオンにしてください。");
             *other += new MenuEntry("視野角変更", ViewingAngleChange, ViewingAngleOption, "視野角を変更します。\n(画面酔い注意)");
             *other += new MenuEntry("視野角変更改良版", nullptr, ViewingAngleChangeV2, "視野の倍率を変更できます。");
             *other += new MenuEntry("武器サイズ変更", nullptr, WeaponSizeChange, "武器のサイズを変更できます。");
@@ -598,7 +588,7 @@ namespace CTRPluginFramework
             *other += new MenuEntry("リージョン変更", nullptr, RegionChange, "日本かヨーロッパに変更できます。");
             *other += new MenuEntry("村の貢献度変更", nullptr, VillageContributionPointChange, "村の貢献度を変更します。");
             *other += new MenuEntry("ルームサービス変更", nullptr, RoomServiceChange, "ルームサービスを変更します。");
-            *other += new MenuEntry("障害物無視", nullptr, WallThrough, "障害物を無視するかどうか選択できます。\nCode by 舞姫");
+            *other += new MenuEntry("障害物無視", nullptr, WallThrough, "障害物を無視するかどうか選択できます。");
             *other += new MenuEntry("最大FPS変更", nullptr, MaximumFpsChange, "最大FPSを変更できます。");
         }
         menu += other;
@@ -737,27 +727,13 @@ namespace CTRPluginFramework
     int main()
     {
         std::string title = "MHX3gx";
-        std::string about = "ソース記述の人\n"
-                            " ぽんぽこ\n"
-                            "サーチした人\n"
-                            " ぽんぽこ\n"
-                            " 舞姫氏\n"
-                            " ymyn氏\n"
-                            " Fort42氏\n"
-                            "プラグイン作成において、ヒントを頂いた人\n"
-                            " Naoki氏\n"
-                            " クレラビ氏\n"
-                            " だいち村長氏\n"
-                            " けんじい氏\n"
-                            "参考にしたサイト\n"
-                            " mhgen.kiranico.com\n"
-                            " www.sejuku.net/blog/24934\n"
-                            "整合性チェックは行っていません。\n"
+        std::string about = "整合性チェックは行っていません。\n"
                             "データのバックアップは取ってください。\n"
-                            "プラグインを楽しんでください。";
+                            "プラグインを楽しんでください！\n"
+                            "Twitter @ponpoko094";
 
         // タイトルやAbout等作成
-        PluginMenu *menu = new PluginMenu(title, 0, 7, 0, about, 1);
+        PluginMenu *menu = new PluginMenu(title, 0, 7, 0, about, 0);
 
         // Synchronize the menu with frame event
         menu->SynchronizeWithFrame(true);
