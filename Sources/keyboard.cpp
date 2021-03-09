@@ -35,6 +35,7 @@ namespace CTRPluginFramework
             "はい",
             "いいえ"};
 
+        OptionsKB->GetMessage() = message;
         OptionsKB->Populate(listToggle);
         switch (OptionsKB->Open())
         {
@@ -55,6 +56,7 @@ namespace CTRPluginFramework
             "はい",
             "いいえ"};
 
+        OptionsKB->GetMessage() = message;
         OptionsKB->Populate(listToggle);
         switch (OptionsKB->Open())
         {
@@ -75,6 +77,7 @@ namespace CTRPluginFramework
             "はい",
             "いいえ"};
 
+        OptionsKB->GetMessage() = message;
         OptionsKB->Populate(listToggle);
         switch (OptionsKB->Open())
         {
@@ -95,6 +98,7 @@ namespace CTRPluginFramework
             "はい",
             "いいえ"};
 
+        OptionsKB->GetMessage() = message;
         OptionsKB->Populate(listToggle);
         switch (OptionsKB->Open())
         {
