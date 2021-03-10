@@ -699,7 +699,7 @@ namespace CTRPluginFramework
                         {
                             File::Create("opskip.bin");
                             MessageBox(openingMessage, "opskip.binを作成しました。\n設定を変更するために\n再起動をお願いします。")();
-                            abort();
+                            Process::ReturnToHomeMenu();
                         }
                         else
                         {
@@ -709,7 +709,7 @@ namespace CTRPluginFramework
                     else
                     {
                         MessageBox(openingMessage, "利用規約に同意する必要があります。")();
-                        abort();
+                        Process::ReturnToHomeMenu();
                     }
                 }
                 file = true;
@@ -717,8 +717,8 @@ namespace CTRPluginFramework
         }
         else
         {
-            MessageBox("openingMessage", "この3gxは日本版MHX(タイトルID:0004000000155400)でのみ動作します。")();
-            abort();
+            MessageBox(openingMessage, "この3gxは日本版MHX(タイトルID:0004000000155400)でのみ動作します。")();
+            Process::ReturnToHomeMenu();
         }
     }
 
