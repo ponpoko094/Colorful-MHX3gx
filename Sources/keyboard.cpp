@@ -1,9 +1,9 @@
-#include <common.hpp>
+#include "common.hpp"
 
 namespace CTRPluginFramework
 {
-    Keyboard *KB = new Keyboard("ダミー");
-    Keyboard *OptionsKB = new Keyboard("ダミー");
+    Keyboard* KB = new Keyboard("ダミー");
+    Keyboard* OptionsKB = new Keyboard("ダミー");
 
     bool KBD::Set(const std::string message, bool hexadecimal, const int length, u32 output, u32 define)
     {
@@ -33,7 +33,7 @@ namespace CTRPluginFramework
     {
         StringVector listToggle{
             "はい",
-            "いいえ"};
+            "いいえ" };
 
         OptionsKB->GetMessage() = message;
         OptionsKB->Populate(listToggle);
@@ -54,7 +54,7 @@ namespace CTRPluginFramework
     {
         StringVector listToggle{
             "はい",
-            "いいえ"};
+            "いいえ" };
 
         OptionsKB->GetMessage() = message;
         OptionsKB->Populate(listToggle);
@@ -75,7 +75,7 @@ namespace CTRPluginFramework
     {
         StringVector listToggle{
             "はい",
-            "いいえ"};
+            "いいえ" };
 
         OptionsKB->GetMessage() = message;
         OptionsKB->Populate(listToggle);
@@ -96,7 +96,7 @@ namespace CTRPluginFramework
     {
         StringVector listToggle{
             "はい",
-            "いいえ"};
+            "いいえ" };
 
         OptionsKB->GetMessage() = message;
         OptionsKB->Populate(listToggle);
@@ -124,5 +124,4 @@ namespace CTRPluginFramework
         delete KB;
         delete OptionsKB;
     };
-
 } // namespace CTRPluginFramework

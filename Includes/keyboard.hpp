@@ -1,6 +1,6 @@
 #ifndef KEYBOARD_HPP
 #define KEYBOARD_HPP
-#include <common.hpp>
+#include "common.hpp"
 
 namespace CTRPluginFramework
 {

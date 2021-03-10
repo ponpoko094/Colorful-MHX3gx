@@ -87,7 +87,7 @@ namespace CTRPluginFramework
         "雷耐性強化の術",
         "氷耐性強化の術",
         "龍耐性強化の術",
-        "透明"};
+        "透明" };
 
     std::vector<std::string> listPalicoAction{
         "なし",
@@ -136,30 +136,30 @@ namespace CTRPluginFramework
         "ここ掘れニャンの技",
         "メガブーメランの技",
         "ネコ式火竜車の技",
-        "透明"};
+        "透明" };
 
     StringVector listToggle{
         "はい",
-        "いいえ"};
+        "いいえ" };
 
     // スーパーノヴァ連射等
-    void NoMotion(MenuEntry *entry)
+    void NoMotion(MenuEntry* entry)
     {
         KBD::Toggle32("モーションを無くしますか？", 0xAF55A8, 0xE3A00001, 0x13A00001);
     }
 
     // クエスト時間停止
-    void QuestTimeStop(MenuEntry *entry)
+    void QuestTimeStop(MenuEntry* entry)
     {
         KBD::Toggle32("クエスト時間を停止しますか？", 0x90E5BC, 0xEA000008, 0xBA000008);
     }
 
     // 名前変更
-    void HunterNameChange(MenuEntry *entry)
+    void HunterNameChange(MenuEntry* entry)
     {
         StringVector listFixKeyboard{
             "定型文",
-            "キーボード"};
+            "キーボード" };
         std::string hunterNameFix, hunterNameNow, hunterNameKeyboard;
         Process::ReadString(0x83AE380, hunterNameFix, 0x1E, StringFormat::Utf8);
         Process::ReadString(0x831B72A, hunterNameNow, 0x1E, StringFormat::Utf8);
@@ -186,7 +186,7 @@ namespace CTRPluginFramework
     }
 
     // 障害物無視
-    void WallThrough(MenuEntry *entry)
+    void WallThrough(MenuEntry* entry)
     {
         Keyboard keyboard("障害物無視しますか？", listToggle);
         int choice = keyboard.Open();
@@ -201,7 +201,7 @@ namespace CTRPluginFramework
     }
 
     // ハンターランク変更
-    void HunterRankChange(MenuEntry *entry)
+    void HunterRankChange(MenuEntry* entry)
     {
         u16 hr;
         Process::Read16(0x831B76A, hr);
@@ -212,7 +212,7 @@ namespace CTRPluginFramework
     }
 
     // モンスターワンパンキル
-    void OneAttackKill(MenuEntry *entry)
+    void OneAttackKill(MenuEntry* entry)
     {
         Keyboard keyboard("瞬殺しますか？", listToggle);
         int choice = keyboard.Open();
@@ -227,7 +227,7 @@ namespace CTRPluginFramework
     }
 
     // 宙に浮くバグ
-    void FloatBug(MenuEntry *entry)
+    void FloatBug(MenuEntry* entry)
     {
         if (Controller::IsKeysPressed(L + Select))
         {
@@ -250,7 +250,7 @@ namespace CTRPluginFramework
     }
 
     // 属性
-    void AttributePointChange(MenuEntry *entry)
+    void AttributePointChange(MenuEntry* entry)
     {
         u16 attributePoint;
         Keyboard keyboard("属性値を入力してください。");
@@ -260,7 +260,7 @@ namespace CTRPluginFramework
     }
 
     // ゼニー
-    void MoneyChange(MenuEntry *entry)
+    void MoneyChange(MenuEntry* entry)
     {
         u32 money;
         Keyboard keyboard("所持金を入力してください。");
@@ -270,7 +270,7 @@ namespace CTRPluginFramework
     }
 
     // ポイント
-    void WycademyPointChange(MenuEntry *entry)
+    void WycademyPointChange(MenuEntry* entry)
     {
         u32 wycademyPoint;
         Keyboard keyboard("龍歴員ポイントを入力してください。");
@@ -280,7 +280,7 @@ namespace CTRPluginFramework
     }
 
     // 全狩技開放
-    void HunterArtRelease(MenuEntry *entry)
+    void HunterArtRelease(MenuEntry* entry)
     {
         Process::Read32(0x0DD9F30, offset);
         Process::Write32(offset + 0x9E0, 0xFFFFFFFE);
@@ -291,7 +291,7 @@ namespace CTRPluginFramework
     }
 
     // 採取無限
-    void InfiniteCollect(MenuEntry *entry)
+    void InfiniteCollect(MenuEntry* entry)
     {
         Keyboard keyboard("採取無限にしますか？", listToggle);
         int choice = keyboard.Open();
@@ -310,7 +310,7 @@ namespace CTRPluginFramework
     }
 
     // 素材なしで調合可能
-    void NoMaterialCompound(MenuEntry *entry)
+    void NoMaterialCompound(MenuEntry* entry)
     {
         Keyboard keyboard("素材無しで調合可能にしますか？", listToggle);
         int choice = keyboard.Open();
@@ -327,7 +327,7 @@ namespace CTRPluginFramework
     }
 
     // 素材無しで装備作成可能
-    void NoMaterialEquipmentCreate(MenuEntry *entry)
+    void NoMaterialEquipmentCreate(MenuEntry* entry)
     {
         Keyboard keyboard("素材無しで装備作成可能にしますか？", listToggle);
         int choice = keyboard.Open();
@@ -348,7 +348,7 @@ namespace CTRPluginFramework
     }
 
     // スタミナ無限
-    void InfiniteStamina(MenuEntry *entry)
+    void InfiniteStamina(MenuEntry* entry)
     {
         Keyboard keyboard("スタミナ無限にしますか？", listToggle);
         int choice = keyboard.Open();
@@ -363,7 +363,7 @@ namespace CTRPluginFramework
     }
 
     // 常にマップ表示
-    void AlwaysDisplayMap(MenuEntry *entry)
+    void AlwaysDisplayMap(MenuEntry* entry)
     {
         Keyboard keyboard("常にマップ表示しますか？", listToggle);
         int choice = keyboard.Open();
@@ -378,7 +378,7 @@ namespace CTRPluginFramework
     }
 
     // 常にモンスターペイント
-    void AlwaysPaint(MenuEntry *entry)
+    void AlwaysPaint(MenuEntry* entry)
     {
         Keyboard keyboard("常にモンスターペイントしますか？", listToggle);
         int choice = keyboard.Open();
@@ -395,7 +395,7 @@ namespace CTRPluginFramework
     }
 
     // 会心率100パーセント
-    void CriticalRate100(MenuEntry *entry)
+    void CriticalRate100(MenuEntry* entry)
     {
         Keyboard keyboard("会心率を100％にしますか？", listToggle);
         int choice = keyboard.Open();
@@ -410,7 +410,7 @@ namespace CTRPluginFramework
     }
 
     // 狩技無限
-    void InfiniteHunterArt(MenuEntry *entry)
+    void InfiniteHunterArt(MenuEntry* entry)
     {
         Keyboard keyboard("狩技を無限にしますか？", listToggle);
         int choice = keyboard.Open();
@@ -433,7 +433,7 @@ namespace CTRPluginFramework
     }
 
     // ボウガンオートリロード
-    void BowgunAutoReload(MenuEntry *entry)
+    void BowgunAutoReload(MenuEntry* entry)
     {
         Keyboard keyboard("ボウガン自動装填しますか？", listToggle);
         int choice = keyboard.Open();
@@ -450,7 +450,7 @@ namespace CTRPluginFramework
     }
 
     // HP無限
-    void InfiniteHP(MenuEntry *entry)
+    void InfiniteHP(MenuEntry* entry)
     {
         Keyboard keyboard("HP無限にしますか？", listToggle);
         int choice = keyboard.Open();
@@ -467,7 +467,7 @@ namespace CTRPluginFramework
     }
 
     // 斬れ味無限
-    void InfiniteSharpness(MenuEntry *entry)
+    void InfiniteSharpness(MenuEntry* entry)
     {
         Keyboard keyboard("斬れ味無限にしますか？", listToggle);
         int choice = keyboard.Open();
@@ -482,7 +482,7 @@ namespace CTRPluginFramework
     }
 
     // ボウガンの弾、アイテム無限
-    void infitemammo(MenuEntry *entry)
+    void infitemammo(MenuEntry* entry)
     {
         Keyboard keyboard("アイテム&弾丸を無限しますか？", listToggle);
         int choice = keyboard.Open();
@@ -497,7 +497,7 @@ namespace CTRPluginFramework
     }
 
     // 溜め最大
-    void ChargeGageMax(MenuEntry *entry)
+    void ChargeGageMax(MenuEntry* entry)
     {
         Keyboard keyboard("チャージゲージ最大にしますか？", listToggle);
         int choice = keyboard.Open();
@@ -512,7 +512,7 @@ namespace CTRPluginFramework
     }
 
     // 運搬物をポーチに入れる
-    void CargoPutInPorch(MenuEntry *entry)
+    void CargoPutInPorch(MenuEntry* entry)
     {
         Keyboard keyboard("運搬物をポーチに入れますか？", listToggle);
         int choice = keyboard.Open();
@@ -527,7 +527,7 @@ namespace CTRPluginFramework
     }
 
     // 常に3つ狩技装着可能
-    void Always3HunterArtEquip(MenuEntry *entry)
+    void Always3HunterArtEquip(MenuEntry* entry)
     {
         Keyboard keyboard("常に3つ狩技装着可能にしますか？", listToggle);
         int choice = keyboard.Open();
@@ -544,7 +544,7 @@ namespace CTRPluginFramework
     }
 
     // スーパーアーマー
-    void SuperArmor(MenuEntry *entry)
+    void SuperArmor(MenuEntry* entry)
     {
         Keyboard keyboard("スーパーアーマーにしますか？", listToggle);
         int choice = keyboard.Open();
@@ -561,7 +561,7 @@ namespace CTRPluginFramework
     }
 
     // アイテムボックス1400枠拡張
-    void ItemBox1400Expansion(MenuEntry *entry)
+    void ItemBox1400Expansion(MenuEntry* entry)
     {
         Keyboard keyboard("アイテムボックス1400枠拡張しますか？", listToggle);
         int choice = keyboard.Open();
@@ -584,7 +584,7 @@ namespace CTRPluginFramework
     }
 
     // 装備欄開放
-    void EquipmentAllRelease(MenuEntry *entry)
+    void EquipmentAllRelease(MenuEntry* entry)
     {
         Keyboard keyboard("装備欄開放しますか？", listToggle);
         int choice = keyboard.Open();
@@ -603,7 +603,7 @@ namespace CTRPluginFramework
     }
 
     // 無敵
-    void Invincible(MenuEntry *entry)
+    void Invincible(MenuEntry* entry)
     {
         Keyboard keyboard("無敵にしますか？", listToggle);
         int choice = keyboard.Open();
@@ -618,7 +618,7 @@ namespace CTRPluginFramework
     }
 
     // 斬れ味レベル+2
-    void SharpnessPlus2(MenuEntry *entry)
+    void SharpnessPlus2(MenuEntry* entry)
     {
         Keyboard keyboard("斬れ味レベル+2にしますか？", listToggle);
         int choice = keyboard.Open();
@@ -641,7 +641,7 @@ namespace CTRPluginFramework
     }
 
     // 全アイテム販売
-    void AllItemSold(MenuEntry *entry)
+    void AllItemSold(MenuEntry* entry)
     {
         Keyboard keyboard("全アイテム販売しますか？", listToggle);
         int choice = keyboard.Open();
@@ -662,7 +662,7 @@ namespace CTRPluginFramework
     }
 
     // サポートゲージ無限
-    void ProwlerSupportGageMax(MenuEntry *entry)
+    void ProwlerSupportGageMax(MenuEntry* entry)
     {
         Process::Read32(0xDD5348, offset);
         if (Process::Read32(offset + 0x14, cmp32) && cmp32 != 0x0)
@@ -673,7 +673,7 @@ namespace CTRPluginFramework
     }
 
     // アイテムを99個まで持てる
-    void HaveItem99(MenuEntry *entry)
+    void HaveItem99(MenuEntry* entry)
     {
         Keyboard keyboard("アイテムを99個まで持ちますか？", listToggle);
         int choice = keyboard.Open();
@@ -716,7 +716,7 @@ namespace CTRPluginFramework
     }
 
     // 溜め高速化
-    void ChargeSpeedUp(MenuEntry *entry)
+    void ChargeSpeedUp(MenuEntry* entry)
     {
         Keyboard keyboard("溜め高速化しますか？", listToggle);
         int choice = keyboard.Open();
@@ -748,7 +748,7 @@ namespace CTRPluginFramework
     }
 
     static float playerSpeed = 1;
-    void PlayerSpeedOption(MenuEntry *entry)
+    void PlayerSpeedOption(MenuEntry* entry)
     {
         std::vector<std::string> list1to10Magnification{
             "1倍",
@@ -760,7 +760,7 @@ namespace CTRPluginFramework
             "7倍",
             "8倍",
             "9倍",
-            "10倍"};
+            "10倍" };
 
         Keyboard keyboard("速度を何倍にしますか？", list1to10Magnification);
         int choice = keyboard.Open();
@@ -768,7 +768,7 @@ namespace CTRPluginFramework
     }
 
     // 速度変更
-    void PlayerSpeedChange(MenuEntry *entry)
+    void PlayerSpeedChange(MenuEntry* entry)
     {
         Process::Write32(0xC18D80, 0xED9F1A04);
         Process::Write32(0xC18D84, 0xED9F2A04);
@@ -798,7 +798,7 @@ namespace CTRPluginFramework
 
     static u8 playerAttackPowerMagnification = 0x1;
     // 攻撃力倍率変更設定
-    void PlayerAttackPowerMagnificationOption(MenuEntry *entry)
+    void PlayerAttackPowerMagnificationOption(MenuEntry* entry)
     {
         Keyboard keyboard("攻撃力を何倍にしますか?\n1~255の間");
         keyboard.IsHexadecimal(false);
@@ -806,7 +806,7 @@ namespace CTRPluginFramework
     }
 
     // 攻撃力変更
-    void PlayerAttackPowerMagnificationChange(MenuEntry *entry)
+    void PlayerAttackPowerMagnificationChange(MenuEntry* entry)
     {
         if (Controller::IsKeysPressed(Y + DU))
         {
@@ -844,7 +844,7 @@ namespace CTRPluginFramework
 
     static u8 playerDefencePowerMagnification = 0x1;
     // 防御力倍率変更設定
-    void PlayerDefencePowerMagnificationOption(MenuEntry *entry)
+    void PlayerDefencePowerMagnificationOption(MenuEntry* entry)
     {
         Keyboard keyboard("防御力を何倍にしますか?\n1~255の間");
         keyboard.IsHexadecimal(false);
@@ -852,7 +852,7 @@ namespace CTRPluginFramework
     }
 
     // 防御力変更
-    void playerDefencePowerMagnificationChange(MenuEntry *entry)
+    void playerDefencePowerMagnificationChange(MenuEntry* entry)
     {
         if (Controller::IsKeysPressed(X + DU))
         {
@@ -885,7 +885,7 @@ namespace CTRPluginFramework
     }
 
     // 肌の色変更
-    void SkinColorChange(MenuEntry *entry)
+    void SkinColorChange(MenuEntry* entry)
     {
         std::vector<std::string> listSkinColor{
             "赤色",
@@ -901,7 +901,7 @@ namespace CTRPluginFramework
             "紫桃",
             "白色",
             "灰色",
-            "黒色"};
+            "黒色" };
 
         Keyboard keyboard("肌の色を何色にしますか？", listSkinColor);
         int choice = keyboard.Open();
@@ -968,7 +968,7 @@ namespace CTRPluginFramework
     }
 
     // 肌の色R設定
-    void SkinRedChange(MenuEntry *entry)
+    void SkinRedChange(MenuEntry* entry)
     {
         u8 r;
         Keyboard keyboard("赤の値を入力してください\n1~255の間");
@@ -978,7 +978,7 @@ namespace CTRPluginFramework
     }
 
     // 肌の色G設定
-    void SkinGreenChange(MenuEntry *entry)
+    void SkinGreenChange(MenuEntry* entry)
     {
         u8 g;
         Keyboard keyboard("緑の値を入力してください\n1~255の間");
@@ -990,7 +990,7 @@ namespace CTRPluginFramework
     }
 
     // 肌の色B設定
-    void SkinBlueChange(MenuEntry *entry)
+    void SkinBlueChange(MenuEntry* entry)
     {
         u8 b;
         Keyboard keyboard("青の値を入力してください\n1~255の間");
@@ -1003,7 +1003,7 @@ namespace CTRPluginFramework
 
     static u8 palicoAttack = 0x1;
     // ニャンター攻撃力変更
-    void PalicoAttackPowerMagnificationChange(MenuEntry *entry)
+    void PalicoAttackPowerMagnificationChange(MenuEntry* entry)
     {
         if (Controller::IsKeysPressed(Y + DU))
         {
@@ -1064,7 +1064,7 @@ namespace CTRPluginFramework
     }
 
     // ニャンター攻撃力変更設定
-    void PalicoAttackPowerMagnificationOption(MenuEntry *entry)
+    void PalicoAttackPowerMagnificationOption(MenuEntry* entry)
     {
         Keyboard keyboard("防御力を何倍にしますか?\n1~255の間");
         keyboard.IsHexadecimal(false);
@@ -1073,7 +1073,7 @@ namespace CTRPluginFramework
 
     static u8 palicoDefence = 0x1;
     // ニャンター防御力変更
-    void PalicoDefencePowerMagnificationChange(MenuEntry *entry)
+    void PalicoDefencePowerMagnificationChange(MenuEntry* entry)
     {
         if (Controller::IsKeysPressed(X + DU))
         {
@@ -1110,7 +1110,7 @@ namespace CTRPluginFramework
     }
 
     // ニャンター防御力変更設定
-    void PalicoDefencePowerMagnificationOption(MenuEntry *entry)
+    void PalicoDefencePowerMagnificationOption(MenuEntry* entry)
     {
         Keyboard keyboard("防御力を何倍にしますか?\n1~255の間");
         keyboard.IsHexadecimal(false);
@@ -1118,7 +1118,7 @@ namespace CTRPluginFramework
     }
 
     // 画面にパス表示
-    void DisplayBasePassword(MenuEntry *entry)
+    void DisplayBasePassword(MenuEntry* entry)
     {
         static int addressOn = 0;
         static u16 pass;
@@ -1130,7 +1130,7 @@ namespace CTRPluginFramework
         if (online == 0x100)
         {
             addressOn = true;
-            OSD::Run([](const Screen &screen) {
+            OSD::Run([](const Screen& screen) {
                 if (!screen.IsTop)
                 {
                     return (false);
@@ -1152,7 +1152,7 @@ namespace CTRPluginFramework
                     }
                 }
                 return (true);
-            });
+                });
         }
         else
         {
@@ -1161,7 +1161,7 @@ namespace CTRPluginFramework
     }
 
     // ガンランス弾無限
-    void GunlanceAmmoInfinite(MenuEntry *entry)
+    void GunlanceAmmoInfinite(MenuEntry* entry)
     {
         Process::Read32(0x8360F24, offset);
         Process::Read32(offset + 0xB4, offset);
@@ -1169,7 +1169,7 @@ namespace CTRPluginFramework
     }
 
     // ガンランスオーバーヒート無効
-    void GunlanceInvalidOverHeat(MenuEntry *entry)
+    void GunlanceInvalidOverHeat(MenuEntry* entry)
     {
         Process::Read32(0x8360F24, offset);
         Process::Read32(offset + 0xB4, offset);
@@ -1178,14 +1178,14 @@ namespace CTRPluginFramework
 
     static u16 heat;
     // ヒートゲージ変更
-    void GunlanceHeatGageOption(MenuEntry *entry)
+    void GunlanceHeatGageOption(MenuEntry* entry)
     {
         Keyboard keyboard("固定したい値を決めてください。\n0:最小\n4D:橙\nD4:赤\n12C:最大");
         keyboard.Open(heat);
     }
 
     // ガンランスヒートゲージ固定
-    void GunlanceHeatGageFix(MenuEntry *entry)
+    void GunlanceHeatGageFix(MenuEntry* entry)
     {
         Process::Read32(0x8360F24, offset);
         Process::Read32(offset + 0xB4, offset);
@@ -1193,7 +1193,7 @@ namespace CTRPluginFramework
     }
 
     // 護石作成
-    void AmuletCreate(MenuEntry *entry)
+    void AmuletCreate(MenuEntry* entry)
     {
         Keyboard keyboard("護石を作成しますか？", listToggle);
         int choice = keyboard.Open();
@@ -1206,7 +1206,7 @@ namespace CTRPluginFramework
     }
 
     // 護石種類変更
-    void AmuletTypeChange(MenuEntry *entry)
+    void AmuletTypeChange(MenuEntry* entry)
     {
         std::vector<std::string> listAmuletType{
             "表示無し",
@@ -1216,7 +1216,7 @@ namespace CTRPluginFramework
             "城塞の護石",
             "女王の護石",
             "王の護石",
-            "龍の護石"};
+            "龍の護石" };
 
         Keyboard keyboard("護石の種類を選んでください", listAmuletType);
         if (int choice = keyboard.Open() != -1)
@@ -1226,7 +1226,7 @@ namespace CTRPluginFramework
     }
 
     // 護石スキル変更
-    void AmuletSkillChange(MenuEntry *entry)
+    void AmuletSkillChange(MenuEntry* entry)
     {
         std::vector<std::string> listAmuletSkill{
             "スキル無し",
@@ -1377,9 +1377,9 @@ namespace CTRPluginFramework
             "荒鉤爪",
             "燼滅刃",
             "北辰納豆流",
-            "胴系統倍加"};
+            "胴系統倍加" };
 
-        Keyboard keyboard("どちらのスキルを変更しますか？", {"第一スキル", "第二スキル"});
+        Keyboard keyboard("どちらのスキルを変更しますか？", { "第一スキル", "第二スキル" });
         int choice = keyboard.Open();
         if (choice == 0)
         {
@@ -1400,7 +1400,7 @@ namespace CTRPluginFramework
     }
 
     // 護石スキルポイント変更
-    void AmuletSkillPointChange(MenuEntry *entry)
+    void AmuletSkillPointChange(MenuEntry* entry)
     {
         u8 a;
         Keyboard keyboard("どちらのスキルポイントを変更しますか？");
@@ -1426,13 +1426,13 @@ namespace CTRPluginFramework
     }
 
     // 護石スロット数変更
-    void AmuletSlotChange(MenuEntry *entry)
+    void AmuletSlotChange(MenuEntry* entry)
     {
         std::vector<std::string> listAmuletSlot{
             "0スロット",
             "1スロット",
             "2スロット",
-            "3スロット"};
+            "3スロット" };
 
         Keyboard keyboard("スロット数を選んでください", listAmuletSlot);
         if (int choice = keyboard.Open() != -1)
@@ -1442,19 +1442,19 @@ namespace CTRPluginFramework
     }
 
     // チャット無限
-    void ChatInfinite(MenuEntry *entry)
+    void ChatInfinite(MenuEntry* entry)
     {
         Process::Write8(0xDD4CA0, 0x0);
     }
 
     // 装備コピー
-    void OtherPlayerEquipmentCopy(MenuEntry *entry)
+    void OtherPlayerEquipmentCopy(MenuEntry* entry)
     {
         std::vector<std::string> list1to4Player{
             "P1",
             "P2",
             "P3",
-            "P4"};
+            "P4" };
 
         u32 equip[2][6];
         u32 online;
@@ -1481,7 +1481,7 @@ namespace CTRPluginFramework
     }
 
     // プレイヤー座標移動
-    void PlayerCoordinateModifier(MenuEntry *entry)
+    void PlayerCoordinateModifier(MenuEntry* entry)
     {
         float x, z;
         Process::Read32(0x8195350, offset);
@@ -1507,7 +1507,7 @@ namespace CTRPluginFramework
     }
 
     // ムーンジャンプ
-    void PlayerMoonJump(MenuEntry *entry)
+    void PlayerMoonJump(MenuEntry* entry)
     {
         float y;
         Process::Read32(0x8195350, offset);
@@ -1520,7 +1520,7 @@ namespace CTRPluginFramework
     }
 
     // 他プレイヤーストーカー
-    void stalker(MenuEntry *entry)
+    void stalker(MenuEntry* entry)
     {
         u16 on;
         u32 player, p1, p2, p3, p4, p1x, p2x, p3x, p4x, p1y, p2y, p3y, p4y, p1z, p2z, p3z, p4z;
@@ -1666,7 +1666,7 @@ namespace CTRPluginFramework
     }
 
     // モンスター座標移動
-    void MonsterCoordinateModifier(MenuEntry *entry)
+    void MonsterCoordinateModifier(MenuEntry* entry)
     {
         float mon1x, mon1z, mon2x, mon2z;
         u32 offset1, offset2;
@@ -1724,7 +1724,7 @@ namespace CTRPluginFramework
     }
 
     // モンスターストーカー
-    void MonsterStalker(MenuEntry *entry)
+    void MonsterStalker(MenuEntry* entry)
     {
         u32 player, mon1, mon2;
         u32 playerX, playerZ, mon1x, mon1z, mon2x, mon2z;
@@ -1779,7 +1779,7 @@ namespace CTRPluginFramework
     }
 
     // 1番目のモンスターHP表示
-    void Monster1HpDisplay(MenuEntry *entry)
+    void Monster1HpDisplay(MenuEntry* entry)
     {
         static u16 mon1HpMax, mon1Hp;
         static int addressOn = 0;
@@ -1791,7 +1791,7 @@ namespace CTRPluginFramework
         if (offset != 0)
         {
             addressOn = true;
-            OSD::Run([](const Screen &screen) {
+            OSD::Run([](const Screen& screen) {
                 if (!screen.IsTop)
                 {
                     return (false);
@@ -1820,14 +1820,14 @@ namespace CTRPluginFramework
                     }
                 }
                 return (true);
-            });
+                });
         }
         else
             addressOn = false;
     }
 
     // 2番目のモンスターHP表示
-    void Monster2HpDisplay(MenuEntry *entry)
+    void Monster2HpDisplay(MenuEntry* entry)
     {
         static u16 mon2HpMax, mon2Hp;
         static int addressOn = 0;
@@ -1837,7 +1837,7 @@ namespace CTRPluginFramework
         if (offset != 0)
         {
             addressOn = true;
-            OSD::Run([](const Screen &screen) {
+            OSD::Run([](const Screen& screen) {
                 if (!screen.IsTop)
                 {
                     return (false);
@@ -1866,14 +1866,14 @@ namespace CTRPluginFramework
                     }
                 }
                 return (true);
-            });
+                });
         }
         else
             addressOn = false;
     }
 
     // プレイヤーの現在座標表示
-    void DisplayPlayerCoordinate(MenuEntry *entry)
+    void DisplayPlayerCoordinate(MenuEntry* entry)
     {
         static float x, y, z;
         static int addressOn = 0;
@@ -1882,7 +1882,7 @@ namespace CTRPluginFramework
         Process::ReadFloat(offset + 0x40, x);
         Process::ReadFloat(offset + 0x44, y);
         Process::ReadFloat(offset + 0x48, z);
-        OSD::Run([](const Screen &screen) {
+        OSD::Run([](const Screen& screen) {
             if (!screen.IsTop)
             {
                 return (false);
@@ -1893,15 +1893,15 @@ namespace CTRPluginFramework
                 addressOn = false;
             }
             return (true);
-        });
+            });
     }
 
     // リージョン変更
-    void RegionChange(MenuEntry *entry)
+    void RegionChange(MenuEntry* entry)
     {
         std::vector<std::string> listRegion{
             "日本",
-            "ヨーロッパ"};
+            "ヨーロッパ" };
 
         Keyboard keyboard("リージョンを選択してください。", listRegion);
         int result = keyboard.Open();
@@ -1916,7 +1916,7 @@ namespace CTRPluginFramework
     }
 
     // リピートムーブ
-    void Repeatmove(MenuEntry *entry)
+    void Repeatmove(MenuEntry* entry)
     {
         Process::Read32(0x8195350, offset);
         if (Controller::IsKeysDown(B + Y))
@@ -1926,7 +1926,7 @@ namespace CTRPluginFramework
     }
 
     // 特殊チケット変更
-    void SpecialPermitQuestTicketChange(MenuEntry *entry)
+    void SpecialPermitQuestTicketChange(MenuEntry* entry)
     {
         std::vector<std::string> listSpecialTicket{
             "紅兜アオアシラ",
@@ -1940,7 +1940,7 @@ namespace CTRPluginFramework
             "黒炎王リオレウス",
             "金雷公ジンオウガ",
             "荒鉤爪ティガレックス",
-            "燼滅刃ディノバルド"};
+            "燼滅刃ディノバルド" };
 
         u8 ticket;
         Keyboard keyboard("変更したいチケットを選んでください。", listSpecialTicket);
@@ -1959,17 +1959,16 @@ namespace CTRPluginFramework
 
     static u32 questClearFail;
     // クエストクリア失敗変更
-    void QuestClearOption(MenuEntry *entry)
+    void QuestClearOption(MenuEntry* entry)
     {
         std::vector<std::string> listQuestClear{
             "クエストクリア",
-            "クエスト失敗"};
+            "クエスト失敗" };
 
         Keyboard keyboard("クエストクリアか失敗かを選んでください。", listQuestClear);
         int choice = keyboard.Open();
         if (choice == 0)
         {
-
             questClearFail = 0x29;
         }
         if (choice == 1)
@@ -1978,28 +1977,28 @@ namespace CTRPluginFramework
         }
     }
     // クエストクリア失敗固定
-    void QuestClear(MenuEntry *entry)
+    void QuestClear(MenuEntry* entry)
     {
         Process::Write32(0x8363F94, questClearFail);
         Process::Write32(0x8363FA0, questClearFail);
     }
 
     // クエスト後即リザルト
-    void QuestResultSkip(MenuEntry *entry)
+    void QuestResultSkip(MenuEntry* entry)
     {
         Process::Read32(0x83ACA40, offset);
         Process::Write32(offset + 0x104, 0);
     }
 
     // 報酬画面スキップ
-    void QuestWaitSkip(MenuEntry *entry)
+    void QuestWaitSkip(MenuEntry* entry)
     {
         Process::Read32(0x819DF68, offset);
         Process::Write32(offset + 0xAC, 0);
     }
 
     // たんほれアイテム
-    void TanhoreItemSet(MenuEntry *entry)
+    void TanhoreItemSet(MenuEntry* entry)
     {
         Process::Write16(0x8372392, 0x0527); // 燃石炭
         Process::Write8(0x8372394, 0x63);
@@ -2010,18 +2009,18 @@ namespace CTRPluginFramework
     }
 
     // 爆弾無限設置
-    void InfiniteBombPut(MenuEntry *entry)
+    void InfiniteBombPut(MenuEntry* entry)
     {
         Process::Write32(0x83AC5F0, 0x3);
     }
 
     // 視野角変更設定
     static float fov = 50.f;
-    void ViewingAngleOption(MenuEntry *entry)
+    void ViewingAngleOption(MenuEntry* entry)
     {
         std::vector<std::string> listViewingAngle{
             "デフォルト",
-            "視野角変更"};
+            "視野角変更" };
 
         Keyboard keyboard("どちらにしますか？", listViewingAngle);
         int result = keyboard.Open();
@@ -2037,21 +2036,21 @@ namespace CTRPluginFramework
     }
 
     // 視野角変更
-    void ViewingAngleChange(MenuEntry *entry)
+    void ViewingAngleChange(MenuEntry* entry)
     {
         Process::Read32(0x81943DC, offset);
         Process::WriteFloat(offset + 0x740, fov);
     }
 
     // 村貢献度
-    void VillageContributionPointChange(MenuEntry *entry)
+    void VillageContributionPointChange(MenuEntry* entry)
     {
         u32 contributionPoint;
         std::vector<std::string> listVillage{
             "ベルナ村",
             "ココット村",
             "ポッケ村",
-            "ユクモ村"};
+            "ユクモ村" };
 
         Keyboard keyboard("貢献度を変更したい村を選んでください。", listVillage);
         int result = keyboard.Open();
@@ -2094,14 +2093,14 @@ namespace CTRPluginFramework
     }
 
     // ルームサービス変更
-    void RoomServiceChange(MenuEntry *entry)
+    void RoomServiceChange(MenuEntry* entry)
     {
         std::vector<std::string> listRoomService{
             "ルームサービス",
             "キャラバンの看板娘",
             "モガの村の看板娘",
             "タンジアの港の看板娘",
-            "ぽかぽか島の管理人"};
+            "ぽかぽか島の管理人" };
 
         Keyboard keyboard("どのルームサービスに変更しますか？", listRoomService);
         if (int choice = keyboard.Open() != -1)
@@ -2111,7 +2110,7 @@ namespace CTRPluginFramework
     }
 
     // ギルドカード変更
-    void GuildCardChange(MenuEntry *entry)
+    void GuildCardChange(MenuEntry* entry)
     {
         std::vector<std::string> listGuildCardChangeGroup{
             "称号",
@@ -2122,25 +2121,25 @@ namespace CTRPluginFramework
             "ポーズ",
             "武器使用回数",
             "プレイ時間",
-            "モンスター狩猟記録"};
+            "モンスター狩猟記録" };
 
         std::vector<std::string> listGuildCardChangeTitle{
             "称号1",
             "称号2",
-            "称号3"};
+            "称号3" };
 
         std::vector<std::string> listGuildCardChangeClearValue{
             "村",
             "集会所下位",
             "集会所上位",
             "特殊許可クエスト",
-            "闘技大会"};
+            "闘技大会" };
 
         std::vector<std::string> listGuildCardChangeWeaponUseGroup{
             "村",
             "集会所",
             "闘技大会",
-            "全てカンスト"};
+            "全てカンスト" };
 
         std::vector<std::string> listGuildCardChangeWeaponUseType{
             "大剣",
@@ -2157,16 +2156,16 @@ namespace CTRPluginFramework
             "狩猟笛",
             "操虫棍",
             "チャージアックス",
-            "ニャンター"};
+            "ニャンター" };
 
         std::vector<std::string> listGuildCardChangeMonsterHuntingGroup{
             "狩猟数",
             "捕獲数",
-            "どちらもカンスト"};
+            "どちらもカンスト" };
 
         std::vector<std::string> listGuildCardChangeMonsterHuntingBigSmall{
             "大型モンスター",
-            "小型モンスター"};
+            "小型モンスター" };
 
         std::vector<std::string> listGuildCardChangeMonsterHuntingBig{
             "リオレイア",
@@ -2239,7 +2238,7 @@ namespace CTRPluginFramework
             "タマミツネ",
             "ガムート",
             "オストガロア",
-            "ドスマッカォ"};
+            "ドスマッカォ" };
 
         std::vector<std::string> listGuildCardChangeMonsterHuntingSmall{
             "アプトノス",
@@ -2275,7 +2274,7 @@ namespace CTRPluginFramework
             "クンチュウ",
             "マッカォ",
             "リモセトス",
-            "ムーファ"};
+            "ムーファ" };
 
         u16 title1, title2, title3, value;
         float friendShipPoint;
@@ -2494,7 +2493,7 @@ namespace CTRPluginFramework
 
     // セーブ画面選択肢固定設定
     static u8 saveFix;
-    void SaveScreenOption(MenuEntry *entry)
+    void SaveScreenOption(MenuEntry* entry)
     {
         Keyboard keyboard("セーブ画面をどちらで固定しますか？", listToggle);
         int choice = keyboard.Open();
@@ -2505,7 +2504,7 @@ namespace CTRPluginFramework
     }
 
     // セーブ画面選択肢固定
-    void SaveScreenFix(MenuEntry *entry)
+    void SaveScreenFix(MenuEntry* entry)
     {
         if (Controller::IsKeysDown(R))
         {
@@ -2514,13 +2513,13 @@ namespace CTRPluginFramework
     }
 
     // アイテムボックス編集
-    void ItemBoxEdit(MenuEntry *entry)
+    void ItemBoxEdit(MenuEntry* entry)
     {
         std::vector<std::string> listItemBoxEdit{
             "アイテムを入れる[1400種]",
             "アイテムを入れる[548種]",
             "全アイテム99個",
-            "全アイテム消去"};
+            "全アイテム消去" };
 
         Keyboard keyboard("アイテムボックスをどう編集しますか？", listItemBoxEdit);
         int choice = keyboard.Open();
@@ -2566,7 +2565,7 @@ namespace CTRPluginFramework
     }
 
     // アイテムポーチ消去
-    void PorchAllClear(MenuEntry *entry)
+    void PorchAllClear(MenuEntry* entry)
     {
         if (MessageBox("確認です", "全て削除してもいいですか？", DialogType::DialogYesNo)())
         {
@@ -2578,7 +2577,7 @@ namespace CTRPluginFramework
     }
 
     // トリプルアップ
-    void InsectGlaiveAlwaysTripleUp(MenuEntry *entry)
+    void InsectGlaiveAlwaysTripleUp(MenuEntry* entry)
     {
         Process::Read32(0x8360F24, offset);
         Process::Read32(offset + 0xB4, offset);
@@ -2588,7 +2587,7 @@ namespace CTRPluginFramework
     }
 
     // 猟虫スタミナ無限
-    void InsectGlaiveInsectStaminaInfinite(MenuEntry *entry)
+    void InsectGlaiveInsectStaminaInfinite(MenuEntry* entry)
     {
         Process::Read32(0x8360F24, offset);
         Process::Read32(offset + 0xB4, offset);
@@ -2597,14 +2596,14 @@ namespace CTRPluginFramework
 
     // 溜め段階固定設定
     static float tame = 0;
-    void ChageStageOption(MenuEntry *entry)
+    void ChageStageOption(MenuEntry* entry)
     {
         std::vector<std::string> listStageSelect{
             "0段階目",
             "1段階目",
             "2段階目",
             "3段階目",
-            "4段階目"};
+            "4段階目" };
 
         static int stage = 0;
         Keyboard keyboard(Utils::Format("溜め段階を選んでください。\n現在[%u段階目]", stage), listStageSelect);
@@ -2637,7 +2636,7 @@ namespace CTRPluginFramework
     }
 
     // 溜め段階固定
-    void ChargeStageFix(MenuEntry *entry)
+    void ChargeStageFix(MenuEntry* entry)
     {
         Process::Read32(0x8360F24, offset);
         Process::Read32(offset + 0xB4, offset);
@@ -2645,7 +2644,7 @@ namespace CTRPluginFramework
     }
 
     // 武器ゲージ
-    void WeaponGageFix(MenuEntry *entry)
+    void WeaponGageFix(MenuEntry* entry)
     {
         Process::Read32(0x8360F24, offset);
         Process::Read32(offset + 0xB4, offset);
@@ -2653,7 +2652,7 @@ namespace CTRPluginFramework
     }
 
     // チャアクビン
-    void ChargeAxeBinFix(MenuEntry *entry)
+    void ChargeAxeBinFix(MenuEntry* entry)
     {
         Process::Read32(0x8360F24, offset);
         Process::Read32(offset + 0xB4, offset);
@@ -2661,7 +2660,7 @@ namespace CTRPluginFramework
     }
 
     // 笛全効果付与
-    void HuntingHornAllEffectGrant(MenuEntry *entry)
+    void HuntingHornAllEffectGrant(MenuEntry* entry)
     {
         u32 questFrame1;
         Process::Read32(0x8363ED4, questFrame1);
@@ -2677,7 +2676,7 @@ namespace CTRPluginFramework
     }
 
     // 弾数
-    void BowgunAmmoInfinite(MenuEntry *entry)
+    void BowgunAmmoInfinite(MenuEntry* entry)
     {
         u8 ammo;
         Process::Read32(0x8360F24, offset);
@@ -2687,7 +2686,7 @@ namespace CTRPluginFramework
     }
 
     // しゃがみ
-    void BowgunCrouchingShot(MenuEntry *entry)
+    void BowgunCrouchingShot(MenuEntry* entry)
     {
         Process::Read32(0x8360F24, offset);
         Process::Read32(offset + 0xB4, offset);
@@ -2695,7 +2694,7 @@ namespace CTRPluginFramework
     }
 
     // 1番目のモンスターサイズ表示
-    void Monster1SizeMagnificationDisplay(MenuEntry *entry)
+    void Monster1SizeMagnificationDisplay(MenuEntry* entry)
     {
         static float mon1size;
         static int addressOn = 0;
@@ -2706,7 +2705,7 @@ namespace CTRPluginFramework
         if (offset != 0)
         {
             addressOn = true;
-            OSD::Run([](const Screen &screen) {
+            OSD::Run([](const Screen& screen) {
                 if (!screen.IsTop)
                 {
                     return (false);
@@ -2717,14 +2716,14 @@ namespace CTRPluginFramework
                     addressOn = false;
                 }
                 return (true);
-            });
+                });
         }
         else
             addressOn = false;
     }
 
     // 2番目のモンスターサイズ表示
-    void Monster2SizeMagnificationDisplay(MenuEntry *entry)
+    void Monster2SizeMagnificationDisplay(MenuEntry* entry)
     {
         static float mon2size;
         static int addressOn = 0;
@@ -2735,7 +2734,7 @@ namespace CTRPluginFramework
         if (offset != 0)
         {
             addressOn = true;
-            OSD::Run([](const Screen &screen) {
+            OSD::Run([](const Screen& screen) {
                 if (!screen.IsTop)
                 {
                     return (false);
@@ -2746,7 +2745,7 @@ namespace CTRPluginFramework
                     addressOn = false;
                 }
                 return (true);
-            });
+                });
         }
         else
             addressOn = false;
@@ -2754,10 +2753,10 @@ namespace CTRPluginFramework
 
     // モンスターリピート設定
     static int mon1act, mon2act;
-    void MonsterActionRepeatOption(MenuEntry *entry)
+    void MonsterActionRepeatOption(MenuEntry* entry)
     {
-        Keyboard keyboard("挙動を選んでください。", {"固まる",
-                                                     "なめらか"});
+        Keyboard keyboard("挙動を選んでください。", { "固まる",
+                                                     "なめらか" });
         int choice = keyboard.Open();
         if (choice == 0)
         {
@@ -2772,7 +2771,7 @@ namespace CTRPluginFramework
     }
 
     // モンスターリピート
-    void MonsterActionRepeat(MenuEntry *entry)
+    void MonsterActionRepeat(MenuEntry* entry)
     {
         u32 mon1, mon2;
         u8 area1, area2;
@@ -2814,7 +2813,7 @@ namespace CTRPluginFramework
     }
 
     // 1番目と2番目のモンスター停止
-    void Monster1And2Stop(MenuEntry *entry)
+    void Monster1And2Stop(MenuEntry* entry)
     {
         u32 mon1, mon2;
         Process::Read32(0x8325244, mon1);
@@ -2826,7 +2825,7 @@ namespace CTRPluginFramework
     // 1番目のモンスター速度変更設定
     static float mon1sp = 1;
     static float mon2sp = 1;
-    void Monster1SpeedAttributeOption(MenuEntry *entry)
+    void Monster1SpeedAttributeOption(MenuEntry* entry)
     {
         Keyboard keyboard(Utils::Format("速度倍率を入力してください。\n現在[%.2f]", mon1sp));
         keyboard.IsHexadecimal(false);
@@ -2834,7 +2833,7 @@ namespace CTRPluginFramework
     }
 
     // 2番目のモンスター速度変更設定
-    void Monster2SpeedAttributeOption(MenuEntry *entry)
+    void Monster2SpeedAttributeOption(MenuEntry* entry)
     {
         Keyboard keyboard(Utils::Format("速度倍率を入力してください。\n現在[%.2f]", mon2sp));
         keyboard.IsHexadecimal(false);
@@ -2842,7 +2841,7 @@ namespace CTRPluginFramework
     }
 
     // 1番目のモンスター速度変更
-    void Monster1SpeedAttributeChange(MenuEntry *entry)
+    void Monster1SpeedAttributeChange(MenuEntry* entry)
     {
         u32 mon1;
         Process::Read32(0x8325244, mon1);
@@ -2850,7 +2849,7 @@ namespace CTRPluginFramework
     }
 
     // 2番目のモンスター速度変更
-    void Monster2SpeedAttributeChange(MenuEntry *entry)
+    void Monster2SpeedAttributeChange(MenuEntry* entry)
     {
         u32 mon2;
         Process::Read32(0x8325248, mon2);
@@ -2858,7 +2857,7 @@ namespace CTRPluginFramework
     }
 
     // 1番目と2番目のモンスター透明
-    void Monster1And2AlwaysInvisible(MenuEntry *entry)
+    void Monster1And2AlwaysInvisible(MenuEntry* entry)
     {
         u32 mon1, mon2;
         Process::Read32(0x8325244, mon1);
@@ -2878,7 +2877,7 @@ namespace CTRPluginFramework
     }
 
     // 1番目と2番目のモンスター毒
-    void Monster1And2AlwaysPoison(MenuEntry *entry)
+    void Monster1And2AlwaysPoison(MenuEntry* entry)
     {
         u32 mon1, mon2;
         u16 poison1Max, poison2Max;
@@ -2891,7 +2890,7 @@ namespace CTRPluginFramework
     }
 
     // 1番目と2番目のモンスター麻痺
-    void Monster1And2AlwaysParalysis(MenuEntry *entry)
+    void Monster1And2AlwaysParalysis(MenuEntry* entry)
     {
         u32 mon1, mon2;
         u16 paralysis1Max, paralysis2Max;
@@ -2904,7 +2903,7 @@ namespace CTRPluginFramework
     }
 
     // 1番目と2番目のモンスター睡眠
-    void Monster1And2AlwaysSleep(MenuEntry *entry)
+    void Monster1And2AlwaysSleep(MenuEntry* entry)
     {
         u32 mon1, mon2;
         u16 sleep1Max, sleep2Max;
@@ -2919,7 +2918,7 @@ namespace CTRPluginFramework
     // 1番目のモンスターサイズ変更設定
     static float monster1Size = 1;
     static float monster2Size = 1;
-    void Monster1SizeOption(MenuEntry *entry)
+    void Monster1SizeOption(MenuEntry* entry)
     {
         u32 mon1;
         Process::Read32(0x8325244, mon1);
@@ -2930,7 +2929,7 @@ namespace CTRPluginFramework
     }
 
     // 1番目のモンスターサイズ変更
-    void Monster1SizeChange(MenuEntry *entry)
+    void Monster1SizeChange(MenuEntry* entry)
     {
         u32 mon1;
         Process::Read32(0x8325244, mon1);
@@ -2938,7 +2937,7 @@ namespace CTRPluginFramework
     }
 
     // 2番目のモンスターサイズ変更設定
-    void Monster2SizeOption(MenuEntry *entry)
+    void Monster2SizeOption(MenuEntry* entry)
     {
         u32 mon2;
         Process::Read32(0x8325248, mon2);
@@ -2949,7 +2948,7 @@ namespace CTRPluginFramework
     }
 
     // 1番目のモンスターサイズ変更
-    void Monster2SizeChange(MenuEntry *entry)
+    void Monster2SizeChange(MenuEntry* entry)
     {
         u32 mon2;
         Process::Read32(0x8325248, mon2);
@@ -2958,7 +2957,7 @@ namespace CTRPluginFramework
 
     // クエスト最大ダウン回数設定
     static u8 quedownmax, quedownnow;
-    void QuestDownMaxOption(MenuEntry *entry)
+    void QuestDownMaxOption(MenuEntry* entry)
     {
         Process::Read8(0x8365440, quedownmax);
         Keyboard keyboard(Utils::Format("最大ダウン回数を入力してください。\n現在[%u]", quedownmax));
@@ -2967,13 +2966,13 @@ namespace CTRPluginFramework
     }
 
     // クエスト最大ダウン回数
-    void QuestDownMaxChange(MenuEntry *entry)
+    void QuestDownMaxChange(MenuEntry* entry)
     {
         Process::Write8(0x8365440, quedownmax);
     }
 
     // クエスト現在ダウン回数設定
-    void QuestDownNowOption(MenuEntry *entry)
+    void QuestDownNowOption(MenuEntry* entry)
     {
         Process::Read8(0x8365440, quedownnow);
         Keyboard keyboard(Utils::Format("現在のダウン回数を入力してください。\n現在[%u]", quedownnow));
@@ -2982,13 +2981,13 @@ namespace CTRPluginFramework
     }
 
     // クエスト現在ダウン回数
-    void QuestDownNowChange(MenuEntry *entry)
+    void QuestDownNowChange(MenuEntry* entry)
     {
         Process::Write8(0x8365440, quedownnow);
     }
 
     // クエスト残り時間表示
-    void QuestTimeDisplay(MenuEntry *entry)
+    void QuestTimeDisplay(MenuEntry* entry)
     {
         static u32 questFrame1, questFrame2, questSecondAll, questSecond1, questSecond2;
         static u32 questMinuteAll, questMinute1, questMinute2, questHour1, questHour2;
@@ -3006,7 +3005,7 @@ namespace CTRPluginFramework
         if (questFrame1 != 0)
         {
             addressOn = true;
-            OSD::Run([](const Screen &screen) {
+            OSD::Run([](const Screen& screen) {
                 if (!screen.IsTop)
                 {
                     return (false);
@@ -3025,14 +3024,14 @@ namespace CTRPluginFramework
                     }
                 }
                 return (true);
-            });
+                });
         }
         else
             addressOn = false;
     }
 
     // ハンターランクポイント変更
-    void HunterRankPointChange(MenuEntry *entry)
+    void HunterRankPointChange(MenuEntry* entry)
     {
         u32 hrp;
         Process::Read32(0x83B3814, hrp);
@@ -3045,11 +3044,11 @@ namespace CTRPluginFramework
     }
 
     // 全クエストクリア未クリア
-    void AllQuestClearChange(MenuEntry *entry)
+    void AllQuestClearChange(MenuEntry* entry)
     {
         std::vector<std::string> listAllQuestClearSelect{
             "クエスト全クリア",
-            "クエスト全未クリア"};
+            "クエスト全未クリア" };
 
         Keyboard keyboard("クエスト全クリアか、未クリアか選んでください。", listAllQuestClearSelect);
         int choice = keyboard.Open();
@@ -3070,14 +3069,14 @@ namespace CTRPluginFramework
     }
 
     // フェニープーギーの名前変更
-    void FenyAndPugyNameChange(MenuEntry *entry)
+    void FenyAndPugyNameChange(MenuEntry* entry)
     {
         std::string name;
         std::vector<std::string> listVillage{
             "ベルナ村",
             "ココット村",
             "ポッケ村",
-            "ユクモ村"};
+            "ユクモ村" };
 
         Process::ReadString(0x83AE380, name, 0x1E, StringFormat::Utf8);
         Keyboard keyboard("グループを選んでください。", listVillage);
@@ -3101,13 +3100,13 @@ namespace CTRPluginFramework
     }
 
     // フェニープーギーの服変更
-    void FenyAndPugyClothes(MenuEntry *entry)
+    void FenyAndPugyClothes(MenuEntry* entry)
     {
         std::vector<std::string> listFenyClothes{
             "ルンルンベル",
             "愛しのマドモワゼル",
             "召しませ姫林檎",
-            "常夏リゾート"};
+            "常夏リゾート" };
 
         std::vector<std::string> listPugyClothes{
             "思い出ストライプ",
@@ -3140,13 +3139,13 @@ namespace CTRPluginFramework
             "ドスのきもち",
             "ハートの女王様",
             "パンプキンナイト",
-            "キラキラ★ナイト"};
+            "キラキラ★ナイト" };
 
         std::vector<std::string> listVillage{
             "ベルナ村",
             "ココット村",
             "ポッケ村",
-            "ユクモ村"};
+            "ユクモ村" };
 
         Keyboard keyboard("グループを選んでください。", listVillage);
         int village = keyboard.Open();
@@ -3178,7 +3177,7 @@ namespace CTRPluginFramework
 
     // 酔っぱらい設定
     static u8 drunk;
-    void InstantDrunkOption(MenuEntry *entry)
+    void InstantDrunkOption(MenuEntry* entry)
     {
         Keyboard keyboard("酔っぱらいになりますか？", listToggle);
         int choice = keyboard.Open();
@@ -3193,7 +3192,7 @@ namespace CTRPluginFramework
     }
 
     // 酔っぱらい
-    void InstantDrunk(MenuEntry *entry)
+    void InstantDrunk(MenuEntry* entry)
     {
         Process::Read32(0x8360F24, offset);
         Process::Read32(offset + 0xB4, offset);
@@ -3201,7 +3200,7 @@ namespace CTRPluginFramework
     }
 
     // 1回飲んだら酔っぱらい
-    void Drunk1(MenuEntry *entry)
+    void Drunk1(MenuEntry* entry)
     {
         Process::Read32(0x8360F24, offset);
         Process::Read32(offset + 0xB4, offset);
@@ -3209,7 +3208,7 @@ namespace CTRPluginFramework
     }
 
     // 乗りゲージ
-    void RideGageMax(MenuEntry *entry)
+    void RideGageMax(MenuEntry* entry)
     {
         Process::Read32(0x8195350, offset);
         Process::WriteFloat(offset + 0x2C18, 2000);
@@ -3217,14 +3216,14 @@ namespace CTRPluginFramework
     }
 
     // 腹減り無効
-    void HungryInvalid(MenuEntry *entry)
+    void HungryInvalid(MenuEntry* entry)
     {
         Process::Read32(0x8360F24, offset);
         Process::Read32(offset + 0xB4, offset);
         Process::WriteFloat(offset + 0x2DC, 1);
     }
 
-    void ContrastChange(MenuEntry *entry)
+    void ContrastChange(MenuEntry* entry)
     {
         float contrast;
         Process::ReadFloat(0x81387A4, contrast);
@@ -3234,7 +3233,7 @@ namespace CTRPluginFramework
         Process::WriteFloat(0x81387A4, contrast);
     }
 
-    void InsectTypeChange(MenuEntry *entry)
+    void InsectTypeChange(MenuEntry* entry)
     {
         std::vector<std::string> listInsectType{
             "なし",
@@ -3263,7 +3262,7 @@ namespace CTRPluginFramework
             "光のルフ",
             "バレットホーク",
             "とら",
-            "表示無し"};
+            "表示無し" };
 
         Keyboard keyboard("虫の種類を選んでください。", listInsectType);
         if (int choice = keyboard.Open() != -1)
@@ -3272,7 +3271,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void InsectLevelChange(MenuEntry *entry)
+    void InsectLevelChange(MenuEntry* entry)
     {
         u8 a;
         Keyboard keyboard("虫のレベルを入力してください。");
@@ -3281,7 +3280,7 @@ namespace CTRPluginFramework
         Process::Write8(0x8386C69, a);
     }
 
-    void InsectPowerChange(MenuEntry *entry)
+    void InsectPowerChange(MenuEntry* entry)
     {
         u8 a;
         Keyboard keyboard("虫のパワー補正を0~15で入力してください。");
@@ -3292,7 +3291,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void InsectWeightChange(MenuEntry *entry)
+    void InsectWeightChange(MenuEntry* entry)
     {
         u8 a;
         Keyboard keyboard("虫のウェイト補正を0~15で入力してください。");
@@ -3303,7 +3302,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void InsectStaminaChange(MenuEntry *entry)
+    void InsectStaminaChange(MenuEntry* entry)
     {
         u8 a;
         Keyboard keyboard("虫のスタミナ補正を0~15で入力してください。");
@@ -3314,7 +3313,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void InsectFireAttributeChange(MenuEntry *entry)
+    void InsectFireAttributeChange(MenuEntry* entry)
     {
         u8 a;
         Keyboard keyboard("虫の火属性を入力してください。");
@@ -3325,7 +3324,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void InsectWaterAttributeChange(MenuEntry *entry)
+    void InsectWaterAttributeChange(MenuEntry* entry)
     {
         u8 a;
         Keyboard keyboard("虫の水属性を入力してください。");
@@ -3336,7 +3335,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void InsectThunderAttributeChange(MenuEntry *entry)
+    void InsectThunderAttributeChange(MenuEntry* entry)
     {
         u8 a;
         Keyboard keyboard("虫の雷属性を入力してください。");
@@ -3347,7 +3346,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void InsectIceAttributeChange(MenuEntry *entry)
+    void InsectIceAttributeChange(MenuEntry* entry)
     {
         u8 a;
         Keyboard keyboard("虫の氷属性を入力してください。");
@@ -3358,7 +3357,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void InsectDragonAttributeChange(MenuEntry *entry)
+    void InsectDragonAttributeChange(MenuEntry* entry)
     {
         u8 a;
         Keyboard keyboard("虫の龍属性を入力してください。");
@@ -3369,7 +3368,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void BaseCreateTargetChange(MenuEntry *entry)
+    void BaseCreateTargetChange(MenuEntry* entry)
     {
         Keyboard keyboard("ターゲットを？？？？？にしますか？", listToggle);
         int choice = keyboard.Open();
@@ -3379,7 +3378,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void BaseCreateQuestTypeChange(MenuEntry *entry)
+    void BaseCreateQuestTypeChange(MenuEntry* entry)
     {
         u8 a;
         Keyboard keyboard("クエスト形式コードを入力してください。\n20から改造です。");
@@ -3390,7 +3389,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void BaseCreateRecruitmentHunterRankMinimumChange(MenuEntry *entry)
+    void BaseCreateRecruitmentHunterRankMinimumChange(MenuEntry* entry)
     {
         u16 a;
         Keyboard keyboard("募集HRの下限を入力してください。");
@@ -3401,7 +3400,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void BaseCreateRecruitmentHunterRankMaximumChange(MenuEntry *entry)
+    void BaseCreateRecruitmentHunterRankMaximumChange(MenuEntry* entry)
     {
         u16 a;
         Keyboard keyboard("募集HRの上限を入力してください。");
@@ -3412,7 +3411,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void BaseCreateEntryPeopleChange(MenuEntry *entry)
+    void BaseCreateEntryPeopleChange(MenuEntry* entry)
     {
         u8 a;
         Keyboard keyboard("入室人数コードを入力してください。\n3から改造です。");
@@ -3423,7 +3422,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void BaseCreateEntryLimitChange(MenuEntry *entry)
+    void BaseCreateEntryLimitChange(MenuEntry* entry)
     {
         u8 a;
         Keyboard keyboard("入室制限コードを入力してください。\n2から改造です。");
@@ -3434,7 +3433,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void BaseCreatePasswordExistChange(MenuEntry *entry)
+    void BaseCreatePasswordExistChange(MenuEntry* entry)
     {
         u8 a;
         Keyboard keyboard("パスワード有無コードを入力してください。\n3から改造です。");
@@ -3445,7 +3444,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void BaseCreateRecruitmentMessage1Change(MenuEntry *entry)
+    void BaseCreateRecruitmentMessage1Change(MenuEntry* entry)
     {
         u8 a;
         Keyboard keyboard("募集文①コードを入力してください。\n33から改造です。");
@@ -3456,7 +3455,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void BaseCreateRecruitmentMessage2Change(MenuEntry *entry)
+    void BaseCreateRecruitmentMessage2Change(MenuEntry* entry)
     {
         u8 a;
         Keyboard keyboard("募集文②コードを入力してください。\n33から改造です。");
@@ -3467,7 +3466,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void BaseCreateRecruitmentMessage3Change(MenuEntry *entry)
+    void BaseCreateRecruitmentMessage3Change(MenuEntry* entry)
     {
         u8 a;
         Keyboard keyboard("募集文③コードを入力してください。\n33から改造です。");
@@ -3478,7 +3477,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void BaseCreateRecruitmentMessage4Change(MenuEntry *entry)
+    void BaseCreateRecruitmentMessage4Change(MenuEntry* entry)
     {
         u8 a;
         Keyboard keyboard("募集文④コードを入力してください。\n33から改造です。");
@@ -3489,7 +3488,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void BaseSearchTargetChange(MenuEntry *entry)
+    void BaseSearchTargetChange(MenuEntry* entry)
     {
         u8 a;
         Keyboard keyboard("ターゲットコードを入力してください。\n75から改造です。");
@@ -3500,7 +3499,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void BaseSearchQuestTypeChange(MenuEntry *entry)
+    void BaseSearchQuestTypeChange(MenuEntry* entry)
     {
         u8 a;
         Keyboard keyboard("クエスト形式コードを入力してください。\n20から改造です。");
@@ -3511,7 +3510,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void BaseSearchHostHunterRankMinimumChange(MenuEntry *entry)
+    void BaseSearchHostHunterRankMinimumChange(MenuEntry* entry)
     {
         u16 a;
         Keyboard keyboard("ホストHR下限を入力してください。");
@@ -3522,7 +3521,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void BaseSearchHostHunterRankMaximumChange(MenuEntry *entry)
+    void BaseSearchHostHunterRankMaximumChange(MenuEntry* entry)
     {
         u16 a;
         Keyboard keyboard("ホストHR上限を入力してください。");
@@ -3533,7 +3532,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void BaseSearchInQuestChange(MenuEntry *entry)
+    void BaseSearchInQuestChange(MenuEntry* entry)
     {
         u8 a;
         Keyboard keyboard("クエスト中コードを入力してください。");
@@ -3544,7 +3543,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void BaseSearchPasswordExistChange(MenuEntry *entry)
+    void BaseSearchPasswordExistChange(MenuEntry* entry)
     {
         u8 a;
         Keyboard keyboard("パスワード有無コードを入力してください。");
@@ -3555,7 +3554,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void HunterArt1Change(MenuEntry *entry)
+    void HunterArt1Change(MenuEntry* entry)
     {
         u16 a;
         Keyboard keyboard("狩技コードを入力してください。");
@@ -3566,7 +3565,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void HunterArt2Change(MenuEntry *entry)
+    void HunterArt2Change(MenuEntry* entry)
     {
         u16 a;
         Keyboard keyboard("狩技コードを入力してください。");
@@ -3577,7 +3576,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void HunterArt3Change(MenuEntry *entry)
+    void HunterArt3Change(MenuEntry* entry)
     {
         u16 a;
         Keyboard keyboard("狩技コードを入力してください。");
@@ -3588,7 +3587,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PlayerVoiceChange(MenuEntry *entry)
+    void PlayerVoiceChange(MenuEntry* entry)
     {
         std::vector<std::string> listVoiceType{
             "TYPE 1",
@@ -3610,7 +3609,7 @@ namespace CTRPluginFramework
             "TYPE 17",
             "TYPE 18",
             "TYPE 19",
-            "TYPE 20"};
+            "TYPE 20" };
 
         Keyboard keyboard("声を選んでください。", listVoiceType);
         if (int choice = keyboard.Open() != -1)
@@ -3619,7 +3618,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PlayerEyeColorChange(MenuEntry *entry)
+    void PlayerEyeColorChange(MenuEntry* entry)
     {
         std::vector<std::string> listEyeType{
             "茶色",
@@ -3631,7 +3630,7 @@ namespace CTRPluginFramework
             "白色",
             "黒色",
             "全部白色",
-            "全部黒色"};
+            "全部黒色" };
 
         Keyboard keyboard("目の色を選んでください。", listEyeType);
         if (int choice = keyboard.Open() != -1)
@@ -3640,7 +3639,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PlayerInnerChange(MenuEntry *entry)
+    void PlayerInnerChange(MenuEntry* entry)
     {
         std::vector<std::string> listInnerType{
             "TYPE 1",
@@ -3649,7 +3648,7 @@ namespace CTRPluginFramework
             "TYPE 4",
             "TYPE 5",
             "TYPE 6",
-            "TYPE 7"};
+            "TYPE 7" };
 
         Keyboard keyboard("インナーを選んでください。", listInnerType);
         if (int choice = keyboard.Open() != -1)
@@ -3658,11 +3657,11 @@ namespace CTRPluginFramework
         }
     }
 
-    void PlayerGenderChange(MenuEntry *entry)
+    void PlayerGenderChange(MenuEntry* entry)
     {
         std::vector<std::string> listGender{
             "男",
-            "女"};
+            "女" };
 
         Keyboard keyboard("性別を選んでください。", listGender);
         if (int choice = keyboard.Open() != -1)
@@ -3671,13 +3670,13 @@ namespace CTRPluginFramework
         }
     }
 
-    void PlayerHuntingStyleChange(MenuEntry *entry)
+    void PlayerHuntingStyleChange(MenuEntry* entry)
     {
         std::vector<std::string> listHuntingStyle{
             "ギルドスタイル",
             "ストライカースタイル",
             "エリアルスタイル",
-            "ブシドースタイル"};
+            "ブシドースタイル" };
 
         Keyboard keyboard("狩猟スタイルを選んでください。", listHuntingStyle);
         if (int choice = keyboard.Open() != -1)
@@ -3686,7 +3685,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PlayerHearStyleChange(MenuEntry *entry)
+    void PlayerHearStyleChange(MenuEntry* entry)
     {
         std::vector<std::string> listHearStyleType{
             "TYPE 1",
@@ -3718,7 +3717,7 @@ namespace CTRPluginFramework
             "TYPE 27",
             "TYPE 28",
             "TYPE 29",
-            "TYPE 30"};
+            "TYPE 30" };
 
         Keyboard keyboard("髪型を選んでください。", listHearStyleType);
         if (int choice = keyboard.Open() != -1)
@@ -3727,7 +3726,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PlayerFaceChange(MenuEntry *entry)
+    void PlayerFaceChange(MenuEntry* entry)
     {
         std::vector<std::string> listFaceType{
             "TYPE 1",
@@ -3747,7 +3746,7 @@ namespace CTRPluginFramework
             "TYPE 15",
             "TYPE 16",
             "TYPE 17",
-            "TYPE 18"};
+            "TYPE 18" };
 
         Keyboard keyboard("顔を選んでください。", listFaceType);
         if (int choice = keyboard.Open() != -1)
@@ -3756,7 +3755,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PlayerMakeChange(MenuEntry *entry)
+    void PlayerMakeChange(MenuEntry* entry)
     {
         std::vector<std::string> listMakeType{
             "TYPE 1",
@@ -3773,7 +3772,7 @@ namespace CTRPluginFramework
             "TYPE 12",
             "TYPE 13",
             "TYPE 14",
-            "メイクなし"};
+            "メイクなし" };
 
         Keyboard keyboard("メイクを選んでください。", listMakeType);
         if (int choice = keyboard.Open() != -1)
@@ -3786,7 +3785,7 @@ namespace CTRPluginFramework
         "タイトルID",
         "プロセスの名前",
         "3DSのタイプ",
-        "Wi-Fi接続確認"};
+        "Wi-Fi接続確認" };
 
     void TitleID()
     {
@@ -3828,7 +3827,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void Information(MenuEntry *entry)
+    void Information(MenuEntry* entry)
     {
         Keyboard keyboard("確認したい情報を選んでください。", info);
         int choice = keyboard.Open();
@@ -3850,7 +3849,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void HexToDecd32(MenuEntry *entry)
+    void HexToDecd32(MenuEntry* entry)
     {
         u32 out;
         Keyboard keyboard("16進数を入力してください。\n-に対応しています。\n例:FFFFFFFF = -1");
@@ -3860,7 +3859,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void HexToDecu32(MenuEntry *entry)
+    void HexToDecu32(MenuEntry* entry)
     {
         u32 out;
         Keyboard keyboard("16進数を入力してください。\n-に対応していません。\n例:FFFFFFFF = 4294967295");
@@ -3870,7 +3869,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void HexToDecd16(MenuEntry *entry)
+    void HexToDecd16(MenuEntry* entry)
     {
         u16 out;
         Keyboard keyboard("16進数を入力してください。\n-に対応しています。\n例:FFFF = -1");
@@ -3880,7 +3879,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void HexToDecu16(MenuEntry *entry)
+    void HexToDecu16(MenuEntry* entry)
     {
         u16 out;
         Keyboard keyboard("16進数を入力してください。\n-に対応していません。\n例:FFFF = 65535");
@@ -3890,7 +3889,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void HexToDecd8(MenuEntry *entry)
+    void HexToDecd8(MenuEntry* entry)
     {
         u8 out;
         Keyboard keyboard("16進数を入力してください。\n-に対応しています。\n例:FF = -1");
@@ -3900,7 +3899,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void HexToDecu8(MenuEntry *entry)
+    void HexToDecu8(MenuEntry* entry)
     {
         u8 out;
         Keyboard keyboard("16進数を入力してください。\n-に対応していません。\n例:FF = 255");
@@ -3910,7 +3909,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void DecToHex(MenuEntry *entry)
+    void DecToHex(MenuEntry* entry)
     {
         u32 out;
         Keyboard keyboard("10進数を入力してください。");
@@ -3921,7 +3920,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void HexadecimalCalculator(MenuEntry *entry)
+    void HexadecimalCalculator(MenuEntry* entry)
     {
         u32 data;
         int hex1, hex2, ans, choice;
@@ -3929,7 +3928,7 @@ namespace CTRPluginFramework
         if (keyboard.Open(data) != -1)
         {
             hex1 = data;
-            Keyboard keyboard("算術演算子を選んでください。", {"+", "-", "×", "÷"});
+            Keyboard keyboard("算術演算子を選んでください。", { "+", "-", "×", "÷" });
             choice = keyboard.Open();
             if (choice != -1)
             {
@@ -3959,7 +3958,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void DecimalCalculator(MenuEntry *entry)
+    void DecimalCalculator(MenuEntry* entry)
     {
         u32 data;
         int dec1, dec2, ans, choice;
@@ -3968,7 +3967,7 @@ namespace CTRPluginFramework
         if (keyboard.Open(data) != -1)
         {
             dec1 = data;
-            Keyboard keyboard("算術演算子を選んでください。", {"+", "-", "×", "÷"});
+            Keyboard keyboard("算術演算子を選んでください。", { "+", "-", "×", "÷" });
             choice = keyboard.Open();
             if (choice != -1)
             {
@@ -3999,14 +3998,14 @@ namespace CTRPluginFramework
         }
     }
 
-    void FloatCalculator(MenuEntry *entry)
+    void FloatCalculator(MenuEntry* entry)
     {
         int choice;
         float float1, float2, ans;
         Keyboard keyboard("1番目の浮動小数点数を入力してください。");
         if (keyboard.Open(float1) != -1)
         {
-            Keyboard keyboard("算術演算子を選んでください。", {"+", "-", "×", "÷"});
+            Keyboard keyboard("算術演算子を選んでください。", { "+", "-", "×", "÷" });
             choice = keyboard.Open();
             if (choice != -1)
             {
@@ -4036,7 +4035,7 @@ namespace CTRPluginFramework
     }
 
     // 変換候補変換
-    void ChatConversionChange(MenuEntry *entry)
+    void ChatConversionChange(MenuEntry* entry)
     {
         u32 a, b, c, aaa, bbb, ccc;
         std::string character1, character2, character3;
@@ -4347,7 +4346,7 @@ namespace CTRPluginFramework
     }
 
     // 変換候補変換可能文字一覧
-    void ChatConversionList(MenuEntry *entry)
+    void ChatConversionList(MenuEntry* entry)
     {
         std::vector<std::string> listChatConversion{
             "るーと √",
@@ -4363,20 +4362,20 @@ namespace CTRPluginFramework
             "(元号) ㍻ ㍼",
             "かいぎょう",
             "たぶ",
-            "どんどん追加してくよ！"};
+            "どんどん追加してくよ！" };
 
         Keyboard keyboard("変換候補変換可能文字一覧です。\n"
-                          "(数字)と書かれている所は、いち、に、等の数字を書いてください。\n"
-                          "(単位)と書かれている所は、きろ、や、めーとる、等の単位を書いてください。\n"
-                          "(元号)と書かれている所は、へいせい、や、しょうわ、等の元号を書いてください。\n"
-                          "改行はキーボード上では表示されますが、チャットログだと空白が表示されます。\n"
-                          "一部変換できない文字があります。",
-                          listChatConversion);
+            "(数字)と書かれている所は、いち、に、等の数字を書いてください。\n"
+            "(単位)と書かれている所は、きろ、や、めーとる、等の単位を書いてください。\n"
+            "(元号)と書かれている所は、へいせい、や、しょうわ、等の元号を書いてください。\n"
+            "改行はキーボード上では表示されますが、チャットログだと空白が表示されます。\n"
+            "一部変換できない文字があります。",
+            listChatConversion);
         keyboard.Open();
     }
 
     static int palicoChoice;
-    void PalicoChoice(MenuEntry *entry)
+    void PalicoChoice(MenuEntry* entry)
     {
         std::string name[60];
         std::vector<std::string> nameSave;
@@ -4394,7 +4393,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoExperienceChange(MenuEntry *entry)
+    void PalicoExperienceChange(MenuEntry* entry)
     {
         u32 exp;
         Process::Read32(palicoChoice * 0x494 + 0x83388E0, exp);
@@ -4406,7 +4405,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void ParicoLevelChange(MenuEntry *entry)
+    void ParicoLevelChange(MenuEntry* entry)
     {
         u8 lv, levelDisplay;
         Process::Read8(palicoChoice * 0x494 + 0x83388E4, lv);
@@ -4419,7 +4418,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void ParicoSupportTrendChange(MenuEntry *entry)
+    void ParicoSupportTrendChange(MenuEntry* entry)
     {
         u8 sup;
         std::vector<std::string> listPalicoSupportTrend{
@@ -4429,7 +4428,7 @@ namespace CTRPluginFramework
             "アシスト",
             "回復",
             "ボマー",
-            "コレクト"};
+            "コレクト" };
         Process::Read8(palicoChoice * 0x494 + 0x83388E5, sup);
         Keyboard keyboard("サポート傾向を選んでください。\n現在[" + listPalicoSupportTrend[sup] + "]", listPalicoSupportTrend);
         if (int choice = keyboard.Open() != -1)
@@ -4438,7 +4437,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoClosenessChange(MenuEntry *entry)
+    void PalicoClosenessChange(MenuEntry* entry)
     {
         u8 closeness;
         Process::Read8(palicoChoice * 0x494 + 0x83388E6, closeness);
@@ -4450,7 +4449,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoTargetChange(MenuEntry *entry)
+    void PalicoTargetChange(MenuEntry* entry)
     {
         u8 tar;
         std::vector<std::string> listPalicoTarget{
@@ -4459,7 +4458,7 @@ namespace CTRPluginFramework
             "小型優先",
             "バランス",
             "大型優先",
-            "大型一筋"};
+            "大型一筋" };
         Process::Read8(palicoChoice * 0x494 + 0x83388E7, tar);
         Keyboard keyboard("ターゲットを選んでください。\n現在[" + listPalicoTarget[tar] + "]", listPalicoTarget);
         if (int choice = keyboard.Open() != -1)
@@ -4468,7 +4467,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoCommentEditPossibleChange(MenuEntry *entry)
+    void PalicoCommentEditPossibleChange(MenuEntry* entry)
     {
         u8 comment;
         std::string ko;
@@ -4495,7 +4494,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void SpecialDeliveryDisplayChange(MenuEntry *entry)
+    void SpecialDeliveryDisplayChange(MenuEntry* entry)
     {
         u8 isSpecial;
         std::string to;
@@ -4522,7 +4521,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoEquipmentSupportAction1Change(MenuEntry *entry)
+    void PalicoEquipmentSupportAction1Change(MenuEntry* entry)
     {
         u8 sup;
         Process::Read8(palicoChoice * 0x494 + 0x83388E8, sup);
@@ -4533,7 +4532,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoEquipmentSupportAction2Change(MenuEntry *entry)
+    void PalicoEquipmentSupportAction2Change(MenuEntry* entry)
     {
         u8 sup;
         Process::Read8(palicoChoice * 0x494 + 0x83388E9, sup);
@@ -4544,7 +4543,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoEquipmentSupportAction3Change(MenuEntry *entry)
+    void PalicoEquipmentSupportAction3Change(MenuEntry* entry)
     {
         u8 sup;
         Process::Read8(palicoChoice * 0x494 + 0x83388EA, sup);
@@ -4555,7 +4554,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoEquipmentSupportAction4Change(MenuEntry *entry)
+    void PalicoEquipmentSupportAction4Change(MenuEntry* entry)
     {
         u8 sup;
         Process::Read8(palicoChoice * 0x494 + 0x83388EB, sup);
@@ -4566,7 +4565,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoEquipmentSupportAction5Change(MenuEntry *entry)
+    void PalicoEquipmentSupportAction5Change(MenuEntry* entry)
     {
         u8 sup;
         Process::Read8(palicoChoice * 0x494 + 0x83388EC, sup);
@@ -4577,7 +4576,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoEquipmentSupportAction6Change(MenuEntry *entry)
+    void PalicoEquipmentSupportAction6Change(MenuEntry* entry)
     {
         u8 sup;
         Process::Read8(palicoChoice * 0x494 + 0x83388ED, sup);
@@ -4588,7 +4587,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoEquipmentSupportAction7Change(MenuEntry *entry)
+    void PalicoEquipmentSupportAction7Change(MenuEntry* entry)
     {
         u8 sup;
         Process::Read8(palicoChoice * 0x494 + 0x83388EE, sup);
@@ -4599,7 +4598,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoEquipmentSupportAction8Change(MenuEntry *entry)
+    void PalicoEquipmentSupportAction8Change(MenuEntry* entry)
     {
         u8 sup;
         Process::Read8(palicoChoice * 0x494 + 0x83388EF, sup);
@@ -4610,7 +4609,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoEquipmentSkill1Change(MenuEntry *entry)
+    void PalicoEquipmentSkill1Change(MenuEntry* entry)
     {
         u8 ski;
         Process::Read8(palicoChoice * 0x494 + 0x83388F0, ski);
@@ -4621,7 +4620,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoEquipmentSkill2Change(MenuEntry *entry)
+    void PalicoEquipmentSkill2Change(MenuEntry* entry)
     {
         u8 ski;
         Process::Read8(palicoChoice * 0x494 + 0x83388F1, ski);
@@ -4632,7 +4631,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoEquipmentSkill3Change(MenuEntry *entry)
+    void PalicoEquipmentSkill3Change(MenuEntry* entry)
     {
         u8 ski;
         Process::Read8(palicoChoice * 0x494 + 0x83388F2, ski);
@@ -4643,7 +4642,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoEquipmentSkill4Change(MenuEntry *entry)
+    void PalicoEquipmentSkill4Change(MenuEntry* entry)
     {
         u8 ski;
         Process::Read8(palicoChoice * 0x494 + 0x83388F3, ski);
@@ -4654,7 +4653,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoEquipmentSkill5Change(MenuEntry *entry)
+    void PalicoEquipmentSkill5Change(MenuEntry* entry)
     {
         u8 ski;
         Process::Read8(palicoChoice * 0x494 + 0x83388F4, ski);
@@ -4665,7 +4664,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoEquipmentSkill6Change(MenuEntry *entry)
+    void PalicoEquipmentSkill6Change(MenuEntry* entry)
     {
         u8 ski;
         Process::Read8(palicoChoice * 0x494 + 0x83388F5, ski);
@@ -4676,7 +4675,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoEquipmentSkill7Change(MenuEntry *entry)
+    void PalicoEquipmentSkill7Change(MenuEntry* entry)
     {
         u8 ski;
         Process::Read8(palicoChoice * 0x494 + 0x83388F6, ski);
@@ -4687,7 +4686,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoEquipmentSkill8Change(MenuEntry *entry)
+    void PalicoEquipmentSkill8Change(MenuEntry* entry)
     {
         u8 ski;
         Process::Read8(palicoChoice * 0x494 + 0x83388F7, ski);
@@ -4698,7 +4697,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoLearnSupportAction1Change(MenuEntry *entry)
+    void PalicoLearnSupportAction1Change(MenuEntry* entry)
     {
         u8 sup;
         Process::Read8(palicoChoice * 0x494 + 0x83388F8, sup);
@@ -4709,7 +4708,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoLearnSupportAction2Change(MenuEntry *entry)
+    void PalicoLearnSupportAction2Change(MenuEntry* entry)
     {
         u8 sup;
         Process::Read8(palicoChoice * 0x494 + 0x83388F9, sup);
@@ -4720,7 +4719,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoLearnSupportAction3Change(MenuEntry *entry)
+    void PalicoLearnSupportAction3Change(MenuEntry* entry)
     {
         u8 sup;
         Process::Read8(palicoChoice * 0x494 + 0x83388FA, sup);
@@ -4731,7 +4730,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoLearnSupportAction4Change(MenuEntry *entry)
+    void PalicoLearnSupportAction4Change(MenuEntry* entry)
     {
         u8 sup;
         Process::Read8(palicoChoice * 0x494 + 0x83388FB, sup);
@@ -4742,7 +4741,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoLearnSupportAction5Change(MenuEntry *entry)
+    void PalicoLearnSupportAction5Change(MenuEntry* entry)
     {
         u8 sup;
         Process::Read8(palicoChoice * 0x494 + 0x83388FC, sup);
@@ -4753,7 +4752,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoLearnSupportAction6Change(MenuEntry *entry)
+    void PalicoLearnSupportAction6Change(MenuEntry* entry)
     {
         u8 sup;
         Process::Read8(palicoChoice * 0x494 + 0x83388FD, sup);
@@ -4764,7 +4763,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoLearnSupportAction7Change(MenuEntry *entry)
+    void PalicoLearnSupportAction7Change(MenuEntry* entry)
     {
         u8 sup;
         Process::Read8(palicoChoice * 0x494 + 0x83388FE, sup);
@@ -4775,7 +4774,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoLearnSupportAction8Change(MenuEntry *entry)
+    void PalicoLearnSupportAction8Change(MenuEntry* entry)
     {
         u8 sup;
         Process::Read8(palicoChoice * 0x494 + 0x83388FF, sup);
@@ -4786,7 +4785,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoLearnSupportAction9Change(MenuEntry *entry)
+    void PalicoLearnSupportAction9Change(MenuEntry* entry)
     {
         u8 sup;
         Process::Read8(palicoChoice * 0x494 + 0x8338900, sup);
@@ -4797,7 +4796,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoLearnSupportAction10Change(MenuEntry *entry)
+    void PalicoLearnSupportAction10Change(MenuEntry* entry)
     {
         u8 sup;
         Process::Read8(palicoChoice * 0x494 + 0x8338901, sup);
@@ -4808,7 +4807,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoLearnSupportAction11Change(MenuEntry *entry)
+    void PalicoLearnSupportAction11Change(MenuEntry* entry)
     {
         u8 sup;
         Process::Read8(palicoChoice * 0x494 + 0x8338902, sup);
@@ -4819,7 +4818,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoLearnSupportAction12Change(MenuEntry *entry)
+    void PalicoLearnSupportAction12Change(MenuEntry* entry)
     {
         u8 sup;
         Process::Read8(palicoChoice * 0x494 + 0x8338903, sup);
@@ -4830,7 +4829,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoLearnSupportAction13Change(MenuEntry *entry)
+    void PalicoLearnSupportAction13Change(MenuEntry* entry)
     {
         u8 sup;
         Process::Read8(palicoChoice * 0x494 + 0x8338904, sup);
@@ -4841,7 +4840,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoLearnSupportAction14Change(MenuEntry *entry)
+    void PalicoLearnSupportAction14Change(MenuEntry* entry)
     {
         u8 sup;
         Process::Read8(palicoChoice * 0x494 + 0x8338905, sup);
@@ -4852,7 +4851,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoLearnSupportAction15Change(MenuEntry *entry)
+    void PalicoLearnSupportAction15Change(MenuEntry* entry)
     {
         u8 sup;
         Process::Read8(palicoChoice * 0x494 + 0x8338906, sup);
@@ -4863,7 +4862,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoLearnSupportAction16Change(MenuEntry *entry)
+    void PalicoLearnSupportAction16Change(MenuEntry* entry)
     {
         u8 sup;
         Process::Read8(palicoChoice * 0x494 + 0x8338907, sup);
@@ -4874,7 +4873,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoLearnSupportSkill1Change(MenuEntry *entry)
+    void PalicoLearnSupportSkill1Change(MenuEntry* entry)
     {
         u8 ski;
         Process::Read8(palicoChoice * 0x494 + 0x8338908, ski);
@@ -4885,7 +4884,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoLearnSupportSkill2Change(MenuEntry *entry)
+    void PalicoLearnSupportSkill2Change(MenuEntry* entry)
     {
         u8 ski;
         Process::Read8(palicoChoice * 0x494 + 0x8338909, ski);
@@ -4896,7 +4895,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoLearnSupportSkill3Change(MenuEntry *entry)
+    void PalicoLearnSupportSkill3Change(MenuEntry* entry)
     {
         u8 ski;
         Process::Read8(palicoChoice * 0x494 + 0x833890A, ski);
@@ -4907,7 +4906,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoLearnSupportSkill4Change(MenuEntry *entry)
+    void PalicoLearnSupportSkill4Change(MenuEntry* entry)
     {
         u8 ski;
         Process::Read8(palicoChoice * 0x494 + 0x833890B, ski);
@@ -4918,7 +4917,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoLearnSupportSkill5Change(MenuEntry *entry)
+    void PalicoLearnSupportSkill5Change(MenuEntry* entry)
     {
         u8 ski;
         Process::Read8(palicoChoice * 0x494 + 0x833890C, ski);
@@ -4929,7 +4928,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoLearnSupportSkill6Change(MenuEntry *entry)
+    void PalicoLearnSupportSkill6Change(MenuEntry* entry)
     {
         u8 ski;
         Process::Read8(palicoChoice * 0x494 + 0x833890D, ski);
@@ -4940,7 +4939,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoLearnSupportSkill7Change(MenuEntry *entry)
+    void PalicoLearnSupportSkill7Change(MenuEntry* entry)
     {
         u8 ski;
         Process::Read8(palicoChoice * 0x494 + 0x833890E, ski);
@@ -4951,7 +4950,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoLearnSupportSkill8Change(MenuEntry *entry)
+    void PalicoLearnSupportSkill8Change(MenuEntry* entry)
     {
         u8 ski;
         Process::Read8(palicoChoice * 0x494 + 0x833890F, ski);
@@ -4962,7 +4961,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoLearnSupportSkill9Change(MenuEntry *entry)
+    void PalicoLearnSupportSkill9Change(MenuEntry* entry)
     {
         u8 ski;
         Process::Read8(palicoChoice * 0x494 + 0x8338910, ski);
@@ -4973,7 +4972,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoLearnSupportSkill10Change(MenuEntry *entry)
+    void PalicoLearnSupportSkill10Change(MenuEntry* entry)
     {
         u8 ski;
         Process::Read8(palicoChoice * 0x494 + 0x8338911, ski);
@@ -4984,7 +4983,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoLearnSupportSkill11Change(MenuEntry *entry)
+    void PalicoLearnSupportSkill11Change(MenuEntry* entry)
     {
         u8 ski;
         Process::Read8(palicoChoice * 0x494 + 0x8338912, ski);
@@ -4995,7 +4994,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoLearnSupportSkill12Change(MenuEntry *entry)
+    void PalicoLearnSupportSkill12Change(MenuEntry* entry)
     {
         u8 ski;
         Process::Read8(palicoChoice * 0x494 + 0x8338913, ski);
@@ -5006,14 +5005,14 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoVoiceChange(MenuEntry *entry)
+    void PalicoVoiceChange(MenuEntry* entry)
     {
         u8 voice;
         std::vector<std::string> listPalicoVoice{
             "なし",
             "TYPE1",
             "TYPE2",
-            "TYPE3"};
+            "TYPE3" };
         Process::Read8(palicoChoice * 0x494 + 0x8338AC1, voice);
         Keyboard keyboard("声を選んでください。\n現在[" + listPalicoVoice[voice] + "]", listPalicoVoice);
         if (int choice = keyboard.Open() != -1)
@@ -5022,7 +5021,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoEyeChange(MenuEntry *entry)
+    void PalicoEyeChange(MenuEntry* entry)
     {
         u8 eye;
         std::vector<std::string> listPalicoEye{
@@ -5032,7 +5031,7 @@ namespace CTRPluginFramework
             "ニヤケ目",
             "閉じ目",
             "キズ目"
-            "透明"};
+            "透明" };
         Process::Read8(palicoChoice * 0x494 + 0x8338AC2, eye);
         Keyboard keyboard("目を選んでください。\n現在[" + listPalicoEye[eye] + "]", listPalicoEye);
         if (int choice = keyboard.Open() != -1)
@@ -5041,7 +5040,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoInnerChange(MenuEntry *entry)
+    void PalicoInnerChange(MenuEntry* entry)
     {
         u8 inner;
         std::vector<std::string> listPalicoInner{
@@ -5050,7 +5049,7 @@ namespace CTRPluginFramework
             "ファラオ",
             "ゴア",
             "シャガル",
-            "透明"};
+            "透明" };
         Process::Read8(palicoChoice * 0x494 + 0x8338AC3, inner);
         Keyboard keyboard("インナーを選んでください。\n現在[" + listPalicoInner[inner] + "]", listPalicoInner);
         if (int choice = keyboard.Open() != -1)
@@ -5059,7 +5058,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoFurCoatChange(MenuEntry *entry)
+    void PalicoFurCoatChange(MenuEntry* entry)
     {
         u8 kenami;
         std::vector<std::string> listPalicoFurCoat{
@@ -5069,7 +5068,7 @@ namespace CTRPluginFramework
             "ワントーン",
             "ツートーン",
             "ミケ",
-            "ハンテン"};
+            "ハンテン" };
         Process::Read8(palicoChoice * 0x494 + 0x8338AC6, kenami);
         Keyboard keyboard("毛並みを選んでください。\n現在[" + listPalicoFurCoat[kenami] + "]", listPalicoFurCoat);
         if (int choice = keyboard.Open() != -1)
@@ -5078,7 +5077,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoEarChange(MenuEntry *entry)
+    void PalicoEarChange(MenuEntry* entry)
     {
         u8 mimi;
         std::vector<std::string> listPalicoEar{
@@ -5087,7 +5086,7 @@ namespace CTRPluginFramework
             "聞き耳",
             "立ち耳",
             "まる耳",
-            "透明"};
+            "透明" };
         Process::Read8(palicoChoice * 0x494 + 0x8338AC7, mimi);
         Keyboard keyboard("耳を選んでください。\n現在[" + listPalicoEar[mimi] + "]", listPalicoEar);
         if (int choice = keyboard.Open() != -1)
@@ -5096,7 +5095,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoTailChange(MenuEntry *entry)
+    void PalicoTailChange(MenuEntry* entry)
     {
         u8 tail;
         std::vector<std::string> listPalicoTail{
@@ -5105,7 +5104,7 @@ namespace CTRPluginFramework
             "カギ",
             "ふさふさ",
             "ながまる",
-            "透明"};
+            "透明" };
         Process::Read8(palicoChoice * 0x494 + 0x8338AC8, tail);
         Keyboard keyboard("尻尾を選んでください。\n現在[" + listPalicoTail[tail] + "]", listPalicoTail);
         if (int choice = keyboard.Open() != -1)
@@ -5114,7 +5113,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoBodyHairColorRedChange(MenuEntry *entry)
+    void PalicoBodyHairColorRedChange(MenuEntry* entry)
     {
         u8 a;
         Keyboard keyboard("赤の値を入力してください\n1~255の間");
@@ -5125,7 +5124,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoBodyHairColorGreenChange(MenuEntry *entry)
+    void PalicoBodyHairColorGreenChange(MenuEntry* entry)
     {
         u8 a;
         Keyboard keyboard("緑の値を入力してください\n1~255の間");
@@ -5136,7 +5135,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoBodyHairColorBlueChange(MenuEntry *entry)
+    void PalicoBodyHairColorBlueChange(MenuEntry* entry)
     {
         u8 a;
         Keyboard keyboard("青の値を入力してください\n1~255の間");
@@ -5147,7 +5146,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoRightEyeColorRedChange(MenuEntry *entry)
+    void PalicoRightEyeColorRedChange(MenuEntry* entry)
     {
         u8 a;
         Keyboard keyboard("赤の値を入力してください\n1~255の間");
@@ -5158,7 +5157,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoRightEyeColorGreenChange(MenuEntry *entry)
+    void PalicoRightEyeColorGreenChange(MenuEntry* entry)
     {
         u8 a;
         Keyboard keyboard("緑の値を入力してください\n1~255の間");
@@ -5169,7 +5168,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoRightEyeColorBlueChange(MenuEntry *entry)
+    void PalicoRightEyeColorBlueChange(MenuEntry* entry)
     {
         u8 a;
         Keyboard keyboard("青の値を入力してください\n1~255の間");
@@ -5180,7 +5179,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoLeftEyeColorRedChange(MenuEntry *entry)
+    void PalicoLeftEyeColorRedChange(MenuEntry* entry)
     {
         u8 a;
         Keyboard keyboard("赤の値を入力してください\n1~255の間");
@@ -5191,7 +5190,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoLeftEyeColorGreenChange(MenuEntry *entry)
+    void PalicoLeftEyeColorGreenChange(MenuEntry* entry)
     {
         u8 a;
         Keyboard keyboard("緑の値を入力してください\n1~255の間");
@@ -5202,7 +5201,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoLeftEyeColorBlueChange(MenuEntry *entry)
+    void PalicoLeftEyeColorBlueChange(MenuEntry* entry)
     {
         u8 a;
         Keyboard keyboard("青の値を入力してください\n1~255の間");
@@ -5213,7 +5212,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoInnerColorRedChange(MenuEntry *entry)
+    void PalicoInnerColorRedChange(MenuEntry* entry)
     {
         u8 a;
         Keyboard keyboard("赤の値を入力してください\n1~255の間");
@@ -5224,7 +5223,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoInnerColorGreenChange(MenuEntry *entry)
+    void PalicoInnerColorGreenChange(MenuEntry* entry)
     {
         u8 a;
         Keyboard keyboard("緑の値を入力してください\n1~255の間");
@@ -5235,7 +5234,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoInnerColorBlueChange(MenuEntry *entry)
+    void PalicoInnerColorBlueChange(MenuEntry* entry)
     {
         u8 a;
         Keyboard keyboard("青の値を入力してください\n1~255の間");
@@ -5246,12 +5245,12 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoNameChange(MenuEntry *entry)
+    void PalicoNameChange(MenuEntry* entry)
     {
         std::string nameFix, namenow, namekbd;
         Process::ReadString(0x83AE380, nameFix, 0x1E, StringFormat::Utf8);
         Process::ReadString(palicoChoice * 0x494 + 0x8338AFE, namenow, 0x1E, StringFormat::Utf8);
-        Keyboard keyboard("どちらで変更しますか？\n現在の名前[" + namenow + "]", {"定型文", "キーボード"});
+        Keyboard keyboard("どちらで変更しますか？\n現在の名前[" + namenow + "]", { "定型文", "キーボード" });
         int choice = keyboard.Open();
         if (choice == 0)
         {
@@ -5275,13 +5274,13 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoCommentChange(MenuEntry *entry)
+    void PalicoCommentChange(MenuEntry* entry)
     {
         std::string nameFix, namenow, namekbd;
         Process::ReadString(0x83AE380, nameFix, 0x1E, StringFormat::Utf8);
         Process::ReadString(palicoChoice * 0x494 + 0x8338920, namenow, 0x1E, StringFormat::Utf8);
-        Keyboard keyboard("どちらで変更しますか？\n現在のコメント[" + namenow + "]", {"定型文",
-                                                                                      "キーボード"});
+        Keyboard keyboard("どちらで変更しますか？\n現在のコメント[" + namenow + "]", { "定型文",
+                                                                                      "キーボード" });
         int choice = keyboard.Open();
         if (choice == 0)
         {
@@ -5305,13 +5304,13 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoGodParentChange(MenuEntry *entry)
+    void PalicoGodParentChange(MenuEntry* entry)
     {
         std::string nameFix, namenow, namekbd;
         Process::ReadString(0x83AE380, nameFix, 0x1E, StringFormat::Utf8);
         Process::ReadString(palicoChoice * 0x494 + 0x833895C, namenow, 0x1E, StringFormat::Utf8);
-        Keyboard keyboard("どちらで変更しますか？\n現在の名付け親[" + namenow + "]", {"定型文",
-                                                                                      "キーボード"});
+        Keyboard keyboard("どちらで変更しますか？\n現在の名付け親[" + namenow + "]", { "定型文",
+                                                                                      "キーボード" });
         int choice = keyboard.Open();
         if (choice == 0)
         {
@@ -5335,13 +5334,13 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoPredecessorHusbandChange(MenuEntry *entry)
+    void PalicoPredecessorHusbandChange(MenuEntry* entry)
     {
         std::string nameFix, namenow, namekbd;
         Process::ReadString(0x83AE380, nameFix, 0x1E, StringFormat::Utf8);
         Process::ReadString(palicoChoice * 0x494 + 0x833897C, namenow, 0x1E, StringFormat::Utf8);
-        Keyboard keyboard("どちらで変更しますか？\n現在の先代旦那さん[" + namenow + "]", {"定型文",
-                                                                                          "キーボード"});
+        Keyboard keyboard("どちらで変更しますか？\n現在の先代旦那さん[" + namenow + "]", { "定型文",
+                                                                                          "キーボード" });
         int choice = keyboard.Open();
         if (choice == 0)
         {
@@ -5365,7 +5364,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PalicoAbsorption(MenuEntry *entry)
+    void PalicoAbsorption(MenuEntry* entry)
     {
         u32 cat1Pointer, cat2Pointer, cat3Pointer, cat4Pointer;
         u32 player;
@@ -5388,7 +5387,7 @@ namespace CTRPluginFramework
         Process::WriteFloat(cat4Pointer + 0x48, playerZ);
     }
 
-    void SpeedHack(MenuEntry *entry)
+    void SpeedHack(MenuEntry* entry)
     {
         float speed;
         Process::ReadFloat(0x317298, speed);
@@ -5400,7 +5399,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void ViewingAngleChangeV2(MenuEntry *entry)
+    void ViewingAngleChangeV2(MenuEntry* entry)
     {
         float viewingAngle;
         Process::ReadFloat(0x9C4AD4, viewingAngle);
@@ -5412,7 +5411,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void WeaponSizeChange(MenuEntry *entry)
+    void WeaponSizeChange(MenuEntry* entry)
     {
         float size;
         Process::ReadFloat(0xA58AF0, size);
@@ -5432,50 +5431,50 @@ namespace CTRPluginFramework
     static u16 resistanceThunderPoint;
     static u16 resistanceIcePoint;
     static u16 resistanceDragonPoint;
-    void AttackPowerOption(MenuEntry *entry)
+    void AttackPowerOption(MenuEntry* entry)
     {
         Keyboard keyboard("素の攻撃力を入力してください。");
         keyboard.IsHexadecimal(false);
         keyboard.Open(attackPoint);
     }
 
-    void AttackPowerChange(MenuEntry *entry)
+    void AttackPowerChange(MenuEntry* entry)
     {
         Process::Write16(0x831B450, attackPoint);
     }
 
-    void DefencePowerOption(MenuEntry *entry)
+    void DefencePowerOption(MenuEntry* entry)
     {
         Keyboard keyboard("素の防御力を入力してください。");
         keyboard.IsHexadecimal(false);
         keyboard.Open(defencePoint);
     }
 
-    void DefencePowerChange(MenuEntry *entry)
+    void DefencePowerChange(MenuEntry* entry)
     {
         Process::Write16(0x831B45E, defencePoint);
     }
 
-    void AttributeOption(MenuEntry *entry)
+    void AttributeOption(MenuEntry* entry)
     {
         Keyboard keyboard("素の属性値を入力してください。");
         keyboard.IsHexadecimal(false);
         keyboard.Open(attributePoint);
     }
 
-    void AttributeChange(MenuEntry *entry)
+    void AttributeChange(MenuEntry* entry)
     {
         Process::Write16(0x831B45A, attributePoint);
     }
 
-    void ResistanceOption(MenuEntry *entry)
+    void ResistanceOption(MenuEntry* entry)
     {
-        Keyboard keyboard("グループを選んでください。", {"火耐性変更",
+        Keyboard keyboard("グループを選んでください。", { "火耐性変更",
                                                          "水耐性変更",
                                                          "雷耐性変更",
                                                          "氷耐性変更",
                                                          "龍耐性変更",
-                                                         "一括変更"});
+                                                         "一括変更" });
         int choice = keyboard.Open();
         if (choice == 0)
         {
@@ -5521,7 +5520,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void ResistanceChange(MenuEntry *entry)
+    void ResistanceChange(MenuEntry* entry)
     {
         Process::Write16(0x831B460, resistanceFirePoint);
         Process::Write16(0x831B462, resistanceWaterPoint);
@@ -5531,10 +5530,10 @@ namespace CTRPluginFramework
     }
 
     static u8 redInput, greenInput, blueInput;
-    void RedInput(MenuEntry *entry)
+    void RedInput(MenuEntry* entry)
     {
-        Keyboard keyboard("入力モードを選んでください。", {"10進数",
-                                                           "16進数"});
+        Keyboard keyboard("入力モードを選んでください。", { "10進数",
+                                                           "16進数" });
         int choice = keyboard.Open();
         if (choice == 0)
         {
@@ -5549,10 +5548,10 @@ namespace CTRPluginFramework
         }
     }
 
-    void GreenInput(MenuEntry *entry)
+    void GreenInput(MenuEntry* entry)
     {
-        Keyboard keyboard("入力モードを選んでください。", {"10進数",
-                                                           "16進数"});
+        Keyboard keyboard("入力モードを選んでください。", { "10進数",
+                                                           "16進数" });
         int choice = keyboard.Open();
         if (choice == 0)
         {
@@ -5567,9 +5566,9 @@ namespace CTRPluginFramework
         }
     }
 
-    void BlueInput(MenuEntry *entry)
+    void BlueInput(MenuEntry* entry)
     {
-        Keyboard keyboard("入力モードを選んでください。", {"10進数", "16進数"});
+        Keyboard keyboard("入力モードを選んでください。", { "10進数", "16進数" });
         int choice = keyboard.Open();
         if (choice == 0)
         {
@@ -5584,10 +5583,10 @@ namespace CTRPluginFramework
         }
     }
 
-    void RGBOutput(MenuEntry *entry)
+    void RGBOutput(MenuEntry* entry)
     {
-        Keyboard keyboard("グループを選んでください。", {"入力された値を確認",
-                                                         "出力された色を確認"});
+        Keyboard keyboard("グループを選んでください。", { "入力された値を確認",
+                                                         "出力された色を確認" });
         int choice = keyboard.Open();
         if (choice == 0)
         {
@@ -5595,13 +5594,12 @@ namespace CTRPluginFramework
         }
         if (choice == 1)
         {
-
             MessageBox("出力された色です。\n"
-                       << Color(redInput, greenInput, blueInput) << "■■■■■■■■■\n■■■■■■■■■\n■■■■■■■■■")();
+                << Color(redInput, greenInput, blueInput) << "■■■■■■■■■\n■■■■■■■■■\n■■■■■■■■■")();
         }
     }
 
-    void HexEditor(MenuEntry *entry)
+    void HexEditor(MenuEntry* entry)
     {
         static int addressOn = 0;
         static u32 Hex, Hex1, Hex2, Hex3, Hex4, Hex5, Hex6, Hex7, Hex8, Hex9, Hex11;
@@ -5678,7 +5676,7 @@ namespace CTRPluginFramework
         Process::Read32(address1 + 36, Hex9);
         Process::Read32(address, Hex11);
         addressOn = true;
-        OSD::Run([](const Screen &screen) {
+        OSD::Run([](const Screen& screen) {
             if (!screen.IsTop)
             {
                 return (false);
@@ -5704,10 +5702,10 @@ namespace CTRPluginFramework
                 addressOn = false;
             }
             return (true);
-        });
+            });
     }
 
-    void HexEditor2(MenuEntry *entry)
+    void HexEditor2(MenuEntry* entry)
     {
         static float float1;
         static u32 hex1, hex2, hex3, hex4;
@@ -5743,7 +5741,7 @@ namespace CTRPluginFramework
         Process::Read32(ad3, hex3);
         Process::Read32(ad4, hex4);
         addressOn = true;
-        OSD::Run([](const Screen &screen) {
+        OSD::Run([](const Screen& screen) {
             if (!screen.IsTop)
             {
                 return (false);
@@ -5759,10 +5757,10 @@ namespace CTRPluginFramework
                 addressOn = false;
             }
             return (true);
-        });
+            });
     }
 
-    void MySetToPorchItemCopy(MenuEntry *entry)
+    void MySetToPorchItemCopy(MenuEntry* entry)
     {
         u32 item;
         std::string mySet1, mySet2, mySet3, mySet4;
@@ -5776,15 +5774,15 @@ namespace CTRPluginFramework
         Process::ReadString(0x837658C, mySet7, 30, StringFormat::Utf8);
         Process::ReadString(0x8376636, mySet8, 30, StringFormat::Utf8);
         Keyboard keyboard("アイテムポーチにコピーしたいアイテムマイセットを選んでください。\n"
-                          "名前の表示がおかしいのは仕様です。",
-                          {mySet1,
-                           mySet2,
-                           mySet3,
-                           mySet4,
-                           mySet5,
-                           mySet6,
-                           mySet7,
-                           mySet8});
+            "名前の表示がおかしいのは仕様です。",
+            { mySet1,
+             mySet2,
+             mySet3,
+             mySet4,
+             mySet5,
+             mySet6,
+             mySet7,
+             mySet8 });
         if (int choice = keyboard.Open() != -1)
         {
             for (int i = 0; i < 32; i++)
@@ -5795,7 +5793,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void DeliveryItemToPorchCopy(MenuEntry *entry)
+    void DeliveryItemToPorchCopy(MenuEntry* entry)
     {
         u16 item1, item2;
         u16 quantity1, quantity2;
@@ -5830,7 +5828,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void PorchToDeliveryItemCopy(MenuEntry *entry)
+    void PorchToDeliveryItemCopy(MenuEntry* entry)
     {
         u16 itemRead1, itemRead2;
         u16 quantity1, quantity2;
@@ -5849,7 +5847,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void IfRunMoonWalk(MenuEntry *entry)
+    void IfRunMoonWalk(MenuEntry* entry)
     {
         Keyboard keyboard("走った時にムーンウォークをしますか？", listToggle);
         int choice = keyboard.Open();
@@ -5863,10 +5861,10 @@ namespace CTRPluginFramework
         }
     }
 
-    void InQuestSpeedHack(MenuEntry *entry)
+    void InQuestSpeedHack(MenuEntry* entry)
     {
         float questTrue, questFalse;
-        Keyboard keyboard("グループを選んでください。", {"クエスト中武器適応", "クエスト中武器無適応"});
+        Keyboard keyboard("グループを選んでください。", { "クエスト中武器適応", "クエスト中武器無適応" });
         int choice = keyboard.Open();
         if (choice == 0)
         {
@@ -5887,13 +5885,13 @@ namespace CTRPluginFramework
     }
 
     static float hunterSizeX = 1, hunterSizeY = 1, hunterSizeZ = 1;
-    void HunterSizeOption(MenuEntry *entry)
+    void HunterSizeOption(MenuEntry* entry)
     {
         Process::Read32(0x8195350, offset);
         Process::ReadFloat(offset + 0x60, hunterSizeX);
         Process::ReadFloat(offset + 0x64, hunterSizeY);
         Process::ReadFloat(offset + 0x68, hunterSizeZ);
-        Keyboard keyboard("グループを選んでください。", {"X倍率", "Y倍率", "Z倍率", "一括変更"});
+        Keyboard keyboard("グループを選んでください。", { "X倍率", "Y倍率", "Z倍率", "一括変更" });
         int choice = keyboard.Open();
         if (choice == 0)
         {
@@ -5921,7 +5919,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void HunterSizeChange(MenuEntry *entry)
+    void HunterSizeChange(MenuEntry* entry)
     {
         Process::Read32(0x8195350, offset);
         Process::WriteFloat(offset + 0x60, hunterSizeX);
@@ -5929,7 +5927,7 @@ namespace CTRPluginFramework
         Process::WriteFloat(offset + 0x68, hunterSizeZ);
     }
 
-    void MaximumFpsChange(MenuEntry *entry)
+    void MaximumFpsChange(MenuEntry* entry)
     {
         float fps;
         Keyboard key("最大FPSを入力してください。");
@@ -5937,68 +5935,68 @@ namespace CTRPluginFramework
         Process::WriteFloat(0x87E24E0, fps);
     }
 
-    void MealInfinite(MenuEntry *entry)
+    void MealInfinite(MenuEntry* entry)
     {
         Process::Write8(0x8480827, 0);
     }
 
-    void LuxuryCouponGrant(MenuEntry *entry)
+    void LuxuryCouponGrant(MenuEntry* entry)
     {
         Process::Write8(0x8480825, 2);
         Process::Write8(0x8480826, 2);
     }
 
-    void MeetRequestInfinite(MenuEntry *entry)
+    void MeetRequestInfinite(MenuEntry* entry)
     {
         Process::Write8(0x8480925, 0);
     }
 
-    void MealHpUp(MenuEntry *entry)
+    void MealHpUp(MenuEntry* entry)
     {
         Process::Write8(0x83A6E68, 127);
     }
 
-    void MealStaminaUp(MenuEntry *entry)
+    void MealStaminaUp(MenuEntry* entry)
     {
         Process::Write8(0x83A6E69, 127);
     }
 
-    void MealAttackPowerUp(MenuEntry *entry)
+    void MealAttackPowerUp(MenuEntry* entry)
     {
         Process::Write8(0x83A6E6A, 127);
     }
 
-    void MealDefencePowerUp(MenuEntry *entry)
+    void MealDefencePowerUp(MenuEntry* entry)
     {
         Process::Write8(0x83A6E6B, 127);
     }
 
-    void MealFireResistanceUp(MenuEntry *entry)
+    void MealFireResistanceUp(MenuEntry* entry)
     {
         Process::Write8(0x83A6E6C, 127);
     }
 
-    void MealWaterResistanceUp(MenuEntry *entry)
+    void MealWaterResistanceUp(MenuEntry* entry)
     {
         Process::Write8(0x83A6E6D, 127);
     }
 
-    void MealThunderResistanceUp(MenuEntry *entry)
+    void MealThunderResistanceUp(MenuEntry* entry)
     {
         Process::Write8(0x83A6E6E, 127);
     }
 
-    void MealIceResistanceUp(MenuEntry *entry)
+    void MealIceResistanceUp(MenuEntry* entry)
     {
         Process::Write8(0x83A6E6F, 127);
     }
 
-    void MealDragonResistanceUp(MenuEntry *entry)
+    void MealDragonResistanceUp(MenuEntry* entry)
     {
         Process::Write8(0x83A6E70, 127);
     }
 
-    void MealSkillChange(MenuEntry *entry)
+    void MealSkillChange(MenuEntry* entry)
     {
         std::vector<std::string> listMealSkill{
             "なし",
@@ -6063,9 +6061,9 @@ namespace CTRPluginFramework
             "ネコの乗り上手",
             "ネコの乗り支援術",
             "ネコの報酬金保険",
-            "ネコの憎まれ上手"};
+            "ネコの憎まれ上手" };
 
-        Keyboard keyboard("どちらのスキルを変更しますか？", {"第一スキル", "第二スキル", "第三スキル"});
+        Keyboard keyboard("どちらのスキルを変更しますか？", { "第一スキル", "第二スキル", "第三スキル" });
         if (int select = keyboard.Open() != -1)
         {
             Keyboard key("スキルを選択してください。", listMealSkill);
@@ -6077,7 +6075,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void Teleport(MenuEntry *entry)
+    void Teleport(MenuEntry* entry)
     {
         float x, y, z;
         Process::Read32(0x8195350, offset);
@@ -6097,7 +6095,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void LocalTimeDisplay(MenuEntry *entry)
+    void LocalTimeDisplay(MenuEntry* entry)
     {
         time_t t = time(0);
         int hour = localtime(&t)->tm_hour & 12;
@@ -6108,7 +6106,7 @@ namespace CTRPluginFramework
         static char buffer[27];
         snprintf(buffer, 27, "%2i:%02i %s", (hour == 0) ? 12 : hour, min, amPm ? "PM" : "AM");
         addressOn = true;
-        OSD::Run([](const Screen &screen) {
+        OSD::Run([](const Screen& screen) {
             if (!screen.IsTop)
             {
                 return (false);
@@ -6119,7 +6117,6 @@ namespace CTRPluginFramework
                 addressOn = false;
             }
             return (true);
-        });
+            });
     }
-
 } // namespace CTRPluginFramework
