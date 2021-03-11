@@ -695,7 +695,7 @@ namespace CTRPluginFramework
         menu->SynchronizeWithFrame(true);
 
         // HexEditorを無効化
-        menu->SetHexEditorState(false);
+        menu->SetHexEditorState(true);
 
         // Plugin Ready!を無効化
         menu->ShowWelcomeMessage(false);
