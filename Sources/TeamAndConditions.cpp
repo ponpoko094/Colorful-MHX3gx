@@ -1,6 +1,9 @@
+#include <string>
+
 #include "TeamAndConditions.hpp"
 
-namespace CTRPluginFramework {
+namespace CTRPluginFramework
+{
     void TeamAndCondition()
     {
         static bool file = false;
