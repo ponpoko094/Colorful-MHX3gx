@@ -10,14 +10,14 @@
 #include "Keyboard.hpp"
 #include "TeamAndConditions.hpp"
 
-#define DU DPadUp
-#define DD DPadDown
-#define DL DPadLeft
-#define DR DPadRight
-#define CU CPadUp
-#define CD CPadDown
-#define CL CPadLeft
-#define CR CPadRight
+#define KEY_DU DPadUp
+#define KEY_DD DPadDown
+#define KEY_DL DPadLeft
+#define KEY_DR DPadRight
+#define KEY_CU CPadUp
+#define KEY_CD CPadDown
+#define KEY_CL CPadLeft
+#define KEY_CR CPadRight
 
 namespace CTRPluginFramework
 {

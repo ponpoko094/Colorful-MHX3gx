@@ -811,7 +811,7 @@ namespace CTRPluginFramework
     // 攻撃力変更
     void PlayerAttackPowerMagnificationChange(MenuEntry* entry)
     {
-        if (Controller::IsKeysPressed(Y + DU))
+        if (Controller::IsKeysPressed(Y + KEY_DU))
         {
             Process::Write32(0xC18E50, 0xE3A01000);
             Process::Write32(0xC18E54, 0xE92D4018);
@@ -827,7 +827,7 @@ namespace CTRPluginFramework
             Process::Write32(0x8F1B84, 0xEB0C9CB1);
             OSD::Notify("Attack:" << Color::Green << "ON!");
         }
-        if (Controller::IsKeysPressed(Y + DD))
+        if (Controller::IsKeysPressed(Y + KEY_DD))
         {
             Process::Write32(0xC18E50, 0xE3A01000);
             Process::Write32(0xC18E54, 0xE92D4018);
@@ -857,7 +857,7 @@ namespace CTRPluginFramework
     // 防御力変更
     void playerDefencePowerMagnificationChange(MenuEntry* entry)
     {
-        if (Controller::IsKeysPressed(X + DU))
+        if (Controller::IsKeysPressed(X + KEY_DU))
         {
             Process::Write32(0x0C18E80, 0xE92D4004);
             Process::Write8(0x0C18E84, playerDefencePowerMagnification);
@@ -871,7 +871,7 @@ namespace CTRPluginFramework
             Process::Write32(0x08F2AC4, 0xEB0C98ED);
             OSD::Notify("Defence:" << Color::Green << "ON!");
         }
-        if (Controller::IsKeysPressed(X + DD))
+        if (Controller::IsKeysPressed(X + KEY_DD))
         {
             Process::Write32(0x0C18E80, 0xE92D4004);
             Process::Write8(0x0C18E84, 0x1);
@@ -1008,7 +1008,7 @@ namespace CTRPluginFramework
     // ニャンター攻撃力変更
     void PalicoAttackPowerMagnificationChange(MenuEntry* entry)
     {
-        if (Controller::IsKeysPressed(Y + DU))
+        if (Controller::IsKeysPressed(Y + KEY_DU))
         {
             Process::Write32(0xC18F80, 0xE92D400C);
             Process::Write8(0xC18F84, palicoAttack);
@@ -1031,7 +1031,7 @@ namespace CTRPluginFramework
             Process::Write32(0x5D60BC, 0xEA000002);
             OSD::Notify("Prowler Attack:" << Color::Green << "ON!");
         }
-        if (Controller::IsKeysPressed(Y + DD))
+        if (Controller::IsKeysPressed(Y + KEY_DD))
         {
             Process::Write32(0xC18F80, 0xE92D400C);
             Process::Write8(0xC18F84, 0x1);
@@ -1078,7 +1078,7 @@ namespace CTRPluginFramework
     // ニャンター防御力変更
     void PalicoDefencePowerMagnificationChange(MenuEntry* entry)
     {
-        if (Controller::IsKeysPressed(X + DU))
+        if (Controller::IsKeysPressed(X + KEY_DU))
         {
             Process::Write32(0xC18FE0, 0xE92D4004);
             Process::Write8(0xC18FE4, palicoDefence);
@@ -1094,7 +1094,7 @@ namespace CTRPluginFramework
             Process::Write32(0x5D60BC, 0xEA000002);
             OSD::Notify("Prowler Defence:" << Color::Green << "ON!");
         }
-        if (Controller::IsKeysPressed(X + DD))
+        if (Controller::IsKeysPressed(X + KEY_DD))
         {
             Process::Write8(0xC18FE4, 0x01);
             OSD::Notify("Prowler Defence:" << Color::Red << "OFF!");
@@ -1491,19 +1491,19 @@ namespace CTRPluginFramework
         Process::ReadFloat(offset + 0x40, x);
         Process::ReadFloat(offset + 0x48, z);
 
-        if (Controller::IsKeysDown(A + DU))
+        if (Controller::IsKeysDown(A + KEY_DU))
         {
             Process::WriteFloat(offset + 0x48, z - 50);
         }
-        if (Controller::IsKeysDown(A + DD))
+        if (Controller::IsKeysDown(A + KEY_DD))
         {
             Process::WriteFloat(offset + 0x48, z + 50);
         }
-        if (Controller::IsKeysDown(A + DL))
+        if (Controller::IsKeysDown(A + KEY_DL))
         {
             Process::WriteFloat(offset + 0x40, x - 50);
         }
-        if (Controller::IsKeysDown(A + DR))
+        if (Controller::IsKeysDown(A + KEY_DR))
         {
             Process::WriteFloat(offset + 0x40, x + 50);
         }
@@ -1552,28 +1552,28 @@ namespace CTRPluginFramework
         Process::Read8(0x831B1C8, playerRoomPosition);
         if (on == 0x100)
         {
-            if (Controller::IsKeysPressed(R + DU))
+            if (Controller::IsKeysPressed(R + KEY_DU))
             {
                 isPlayer1Stalker = true;
                 isPlayer2Stalker = false;
                 isPlayer3Stalker = false;
                 OSD::Notify("StalkerP1:" << Color::Green << "ON!");
             }
-            if (Controller::IsKeysPressed(R + DR))
+            if (Controller::IsKeysPressed(R + KEY_DR))
             {
                 isPlayer2Stalker = true;
                 isPlayer1Stalker = false;
                 isPlayer3Stalker = false;
                 OSD::Notify("StalkerP2:" << Color::Green << "ON!");
             }
-            if (Controller::IsKeysPressed(R + DD))
+            if (Controller::IsKeysPressed(R + KEY_DD))
             {
                 isPlayer3Stalker = true;
                 isPlayer1Stalker = false;
                 isPlayer2Stalker = false;
                 OSD::Notify("StalkerP3:" << Color::Green << "ON!");
             }
-            if (Controller::IsKeysPressed(R + DL))
+            if (Controller::IsKeysPressed(R + KEY_DL))
             {
                 isPlayer1Stalker = false;
                 isPlayer2Stalker = false;
@@ -1687,38 +1687,38 @@ namespace CTRPluginFramework
         {
             if (area1 == 0x4C)
             {
-                if (Controller::IsKeysDown(DU))
+                if (Controller::IsKeysDown(KEY_DU))
                 {
                     Process::WriteFloat(offset1 + 0x1000, mon1z - 50);
                 }
-                if (Controller::IsKeysDown(DD))
+                if (Controller::IsKeysDown(KEY_DD))
                 {
                     Process::WriteFloat(offset1 + 0x1000, mon1z + 50);
                 }
-                if (Controller::IsKeysDown(DL))
+                if (Controller::IsKeysDown(KEY_DL))
                 {
                     Process::WriteFloat(offset1 + 0xFF8, mon1x - 50);
                 }
-                if (Controller::IsKeysDown(DR))
+                if (Controller::IsKeysDown(KEY_DR))
                 {
                     Process::WriteFloat(offset1 + 0xFF8, mon1x + 50);
                 }
             }
             if (area2 == 0x4C)
             {
-                if (Controller::IsKeysDown(CU))
+                if (Controller::IsKeysDown(KEY_CU))
                 {
                     Process::WriteFloat(offset2 + 0x1000, mon2z - 50);
                 }
-                if (Controller::IsKeysDown(CD))
+                if (Controller::IsKeysDown(KEY_CD))
                 {
                     Process::WriteFloat(offset2 + 0x1000, mon2z + 50);
                 }
-                if (Controller::IsKeysDown(CL))
+                if (Controller::IsKeysDown(KEY_CL))
                 {
                     Process::WriteFloat(offset2 + 0xFF8, mon2x - 50);
                 }
-                if (Controller::IsKeysDown(CR))
+                if (Controller::IsKeysDown(KEY_CR))
                 {
                     Process::WriteFloat(offset2 + 0xFF8, mon2x + 50);
                 }
@@ -1745,19 +1745,19 @@ namespace CTRPluginFramework
         Process::Read32(mon2 + 0x1000, mon2z);
         Process::Read8(mon1 + 0xD, area1);
         Process::Read8(mon2 + 0xD, area2);
-        if (Controller::IsKeysPressed(X + DU + R))
+        if (Controller::IsKeysPressed(X + KEY_DU + R))
         {
             ston1 = true;
             ston2 = false;
             OSD::Notify("Mon1Stalker:" << Color::Green << "ON!");
         }
-        if (Controller::IsKeysPressed(X + DU + L))
+        if (Controller::IsKeysPressed(X + KEY_DU + L))
         {
             ston1 = false;
             ston2 = true;
             OSD::Notify("Mon2Stalker:" << Color::Green << "ON!");
         }
-        if (Controller::IsKeysPressed(X + DD + R))
+        if (Controller::IsKeysPressed(X + KEY_DD + R))
         {
             ston1 = false;
             ston2 = false;
@@ -2782,7 +2782,7 @@ namespace CTRPluginFramework
         Process::Read32(0x8325248, mon2);
         Process::Read8(mon1 + 0xD, area1);
         Process::Read8(mon2 + 0xD, area2);
-        if (Controller::IsKeysDown(X + DR))
+        if (Controller::IsKeysDown(X + KEY_DR))
         {
             if (Controller::IsKeysDown(R))
             {
@@ -5638,27 +5638,27 @@ namespace CTRPluginFramework
                 return;
             }
         }
-        if (Controller::IsKeysPressed(A + DL) && Hex10 == 0)
+        if (Controller::IsKeysPressed(A + KEY_DL) && Hex10 == 0)
         {
             Hex10 = 1;
         }
-        if (Controller::IsKeysPressed(A + DR) && Hex10 == 0)
+        if (Controller::IsKeysPressed(A + KEY_DR) && Hex10 == 0)
         {
             Hex10 = 1;
         }
-        if (Controller::IsKeysPressed(A + DL) && Hex10 == 1)
+        if (Controller::IsKeysPressed(A + KEY_DL) && Hex10 == 1)
         {
             Hex10 = 0;
         }
-        if (Controller::IsKeysPressed(A + DR) && Hex10 == 1)
+        if (Controller::IsKeysPressed(A + KEY_DR) && Hex10 == 1)
         {
             Hex10 = 0;
         }
-        if (Controller::IsKeysPressed(A + DU))
+        if (Controller::IsKeysPressed(A + KEY_DU))
         {
             address1 -= 8;
         }
-        if (Controller::IsKeysPressed(A + DD))
+        if (Controller::IsKeysPressed(A + KEY_DD))
         {
             address1 += 8;
         }
@@ -5727,11 +5727,11 @@ namespace CTRPluginFramework
                 Process::Write32(ad1, hex1);
             }
         }
-        if (Controller::IsKeysPressed(A + DU))
+        if (Controller::IsKeysPressed(A + KEY_DU))
         {
             ad1 -= 4;
         }
-        if (Controller::IsKeysPressed(A + DD))
+        if (Controller::IsKeysPressed(A + KEY_DD))
         {
             ad1 += 4;
         }
@@ -6083,14 +6083,14 @@ namespace CTRPluginFramework
         float x, y, z;
         Process::Read32(0x8195350, offset);
 
-        if (Controller::IsKeysDown(X + DR))
+        if (Controller::IsKeysDown(X + KEY_DR))
         {
             Process::ReadFloat(offset + 0x40, x);
             Process::ReadFloat(offset + 0x44, y);
             Process::ReadFloat(offset + 0x48, z);
         }
 
-        if (Controller::IsKeysDown(X + DL))
+        if (Controller::IsKeysDown(X + KEY_DL))
         {
             Process::WriteFloat(offset + 0x40, x);
             Process::WriteFloat(offset + 0x44, y);
