@@ -1,12 +1,9 @@
-#include <string>
-
 #include "Patch.hpp"
+
 namespace CTRPluginFramework
 {
-    std::string patchProcessColorEditorTitle = "16進数で入力してください。[RGBa]";
     void PatchProcessUiMainTextColorEditor(MenuEntry* entry)
     {
-        FwkSettings set;
         Keyboard keyboard(patchProcessColorEditorTitle);
         keyboard.Open(colorUiMainText);
         set.Get().MainTextColor = Color(colorUiMainText);
@@ -14,7 +11,6 @@ namespace CTRPluginFramework
 
     void PatchProcessUiWindowTitleColorEditor(MenuEntry* entry)
     {
-        FwkSettings set;
         Keyboard keyboard(patchProcessColorEditorTitle);
         keyboard.Open(colorUiWindowTitle);
         set.Get().WindowTitleColor = Color(colorUiWindowTitle);
@@ -22,7 +18,6 @@ namespace CTRPluginFramework
 
     void PatchProcessUiMenuSelectedItemColorEditor(MenuEntry* entry)
     {
-        FwkSettings set;
         Keyboard keyboard(patchProcessColorEditorTitle);
         keyboard.Open(colorUiMenuSelectedItem);
         set.Get().MenuSelectedItemColor = Color(colorUiMenuSelectedItem);
@@ -30,7 +25,6 @@ namespace CTRPluginFramework
 
     void PatchProcessUiMenuUnselectedItemColorEditor(MenuEntry* entry)
     {
-        FwkSettings set;
         Keyboard keyboard(patchProcessColorEditorTitle);
         keyboard.Open(colorUiMenuUnselectedItem);
         set.Get().MenuUnselectedItemColor = Color(colorUiMenuUnselectedItem);
@@ -38,7 +32,6 @@ namespace CTRPluginFramework
 
     void PatchProcessUiBackgroundMainColorEditor(MenuEntry* entry)
     {
-        FwkSettings set;
         Keyboard keyboard(patchProcessColorEditorTitle);
         keyboard.Open(colorUiBackgroundMain);
         set.Get().BackgroundMainColor = Color(colorUiBackgroundMain);
@@ -46,7 +39,6 @@ namespace CTRPluginFramework
 
     void PatchProcessUiBackgroundSecondaryColorEditor(MenuEntry* entry)
     {
-        FwkSettings set;
         Keyboard keyboard(patchProcessColorEditorTitle);
         keyboard.Open(colorUiBackgroundSecondary);
         set.Get().BackgroundSecondaryColor = Color(colorUiBackgroundSecondary);
@@ -54,7 +46,6 @@ namespace CTRPluginFramework
 
     void PatchProcessUiBackgroundBorderColorEditor(MenuEntry* entry)
     {
-        FwkSettings set;
         Keyboard keyboard(patchProcessColorEditorTitle);
         keyboard.Open(colorUiBackgroundBorder);
         set.Get().BackgroundBorderColor = Color(colorUiBackgroundBorder);
@@ -62,7 +53,6 @@ namespace CTRPluginFramework
 
     void PatchProcessKeyboardBackgroundColorEditor(MenuEntry* entry)
     {
-        FwkSettings set;
         Keyboard keyboard(patchProcessColorEditorTitle);
         keyboard.Open(colorKeyboardBackground);
         set.Get().Keyboard.Background = Color(colorKeyboardBackground);
@@ -70,7 +60,6 @@ namespace CTRPluginFramework
 
     void PatchProcessKeyboardKeyBackgroundColorEditor(MenuEntry* entry)
     {
-        FwkSettings set;
         Keyboard keyboard(patchProcessColorEditorTitle);
         keyboard.Open(colorKeyboardKeyBackground);
         set.Get().Keyboard.KeyBackground = Color(colorKeyboardKeyBackground);
@@ -78,7 +67,6 @@ namespace CTRPluginFramework
 
     void PatchProcessKeyboardKeyBackgroundPressedColorEditor(MenuEntry* entry)
     {
-        FwkSettings set;
         Keyboard keyboard(patchProcessColorEditorTitle);
         keyboard.Open(colorKeyboardKeyBackgroundPressed);
         set.Get().Keyboard.KeyBackgroundPressed = Color(colorKeyboardKeyBackgroundPressed);
@@ -86,7 +74,6 @@ namespace CTRPluginFramework
 
     void PatchProcessKeyboardKeyTextColorEditor(MenuEntry* entry)
     {
-        FwkSettings set;
         Keyboard keyboard(patchProcessColorEditorTitle);
         keyboard.Open(colorKeyboardKeyText);
         set.Get().Keyboard.KeyText = Color(colorKeyboardKeyText);
@@ -94,7 +81,6 @@ namespace CTRPluginFramework
 
     void PatchProcessKeyboardKeyTextPressedColorEditor(MenuEntry* entry)
     {
-        FwkSettings set;
         Keyboard keyboard(patchProcessColorEditorTitle);
         keyboard.Open(colorKeyboardKeyTextPressed);
         set.Get().Keyboard.KeyTextPressed = Color(colorKeyboardKeyTextPressed);
@@ -102,7 +88,6 @@ namespace CTRPluginFramework
 
     void PatchProcessKeyboardCursorColorEditor(MenuEntry* entry)
     {
-        FwkSettings set;
         Keyboard keyboard(patchProcessColorEditorTitle);
         keyboard.Open(colorKeyboardCursor);
         set.Get().Keyboard.Cursor = Color(colorKeyboardCursor);
@@ -110,7 +95,6 @@ namespace CTRPluginFramework
 
     void PatchProcessKeyboardInputColorEditor(MenuEntry* entry)
     {
-        FwkSettings set;
         Keyboard keyboard(patchProcessColorEditorTitle);
         keyboard.Open(colorKeyboardInput);
         set.Get().Keyboard.Input = Color(colorKeyboardInput);
@@ -118,7 +102,6 @@ namespace CTRPluginFramework
 
     void PatchProcessCustomKeyboardBackgroundMainColorEditor(MenuEntry* entry)
     {
-        FwkSettings set;
         Keyboard keyboard(patchProcessColorEditorTitle);
         keyboard.Open(colorCustomKeyboardBackgroundMain);
         set.Get().CustomKeyboard.BackgroundMain = Color(colorCustomKeyboardBackgroundMain);
@@ -126,7 +109,6 @@ namespace CTRPluginFramework
 
     void PatchProcessCustomKeyboardBackgroundSecondaryColorEditor(MenuEntry* entry)
     {
-        FwkSettings set;
         Keyboard keyboard(patchProcessColorEditorTitle);
         keyboard.Open(colorCustomKeyboardBackgroundSecondary);
         set.Get().CustomKeyboard.BackgroundSecondary = Color(colorCustomKeyboardBackgroundSecondary);
@@ -134,7 +116,6 @@ namespace CTRPluginFramework
 
     void PatchProcessCustomKeyboardBackgroundBorderColorEditor(MenuEntry* entry)
     {
-        FwkSettings set;
         Keyboard keyboard(patchProcessColorEditorTitle);
         keyboard.Open(colorCustomKeyboardBackgroundBorder);
         set.Get().CustomKeyboard.BackgroundBorder = Color(colorCustomKeyboardBackgroundBorder);
@@ -142,7 +123,6 @@ namespace CTRPluginFramework
 
     void PatchProcessCustomKeyboardKeyBackgroundColorEditor(MenuEntry* entry)
     {
-        FwkSettings set;
         Keyboard keyboard(patchProcessColorEditorTitle);
         keyboard.Open(colorCustomKeyboardKeyBackground);
         set.Get().CustomKeyboard.KeyBackground = Color(colorCustomKeyboardKeyBackground);
@@ -150,7 +130,6 @@ namespace CTRPluginFramework
 
     void PatchProcessCustomKeyboardKeyBackgroundPressedColorEditor(MenuEntry* entry)
     {
-        FwkSettings set;
         Keyboard keyboard(patchProcessColorEditorTitle);
         keyboard.Open(colorCustomKeyboardKeyBackgroundPressed);
         set.Get().CustomKeyboard.KeyBackgroundPressed = Color(colorCustomKeyboardKeyBackgroundPressed);
@@ -158,7 +137,6 @@ namespace CTRPluginFramework
 
     void PatchProcessCustomKeyboardKeyTextColorEditor(MenuEntry* entry)
     {
-        FwkSettings set;
         Keyboard keyboard(patchProcessColorEditorTitle);
         keyboard.Open(colorCustomKeyboardKeyText);
         set.Get().CustomKeyboard.KeyText = Color(colorCustomKeyboardKeyText);
@@ -166,7 +144,6 @@ namespace CTRPluginFramework
 
     void PatchProcessCustomKeyboardKeyTextPressedColorEditor(MenuEntry* entry)
     {
-        FwkSettings set;
         Keyboard keyboard(patchProcessColorEditorTitle);
         keyboard.Open(colorCustomKeyboardKeyTextPressed);
         set.Get().CustomKeyboard.KeyTextPressed = Color(colorCustomKeyboardKeyTextPressed);
@@ -174,7 +151,6 @@ namespace CTRPluginFramework
 
     void PatchProcessCustomKeyboardScrollBarBackgroundColorEditor(MenuEntry* entry)
     {
-        FwkSettings set;
         Keyboard keyboard(patchProcessColorEditorTitle);
         keyboard.Open(colorCustomKeyboardScrollBarBackground);
         set.Get().CustomKeyboard.ScrollBarBackground = Color(colorCustomKeyboardScrollBarBackground);
@@ -182,7 +158,6 @@ namespace CTRPluginFramework
 
     void PatchProcessCustomKeyboardScrollBarThumbColorEditor(MenuEntry* entry)
     {
-        FwkSettings set;
         Keyboard keyboard(patchProcessColorEditorTitle);
         keyboard.Open(colorCustomKeyboardScrollBarThumb);
         set.Get().CustomKeyboard.ScrollBarThumb = Color(colorCustomKeyboardScrollBarThumb);
@@ -190,7 +165,6 @@ namespace CTRPluginFramework
 
     void PatchProcessDefaultTheme(MenuEntry* entry)
     {
-        FwkSettings set;
         Keyboard keyboard("CTRPFの色を元に戻しますか？", { "はい", "いいえ" });
         int choice = keyboard.Open();
         if (choice == 0)

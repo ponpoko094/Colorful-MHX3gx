@@ -4,6 +4,9 @@
 #include <CTRPluginFramework.hpp>
 namespace CTRPluginFramework
 {
+    FwkSettings set;
+    std::string patchProcessColorEditorTitle = "16i”‚Å“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B[RGBa]";
+
     // Ui Color
     static u32 colorUiMainText = 0xF08080FF;
     static u32 colorUiWindowTitle = 0xF08080FF;
