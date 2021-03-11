@@ -5,13 +5,6 @@
 
 namespace CTRPluginFramework
 {
-    //宣言、定義
-    u32 offset = 0, data = 0;
-    u64 data64 = 0, cmp64 = 0;
-    u32 data32 = 0, cmp32 = 0;
-    u16 data16 = 0, cmp16 = 0;
-    u8 data8 = 0, cmp8 = 0;
-
     std::vector<std::string> listPalicoSkill{
         "なし",
         "体力強化の術【小】",
@@ -285,6 +278,7 @@ namespace CTRPluginFramework
     // 全狩技開放
     void HunterArtRelease(MenuEntry* entry)
     {
+        u32 offset;
         Process::Read32(0x0DD9F30, offset);
         Process::Write32(offset + 0x9E0, 0xFFFFFFFE);
         Process::Write32(offset + 0x9E4, 0x00FFFFFF);
@@ -667,6 +661,7 @@ namespace CTRPluginFramework
     // サポートゲージ無限
     void ProwlerSupportGageMax(MenuEntry* entry)
     {
+        u32 offset, cmp32;
         Process::Read32(0xDD5348, offset);
         if (Process::Read32(offset + 0x14, cmp32) && cmp32 != 0x0)
         {
@@ -1008,6 +1003,7 @@ namespace CTRPluginFramework
     // ニャンター攻撃力変更
     void PalicoAttackPowerMagnificationChange(MenuEntry* entry)
     {
+        u32 data32, cmp32;
         if (Controller::IsKeysPressed(Y + KEY_DU))
         {
             Process::Write32(0xC18F80, 0xE92D400C);
@@ -1078,6 +1074,7 @@ namespace CTRPluginFramework
     // ニャンター防御力変更
     void PalicoDefencePowerMagnificationChange(MenuEntry* entry)
     {
+        u32 offset, data32, cmp32;
         if (Controller::IsKeysPressed(X + KEY_DU))
         {
             Process::Write32(0xC18FE0, 0xE92D4004);
@@ -1166,6 +1163,7 @@ namespace CTRPluginFramework
     // ガンランス弾無限
     void GunlanceAmmoInfinite(MenuEntry* entry)
     {
+        u32 offset;
         Process::Read32(0x8360F24, offset);
         Process::Read32(offset + 0xB4, offset);
         Process::Write8(offset + 0x1922, 0xFF);
@@ -1174,6 +1172,7 @@ namespace CTRPluginFramework
     // ガンランスオーバーヒート無効
     void GunlanceInvalidOverHeat(MenuEntry* entry)
     {
+        u32 offset;
         Process::Read32(0x8360F24, offset);
         Process::Read32(offset + 0xB4, offset);
         Process::Write32(offset + 0x1FF8, 0x0);
@@ -1190,6 +1189,7 @@ namespace CTRPluginFramework
     // ガンランスヒートゲージ固定
     void GunlanceHeatGageFix(MenuEntry* entry)
     {
+        u32 offset;
         Process::Read32(0x8360F24, offset);
         Process::Read32(offset + 0xB4, offset);
         Process::Write16(offset + 0x2018, heat);
@@ -1486,6 +1486,7 @@ namespace CTRPluginFramework
     // プレイヤー座標移動
     void PlayerCoordinateModifier(MenuEntry* entry)
     {
+        u32 offset;
         float x, z;
         Process::Read32(0x8195350, offset);
         Process::ReadFloat(offset + 0x40, x);
@@ -1512,6 +1513,7 @@ namespace CTRPluginFramework
     // ムーンジャンプ
     void PlayerMoonJump(MenuEntry* entry)
     {
+        u32 offset;
         float y;
         Process::Read32(0x8195350, offset);
         Process::ReadFloat(offset + 0x44, y);
@@ -1784,6 +1786,7 @@ namespace CTRPluginFramework
     // 1番目のモンスターHP表示
     void Monster1HpDisplay(MenuEntry* entry)
     {
+        u32 offset;
         static u16 mon1HpMax, mon1Hp;
         static int addressOn = 0;
         addressOn = true;
@@ -1832,6 +1835,7 @@ namespace CTRPluginFramework
     // 2番目のモンスターHP表示
     void Monster2HpDisplay(MenuEntry* entry)
     {
+        u32 offset;
         static u16 mon2HpMax, mon2Hp;
         static int addressOn = 0;
         Process::Read32(0x8325248, offset);
@@ -1878,6 +1882,7 @@ namespace CTRPluginFramework
     // プレイヤーの現在座標表示
     void DisplayPlayerCoordinate(MenuEntry* entry)
     {
+        u32 offset;
         static float x, y, z;
         static int addressOn = 0;
         addressOn = true;
@@ -1921,6 +1926,7 @@ namespace CTRPluginFramework
     // リピートムーブ
     void Repeatmove(MenuEntry* entry)
     {
+        u32 offset;
         Process::Read32(0x8195350, offset);
         if (Controller::IsKeysDown(B + Y))
         {
@@ -1989,6 +1995,7 @@ namespace CTRPluginFramework
     // クエスト後即リザルト
     void QuestResultSkip(MenuEntry* entry)
     {
+        u32 offset;
         Process::Read32(0x83ACA40, offset);
         Process::Write32(offset + 0x104, 0);
     }
@@ -1996,6 +2003,7 @@ namespace CTRPluginFramework
     // 報酬画面スキップ
     void QuestWaitSkip(MenuEntry* entry)
     {
+        u32 offset;
         Process::Read32(0x819DF68, offset);
         Process::Write32(offset + 0xAC, 0);
     }
@@ -2041,6 +2049,7 @@ namespace CTRPluginFramework
     // 視野角変更
     void ViewingAngleChange(MenuEntry* entry)
     {
+        u32 offset;
         Process::Read32(0x81943DC, offset);
         Process::WriteFloat(offset + 0x740, fov);
     }
@@ -2518,6 +2527,7 @@ namespace CTRPluginFramework
     // アイテムボックス編集
     void ItemBoxEdit(MenuEntry* entry)
     {
+        u16 data16;
         std::vector<std::string> listItemBoxEdit{
             "アイテムを入れる[1400種]",
             "アイテムを入れる[548種]",
@@ -2582,6 +2592,7 @@ namespace CTRPluginFramework
     // トリプルアップ
     void InsectGlaiveAlwaysTripleUp(MenuEntry* entry)
     {
+        u32 offset;
         Process::Read32(0x8360F24, offset);
         Process::Read32(offset + 0xB4, offset);
         Process::WriteFloat(offset + 0x1FF8, 3600);
@@ -2592,6 +2603,7 @@ namespace CTRPluginFramework
     // 猟虫スタミナ無限
     void InsectGlaiveInsectStaminaInfinite(MenuEntry* entry)
     {
+        u32 offset;
         Process::Read32(0x8360F24, offset);
         Process::Read32(offset + 0xB4, offset);
         Process::Write16(offset + 0x2010, 0x82);
@@ -2641,6 +2653,7 @@ namespace CTRPluginFramework
     // 溜め段階固定
     void ChargeStageFix(MenuEntry* entry)
     {
+        u32 offset;
         Process::Read32(0x8360F24, offset);
         Process::Read32(offset + 0xB4, offset);
         Process::WriteFloat(offset + 0x1914, tame);
@@ -2649,6 +2662,7 @@ namespace CTRPluginFramework
     // 武器ゲージ
     void WeaponGageFix(MenuEntry* entry)
     {
+        u32 offset;
         Process::Read32(0x8360F24, offset);
         Process::Read32(offset + 0xB4, offset);
         Process::Write16(offset + 0x1598, 0x64);
@@ -2657,6 +2671,7 @@ namespace CTRPluginFramework
     // チャアクビン
     void ChargeAxeBinFix(MenuEntry* entry)
     {
+        u32 offset;
         Process::Read32(0x8360F24, offset);
         Process::Read32(offset + 0xB4, offset);
         Process::Write8(offset + 0x1922, 0x5);
@@ -2665,7 +2680,7 @@ namespace CTRPluginFramework
     // 笛全効果付与
     void HuntingHornAllEffectGrant(MenuEntry* entry)
     {
-        u32 questFrame1;
+        u32 questFrame1, offset;
         Process::Read32(0x8363ED4, questFrame1);
         Process::Read32(0x8360F24, offset);
         Process::Read32(offset + 0xB4, offset);
@@ -2681,7 +2696,7 @@ namespace CTRPluginFramework
     // 弾数
     void BowgunAmmoInfinite(MenuEntry* entry)
     {
-        u8 ammo;
+        u8 ammo, offset;
         Process::Read32(0x8360F24, offset);
         Process::Read32(offset + 0xB4, offset);
         Process::Read8(offset + 0x1924, ammo);
@@ -2691,6 +2706,7 @@ namespace CTRPluginFramework
     // しゃがみ
     void BowgunCrouchingShot(MenuEntry* entry)
     {
+        u32 offset;
         Process::Read32(0x8360F24, offset);
         Process::Read32(offset + 0xB4, offset);
         Process::Write8(offset + 0x1FF6, 0x7F);
@@ -2699,6 +2715,7 @@ namespace CTRPluginFramework
     // 1番目のモンスターサイズ表示
     void Monster1SizeMagnificationDisplay(MenuEntry* entry)
     {
+        u32 offset;
         static float mon1size;
         static int addressOn = 0;
         addressOn = true;
@@ -2728,6 +2745,7 @@ namespace CTRPluginFramework
     // 2番目のモンスターサイズ表示
     void Monster2SizeMagnificationDisplay(MenuEntry* entry)
     {
+        u32 offset;
         static float mon2size;
         static int addressOn = 0;
         addressOn = true;
@@ -3197,6 +3215,7 @@ namespace CTRPluginFramework
     // 酔っぱらい
     void InstantDrunk(MenuEntry* entry)
     {
+        u32 offset;
         Process::Read32(0x8360F24, offset);
         Process::Read32(offset + 0xB4, offset);
         Process::Write8(offset + 0x1510, drunk);
@@ -3205,6 +3224,7 @@ namespace CTRPluginFramework
     // 1回飲んだら酔っぱらい
     void Drunk1(MenuEntry* entry)
     {
+        u32 offset;
         Process::Read32(0x8360F24, offset);
         Process::Read32(offset + 0xB4, offset);
         Process::Write8(offset + 0x1538, 0xA);
@@ -3213,6 +3233,7 @@ namespace CTRPluginFramework
     // 乗りゲージ
     void RideGageMax(MenuEntry* entry)
     {
+        u32 offset;
         Process::Read32(0x8195350, offset);
         Process::WriteFloat(offset + 0x2C18, 2000);
         Process::WriteFloat(offset + 0x2C1C, 1);
@@ -3221,6 +3242,7 @@ namespace CTRPluginFramework
     // 腹減り無効
     void HungryInvalid(MenuEntry* entry)
     {
+        u32 offset;
         Process::Read32(0x8360F24, offset);
         Process::Read32(offset + 0xB4, offset);
         Process::WriteFloat(offset + 0x2DC, 1);
@@ -5890,6 +5912,7 @@ namespace CTRPluginFramework
     static float hunterSizeX = 1, hunterSizeY = 1, hunterSizeZ = 1;
     void HunterSizeOption(MenuEntry* entry)
     {
+        u32 offset;
         Process::Read32(0x8195350, offset);
         Process::ReadFloat(offset + 0x60, hunterSizeX);
         Process::ReadFloat(offset + 0x64, hunterSizeY);
@@ -5924,6 +5947,7 @@ namespace CTRPluginFramework
 
     void HunterSizeChange(MenuEntry* entry)
     {
+        u32 offset;
         Process::Read32(0x8195350, offset);
         Process::WriteFloat(offset + 0x60, hunterSizeX);
         Process::WriteFloat(offset + 0x64, hunterSizeY);
@@ -6080,6 +6104,7 @@ namespace CTRPluginFramework
 
     void Teleport(MenuEntry* entry)
     {
+        u32 offset;
         float x, y, z;
         Process::Read32(0x8195350, offset);
 
