@@ -4,8 +4,7 @@
 #include <CTRPluginFramework.hpp>
 namespace CTRPluginFramework
 {
-    FwkSettings set;
-    std::string patchProcessColorEditorTitle = "16進数で入力してください。[RGBa]";
+    const static std::string patchProcessColorEditorTitle = "16進数で入力してください。[RGBa]";
 
     // Ui Color
     static u32 colorUiMainText = 0xF08080FF;
