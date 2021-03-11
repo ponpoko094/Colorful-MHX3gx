@@ -1,4 +1,7 @@
-#include "common.hpp"
+#include <3ds.h>
+#include <CTRPluginFramework.hpp>
+#include "Cheats.hpp"
+#include "TeamAndConditions.hpp"
 
 namespace CTRPluginFramework
 {
@@ -132,9 +135,6 @@ namespace CTRPluginFramework
     // チートメニュー作成
     void InitMenu(PluginMenu& menu)
     {
-        // Create your entries here, or elsewhere
-        // You can create your entries whenever/wherever you feel like it
-
         MenuFolder* player = new MenuFolder("プレイヤー");
         {
             MenuFolder* statusV2 = new MenuFolder("ステータス変更");
@@ -679,49 +679,6 @@ namespace CTRPluginFramework
         menu += bonus;
     }
 
-    void TeamAndConditions()
-    {
-        // オープニングメッセージ
-        static bool file = false;
-        std::string tid;
-        std::string openingMessage = "オープニングメッセージ";
-        Process::GetTitleID(tid);
-        if (tid == "0004000000155400")
-        {
-            if (!file)
-            {
-                if (!File::Exists("opskip.bin"))
-                {
-                    MessageBox(openingMessage, "ぽんぽこ @ponpoko094\nの3gxを使用していただき\nありがとうございます。\n次に利用規約が表示されます\n同意をお願いします。")();
-                    if (MessageBox(openingMessage, "利用規約\n①この3gxは無料で提供されます。\n②二次配布を禁止します。\n③この3gxを使用しデータが破損する等の\n損害に対して、ぽんぽこは一切の責任を負いません。\n④この3gxは日本版MHX\n  (タイトルID:0004000000155400)\n  でのみ使用できるものとします。\n利用規約に同意しますか？", DialogType::DialogYesNo)())
-                    {
-                        if (MessageBox(openingMessage, "利用規約に同意していただき\nありがとうございます。\n次回からオープニングメッセージを\nスキップしますか？", DialogType::DialogYesNo)())
-                        {
-                            File::Create("opskip.bin");
-                            MessageBox(openingMessage, "opskip.binを作成しました。\n設定を変更するために\n再起動をお願いします。")();
-                            Process::ReturnToHomeMenu();
-                        }
-                        else
-                        {
-                            MessageBox(openingMessage, "プラグインを楽しんでください。")();
-                        }
-                    }
-                    else
-                    {
-                        MessageBox(openingMessage, "利用規約に同意する必要があります。")();
-                        Process::ReturnToHomeMenu();
-                    }
-                }
-                file = true;
-            }
-        }
-        else
-        {
-            MessageBox(openingMessage, "この3gxは日本版MHX(タイトルID:0004000000155400)でのみ動作します。")();
-            Process::ReturnToHomeMenu();
-        }
-    }
-
     // Plugin menu
     int main()
     {
@@ -732,7 +689,7 @@ namespace CTRPluginFramework
             "Twitter @ponpoko094";
 
         // タイトルやAbout等作成
-        PluginMenu* menu = new PluginMenu(title, 1, 0, 0, about, 0);
+        PluginMenu* menu = new PluginMenu(title, 1, 0, 1, about, 0);
 
         // Synchronize the menu with frame event
         menu->SynchronizeWithFrame(true);
@@ -744,7 +701,7 @@ namespace CTRPluginFramework
         menu->ShowWelcomeMessage(false);
 
         // 利用規約の表示
-        TeamAndConditions();
+        TeamAndCondition();
 
         // Plugin Ready!の代わり
         OSD::Notify(Color(234, 145, 152) << "ponpoko094's 3gx!");

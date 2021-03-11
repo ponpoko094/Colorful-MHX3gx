@@ -1,8 +1,29 @@
-#ifndef CHEATS_HPP
-#define CHEATS_HPP
+#pragma once
+#include <string>
+#include <vector>
+#include <ctime>
+
+#include <3ds.h>
+#include <CTRPluginFramework.hpp>
+#include "csvc.h"
+#include "Patch.hpp"
+#include "Keyboard.hpp"
+#include "TeamAndConditions.hpp"
+
+#define DU DPadUp
+#define DD DPadDown
+#define DL DPadLeft
+#define DR DPadRight
+#define CU CPadUp
+#define CD CPadDown
+#define CL CPadLeft
+#define CR CPadRight
 
 namespace CTRPluginFramework
 {
+    using CallbackPointer = void (*)(void);
+    using StringVector = std::vector<std::string>;
+
     void NoMotion(MenuEntry* entry);
     void QuestTimeStop(MenuEntry* entry);
     void HunterNameChange(MenuEntry* entry);
@@ -303,4 +324,3 @@ namespace CTRPluginFramework
     void LocalTimeDisplay(MenuEntry* entry);
     void Clean(void);
 } // namespace CTRPluginFramework
-#endif

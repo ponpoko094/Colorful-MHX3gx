@@ -1,6 +1,7 @@
-#ifndef PATCH_HPP
-#define PATCH_HPP
-#include "types.h"
+#pragma once
+#include <string>
+
+#include <CTRPluginFramework.hpp>
 namespace CTRPluginFramework
 {
     // Ui Color
@@ -60,4 +61,3 @@ namespace CTRPluginFramework
 
     void PatchProcessDefaultTheme(MenuEntry* entry);
 } // namespace CTRPluginFramework
-#endif

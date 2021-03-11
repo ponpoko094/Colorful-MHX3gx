@@ -1,6 +1,6 @@
-#include "common.hpp"
-#include "patch.hpp"
 #include <string>
+
+#include "Patch.hpp"
 namespace CTRPluginFramework
 {
     std::string patchProcessColorEditorTitle = "16進数で入力してください。[RGBa]";

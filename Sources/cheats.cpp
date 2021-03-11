@@ -1,4 +1,7 @@
-#include "common.hpp"
+#include <vector>
+#include <string>
+
+#include "cheats.hpp"
 
 namespace CTRPluginFramework
 {

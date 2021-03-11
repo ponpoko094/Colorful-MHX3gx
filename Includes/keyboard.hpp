@@ -1,9 +1,13 @@
-#ifndef KEYBOARD_HPP
-#define KEYBOARD_HPP
-#include "common.hpp"
+#pragma once
+#include <string>
+#include <vector>
+
+#include <CTRPluginFramework.hpp>
 
 namespace CTRPluginFramework
 {
+    using StringVector = std::vector<std::string>;
+
     class KBD
     {
     public:
@@ -22,5 +26,3 @@ namespace CTRPluginFramework
         static void Clean();
     };
 } // namespace CTRPluginFramework
-
-#endif
