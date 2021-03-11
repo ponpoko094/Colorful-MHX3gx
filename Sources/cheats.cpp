@@ -485,7 +485,7 @@ namespace CTRPluginFramework
     }
 
     // ボウガンの弾、アイテム無限
-    void infitemammo(MenuEntry* entry)
+    void InfiniteItemAmmo(MenuEntry* entry)
     {
         Keyboard keyboard("アイテム&弾丸を無限しますか？", listToggle);
         int choice = keyboard.Open();
@@ -1523,7 +1523,7 @@ namespace CTRPluginFramework
     }
 
     // 他プレイヤーストーカー
-    void stalker(MenuEntry* entry)
+    void Stalker(MenuEntry* entry)
     {
         u16 on;
         u32 player, p1, p2, p3, p4, p1x, p2x, p3x, p4x, p1y, p2y, p3y, p4y, p1z, p2z, p3z, p4z;
@@ -4408,7 +4408,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void ParicoLevelChange(MenuEntry* entry)
+    void PalicoLevelChange(MenuEntry* entry)
     {
         u8 lv, levelDisplay;
         Process::Read8(palicoChoice * 0x494 + 0x83388E4, lv);
@@ -4421,7 +4421,7 @@ namespace CTRPluginFramework
         }
     }
 
-    void ParicoSupportTrendChange(MenuEntry* entry)
+    void PalicoSupportTrendChange(MenuEntry* entry)
     {
         u8 sup;
         std::vector<std::string> listPalicoSupportTrend{

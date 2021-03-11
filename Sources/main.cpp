@@ -215,7 +215,7 @@ namespace CTRPluginFramework
             *player += new MenuEntry("プレイヤー座標移動", PlayerCoordinateModifier, "A+十字キーで移動できます。");
             *player += new MenuEntry("ムーンジャンプ", PlayerMoonJump, "R+Bでジャンプできます。\n上がり続けるにはリピートムーブもオンにして、R+B+Yを押してください。");
             *player += new MenuEntry("保存式テレポート", Teleport, "R + → 現在位置を読み込む。\nR + ← 現在位置に書き込む");
-            *player += new MenuEntry("他プレイヤーストーカー", stalker, "R+十字キーで追跡設定ができます。\nR↑ P1を追跡有効\nR+→ P2を追跡有効\nR+↓ P3を追跡有効\nR+←で追跡無効にできます。");
+            *player += new MenuEntry("他プレイヤーストーカー", Stalker, "R+十字キーで追跡設定ができます。\nR↑ P1を追跡有効\nR+→ P2を追跡有効\nR+↓ P3を追跡有効\nR+←で追跡無効にできます。");
             *player += new MenuEntry("リピートムーブ", Repeatmove, "B+Yで動きを繰り返します。");
             *player += new MenuEntry("狩技解放", HunterArtRelease, "狩技を全て解放します。");
             *player += new MenuEntry("腹減り無効", HungryInvalid, "時間経過でスタミナが減らなくなります。");
@@ -272,7 +272,7 @@ namespace CTRPluginFramework
             *item += new MenuEntry("たんほれアイテムセット", TanhoreItemSet, "ポーチの\n1枠目を 燃石炭\n2枠目を ネコタクチケット\n3枠目を モドリ玉\nにします。");
             *item += new MenuEntry("所持金最大", nullptr, MoneyChange, "所持金を変更できます。");
             *item += new MenuEntry("龍歴院ポイント最大", nullptr, WycademyPointChange, "龍歴院ポイントを変更できます。");
-            *item += new MenuEntry("アイテム&弾丸無限", nullptr, infitemammo, "アイテムと弾丸を無限にします。\nしゃがみの弾は無限になりません。");
+            *item += new MenuEntry("アイテム&弾丸無限", nullptr, InfiniteItemAmmo, "アイテムと弾丸を無限にします。\nしゃがみの弾は無限になりません。");
             *item += new MenuEntry("素材無しで調合可能", nullptr, NoMaterialCompound, "素材無しで調合を可能にします。");
             *item += new MenuEntry("運搬物を持たずにポーチに入れる", nullptr, CargoPutInPorch, "運搬物がポーチに入ります。");
             *item += new MenuEntry("採取無限", nullptr, InfiniteCollect, "採集ポイントで無限に採取ができます。");
@@ -480,8 +480,8 @@ namespace CTRPluginFramework
                 *palicoEdit += palicoAppearance;
 
                 *palicoEdit += new MenuEntry("経験値変更", nullptr, PalicoExperienceChange, "ねこの経験値を変更します。");
-                *palicoEdit += new MenuEntry("レベル変更", nullptr, ParicoLevelChange, "ねこのレベルを変更します。");
-                *palicoEdit += new MenuEntry("サポート傾向変更", nullptr, ParicoSupportTrendChange, "ねこのサポート傾向を変更します。");
+                *palicoEdit += new MenuEntry("レベル変更", nullptr, PalicoLevelChange, "ねこのレベルを変更します。");
+                *palicoEdit += new MenuEntry("サポート傾向変更", nullptr, PalicoSupportTrendChange, "ねこのサポート傾向を変更します。");
                 *palicoEdit += new MenuEntry("親密度変更", nullptr, PalicoClosenessChange, "ねこの親密度を変更します。");
                 *palicoEdit += new MenuEntry("ターゲット変更", nullptr, PalicoTargetChange, "ねこのターゲットを変更します。");
                 *palicoEdit += new MenuEntry("オトモコメント編集可能変更", nullptr, PalicoCommentEditPossibleChange, "ねこのオトモコメントを編集可能にするか選べます。");
