@@ -5,6 +5,7 @@
 
 #include <3ds.h>
 #include <CTRPluginFramework.hpp>
+#include "types.h"
 #include "csvc.h"
 #include "Patch.hpp"
 #include "Keyboard.hpp"
@@ -82,7 +83,7 @@ namespace CTRPluginFramework
     void PlayerHuntingStyleChange(MenuEntry* entry);
     void PlayerHearStyleChange(MenuEntry* entry);
     void PlayerFaceChange(MenuEntry* entry);
-    void PlayerMakeChange(MenuEntry* entry);
+    void PlayerCosmeticsChange(MenuEntry* entry);
     // プレイヤー情報変更終わり
 
     void PlayerAttackPowerMagnificationChange(MenuEntry* entry);
@@ -456,6 +457,7 @@ namespace CTRPluginFramework
     void NameID();
     void ConsoleType();
     void WiFiStatus();
+    void BatteryLevel();
     // おまけ終わり
 
 } // namespace CTRPluginFramework
