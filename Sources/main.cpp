@@ -694,10 +694,11 @@ namespace CTRPluginFramework
     int main()
     {
         const std::string title = "MHX3gx";
-        const std::string about = "整合性チェックは行っていません。\n"
+        const std::string about =
             "データのバックアップは取ってください。\n"
             "プラグインを楽しんでください！\n"
-            "Twitter @ponpoko094";
+            "Twitter @ponpoko094\n"
+            "github.com/ponpoko094/MHX3gx";
 
         // タイトルやAbout等作成
         PluginMenu* menu = new PluginMenu(title, 1, 0, 1, about, 0);
