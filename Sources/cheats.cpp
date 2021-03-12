@@ -2696,7 +2696,8 @@ namespace CTRPluginFramework
     // 弾数
     void BowgunAmmoInfinite(MenuEntry* entry)
     {
-        u8 ammo, offset;
+        u8 ammo;
+        u32 offset;
         Process::Read32(0x8360F24, offset);
         Process::Read32(offset + 0xB4, offset);
         Process::Read8(offset + 0x1924, ammo);
@@ -3614,7 +3615,9 @@ namespace CTRPluginFramework
 
     void PlayerVoiceChange(MenuEntry* entry)
     {
+        u8 currentVoice;
         std::vector<std::string> listVoiceType{
+            "声なし",
             "TYPE 1",
             "TYPE 2",
             "TYPE 3",
@@ -3636,8 +3639,10 @@ namespace CTRPluginFramework
             "TYPE 19",
             "TYPE 20" };
 
-        Keyboard keyboard("声を選んでください。", listVoiceType);
-        if (int choice = keyboard.Open() != -1)
+        Process::Read8(0x831B6ED, currentVoice);
+        Keyboard keyboard("声を選んでください。\n現在[" + listVoiceType[currentVoice] + "]", listVoiceType);
+        int choice = keyboard.Open();
+        if (choice != -1)
         {
             Process::Write8(0x831B6ED, choice);
         }
@@ -3645,6 +3650,7 @@ namespace CTRPluginFramework
 
     void PlayerEyeColorChange(MenuEntry* entry)
     {
+        u8 currentEye;
         std::vector<std::string> listEyeType{
             "茶色",
             "赤色",
@@ -3657,8 +3663,10 @@ namespace CTRPluginFramework
             "全部白色",
             "全部黒色" };
 
-        Keyboard keyboard("目の色を選んでください。", listEyeType);
-        if (int choice = keyboard.Open() != -1)
+        Process::Read8(0x831B6EE, currentEye);
+        Keyboard keyboard("目の色を選んでください。\n現在[" + listEyeType[currentEye] + "]", listEyeType);
+        int choice = keyboard.Open();
+        if (choice != -1)
         {
             Process::Write8(0x831B6EE, choice);
         }
@@ -3666,6 +3674,7 @@ namespace CTRPluginFramework
 
     void PlayerInnerChange(MenuEntry* entry)
     {
+        u8 currentInner;
         std::vector<std::string> listInnerType{
             "TYPE 1",
             "TYPE 2",
@@ -3675,8 +3684,10 @@ namespace CTRPluginFramework
             "TYPE 6",
             "TYPE 7" };
 
-        Keyboard keyboard("インナーを選んでください。", listInnerType);
-        if (int choice = keyboard.Open() != -1)
+        Process::Read8(0x831B6EF, currentInner);
+        Keyboard keyboard("インナーを選んでください。\n現在[" + listInnerType[currentInner] + "]", listInnerType);
+        int choice = keyboard.Open();
+        if (choice != -1)
         {
             Process::Write8(0x831B6EF, choice);
         }
@@ -3684,12 +3695,15 @@ namespace CTRPluginFramework
 
     void PlayerGenderChange(MenuEntry* entry)
     {
+        u8 currentGender;
         std::vector<std::string> listGender{
             "男",
             "女" };
 
-        Keyboard keyboard("性別を選んでください。", listGender);
-        if (int choice = keyboard.Open() != -1)
+        Process::Read8(0x831B6F0, currentGender);
+        Keyboard keyboard("性別を選んでください。\n現在[" + listGender[currentGender] + "]", listGender);
+        int choice = keyboard.Open();
+        if (choice != -1)
         {
             Process::Write8(0x831B6F0, choice);
         }
@@ -3697,14 +3711,17 @@ namespace CTRPluginFramework
 
     void PlayerHuntingStyleChange(MenuEntry* entry)
     {
+        u8 currentHuntingStyle;
         std::vector<std::string> listHuntingStyle{
             "ギルドスタイル",
             "ストライカースタイル",
             "エリアルスタイル",
             "ブシドースタイル" };
 
-        Keyboard keyboard("狩猟スタイルを選んでください。", listHuntingStyle);
-        if (int choice = keyboard.Open() != -1)
+        Process::Read8(0x831B6F1, currentHuntingStyle);
+        Keyboard keyboard("狩猟スタイルを選んでください。\n現在[" + listHuntingStyle[currentHuntingStyle] + "]", listHuntingStyle);
+        int choice = keyboard.Open();
+        if (choice != -1)
         {
             Process::Write8(0x831B6F1, choice);
         }
@@ -3712,6 +3729,7 @@ namespace CTRPluginFramework
 
     void PlayerHearStyleChange(MenuEntry* entry)
     {
+        u8 currentHearStyle;
         std::vector<std::string> listHearStyleType{
             "TYPE 1",
             "TYPE 2",
@@ -3744,8 +3762,10 @@ namespace CTRPluginFramework
             "TYPE 29",
             "TYPE 30" };
 
-        Keyboard keyboard("髪型を選んでください。", listHearStyleType);
-        if (int choice = keyboard.Open() != -1)
+        Process::Read8(0x831B6F2, currentHearStyle);
+        Keyboard keyboard("髪型を選んでください。\n現在[" + listHearStyleType[currentHearStyle] + "]", listHearStyleType);
+        int choice = keyboard.Open();
+        if (choice != -1)
         {
             Process::Write8(0x831B6F2, choice);
         }
@@ -3753,6 +3773,7 @@ namespace CTRPluginFramework
 
     void PlayerFaceChange(MenuEntry* entry)
     {
+        u8 currentFace;
         std::vector<std::string> listFaceType{
             "TYPE 1",
             "TYPE 2",
@@ -3773,15 +3794,18 @@ namespace CTRPluginFramework
             "TYPE 17",
             "TYPE 18" };
 
-        Keyboard keyboard("顔を選んでください。", listFaceType);
-        if (int choice = keyboard.Open() != -1)
+        Process::Read8(0x831B6F3, currentFace);
+        Keyboard keyboard("顔を選んでください。\n現在[" + listFaceType[currentFace] + "]", listFaceType);
+        int choice = keyboard.Open();
+        if (choice != -1)
         {
             Process::Write8(0x831B6F3, choice);
         }
     }
 
-    void PlayerMakeChange(MenuEntry* entry)
+    void PlayerCosmeticsChange(MenuEntry* entry)
     {
+        u8 currentCosmetics;
         std::vector<std::string> listMakeType{
             "TYPE 1",
             "TYPE 2",
@@ -3799,18 +3823,14 @@ namespace CTRPluginFramework
             "TYPE 14",
             "メイクなし" };
 
-        Keyboard keyboard("メイクを選んでください。", listMakeType);
-        if (int choice = keyboard.Open() != -1)
+        Process::Read8(0x831B6F4, currentCosmetics);
+        Keyboard keyboard("メイクを選んでください。\n現在[" + listMakeType[currentCosmetics] + "]", listMakeType);
+        int choice = keyboard.Open();
+        if (choice != -1)
         {
             Process::Write8(0x831B6F4, choice);
         }
     }
-
-    StringVector info{
-        "タイトルID",
-        "プロセスの名前",
-        "3DSのタイプ",
-        "Wi-Fi接続確認" };
 
     void TitleID()
     {
@@ -3852,8 +3872,23 @@ namespace CTRPluginFramework
         }
     }
 
+    void BatteryLevel()
+    {
+        u8 percent = 0;
+        PTMU_GetBatteryLevel(&percent);
+        std::string percent_string = std::to_string(percent) + "%";
+        MessageBox("バッテリー残量は" + percent_string + "です。")();
+    }
+
     void Information(MenuEntry* entry)
     {
+        StringVector info{
+            "タイトルID",
+            "プロセスの名前",
+            "3DSのタイプ",
+            "Wi-Fi接続確認",
+            "バッテリー残量確認" };
+
         Keyboard keyboard("確認したい情報を選んでください。", info);
         int choice = keyboard.Open();
 
@@ -3870,6 +3905,9 @@ namespace CTRPluginFramework
             break;
         case 3:
             WiFiStatus();
+            break;
+        case 4:
+            BatteryLevel();
             break;
         }
     }
@@ -6091,7 +6129,8 @@ namespace CTRPluginFramework
             "ネコの憎まれ上手" };
 
         Keyboard keyboard("どちらのスキルを変更しますか？", { "第一スキル", "第二スキル", "第三スキル" });
-        if (int select = keyboard.Open() != -1)
+        int select = keyboard.Open();
+        if (select != -1)
         {
             Keyboard key("スキルを選択してください。", listMealSkill);
             int choice = key.Open();
@@ -6125,14 +6164,13 @@ namespace CTRPluginFramework
 
     void LocalTimeDisplay(MenuEntry* entry)
     {
-        time_t t = time(0);
-        int hour = localtime(&t)->tm_hour & 12;
-        int min = localtime(&t)->tm_min;
-        int amPm = localtime(&t)->tm_hour / 12;
-        static bool addressOn = false;
+        const std::time_t time = std::time(nullptr);
+        const std::tm calendar_time = *std::localtime(std::addressof(time));
 
-        static char buffer[27];
-        snprintf(buffer, 27, "%2i:%02i %s", (hour == 0) ? 12 : hour, min, amPm ? "PM" : "AM");
+        static char time_string[30];
+        std::snprintf(time_string, 30, "%2i:%02i %s", (calendar_time.tm_hour % 12) == 0 ? 12 : (calendar_time.tm_hour % 12), calendar_time.tm_min, (calendar_time.tm_hour / 12) ? "PM" : "AM");
+
+        static bool addressOn = false;
         addressOn = true;
         OSD::Run([](const Screen& screen) {
             if (!screen.IsTop)
@@ -6141,7 +6179,7 @@ namespace CTRPluginFramework
             }
             if (addressOn == true)
             {
-                screen.Draw(Utils::Format("%s", buffer), 0, 180);
+                screen.Draw(time_string, 0, 180);
                 addressOn = false;
             }
             return (true);
