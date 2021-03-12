@@ -7,33 +7,33 @@ namespace CTRPluginFramework
     const static std::string patchProcessColorEditorTitle = "16êiêîÇ≈ì¸óÕÇµÇƒÇ≠ÇæÇ≥Ç¢ÅB[RGBa]";
 
     // Ui Color
-    static u32 colorUiMainText = 0xF08080FF;
-    static u32 colorUiWindowTitle = 0xF08080FF;
-    static u32 colorUiMenuSelectedItem = 0xF08080FF;
-    static u32 colorUiMenuUnselectedItem = 0xF08080FF;
-    static u32 colorUiBackgroundMain = 0x000000FF;
-    static u32 colorUiBackgroundSecondary = 0x000000FF;
-    static u32 colorUiBackgroundBorder = 0xF08080FF;
+    static u32 colorUiMainText;
+    static u32 colorUiWindowTitle;
+    static u32 colorUiMenuSelectedItem;
+    static u32 colorUiMenuUnselectedItem;
+    static u32 colorUiBackgroundMain;
+    static u32 colorUiBackgroundSecondary;
+    static u32 colorUiBackgroundBorder;
 
     // Keyboard Color
-    static u32 colorKeyboardBackground = 0xF08080FF;
-    static u32 colorKeyboardKeyBackground = 0xF08080FF;
-    static u32 colorKeyboardKeyBackgroundPressed = 0xF08080FF;
-    static u32 colorKeyboardKeyText = 0xF08080FF;
-    static u32 colorKeyboardKeyTextPressed = 0xF08080FF;
-    static u32 colorKeyboardCursor = 0xF08080FF;
-    static u32 colorKeyboardInput = 0xF08080FF;
+    static u32 colorKeyboardBackground;
+    static u32 colorKeyboardKeyBackground;
+    static u32 colorKeyboardKeyBackgroundPressed;
+    static u32 colorKeyboardKeyText;
+    static u32 colorKeyboardKeyTextPressed;
+    static u32 colorKeyboardCursor;
+    static u32 colorKeyboardInput;
 
     // Custom Keyboard Color
-    static u32 colorCustomKeyboardBackgroundMain = 0xF08080FF;
-    static u32 colorCustomKeyboardBackgroundSecondary = 0xF08080FF;
-    static u32 colorCustomKeyboardBackgroundBorder = 0xF08080FF;
-    static u32 colorCustomKeyboardKeyBackground = 0xF08080FF;
-    static u32 colorCustomKeyboardKeyBackgroundPressed = 0xF08080FF;
-    static u32 colorCustomKeyboardKeyText = 0xF08080FF;
-    static u32 colorCustomKeyboardKeyTextPressed = 0xF08080FF;
-    static u32 colorCustomKeyboardScrollBarBackground = 0xF08080FF;
-    static u32 colorCustomKeyboardScrollBarThumb = 0xF08080FF;
+    static u32 colorCustomKeyboardBackgroundMain;
+    static u32 colorCustomKeyboardBackgroundSecondary;
+    static u32 colorCustomKeyboardBackgroundBorder;
+    static u32 colorCustomKeyboardKeyBackground;
+    static u32 colorCustomKeyboardKeyBackgroundPressed;
+    static u32 colorCustomKeyboardKeyText;
+    static u32 colorCustomKeyboardKeyTextPressed;
+    static u32 colorCustomKeyboardScrollBarBackground;
+    static u32 colorCustomKeyboardScrollBarThumb;
 
     void PatchProcessUiMainTextColorEditor(MenuEntry* entry);
     void PatchProcessUiWindowTitleColorEditor(MenuEntry* entry);
