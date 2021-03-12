@@ -3839,7 +3839,7 @@ namespace CTRPluginFramework
         MessageBox("タイトルIDは " + tid + " です。")();
     }
 
-    void NameID()
+    void ProcessNameID()
     {
         std::string name;
         Process::GetName(name);
@@ -3898,7 +3898,7 @@ namespace CTRPluginFramework
             TitleID();
             break;
         case 1:
-            NameID();
+            ProcessNameID();
             break;
         case 2:
             ConsoleType();
@@ -3918,7 +3918,7 @@ namespace CTRPluginFramework
         Keyboard keyboard("16進数を入力してください。\n-に対応しています。\n例:FFFFFFFF = -1");
         if (keyboard.Open(out) != -1)
         {
-            MessageBox(Utils::Format("結果は %d です。", out))();
+            MessageBox(Utils::Format("結果は %d です。", (s32)out))();
         }
     }
 
@@ -3938,7 +3938,7 @@ namespace CTRPluginFramework
         Keyboard keyboard("16進数を入力してください。\n-に対応しています。\n例:FFFF = -1");
         if (keyboard.Open(out) != -1)
         {
-            MessageBox(Utils::Format("結果は %d です。", out))();
+            MessageBox(Utils::Format("結果は %d です。", (s16)out))();
         }
     }
 
@@ -3958,7 +3958,7 @@ namespace CTRPluginFramework
         Keyboard keyboard("16進数を入力してください。\n-に対応しています。\n例:FF = -1");
         if (keyboard.Open(out) != -1)
         {
-            MessageBox(Utils::Format("結果は %d です。", out))();
+            MessageBox(Utils::Format("結果は %d です。", (s8)out))();
         }
     }
 
@@ -4061,35 +4061,35 @@ namespace CTRPluginFramework
         }
     }
 
-    void FloatCalculator(MenuEntry* entry)
+    void DoubleCalculator(MenuEntry* entry)
     {
         int choice;
-        float float1, float2, ans;
+        double double1, double2, ans;
         Keyboard keyboard("1番目の浮動小数点数を入力してください。");
-        if (keyboard.Open(float1) != -1)
+        if (keyboard.Open(double1) != -1)
         {
             Keyboard keyboard("算術演算子を選んでください。", { "+", "-", "×", "÷" });
             choice = keyboard.Open();
             if (choice != -1)
             {
                 Keyboard keyboard("2番目の浮動小数点数を入力してください。");
-                if (keyboard.Open(float2) != -1)
+                if (keyboard.Open(double2) != -1)
                 {
                     if (choice == 0)
                     {
-                        ans = float1 + float2;
+                        ans = double1 + double2;
                     }
                     if (choice == 1)
                     {
-                        ans = float1 - float2;
+                        ans = double1 - double2;
                     }
                     if (choice == 2)
                     {
-                        ans = float1 * float2;
+                        ans = double1 * double2;
                     }
                     if (choice == 3)
                     {
-                        ans = float1 / float2;
+                        ans = double1 / double2;
                     }
                     MessageBox(Utils::Format("結果は %f です。", ans))();
                 }

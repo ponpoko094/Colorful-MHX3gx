@@ -439,7 +439,7 @@ namespace CTRPluginFramework
     // 電卓
     void HexadecimalCalculator(MenuEntry* entry);
     void DecimalCalculator(MenuEntry* entry);
-    void FloatCalculator(MenuEntry* entry);
+    void DoubleCalculator(MenuEntry* entry);
     // 電卓終わり
 
     // RGBチェッカー
@@ -454,7 +454,7 @@ namespace CTRPluginFramework
     void LocalTimeDisplay(MenuEntry* entry);
     void Information(MenuEntry* entry);
     void TitleID();
-    void NameID();
+    void ProcessNameID();
     void ConsoleType();
     void WiFiStatus();
     void BatteryLevel();

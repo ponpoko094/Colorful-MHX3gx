@@ -600,30 +600,30 @@ namespace CTRPluginFramework
         {
             MenuFolder* conversion = new MenuFolder("変換");
             {
-                *conversion += new MenuEntry("32bit版符号あり16進数を10進数に変換" + workInProgress, nullptr, HexToDecd32);
-                *conversion += new MenuEntry("32bit版符号なし16進数を10進数に変換" + workInProgress, nullptr, HexToDecu32);
-                *conversion += new MenuEntry("16bit版符号あり16進数を10進数に変換" + workInProgress, nullptr, HexToDecd16);
-                *conversion += new MenuEntry("16bit版符号なし16進数を10進数に変換" + workInProgress, nullptr, HexToDecu16);
-                *conversion += new MenuEntry("8bit版符号あり16進数を10進数に変換" + workInProgress, nullptr, HexToDecd8);
-                *conversion += new MenuEntry("8bit版符号なし16進数を10進数に変換" + workInProgress, nullptr, HexToDecu8);
-                *conversion += new MenuEntry("10進数を16進数に変換" + workInProgress, nullptr, DecToHex);
+                *conversion += new MenuEntry("32bit版符号あり16進数→10進数" + stable, nullptr, HexToDecd32);
+                *conversion += new MenuEntry("32bit版符号なし16進数→10進数" + stable, nullptr, HexToDecu32);
+                *conversion += new MenuEntry("16bit版符号あり16進数→10進数" + stable, nullptr, HexToDecd16);
+                *conversion += new MenuEntry("16bit版符号なし16進数→10進数" + stable, nullptr, HexToDecu16);
+                *conversion += new MenuEntry("8bit版符号あり16進数→10進数" + stable, nullptr, HexToDecd8);
+                *conversion += new MenuEntry("8bit版符号なし16進数→10進数" + stable, nullptr, HexToDecu8);
+                *conversion += new MenuEntry("10進数→16進数" + stable, nullptr, DecToHex);
             }
             *bonus += conversion;
 
             MenuFolder* calculator = new MenuFolder("電卓");
             {
-                *calculator += new MenuEntry("16進数電卓" + workInProgress, nullptr, HexadecimalCalculator, "16進数を計算することができます。");
-                *calculator += new MenuEntry("10進数電卓" + workInProgress, nullptr, DecimalCalculator, "10進数を計算することができます。");
-                *calculator += new MenuEntry("浮動小数点数電卓" + workInProgress, nullptr, FloatCalculator, "浮動小数点数を計算することができます。");
+                *calculator += new MenuEntry("16進数電卓" + stable, nullptr, HexadecimalCalculator, "16進数を計算することができます。");
+                *calculator += new MenuEntry("10進数電卓" + stable, nullptr, DecimalCalculator, "10進数を計算することができます。");
+                *calculator += new MenuEntry("浮動小数点数電卓" + stable, nullptr, DoubleCalculator, "浮動小数点数を計算することができます。");
             }
             *bonus += calculator;
 
             MenuFolder* RGBChecker = new MenuFolder("RGBチェッカー");
             {
-                *RGBChecker += new MenuEntry("R値入力" + workInProgress, nullptr, RedInput);
-                *RGBChecker += new MenuEntry("G値入力" + workInProgress, nullptr, GreenInput);
-                *RGBChecker += new MenuEntry("B値入力" + workInProgress, nullptr, BlueInput);
-                *RGBChecker += new MenuEntry("色確認" + workInProgress, nullptr, RGBOutput);
+                *RGBChecker += new MenuEntry("R値入力" + stable, nullptr, RedInput);
+                *RGBChecker += new MenuEntry("G値入力" + stable, nullptr, GreenInput);
+                *RGBChecker += new MenuEntry("B値入力" + stable, nullptr, BlueInput);
+                *RGBChecker += new MenuEntry("色確認" + stable, nullptr, RGBOutput);
             }
             *bonus += RGBChecker;
 
