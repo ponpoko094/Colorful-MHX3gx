@@ -1,49 +1,77 @@
-#include <string>
-
 #include "TeamAndConditions.hpp"
 
-namespace CTRPluginFramework
-{
-    void TeamAndCondition()
-    {
-        static bool file = false;
-        std::string titleid;
-        std::string openingMessage = "ƒI[ƒvƒjƒ“ƒOƒƒbƒZ[ƒW";
+#include <string>
 
-        Process::GetTitleID(titleid);
-        if (titleid == "0004000000155400")
-        {
-            if (!file)
-            {
-                if (!File::Exists("opskip.bin"))
-                {
-                    MessageBox(openingMessage, "‚Û‚ñ‚Û‚± @ponpoko094\n‚Ì3gx‚ğg—p‚µ‚Ä‚¢‚½‚¾‚«\n‚ ‚è‚ª‚Æ‚¤‚²‚´‚¢‚Ü‚·B\n—˜—p‹K–ñ‚Ì“¯ˆÓ‚ğ‚¨Šè‚¢‚µ‚Ü‚·B")();
-                    if (MessageBox(openingMessage, "—˜—p‹K–ñ\n‡@‚±‚Ì3gx‚Í–³—¿‚Å’ñ‹Ÿ‚³‚ê‚Ü‚·B\n‡A‘¼l‚É÷“n‚·‚éê‡AMHX3gx‚ÌGithub‚ÌƒŠƒ“ƒN‚ğ’ñ¦‚·‚é‚±‚ÆB\n‡B‚±‚Ì3gx‚ğg—p‚µƒf[ƒ^‚ª”j‘¹‚·‚é“™‚Ì\n‘¹ŠQ‚É‘Î‚µ‚ÄA‚Û‚ñ‚Û‚±‚ÍˆêØ‚ÌÓ”C‚ğ•‰‚¢‚Ü‚¹‚ñB\n‡C‚±‚Ì3gx‚Í“ú–{”ÅMHX\n  (ƒ^ƒCƒgƒ‹ID:0004000000155400)\n  ‚Å‚Ì‚İg—p‚Å‚«‚é‚à‚Ì‚Æ‚µ‚Ü‚·B\n—˜—p‹K–ñ‚É“¯ˆÓ‚µ‚Ü‚·‚©H", DialogType::DialogYesNo)())
-                    {
-                        if (MessageBox(openingMessage, "—˜—p‹K–ñ‚É“¯ˆÓ‚µ‚Ä‚¢‚½‚¾‚«\n‚ ‚è‚ª‚Æ‚¤‚²‚´‚¢‚Ü‚·B\nŸ‰ñ‚©‚çƒI[ƒvƒjƒ“ƒOƒƒbƒZ[ƒW‚ğ\nƒXƒLƒbƒv‚µ‚Ü‚·‚©H", DialogType::DialogYesNo)())
-                        {
-                            File::Create("opskip.bin");
-                            MessageBox(openingMessage, "opskip.bin‚ğì¬‚µ‚Ü‚µ‚½B\nİ’è‚ğ•ÏX‚·‚é‚½‚ß‚É\nÄ‹N“®‚ğ‚¨Šè‚¢‚µ‚Ü‚·B")();
-                            Process::ReturnToHomeMenu();
-                        }
-                        else
-                        {
-                            MessageBox(openingMessage, "ƒvƒ‰ƒOƒCƒ“‚ğŠy‚µ‚ñ‚Å‚­‚¾‚³‚¢B")();
-                        }
-                    }
-                    else
-                    {
-                        MessageBox(openingMessage, "—˜—p‹K–ñ‚É“¯ˆÓ‚·‚é•K—v‚ª‚ ‚è‚Ü‚·B")();
+namespace CTRPluginFramework {
+
+void TeamAndCondition() {
+    static bool file = false;
+
+    std::string titleID;
+    const std::string mhxTitleID = "0004000000155400";
+
+    const std::string skipSaveFileName = "opskip.bin";
+
+    const std::string openingMessage = "ã‚ªãƒ¼ãƒ—ãƒ‹ãƒ³ã‚°ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸";
+
+    const std::string thanksMessage =
+        "ã½ã‚“ã½ã“ @ponpoko094\n"
+        "ã®3gxã‚’ä½¿ç”¨ã—ã¦ã„ãŸã ã\n"
+        "ã‚ã‚ŠãŒã¨ã†ã”ã–ã„ã¾ã™ã€‚\n"
+        "åˆ©ç”¨è¦ç´„ã®åŒæ„ã‚’ãŠé¡˜ã„ã—ã¾ã™ã€‚";
+
+    const std::string teamAndConditionMessage =
+        "åˆ©ç”¨è¦ç´„\n"
+        "â‘ ã“ã®3gxã¯ç„¡æ–™ã§æä¾›ã•ã‚Œã¾ã™ã€‚\n"
+        "â‘¡ä»–äººã«è­²æ¸¡ã™ã‚‹å ´åˆã€MHX3gxã®Githubã®ãƒªãƒ³ã‚¯ã‚’æç¤ºã™ã‚‹ã“ã¨ã€‚\n"
+        "â‘¢ã“ã®3gxã‚’ä½¿ç”¨ã—ãƒ‡ãƒ¼ã‚¿ãŒç ´æã™ã‚‹ç­‰ã®\n"
+        "æå®³ã«å¯¾ã—ã¦ã€ã½ã‚“ã½ã“ã¯ä¸€åˆ‡ã®è²¬ä»»ã‚’è² ã„ã¾ã›ã‚“ã€‚\n"
+        "â‘£ã“ã®3gxã¯æ—¥æœ¬ç‰ˆMHX\n"
+        "(ã‚¿ã‚¤ãƒˆãƒ«ID:0004000000155400)\n"
+        "ã§ã®ã¿ä½¿ç”¨ã§ãã‚‹ã‚‚ã®ã¨ã—ã¾ã™ã€‚\n"
+        "åˆ©ç”¨è¦ç´„ã«åŒæ„ã—ã¾ã™ã‹ï¼Ÿ";
+
+    const std::string askOpeningMessageSkipMessage =
+        "åˆ©ç”¨è¦ç´„ã«åŒæ„ã—ã¦ã„ãŸã ã\n"
+        "ã‚ã‚ŠãŒã¨ã†ã”ã–ã„ã¾ã™ã€‚\n"
+        "æ¬¡å›ã‹ã‚‰ã‚ªãƒ¼ãƒ—ãƒ‹ãƒ³ã‚°ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’\n"
+        "ã‚¹ã‚­ãƒƒãƒ—ã—ã¾ã™ã‹ï¼Ÿ";
+
+    const std::string createdOpskipBinMessage =
+        "opskip.binã‚’ä½œæˆã—ã¾ã—ãŸã€‚\n"
+        "è¨­å®šã‚’å¤‰æ›´ã™ã‚‹ãŸã‚ã«\n"
+        "å†èµ·å‹•ã‚’ãŠé¡˜ã„ã—ã¾ã™ã€‚";
+
+    const std::string enjoyPluginMessage = "ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã‚’æ¥½ã—ã‚“ã§ãã ã•ã„ã€‚";
+
+    const std::string teamAndConditionAgreementMessage = "åˆ©ç”¨è¦ç´„ã«åŒæ„ã™ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚";
+
+    const std::string otherGameMessage = "ã“ã®3gxã¯æ—¥æœ¬ç‰ˆMHX(ã‚¿ã‚¤ãƒˆãƒ«ID:0004000000155400)ã§ã®ã¿å‹•ä½œã—ã¾ã™ã€‚";
+
+    Process::GetTitleID(titleID);
+    if (titleID == mhxTitleID) {
+        if (!file) {
+            if (!File::Exists(skipSaveFileName)) {
+                MessageBox(openingMessage, thanksMessage)();
+                if (MessageBox(openingMessage, teamAndConditionMessage, DialogType::DialogYesNo)()) {
+                    if (MessageBox(openingMessage, askOpeningMessageSkipMessage, DialogType::DialogYesNo)()) {
+                        File::Create(skipSaveFileName);
+                        MessageBox(openingMessage, createdOpskipBinMessage)();
                         Process::ReturnToHomeMenu();
+                    } else {
+                        MessageBox(openingMessage, enjoyPluginMessage)();
                     }
+                } else {
+                    MessageBox(openingMessage, teamAndConditionAgreementMessage)();
+                    Process::ReturnToHomeMenu();
                 }
-                file = true;
             }
+            file = true;
         }
-        else
-        {
-            MessageBox(openingMessage, "‚±‚Ì3gx‚Í“ú–{”ÅMHX(ƒ^ƒCƒgƒ‹ID:0004000000155400)‚Å‚Ì‚İ“®ì‚µ‚Ü‚·B")();
-            Process::ReturnToHomeMenu();
-        }
+    } else {
+        MessageBox(openingMessage, otherGameMessage)();
+        Process::ReturnToHomeMenu();
     }
-} // namespace CTRPluginFramework
+}
+
+}  // namespace CTRPluginFramework

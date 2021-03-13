@@ -1,65 +1,66 @@
 #pragma once
+#include <CTRPluginFramework.hpp>
 #include <string>
 
-#include <CTRPluginFramework.hpp>
-namespace CTRPluginFramework
-{
-    const static std::string patchProcessColorEditorTitle = "16êiêîÇ≈ì¸óÕÇµÇƒÇ≠ÇæÇ≥Ç¢ÅB[RGBa]";
+namespace CTRPluginFramework {
 
-    // Ui Color
-    static u32 colorUiMainText;
-    static u32 colorUiWindowTitle;
-    static u32 colorUiMenuSelectedItem;
-    static u32 colorUiMenuUnselectedItem;
-    static u32 colorUiBackgroundMain;
-    static u32 colorUiBackgroundSecondary;
-    static u32 colorUiBackgroundBorder;
+const static std::string patchProcessColorEditorTitle = "16ÈÄ≤Êï∞„ÅßÂÖ•Âäõ„Åó„Å¶„Åè„Å†„Åï„ÅÑ„ÄÇ[RGBa]";
 
-    // Keyboard Color
-    static u32 colorKeyboardBackground;
-    static u32 colorKeyboardKeyBackground;
-    static u32 colorKeyboardKeyBackgroundPressed;
-    static u32 colorKeyboardKeyText;
-    static u32 colorKeyboardKeyTextPressed;
-    static u32 colorKeyboardCursor;
-    static u32 colorKeyboardInput;
+// Ui Color
+static u32 colorUiMainText = 0xFFFFFFFF;
+static u32 colorUiWindowTitle = 0xFFFFFFFF;
+static u32 colorUiMenuSelectedItem = 0xFFFFFFFF;
+static u32 colorUiMenuUnselectedItem = 0xFFFFFFFF;
+static u32 colorUiBackgroundMain = 0xFFFFFFFF;
+static u32 colorUiBackgroundSecondary = 0xFFFFFFFF;
+static u32 colorUiBackgroundBorder = 0xFFFFFFFF;
 
-    // Custom Keyboard Color
-    static u32 colorCustomKeyboardBackgroundMain;
-    static u32 colorCustomKeyboardBackgroundSecondary;
-    static u32 colorCustomKeyboardBackgroundBorder;
-    static u32 colorCustomKeyboardKeyBackground;
-    static u32 colorCustomKeyboardKeyBackgroundPressed;
-    static u32 colorCustomKeyboardKeyText;
-    static u32 colorCustomKeyboardKeyTextPressed;
-    static u32 colorCustomKeyboardScrollBarBackground;
-    static u32 colorCustomKeyboardScrollBarThumb;
+// Keyboard Color
+static u32 colorKeyboardBackground = 0x00000000;
+static u32 colorKeyboardKeyBackground = 0x00000000;
+static u32 colorKeyboardKeyBackgroundPressed = 0xFFFFFFFF;
+static u32 colorKeyboardKeyText = 0xFFFFFFFF;
+static u32 colorKeyboardKeyTextPressed = 0x00000000;
+static u32 colorKeyboardCursor = 0x00000000;
+static u32 colorKeyboardInput = 0xFFFFFFFF;
 
-    void PatchProcessUiMainTextColorEditor(MenuEntry* entry);
-    void PatchProcessUiWindowTitleColorEditor(MenuEntry* entry);
-    void PatchProcessUiMenuSelectedItemColorEditor(MenuEntry* entry);
-    void PatchProcessUiMenuUnselectedItemColorEditor(MenuEntry* entry);
-    void PatchProcessUiBackgroundMainColorEditor(MenuEntry* entry);
-    void PatchProcessUiBackgroundSecondaryColorEditor(MenuEntry* entry);
-    void PatchProcessUiBackgroundBorderColorEditor(MenuEntry* entry);
+// Custom Keyboard Color
+static u32 colorCustomKeyboardBackgroundMain = 0x00000000;
+static u32 colorCustomKeyboardBackgroundSecondary = 0x00000000;
+static u32 colorCustomKeyboardBackgroundBorder = 0x00000000;
+static u32 colorCustomKeyboardKeyBackground = 0x00000000;
+static u32 colorCustomKeyboardKeyBackgroundPressed = 0xFFFFFFFF;
+static u32 colorCustomKeyboardKeyText = 0xFFFFFFFF;
+static u32 colorCustomKeyboardKeyTextPressed = 0x00000000;
+static u32 colorCustomKeyboardScrollBarBackground = 0x00000000;
+static u32 colorCustomKeyboardScrollBarThumb = 0xFFFFFFFF;
 
-    void PatchProcessKeyboardBackgroundColorEditor(MenuEntry* entry);
-    void PatchProcessKeyboardKeyBackgroundColorEditor(MenuEntry* entry);
-    void PatchProcessKeyboardKeyBackgroundPressedColorEditor(MenuEntry* entry);
-    void PatchProcessKeyboardKeyTextColorEditor(MenuEntry* entry);
-    void PatchProcessKeyboardKeyTextPressedColorEditor(MenuEntry* entry);
-    void PatchProcessKeyboardCursorColorEditor(MenuEntry* entry);
-    void PatchProcessKeyboardInputColorEditor(MenuEntry* entry);
+void PatchProcessUiMainTextColorEditor(MenuEntry* entry);
+void PatchProcessUiWindowTitleColorEditor(MenuEntry* entry);
+void PatchProcessUiMenuSelectedItemColorEditor(MenuEntry* entry);
+void PatchProcessUiMenuUnselectedItemColorEditor(MenuEntry* entry);
+void PatchProcessUiBackgroundMainColorEditor(MenuEntry* entry);
+void PatchProcessUiBackgroundSecondaryColorEditor(MenuEntry* entry);
+void PatchProcessUiBackgroundBorderColorEditor(MenuEntry* entry);
 
-    void PatchProcessCustomKeyboardBackgroundMainColorEditor(MenuEntry* entry);
-    void PatchProcessCustomKeyboardBackgroundSecondaryColorEditor(MenuEntry* entry);
-    void PatchProcessCustomKeyboardBackgroundBorderColorEditor(MenuEntry* entry);
-    void PatchProcessCustomKeyboardKeyBackgroundColorEditor(MenuEntry* entry);
-    void PatchProcessCustomKeyboardKeyBackgroundPressedColorEditor(MenuEntry* entry);
-    void PatchProcessCustomKeyboardKeyTextColorEditor(MenuEntry* entry);
-    void PatchProcessCustomKeyboardKeyTextPressedColorEditor(MenuEntry* entry);
-    void PatchProcessCustomKeyboardScrollBarBackgroundColorEditor(MenuEntry* entry);
-    void PatchProcessCustomKeyboardScrollBarThumbColorEditor(MenuEntry* entry);
+void PatchProcessKeyboardBackgroundColorEditor(MenuEntry* entry);
+void PatchProcessKeyboardKeyBackgroundColorEditor(MenuEntry* entry);
+void PatchProcessKeyboardKeyBackgroundPressedColorEditor(MenuEntry* entry);
+void PatchProcessKeyboardKeyTextColorEditor(MenuEntry* entry);
+void PatchProcessKeyboardKeyTextPressedColorEditor(MenuEntry* entry);
+void PatchProcessKeyboardCursorColorEditor(MenuEntry* entry);
+void PatchProcessKeyboardInputColorEditor(MenuEntry* entry);
 
-    void PatchProcessDefaultTheme(MenuEntry* entry);
-} // namespace CTRPluginFramework
+void PatchProcessCustomKeyboardBackgroundMainColorEditor(MenuEntry* entry);
+void PatchProcessCustomKeyboardBackgroundSecondaryColorEditor(MenuEntry* entry);
+void PatchProcessCustomKeyboardBackgroundBorderColorEditor(MenuEntry* entry);
+void PatchProcessCustomKeyboardKeyBackgroundColorEditor(MenuEntry* entry);
+void PatchProcessCustomKeyboardKeyBackgroundPressedColorEditor(MenuEntry* entry);
+void PatchProcessCustomKeyboardKeyTextColorEditor(MenuEntry* entry);
+void PatchProcessCustomKeyboardKeyTextPressedColorEditor(MenuEntry* entry);
+void PatchProcessCustomKeyboardScrollBarBackgroundColorEditor(MenuEntry* entry);
+void PatchProcessCustomKeyboardScrollBarThumbColorEditor(MenuEntry* entry);
+
+void PatchProcessDefaultTheme(MenuEntry* entry);
+
+}  // namespace CTRPluginFramework

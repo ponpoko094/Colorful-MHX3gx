@@ -1,15 +1,16 @@
 #pragma once
+#include <3ds.h>
+
+#include <CTRPluginFramework.hpp>
+#include <ctime>
 #include <string>
 #include <vector>
-#include <ctime>
 
-#include <3ds.h>
-#include <CTRPluginFramework.hpp>
-#include "types.h"
-#include "csvc.h"
-#include "Patch.hpp"
 #include "Keyboard.hpp"
+#include "Patch.hpp"
 #include "TeamAndConditions.hpp"
+#include "csvc.h"
+#include "types.h"
 
 #define KEY_DU DPadUp
 #define KEY_DD DPadDown
@@ -20,444 +21,443 @@
 #define KEY_CL CPadLeft
 #define KEY_CR CPadRight
 
-namespace CTRPluginFramework
-{
-    using CallbackPointer = void (*)(void);
-    using StringVector = std::vector<std::string>;
+namespace CTRPluginFramework {
+using CallbackPointer = void (*)(void);
+using StringVector = std::vector<std::string>;
 
-    // ƒvƒŒƒCƒ„[
-    // ƒXƒe[ƒ^ƒX•ÏX
-    void AttackPowerChange(MenuEntry* entry);
-    void AttackPowerOption(MenuEntry* entry);
-    void DefencePowerChange(MenuEntry* entry);
-    void DefencePowerOption(MenuEntry* entry);
-    void AttributeChange(MenuEntry* entry);
-    void AttributeOption(MenuEntry* entry);
-    void ResistanceChange(MenuEntry* entry);
-    void ResistanceOption(MenuEntry* entry);
-    // ƒXƒe[ƒ^ƒX•ÏXI‚í‚è
+// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼
+// ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹å¤‰æ›´
+void AttackPowerChange(MenuEntry* entry);
+void AttackPowerOption(MenuEntry* entry);
+void DefencePowerChange(MenuEntry* entry);
+void DefencePowerOption(MenuEntry* entry);
+void AttributeChange(MenuEntry* entry);
+void AttributeOption(MenuEntry* entry);
+void ResistanceChange(MenuEntry* entry);
+void ResistanceOption(MenuEntry* entry);
+// ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹å¤‰æ›´çµ‚ã‚ã‚Š
 
-    // ƒvƒŒƒCƒ„[î•ñ•ÏX
-    // ë‹Z•ÏX
-    void HunterArt1Change(MenuEntry* entry);
-    void HunterArt2Change(MenuEntry* entry);
-    void HunterArt3Change(MenuEntry* entry);
-    // ë‹Z•ÏXI‚í‚è
+// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼æƒ…å ±å¤‰æ›´
+// ç‹©æŠ€å¤‰æ›´
+void HunterArt1Change(MenuEntry* entry);
+void HunterArt2Change(MenuEntry* entry);
+void HunterArt3Change(MenuEntry* entry);
+// ç‹©æŠ€å¤‰æ›´çµ‚ã‚ã‚Š
 
-    // ”§‚ÌF•ÏX
-    void SkinRedChange(MenuEntry* entry);
-    void SkinGreenChange(MenuEntry* entry);
-    void SkinBlueChange(MenuEntry* entry);
-    void SkinColorChange(MenuEntry* entry);
-    // ”§‚ÌF•ÏXI‚í‚è
+// è‚Œã®è‰²å¤‰æ›´
+void SkinRedChange(MenuEntry* entry);
+void SkinGreenChange(MenuEntry* entry);
+void SkinBlueChange(MenuEntry* entry);
+void SkinColorChange(MenuEntry* entry);
+// è‚Œã®è‰²å¤‰æ›´çµ‚ã‚ã‚Š
 
-    // H–
-    // ƒtƒ‰ƒO
-    void MealInfinite(MenuEntry* entry);
-    void LuxuryCouponGrant(MenuEntry* entry);
-    void MeetRequestInfinite(MenuEntry* entry);
-    // ƒtƒ‰ƒOI‚í‚è
+// é£Ÿäº‹
+// ãƒ•ãƒ©ã‚°
+void MealInfinite(MenuEntry* entry);
+void LuxuryCouponGrant(MenuEntry* entry);
+void MeetRequestInfinite(MenuEntry* entry);
+// ãƒ•ãƒ©ã‚°çµ‚ã‚ã‚Š
 
-    // ƒXƒe[ƒ^ƒX
-    // ‘Ï«
-    void MealFireResistanceUp(MenuEntry* entry);
-    void MealWaterResistanceUp(MenuEntry* entry);
-    void MealThunderResistanceUp(MenuEntry* entry);
-    void MealIceResistanceUp(MenuEntry* entry);
-    void MealDragonResistanceUp(MenuEntry* entry);
-    // ‘Ï«I‚í‚è
+// ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹
+// è€æ€§
+void MealFireResistanceUp(MenuEntry* entry);
+void MealWaterResistanceUp(MenuEntry* entry);
+void MealThunderResistanceUp(MenuEntry* entry);
+void MealIceResistanceUp(MenuEntry* entry);
+void MealDragonResistanceUp(MenuEntry* entry);
+// è€æ€§çµ‚ã‚ã‚Š
 
-    void MealHpUp(MenuEntry* entry);
-    void MealStaminaUp(MenuEntry* entry);
-    void MealAttackPowerUp(MenuEntry* entry);
-    void MealDefencePowerUp(MenuEntry* entry);
-    // ƒXƒe[ƒ^ƒXI‚í‚è
+void MealHpUp(MenuEntry* entry);
+void MealStaminaUp(MenuEntry* entry);
+void MealAttackPowerUp(MenuEntry* entry);
+void MealDefencePowerUp(MenuEntry* entry);
+// ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹çµ‚ã‚ã‚Š
 
-    void MealSkillChange(MenuEntry* entry);
-    // H–I‚í‚è
+void MealSkillChange(MenuEntry* entry);
+// é£Ÿäº‹çµ‚ã‚ã‚Š
 
-    void PlayerVoiceChange(MenuEntry* entry);
-    void PlayerEyeColorChange(MenuEntry* entry);
-    void PlayerInnerChange(MenuEntry* entry);
-    void PlayerGenderChange(MenuEntry* entry);
-    void PlayerHuntingStyleChange(MenuEntry* entry);
-    void PlayerHearStyleChange(MenuEntry* entry);
-    void PlayerFaceChange(MenuEntry* entry);
-    void PlayerCosmeticsChange(MenuEntry* entry);
-    // ƒvƒŒƒCƒ„[î•ñ•ÏXI‚í‚è
+void PlayerVoiceChange(MenuEntry* entry);
+void PlayerEyeColorChange(MenuEntry* entry);
+void PlayerInnerChange(MenuEntry* entry);
+void PlayerGenderChange(MenuEntry* entry);
+void PlayerHuntingStyleChange(MenuEntry* entry);
+void PlayerHearStyleChange(MenuEntry* entry);
+void PlayerFaceChange(MenuEntry* entry);
+void PlayerCosmeticsChange(MenuEntry* entry);
+// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼æƒ…å ±å¤‰æ›´çµ‚ã‚ã‚Š
 
-    void PlayerAttackPowerMagnificationChange(MenuEntry* entry);
-    void PlayerAttackPowerMagnificationOption(MenuEntry* entry);
-    void playerDefencePowerMagnificationChange(MenuEntry* entry);
-    void PlayerDefencePowerMagnificationOption(MenuEntry* entry);
-    void PlayerSpeedChange(MenuEntry* entry);
-    void PlayerSpeedOption(MenuEntry* entry);
-    void PlayerCoordinateModifier(MenuEntry* entry);
-    void PlayerMoonJump(MenuEntry* entry);
-    void Teleport(MenuEntry* entry);
-    void Stalker(MenuEntry* entry);
-    void Repeatmove(MenuEntry* entry);
-    void HunterArtRelease(MenuEntry* entry);
-    void HungryInvalid(MenuEntry* entry);
-    void HunterSizeChange(MenuEntry* entry);
-    void HunterSizeOption(MenuEntry* entry);
-    void InfiniteHP(MenuEntry* entry);
-    void Invincible(MenuEntry* entry);
-    void SuperArmor(MenuEntry* entry);
-    void InfiniteStamina(MenuEntry* entry);
-    void InfiniteHunterArt(MenuEntry* entry);
-    void Always3HunterArtEquip(MenuEntry* entry);
-    void AlwaysDisplayMap(MenuEntry* entry);
-    void AlwaysPaint(MenuEntry* entry);
-    void SpeedHack(MenuEntry* entry);
-    void InQuestSpeedHack(MenuEntry* entry);
-    void IfRunMoonWalk(MenuEntry* entry);
-    void HunterNameChange(MenuEntry* entry);
-    // ƒvƒŒƒCƒ„[I‚í‚è
+void PlayerAttackPowerMagnificationChange(MenuEntry* entry);
+void PlayerAttackPowerMagnificationOption(MenuEntry* entry);
+void playerDefencePowerMagnificationChange(MenuEntry* entry);
+void PlayerDefencePowerMagnificationOption(MenuEntry* entry);
+void PlayerSpeedChange(MenuEntry* entry);
+void PlayerSpeedOption(MenuEntry* entry);
+void PlayerCoordinateModifier(MenuEntry* entry);
+void PlayerMoonJump(MenuEntry* entry);
+void Teleport(MenuEntry* entry);
+void Stalker(MenuEntry* entry);
+void Repeatmove(MenuEntry* entry);
+void HunterArtRelease(MenuEntry* entry);
+void HungryInvalid(MenuEntry* entry);
+void HunterSizeChange(MenuEntry* entry);
+void HunterSizeOption(MenuEntry* entry);
+void InfiniteHP(MenuEntry* entry);
+void Invincible(MenuEntry* entry);
+void SuperArmor(MenuEntry* entry);
+void InfiniteStamina(MenuEntry* entry);
+void InfiniteHunterArt(MenuEntry* entry);
+void Always3HunterArtEquip(MenuEntry* entry);
+void AlwaysDisplayMap(MenuEntry* entry);
+void AlwaysPaint(MenuEntry* entry);
+void SpeedHack(MenuEntry* entry);
+void InQuestSpeedHack(MenuEntry* entry);
+void IfRunMoonWalk(MenuEntry* entry);
+void HunterNameChange(MenuEntry* entry);
+// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼çµ‚ã‚ã‚Š
 
-    // ƒAƒCƒeƒ€
-    // ‘•”õ
-    // ŒìÎ•ÒW
-    void AmuletCreate(MenuEntry* entry);
-    void AmuletTypeChange(MenuEntry* entry);
-    void AmuletSkillChange(MenuEntry* entry);
-    void AmuletSkillPointChange(MenuEntry* entry);
-    void AmuletSlotChange(MenuEntry* entry);
-    // ŒìÎ•ÒWI‚í‚è
+// ã‚¢ã‚¤ãƒ†ãƒ 
+// è£…å‚™
+// è­·çŸ³ç·¨é›†
+void AmuletCreate(MenuEntry* entry);
+void AmuletTypeChange(MenuEntry* entry);
+void AmuletSkillChange(MenuEntry* entry);
+void AmuletSkillPointChange(MenuEntry* entry);
+void AmuletSlotChange(MenuEntry* entry);
+// è­·çŸ³ç·¨é›†çµ‚ã‚ã‚Š
 
-    // —Â’•ÒW
-    void InsectTypeChange(MenuEntry* entry);
-    void InsectLevelChange(MenuEntry* entry);
-    void InsectPowerChange(MenuEntry* entry);
-    void InsectWeightChange(MenuEntry* entry);
-    void InsectStaminaChange(MenuEntry* entry);
-    void InsectFireAttributeChange(MenuEntry* entry);
-    void InsectWaterAttributeChange(MenuEntry* entry);
-    void InsectThunderAttributeChange(MenuEntry* entry);
-    void InsectIceAttributeChange(MenuEntry* entry);
-    void InsectDragonAttributeChange(MenuEntry* entry);
-    // —Â’•ÒWI‚í‚è
+// çŒŸè™«ç·¨é›†
+void InsectTypeChange(MenuEntry* entry);
+void InsectLevelChange(MenuEntry* entry);
+void InsectPowerChange(MenuEntry* entry);
+void InsectWeightChange(MenuEntry* entry);
+void InsectStaminaChange(MenuEntry* entry);
+void InsectFireAttributeChange(MenuEntry* entry);
+void InsectWaterAttributeChange(MenuEntry* entry);
+void InsectThunderAttributeChange(MenuEntry* entry);
+void InsectIceAttributeChange(MenuEntry* entry);
+void InsectDragonAttributeChange(MenuEntry* entry);
+// çŒŸè™«ç·¨é›†çµ‚ã‚ã‚Š
 
-    void OtherPlayerEquipmentCopy(MenuEntry* entry);
-    // ‘•”õI‚í‚è
+void OtherPlayerEquipmentCopy(MenuEntry* entry);
+// è£…å‚™çµ‚ã‚ã‚Š
 
-    void InfiniteBombPut(MenuEntry* entry);
-    void TanhoreItemSet(MenuEntry* entry);
-    void MoneyChange(MenuEntry* entry);
-    void WycademyPointChange(MenuEntry* entry);
-    void InfiniteItemAmmo(MenuEntry* entry);
-    void NoMaterialCompound(MenuEntry* entry);
-    void CargoPutInPorch(MenuEntry* entry);
-    void InfiniteCollect(MenuEntry* entry);
-    void NoMaterialEquipmentCreate(MenuEntry* entry);
-    void EquipmentAllRelease(MenuEntry* entry);
-    void AllItemSold(MenuEntry* entry);
-    void ItemBox1400Expansion(MenuEntry* entry);
-    void HaveItem99(MenuEntry* entry);
-    void ItemBoxEdit(MenuEntry* entry);
-    void MySetToPorchItemCopy(MenuEntry* entry);
-    void DeliveryItemToPorchCopy(MenuEntry* entry);
-    void PorchToDeliveryItemCopy(MenuEntry* entry);
-    void PorchAllClear(MenuEntry* entry);
-    void SpecialPermitQuestTicketChange(MenuEntry* entry);
-    // ƒAƒCƒeƒ€I‚í‚è
+void InfiniteBombPut(MenuEntry* entry);
+void TanhoreItemSet(MenuEntry* entry);
+void MoneyChange(MenuEntry* entry);
+void WycademyPointChange(MenuEntry* entry);
+void InfiniteItemAmmo(MenuEntry* entry);
+void NoMaterialCompound(MenuEntry* entry);
+void CargoPutInPorch(MenuEntry* entry);
+void InfiniteCollect(MenuEntry* entry);
+void NoMaterialEquipmentCreate(MenuEntry* entry);
+void EquipmentAllRelease(MenuEntry* entry);
+void AllItemSold(MenuEntry* entry);
+void ItemBox1400Expansion(MenuEntry* entry);
+void HaveItem99(MenuEntry* entry);
+void ItemBoxEdit(MenuEntry* entry);
+void MySetToPorchItemCopy(MenuEntry* entry);
+void DeliveryItemToPorchCopy(MenuEntry* entry);
+void PorchToDeliveryItemCopy(MenuEntry* entry);
+void PorchAllClear(MenuEntry* entry);
+void SpecialPermitQuestTicketChange(MenuEntry* entry);
+// ã‚¢ã‚¤ãƒ†ãƒ çµ‚ã‚ã‚Š
 
-    // •Ší
-    // •Ší•Êƒ`[ƒg
-    // ƒKƒ“ƒ‰ƒ“ƒXƒ`[ƒg
-    void GunlanceHeatGageFix(MenuEntry* entry);
-    void GunlanceHeatGageOption(MenuEntry* entry);
-    void GunlanceAmmoInfinite(MenuEntry* entry);
-    void GunlanceInvalidOverHeat(MenuEntry* entry);
-    // ƒKƒ“ƒ‰ƒ“ƒXƒ`[ƒgI‚í‚è
+// æ­¦å™¨
+// æ­¦å™¨åˆ¥ãƒãƒ¼ãƒˆ
+// ã‚¬ãƒ³ãƒ©ãƒ³ã‚¹ãƒãƒ¼ãƒˆ
+void GunlanceHeatGageFix(MenuEntry* entry);
+void GunlanceHeatGageOption(MenuEntry* entry);
+void GunlanceAmmoInfinite(MenuEntry* entry);
+void GunlanceInvalidOverHeat(MenuEntry* entry);
+// ã‚¬ãƒ³ãƒ©ãƒ³ã‚¹ãƒãƒ¼ãƒˆçµ‚ã‚ã‚Š
 
-    // ‘€’ƒ`[ƒg
-    void InsectGlaiveAlwaysTripleUp(MenuEntry* entry);
-    void InsectGlaiveInsectStaminaInfinite(MenuEntry* entry);
-    // ‘€’ƒ`[ƒgI‚í‚è
+// æ“è™«æ£ãƒãƒ¼ãƒˆ
+void InsectGlaiveAlwaysTripleUp(MenuEntry* entry);
+void InsectGlaiveInsectStaminaInfinite(MenuEntry* entry);
+// æ“è™«æ£ãƒãƒ¼ãƒˆçµ‚ã‚ã‚Š
 
-    // ƒ{ƒEƒKƒ“ƒ`[ƒg
-    void BowgunAmmoInfinite(MenuEntry* entry);
-    void BowgunCrouchingShot(MenuEntry* entry);
-    // ƒ{ƒEƒKƒ“ƒ`[ƒgI‚í‚è
+// ãƒœã‚¦ã‚¬ãƒ³ãƒãƒ¼ãƒˆ
+void BowgunAmmoInfinite(MenuEntry* entry);
+void BowgunCrouchingShot(MenuEntry* entry);
+// ãƒœã‚¦ã‚¬ãƒ³ãƒãƒ¼ãƒˆçµ‚ã‚ã‚Š
 
-    void ChargeStageFix(MenuEntry* entry);
-    void ChageStageOption(MenuEntry* entry);
-    void WeaponGageFix(MenuEntry* entry);
-    void ChargeAxeBinFix(MenuEntry* entry);
-    void HuntingHornAllEffectGrant(MenuEntry* entry);
-    // •Ší•Êƒ`[ƒgI‚í‚è
+void ChargeStageFix(MenuEntry* entry);
+void ChageStageOption(MenuEntry* entry);
+void WeaponGageFix(MenuEntry* entry);
+void ChargeAxeBinFix(MenuEntry* entry);
+void HuntingHornAllEffectGrant(MenuEntry* entry);
+// æ­¦å™¨åˆ¥ãƒãƒ¼ãƒˆçµ‚ã‚ã‚Š
 
-    void AttributePointChange(MenuEntry* entry);
-    void NoMotion(MenuEntry* entry);
-    void CriticalRate100(MenuEntry* entry);
-    void BowgunAutoReload(MenuEntry* entry);
-    void InfiniteSharpness(MenuEntry* entry);
-    void SharpnessPlus2(MenuEntry* entry);
-    void ChargeSpeedUp(MenuEntry* entry);
-    void ChargeGageMax(MenuEntry* entry);
-    // •ŠíI‚í‚è
+void AttributePointChange(MenuEntry* entry);
+void NoMotion(MenuEntry* entry);
+void CriticalRate100(MenuEntry* entry);
+void BowgunAutoReload(MenuEntry* entry);
+void InfiniteSharpness(MenuEntry* entry);
+void SharpnessPlus2(MenuEntry* entry);
+void ChargeSpeedUp(MenuEntry* entry);
+void ChargeGageMax(MenuEntry* entry);
+// æ­¦å™¨çµ‚ã‚ã‚Š
 
-    // ƒ‚ƒ“ƒXƒ^[
-    // ƒ‚ƒ“ƒXƒ^[î•ñ‰æ–Ê•\¦
-    void Monster1HpDisplay(MenuEntry* entry);
-    void Monster2HpDisplay(MenuEntry* entry);
-    void Monster1SizeMagnificationDisplay(MenuEntry* entry);
-    void Monster2SizeMagnificationDisplay(MenuEntry* entry);
-    // ƒ‚ƒ“ƒXƒ^[î•ñ‰æ–Ê•\¦I‚í‚è
+// ãƒ¢ãƒ³ã‚¹ã‚¿ãƒ¼
+// ãƒ¢ãƒ³ã‚¹ã‚¿ãƒ¼æƒ…å ±ç”»é¢è¡¨ç¤º
+void Monster1HpDisplay(MenuEntry* entry);
+void Monster2HpDisplay(MenuEntry* entry);
+void Monster1SizeMagnificationDisplay(MenuEntry* entry);
+void Monster2SizeMagnificationDisplay(MenuEntry* entry);
+// ãƒ¢ãƒ³ã‚¹ã‚¿ãƒ¼æƒ…å ±ç”»é¢è¡¨ç¤ºçµ‚ã‚ã‚Š
 
-    void RideGageMax(MenuEntry* entry);
-    void MonsterCoordinateModifier(MenuEntry* entry);
-    void MonsterStalker(MenuEntry* entry);
-    void MonsterActionRepeat(MenuEntry* entry);
-    void MonsterActionRepeatOption(MenuEntry* entry);
-    void Monster1And2Stop(MenuEntry* entry);
-    void Monster1SizeChange(MenuEntry* entry);
-    void Monster1SizeOption(MenuEntry* entry);
-    void Monster2SizeChange(MenuEntry* entry);
-    void Monster2SizeOption(MenuEntry* entry);
-    void Monster1SpeedAttributeChange(MenuEntry* entry);
-    void Monster1SpeedAttributeOption(MenuEntry* entry);
-    void Monster2SpeedAttributeChange(MenuEntry* entry);
-    void Monster2SpeedAttributeOption(MenuEntry* entry);
-    void Monster1And2AlwaysPoison(MenuEntry* entry);
-    void Monster1And2AlwaysParalysis(MenuEntry* entry);
-    void Monster1And2AlwaysSleep(MenuEntry* entry);
-    void Monster1And2AlwaysInvisible(MenuEntry* entry);
-    void OneAttackKill(MenuEntry* entry);
-    // ƒ‚ƒ“ƒXƒ^[I‚í‚è
+void RideGageMax(MenuEntry* entry);
+void MonsterCoordinateModifier(MenuEntry* entry);
+void MonsterStalker(MenuEntry* entry);
+void MonsterActionRepeat(MenuEntry* entry);
+void MonsterActionRepeatOption(MenuEntry* entry);
+void Monster1And2Stop(MenuEntry* entry);
+void Monster1SizeChange(MenuEntry* entry);
+void Monster1SizeOption(MenuEntry* entry);
+void Monster2SizeChange(MenuEntry* entry);
+void Monster2SizeOption(MenuEntry* entry);
+void Monster1SpeedAttributeChange(MenuEntry* entry);
+void Monster1SpeedAttributeOption(MenuEntry* entry);
+void Monster2SpeedAttributeChange(MenuEntry* entry);
+void Monster2SpeedAttributeOption(MenuEntry* entry);
+void Monster1And2AlwaysPoison(MenuEntry* entry);
+void Monster1And2AlwaysParalysis(MenuEntry* entry);
+void Monster1And2AlwaysSleep(MenuEntry* entry);
+void Monster1And2AlwaysInvisible(MenuEntry* entry);
+void OneAttackKill(MenuEntry* entry);
+// ãƒ¢ãƒ³ã‚¹ã‚¿ãƒ¼çµ‚ã‚ã‚Š
 
-    // ‚Ë‚±
-    // ‚Ë‚±•ÒW
-    void PalicoChoice(MenuEntry* entry);
+// ã­ã“
+// ã­ã“ç·¨é›†
+void PalicoChoice(MenuEntry* entry);
 
-    // ‘•”õƒTƒ|[ƒgs“®
-    void PalicoEquipmentSupportAction1Change(MenuEntry* entry);
-    void PalicoEquipmentSupportAction2Change(MenuEntry* entry);
-    void PalicoEquipmentSupportAction3Change(MenuEntry* entry);
-    void PalicoEquipmentSupportAction4Change(MenuEntry* entry);
-    void PalicoEquipmentSupportAction5Change(MenuEntry* entry);
-    void PalicoEquipmentSupportAction6Change(MenuEntry* entry);
-    void PalicoEquipmentSupportAction7Change(MenuEntry* entry);
-    void PalicoEquipmentSupportAction8Change(MenuEntry* entry);
-    // ‘•”õƒTƒ|[ƒgs“®I‚í‚è
+// è£…å‚™ã‚µãƒãƒ¼ãƒˆè¡Œå‹•
+void PalicoEquipmentSupportAction1Change(MenuEntry* entry);
+void PalicoEquipmentSupportAction2Change(MenuEntry* entry);
+void PalicoEquipmentSupportAction3Change(MenuEntry* entry);
+void PalicoEquipmentSupportAction4Change(MenuEntry* entry);
+void PalicoEquipmentSupportAction5Change(MenuEntry* entry);
+void PalicoEquipmentSupportAction6Change(MenuEntry* entry);
+void PalicoEquipmentSupportAction7Change(MenuEntry* entry);
+void PalicoEquipmentSupportAction8Change(MenuEntry* entry);
+// è£…å‚™ã‚µãƒãƒ¼ãƒˆè¡Œå‹•çµ‚ã‚ã‚Š
 
-    // ‘•”õƒIƒgƒ‚ƒXƒLƒ‹
-    void PalicoEquipmentSkill1Change(MenuEntry* entry);
-    void PalicoEquipmentSkill2Change(MenuEntry* entry);
-    void PalicoEquipmentSkill3Change(MenuEntry* entry);
-    void PalicoEquipmentSkill4Change(MenuEntry* entry);
-    void PalicoEquipmentSkill5Change(MenuEntry* entry);
-    void PalicoEquipmentSkill6Change(MenuEntry* entry);
-    void PalicoEquipmentSkill7Change(MenuEntry* entry);
-    void PalicoEquipmentSkill8Change(MenuEntry* entry);
-    // ‘•”õƒIƒgƒ‚ƒXƒLƒ‹I‚í‚è
+// è£…å‚™ã‚ªãƒˆãƒ¢ã‚¹ã‚­ãƒ«
+void PalicoEquipmentSkill1Change(MenuEntry* entry);
+void PalicoEquipmentSkill2Change(MenuEntry* entry);
+void PalicoEquipmentSkill3Change(MenuEntry* entry);
+void PalicoEquipmentSkill4Change(MenuEntry* entry);
+void PalicoEquipmentSkill5Change(MenuEntry* entry);
+void PalicoEquipmentSkill6Change(MenuEntry* entry);
+void PalicoEquipmentSkill7Change(MenuEntry* entry);
+void PalicoEquipmentSkill8Change(MenuEntry* entry);
+// è£…å‚™ã‚ªãƒˆãƒ¢ã‚¹ã‚­ãƒ«çµ‚ã‚ã‚Š
 
-    // K“¾ƒTƒ|[ƒgs“®
-    void PalicoLearnSupportAction1Change(MenuEntry* entry);
-    void PalicoLearnSupportAction2Change(MenuEntry* entry);
-    void PalicoLearnSupportAction3Change(MenuEntry* entry);
-    void PalicoLearnSupportAction4Change(MenuEntry* entry);
-    void PalicoLearnSupportAction5Change(MenuEntry* entry);
-    void PalicoLearnSupportAction6Change(MenuEntry* entry);
-    void PalicoLearnSupportAction7Change(MenuEntry* entry);
-    void PalicoLearnSupportAction8Change(MenuEntry* entry);
-    void PalicoLearnSupportAction9Change(MenuEntry* entry);
-    void PalicoLearnSupportAction10Change(MenuEntry* entry);
-    void PalicoLearnSupportAction11Change(MenuEntry* entry);
-    void PalicoLearnSupportAction12Change(MenuEntry* entry);
-    void PalicoLearnSupportAction13Change(MenuEntry* entry);
-    void PalicoLearnSupportAction14Change(MenuEntry* entry);
-    void PalicoLearnSupportAction15Change(MenuEntry* entry);
-    void PalicoLearnSupportAction16Change(MenuEntry* entry);
-    // K“¾ƒTƒ|[ƒgs“®I‚í‚è
+// ç¿’å¾—ã‚µãƒãƒ¼ãƒˆè¡Œå‹•
+void PalicoLearnSupportAction1Change(MenuEntry* entry);
+void PalicoLearnSupportAction2Change(MenuEntry* entry);
+void PalicoLearnSupportAction3Change(MenuEntry* entry);
+void PalicoLearnSupportAction4Change(MenuEntry* entry);
+void PalicoLearnSupportAction5Change(MenuEntry* entry);
+void PalicoLearnSupportAction6Change(MenuEntry* entry);
+void PalicoLearnSupportAction7Change(MenuEntry* entry);
+void PalicoLearnSupportAction8Change(MenuEntry* entry);
+void PalicoLearnSupportAction9Change(MenuEntry* entry);
+void PalicoLearnSupportAction10Change(MenuEntry* entry);
+void PalicoLearnSupportAction11Change(MenuEntry* entry);
+void PalicoLearnSupportAction12Change(MenuEntry* entry);
+void PalicoLearnSupportAction13Change(MenuEntry* entry);
+void PalicoLearnSupportAction14Change(MenuEntry* entry);
+void PalicoLearnSupportAction15Change(MenuEntry* entry);
+void PalicoLearnSupportAction16Change(MenuEntry* entry);
+// ç¿’å¾—ã‚µãƒãƒ¼ãƒˆè¡Œå‹•çµ‚ã‚ã‚Š
 
-    // K“¾ƒIƒgƒ‚ƒXƒLƒ‹
-    void PalicoLearnSupportSkill1Change(MenuEntry* entry);
-    void PalicoLearnSupportSkill2Change(MenuEntry* entry);
-    void PalicoLearnSupportSkill3Change(MenuEntry* entry);
-    void PalicoLearnSupportSkill4Change(MenuEntry* entry);
-    void PalicoLearnSupportSkill5Change(MenuEntry* entry);
-    void PalicoLearnSupportSkill6Change(MenuEntry* entry);
-    void PalicoLearnSupportSkill7Change(MenuEntry* entry);
-    void PalicoLearnSupportSkill8Change(MenuEntry* entry);
-    void PalicoLearnSupportSkill9Change(MenuEntry* entry);
-    void PalicoLearnSupportSkill10Change(MenuEntry* entry);
-    void PalicoLearnSupportSkill11Change(MenuEntry* entry);
-    void PalicoLearnSupportSkill12Change(MenuEntry* entry);
-    // K“¾ƒIƒgƒ‚ƒXƒLƒ‹I‚í‚è
+// ç¿’å¾—ã‚ªãƒˆãƒ¢ã‚¹ã‚­ãƒ«
+void PalicoLearnSupportSkill1Change(MenuEntry* entry);
+void PalicoLearnSupportSkill2Change(MenuEntry* entry);
+void PalicoLearnSupportSkill3Change(MenuEntry* entry);
+void PalicoLearnSupportSkill4Change(MenuEntry* entry);
+void PalicoLearnSupportSkill5Change(MenuEntry* entry);
+void PalicoLearnSupportSkill6Change(MenuEntry* entry);
+void PalicoLearnSupportSkill7Change(MenuEntry* entry);
+void PalicoLearnSupportSkill8Change(MenuEntry* entry);
+void PalicoLearnSupportSkill9Change(MenuEntry* entry);
+void PalicoLearnSupportSkill10Change(MenuEntry* entry);
+void PalicoLearnSupportSkill11Change(MenuEntry* entry);
+void PalicoLearnSupportSkill12Change(MenuEntry* entry);
+// ç¿’å¾—ã‚ªãƒˆãƒ¢ã‚¹ã‚­ãƒ«çµ‚ã‚ã‚Š
 
-    // Œ©‚½–Ú
-    // Œ©‚½–Ú‚ÌF•ÏX
-    // –ÑF
-    void PalicoBodyHairColorRedChange(MenuEntry* entry);
-    void PalicoBodyHairColorGreenChange(MenuEntry* entry);
-    void PalicoBodyHairColorBlueChange(MenuEntry* entry);
-    // –ÑFI‚í‚è
+// è¦‹ãŸç›®
+// è¦‹ãŸç›®ã®è‰²å¤‰æ›´
+// æ¯›è‰²
+void PalicoBodyHairColorRedChange(MenuEntry* entry);
+void PalicoBodyHairColorGreenChange(MenuEntry* entry);
+void PalicoBodyHairColorBlueChange(MenuEntry* entry);
+// æ¯›è‰²çµ‚ã‚ã‚Š
 
-    // ‰E–Ú‚ÌF
-    void PalicoRightEyeColorRedChange(MenuEntry* entry);
-    void PalicoRightEyeColorGreenChange(MenuEntry* entry);
-    void PalicoRightEyeColorBlueChange(MenuEntry* entry);
-    // ‰E–Ú‚ÌFI‚í‚è
+// å³ç›®ã®è‰²
+void PalicoRightEyeColorRedChange(MenuEntry* entry);
+void PalicoRightEyeColorGreenChange(MenuEntry* entry);
+void PalicoRightEyeColorBlueChange(MenuEntry* entry);
+// å³ç›®ã®è‰²çµ‚ã‚ã‚Š
 
-    // ¶–Ú‚ÌF
-    void PalicoLeftEyeColorRedChange(MenuEntry* entry);
-    void PalicoLeftEyeColorGreenChange(MenuEntry* entry);
-    void PalicoLeftEyeColorBlueChange(MenuEntry* entry);
-    // ¶–Ú‚ÌFI‚í‚è
+// å·¦ç›®ã®è‰²
+void PalicoLeftEyeColorRedChange(MenuEntry* entry);
+void PalicoLeftEyeColorGreenChange(MenuEntry* entry);
+void PalicoLeftEyeColorBlueChange(MenuEntry* entry);
+// å·¦ç›®ã®è‰²çµ‚ã‚ã‚Š
 
-    // ƒCƒ“ƒi[‚ÌF
-    void PalicoInnerColorRedChange(MenuEntry* entry);
-    void PalicoInnerColorGreenChange(MenuEntry* entry);
-    void PalicoInnerColorBlueChange(MenuEntry* entry);
-    // ƒCƒ“ƒi[‚ÌFI‚í‚è
+// ã‚¤ãƒ³ãƒŠãƒ¼ã®è‰²
+void PalicoInnerColorRedChange(MenuEntry* entry);
+void PalicoInnerColorGreenChange(MenuEntry* entry);
+void PalicoInnerColorBlueChange(MenuEntry* entry);
+// ã‚¤ãƒ³ãƒŠãƒ¼ã®è‰²çµ‚ã‚ã‚Š
 
-    // Œ©‚½–Ú‚ÌF•ÏXI‚í‚è
+// è¦‹ãŸç›®ã®è‰²å¤‰æ›´çµ‚ã‚ã‚Š
 
-    void PalicoVoiceChange(MenuEntry* entry);
-    void PalicoEyeChange(MenuEntry* entry);
-    void PalicoInnerChange(MenuEntry* entry);
-    void PalicoFurCoatChange(MenuEntry* entry);
-    void PalicoEarChange(MenuEntry* entry);
-    void PalicoTailChange(MenuEntry* entry);
-    // Œ©‚½–ÚI‚í‚è
+void PalicoVoiceChange(MenuEntry* entry);
+void PalicoEyeChange(MenuEntry* entry);
+void PalicoInnerChange(MenuEntry* entry);
+void PalicoFurCoatChange(MenuEntry* entry);
+void PalicoEarChange(MenuEntry* entry);
+void PalicoTailChange(MenuEntry* entry);
+// è¦‹ãŸç›®çµ‚ã‚ã‚Š
 
-    void PalicoExperienceChange(MenuEntry* entry);
-    void PalicoLevelChange(MenuEntry* entry);
-    void PalicoSupportTrendChange(MenuEntry* entry);
-    void PalicoClosenessChange(MenuEntry* entry);
-    void PalicoTargetChange(MenuEntry* entry);
-    void PalicoCommentEditPossibleChange(MenuEntry* entry);
-    void SpecialDeliveryDisplayChange(MenuEntry* entry);
-    void PalicoNameChange(MenuEntry* entry);
-    void PalicoCommentChange(MenuEntry* entry);
-    void PalicoGodParentChange(MenuEntry* entry);
-    void PalicoPredecessorHusbandChange(MenuEntry* entry);
-    // ‚Ë‚±•ÒWI‚í‚è
+void PalicoExperienceChange(MenuEntry* entry);
+void PalicoLevelChange(MenuEntry* entry);
+void PalicoSupportTrendChange(MenuEntry* entry);
+void PalicoClosenessChange(MenuEntry* entry);
+void PalicoTargetChange(MenuEntry* entry);
+void PalicoCommentEditPossibleChange(MenuEntry* entry);
+void SpecialDeliveryDisplayChange(MenuEntry* entry);
+void PalicoNameChange(MenuEntry* entry);
+void PalicoCommentChange(MenuEntry* entry);
+void PalicoGodParentChange(MenuEntry* entry);
+void PalicoPredecessorHusbandChange(MenuEntry* entry);
+// ã­ã“ç·¨é›†çµ‚ã‚ã‚Š
 
-    void PalicoAttackPowerMagnificationChange(MenuEntry* entry);
-    void PalicoAttackPowerMagnificationOption(MenuEntry* entry);
-    void PalicoDefencePowerMagnificationChange(MenuEntry* entry);
-    void PalicoDefencePowerMagnificationOption(MenuEntry* entry);
-    void PalicoAbsorption(MenuEntry* entry);
-    void ProwlerSupportGageMax(MenuEntry* entry);
-    // ‚Ë‚±I‚í‚è
+void PalicoAttackPowerMagnificationChange(MenuEntry* entry);
+void PalicoAttackPowerMagnificationOption(MenuEntry* entry);
+void PalicoDefencePowerMagnificationChange(MenuEntry* entry);
+void PalicoDefencePowerMagnificationOption(MenuEntry* entry);
+void PalicoAbsorption(MenuEntry* entry);
+void ProwlerSupportGageMax(MenuEntry* entry);
+// ã­ã“çµ‚ã‚ã‚Š
 
-    // ‚»‚Ì‘¼
-    // ƒ`ƒƒƒbƒg
-    void ChatInfinite(MenuEntry* entry);
-    void ChatConversionChange(MenuEntry* entry);
-    void ChatConversionList(MenuEntry* entry);
-    // ƒ`ƒƒƒbƒgI‚í‚è
+// ãã®ä»–
+// ãƒãƒ£ãƒƒãƒˆ
+void ChatInfinite(MenuEntry* entry);
+void ChatConversionChange(MenuEntry* entry);
+void ChatConversionList(MenuEntry* entry);
+// ãƒãƒ£ãƒƒãƒˆçµ‚ã‚ã‚Š
 
-    // Œ‚Á‚Ï‚ç‚¢
-    void InstantDrunk(MenuEntry* entry);
-    void InstantDrunkOption(MenuEntry* entry);
-    void Drunk1(MenuEntry* entry);
-    // Œ‚Á‚Ï‚ç‚¢I‚í‚è
+// é…”ã£ã±ã‚‰ã„
+void InstantDrunk(MenuEntry* entry);
+void InstantDrunkOption(MenuEntry* entry);
+void Drunk1(MenuEntry* entry);
+// é…”ã£ã±ã‚‰ã„çµ‚ã‚ã‚Š
 
-    // ƒnƒ“ƒ^[ƒ‰ƒ“ƒN
-    void HunterRankChange(MenuEntry* entry);
-    void HunterRankPointChange(MenuEntry* entry);
-    // ƒnƒ“ƒ^[ƒ‰ƒ“ƒNI‚í‚è
+// ãƒãƒ³ã‚¿ãƒ¼ãƒ©ãƒ³ã‚¯
+void HunterRankChange(MenuEntry* entry);
+void HunterRankPointChange(MenuEntry* entry);
+// ãƒãƒ³ã‚¿ãƒ¼ãƒ©ãƒ³ã‚¯çµ‚ã‚ã‚Š
 
-    // ƒv[ƒM[•ƒtƒFƒj[
-    void FenyAndPugyClothes(MenuEntry* entry);
-    void FenyAndPugyNameChange(MenuEntry* entry);
-    // ƒv[ƒM[•ƒtƒFƒj[I‚í‚è
+// ãƒ—ãƒ¼ã‚®ãƒ¼ï¼†ãƒ•ã‚§ãƒ‹ãƒ¼
+void FenyAndPugyClothes(MenuEntry* entry);
+void FenyAndPugyNameChange(MenuEntry* entry);
+// ãƒ—ãƒ¼ã‚®ãƒ¼ï¼†ãƒ•ã‚§ãƒ‹ãƒ¼çµ‚ã‚ã‚Š
 
-    // ƒNƒGƒXƒg
-    void QuestClear(MenuEntry* entry);
-    void QuestClearOption(MenuEntry* entry);
-    void QuestWaitSkip(MenuEntry* entry);
-    void QuestResultSkip(MenuEntry* entry);
-    void QuestDownMaxChange(MenuEntry* entry);
-    void QuestDownMaxOption(MenuEntry* entry);
-    void QuestDownNowChange(MenuEntry* entry);
-    void QuestDownNowOption(MenuEntry* entry);
-    void QuestTimeDisplay(MenuEntry* entry);
-    void SaveScreenFix(MenuEntry* entry);
-    void SaveScreenOption(MenuEntry* entry);
-    void QuestTimeStop(MenuEntry* entry);
-    void AllQuestClearChange(MenuEntry* entry);
-    // ƒNƒGƒXƒgI‚í‚è
+// ã‚¯ã‚¨ã‚¹ãƒˆ
+void QuestClear(MenuEntry* entry);
+void QuestClearOption(MenuEntry* entry);
+void QuestWaitSkip(MenuEntry* entry);
+void QuestResultSkip(MenuEntry* entry);
+void QuestDownMaxChange(MenuEntry* entry);
+void QuestDownMaxOption(MenuEntry* entry);
+void QuestDownNowChange(MenuEntry* entry);
+void QuestDownNowOption(MenuEntry* entry);
+void QuestTimeDisplay(MenuEntry* entry);
+void SaveScreenFix(MenuEntry* entry);
+void SaveScreenOption(MenuEntry* entry);
+void QuestTimeStop(MenuEntry* entry);
+void AllQuestClearChange(MenuEntry* entry);
+// ã‚¯ã‚¨ã‚¹ãƒˆçµ‚ã‚ã‚Š
 
-    // W‰ïŠ
-    // W‰ïŠ‚ğì‚é
-    void BaseCreateTargetChange(MenuEntry* entry);
-    void BaseCreateQuestTypeChange(MenuEntry* entry);
-    void BaseCreateRecruitmentHunterRankMinimumChange(MenuEntry* entry);
-    void BaseCreateRecruitmentHunterRankMaximumChange(MenuEntry* entry);
-    void BaseCreateEntryPeopleChange(MenuEntry* entry);
-    void BaseCreateEntryLimitChange(MenuEntry* entry);
-    void BaseCreatePasswordExistChange(MenuEntry* entry);
-    void BaseCreateRecruitmentMessage1Change(MenuEntry* entry);
-    void BaseCreateRecruitmentMessage2Change(MenuEntry* entry);
-    void BaseCreateRecruitmentMessage3Change(MenuEntry* entry);
-    void BaseCreateRecruitmentMessage4Change(MenuEntry* entry);
-    // W‰ïŠ‚ğì‚éI‚í‚è
+// é›†ä¼šæ‰€
+// é›†ä¼šæ‰€ã‚’ä½œã‚‹
+void BaseCreateTargetChange(MenuEntry* entry);
+void BaseCreateQuestTypeChange(MenuEntry* entry);
+void BaseCreateRecruitmentHunterRankMinimumChange(MenuEntry* entry);
+void BaseCreateRecruitmentHunterRankMaximumChange(MenuEntry* entry);
+void BaseCreateEntryPeopleChange(MenuEntry* entry);
+void BaseCreateEntryLimitChange(MenuEntry* entry);
+void BaseCreatePasswordExistChange(MenuEntry* entry);
+void BaseCreateRecruitmentMessage1Change(MenuEntry* entry);
+void BaseCreateRecruitmentMessage2Change(MenuEntry* entry);
+void BaseCreateRecruitmentMessage3Change(MenuEntry* entry);
+void BaseCreateRecruitmentMessage4Change(MenuEntry* entry);
+// é›†ä¼šæ‰€ã‚’ä½œã‚‹çµ‚ã‚ã‚Š
 
-    // W‰ïŠ‚ğ’T‚·
-    void BaseSearchTargetChange(MenuEntry* entry);
-    void BaseSearchQuestTypeChange(MenuEntry* entry);
-    void BaseSearchHostHunterRankMinimumChange(MenuEntry* entry);
-    void BaseSearchHostHunterRankMaximumChange(MenuEntry* entry);
-    void BaseSearchInQuestChange(MenuEntry* entry);
-    void BaseSearchPasswordExistChange(MenuEntry* entry);
-    // W‰ïŠ‚ğ’T‚·I‚í‚è
+// é›†ä¼šæ‰€ã‚’æ¢ã™
+void BaseSearchTargetChange(MenuEntry* entry);
+void BaseSearchQuestTypeChange(MenuEntry* entry);
+void BaseSearchHostHunterRankMinimumChange(MenuEntry* entry);
+void BaseSearchHostHunterRankMaximumChange(MenuEntry* entry);
+void BaseSearchInQuestChange(MenuEntry* entry);
+void BaseSearchPasswordExistChange(MenuEntry* entry);
+// é›†ä¼šæ‰€ã‚’æ¢ã™çµ‚ã‚ã‚Š
 
-    // W‰ïŠI‚í‚è
+// é›†ä¼šæ‰€çµ‚ã‚ã‚Š
 
-    void DisplayBasePassword(MenuEntry* entry);
-    void DisplayPlayerCoordinate(MenuEntry* entry);
-    void FloatBug(MenuEntry* entry);
-    void ViewingAngleChange(MenuEntry* entry);
-    void ViewingAngleOption(MenuEntry* entry);
-    void ViewingAngleChangeV2(MenuEntry* entry);
-    void WeaponSizeChange(MenuEntry* entry);
-    void ContrastChange(MenuEntry* entry);
-    void GuildCardChange(MenuEntry* entry);
-    void RegionChange(MenuEntry* entry);
-    void VillageContributionPointChange(MenuEntry* entry);
-    void RoomServiceChange(MenuEntry* entry);
-    void WallThrough(MenuEntry* entry);
-    void MaximumFpsChange(MenuEntry* entry);
-    // ‚»‚Ì‘¼I‚í‚è
+void DisplayBasePassword(MenuEntry* entry);
+void DisplayPlayerCoordinate(MenuEntry* entry);
+void FloatBug(MenuEntry* entry);
+void ViewingAngleChange(MenuEntry* entry);
+void ViewingAngleOption(MenuEntry* entry);
+void ViewingAngleChangeV2(MenuEntry* entry);
+void WeaponSizeChange(MenuEntry* entry);
+void ContrastChange(MenuEntry* entry);
+void GuildCardChange(MenuEntry* entry);
+void RegionChange(MenuEntry* entry);
+void VillageContributionPointChange(MenuEntry* entry);
+void RoomServiceChange(MenuEntry* entry);
+void WallThrough(MenuEntry* entry);
+void MaximumFpsChange(MenuEntry* entry);
+// ãã®ä»–çµ‚ã‚ã‚Š
 
-    // ‚¨‚Ü‚¯
-    // •ÏŠ·
-    void HexToDecd32(MenuEntry* entry);
-    void HexToDecu32(MenuEntry* entry);
-    void HexToDecd16(MenuEntry* entry);
-    void HexToDecu16(MenuEntry* entry);
-    void HexToDecd8(MenuEntry* entry);
-    void HexToDecu8(MenuEntry* entry);
-    void DecToHex(MenuEntry* entry);
-    // •ÏŠ·I‚í‚è
+// ãŠã¾ã‘
+// å¤‰æ›
+void HexToDecd32(MenuEntry* entry);
+void HexToDecu32(MenuEntry* entry);
+void HexToDecd16(MenuEntry* entry);
+void HexToDecu16(MenuEntry* entry);
+void HexToDecd8(MenuEntry* entry);
+void HexToDecu8(MenuEntry* entry);
+void DecToHex(MenuEntry* entry);
+// å¤‰æ›çµ‚ã‚ã‚Š
 
-    // “d‘ì
-    void HexadecimalCalculator(MenuEntry* entry);
-    void DecimalCalculator(MenuEntry* entry);
-    void DoubleCalculator(MenuEntry* entry);
-    // “d‘ìI‚í‚è
+// é›»å“
+void HexadecimalCalculator(MenuEntry* entry);
+void DecimalCalculator(MenuEntry* entry);
+void DoubleCalculator(MenuEntry* entry);
+// é›»å“çµ‚ã‚ã‚Š
 
-    // RGBƒ`ƒFƒbƒJ[
-    void RedInput(MenuEntry* entry);
-    void GreenInput(MenuEntry* entry);
-    void BlueInput(MenuEntry* entry);
-    void RGBOutput(MenuEntry* entry);
-    // RGBƒ`ƒFƒbƒJ[I‚í‚è
+// RGBãƒã‚§ãƒƒã‚«ãƒ¼
+void RedInput(MenuEntry* entry);
+void GreenInput(MenuEntry* entry);
+void BlueInput(MenuEntry* entry);
+void RGBOutput(MenuEntry* entry);
+// RGBãƒã‚§ãƒƒã‚«ãƒ¼çµ‚ã‚ã‚Š
 
-    void HexEditor(MenuEntry* entry);
-    void HexEditor2(MenuEntry* entry);
-    void LocalTimeDisplay(MenuEntry* entry);
-    void Information(MenuEntry* entry);
-    void TitleID();
-    void ProcessNameID();
-    void ConsoleType();
-    void WiFiStatus();
-    void BatteryLevel();
-    // ‚¨‚Ü‚¯I‚í‚è
+void HexEditor(MenuEntry* entry);
+void HexEditor2(MenuEntry* entry);
+void LocalTimeDisplay(MenuEntry* entry);
+void Information(MenuEntry* entry);
+void TitleID();
+void ProcessNameID();
+void ConsoleType();
+void WiFiStatus();
+void BatteryLevel();
+// ãŠã¾ã‘çµ‚ã‚ã‚Š
 
-} // namespace CTRPluginFramework
+}  // namespace CTRPluginFramework

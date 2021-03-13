@@ -1,223 +1,176 @@
 #include "Patch.hpp"
 
-namespace CTRPluginFramework
-{
-    FwkSettings* set;
+namespace CTRPluginFramework {
 
-    void PatchProcessUiMainTextColorEditor(MenuEntry* entry)
-    {
-        Keyboard keyboard(patchProcessColorEditorTitle);
-        if (keyboard.Open(colorUiMainText) != -1)
-        {
-            set->Get().MainTextColor = Color(colorUiMainText);
-        }
-    }
+FwkSettings* set;
 
-    void PatchProcessUiWindowTitleColorEditor(MenuEntry* entry)
-    {
-        Keyboard keyboard(patchProcessColorEditorTitle);
-        if (keyboard.Open(colorUiWindowTitle) != -1)
-        {
-            set->Get().WindowTitleColor = Color(colorUiWindowTitle);
-        }
+void PatchProcessUiMainTextColorEditor(MenuEntry* entry) {
+    Keyboard keyboard(patchProcessColorEditorTitle);
+    if (keyboard.Open(colorUiMainText) != -1) {
+        set->Get().MainTextColor = Color(colorUiMainText);
     }
+}
 
-    void PatchProcessUiMenuSelectedItemColorEditor(MenuEntry* entry)
-    {
-        Keyboard keyboard(patchProcessColorEditorTitle);
-        if (keyboard.Open(colorUiMenuSelectedItem) != -1)
-        {
-            set->Get().MenuSelectedItemColor = Color(colorUiMenuSelectedItem);
-        }
+void PatchProcessUiWindowTitleColorEditor(MenuEntry* entry) {
+    Keyboard keyboard(patchProcessColorEditorTitle);
+    if (keyboard.Open(colorUiWindowTitle) != -1) {
+        set->Get().WindowTitleColor = Color(colorUiWindowTitle);
     }
+}
 
-    void PatchProcessUiMenuUnselectedItemColorEditor(MenuEntry* entry)
-    {
-        Keyboard keyboard(patchProcessColorEditorTitle);
-        if (keyboard.Open(colorUiMenuUnselectedItem) != -1)
-        {
-            set->Get().MenuUnselectedItemColor = Color(colorUiMenuUnselectedItem);
-        }
+void PatchProcessUiMenuSelectedItemColorEditor(MenuEntry* entry) {
+    Keyboard keyboard(patchProcessColorEditorTitle);
+    if (keyboard.Open(colorUiMenuSelectedItem) != -1) {
+        set->Get().MenuSelectedItemColor = Color(colorUiMenuSelectedItem);
     }
+}
 
-    void PatchProcessUiBackgroundMainColorEditor(MenuEntry* entry)
-    {
-        Keyboard keyboard(patchProcessColorEditorTitle);
-        if (keyboard.Open(colorUiBackgroundMain) != -1)
-        {
-            set->Get().BackgroundMainColor = Color(colorUiBackgroundMain);
-        }
+void PatchProcessUiMenuUnselectedItemColorEditor(MenuEntry* entry) {
+    Keyboard keyboard(patchProcessColorEditorTitle);
+    if (keyboard.Open(colorUiMenuUnselectedItem) != -1) {
+        set->Get().MenuUnselectedItemColor = Color(colorUiMenuUnselectedItem);
     }
+}
 
-    void PatchProcessUiBackgroundSecondaryColorEditor(MenuEntry* entry)
-    {
-        Keyboard keyboard(patchProcessColorEditorTitle);
-        if (keyboard.Open(colorUiBackgroundSecondary) != -1)
-        {
-            set->Get().BackgroundSecondaryColor = Color(colorUiBackgroundSecondary);
-        }
+void PatchProcessUiBackgroundMainColorEditor(MenuEntry* entry) {
+    Keyboard keyboard(patchProcessColorEditorTitle);
+    if (keyboard.Open(colorUiBackgroundMain) != -1) {
+        set->Get().BackgroundMainColor = Color(colorUiBackgroundMain);
     }
+}
 
-    void PatchProcessUiBackgroundBorderColorEditor(MenuEntry* entry)
-    {
-        Keyboard keyboard(patchProcessColorEditorTitle);
-        if (keyboard.Open(colorUiBackgroundBorder) != -1)
-        {
-            set->Get().BackgroundBorderColor = Color(colorUiBackgroundBorder);
-        }
+void PatchProcessUiBackgroundSecondaryColorEditor(MenuEntry* entry) {
+    Keyboard keyboard(patchProcessColorEditorTitle);
+    if (keyboard.Open(colorUiBackgroundSecondary) != -1) {
+        set->Get().BackgroundSecondaryColor = Color(colorUiBackgroundSecondary);
     }
+}
 
-    void PatchProcessKeyboardBackgroundColorEditor(MenuEntry* entry)
-    {
-        Keyboard keyboard(patchProcessColorEditorTitle);
-        if (keyboard.Open(colorKeyboardBackground) != -1)
-        {
-            set->Get().Keyboard.Background = Color(colorKeyboardBackground);
-        }
+void PatchProcessUiBackgroundBorderColorEditor(MenuEntry* entry) {
+    Keyboard keyboard(patchProcessColorEditorTitle);
+    if (keyboard.Open(colorUiBackgroundBorder) != -1) {
+        set->Get().BackgroundBorderColor = Color(colorUiBackgroundBorder);
     }
+}
 
-    void PatchProcessKeyboardKeyBackgroundColorEditor(MenuEntry* entry)
-    {
-        Keyboard keyboard(patchProcessColorEditorTitle);
-        if (keyboard.Open(colorKeyboardKeyBackground) != -1)
-        {
-            set->Get().Keyboard.KeyBackground = Color(colorKeyboardKeyBackground);
-        }
+void PatchProcessKeyboardBackgroundColorEditor(MenuEntry* entry) {
+    Keyboard keyboard(patchProcessColorEditorTitle);
+    if (keyboard.Open(colorKeyboardBackground) != -1) {
+        set->Get().Keyboard.Background = Color(colorKeyboardBackground);
     }
+}
 
-    void PatchProcessKeyboardKeyBackgroundPressedColorEditor(MenuEntry* entry)
-    {
-        Keyboard keyboard(patchProcessColorEditorTitle);
-        if (keyboard.Open(colorKeyboardKeyBackgroundPressed) != -1)
-        {
-            set->Get().Keyboard.KeyBackgroundPressed = Color(colorKeyboardKeyBackgroundPressed);
-        }
+void PatchProcessKeyboardKeyBackgroundColorEditor(MenuEntry* entry) {
+    Keyboard keyboard(patchProcessColorEditorTitle);
+    if (keyboard.Open(colorKeyboardKeyBackground) != -1) {
+        set->Get().Keyboard.KeyBackground = Color(colorKeyboardKeyBackground);
     }
+}
 
-    void PatchProcessKeyboardKeyTextColorEditor(MenuEntry* entry)
-    {
-        Keyboard keyboard(patchProcessColorEditorTitle);
-        if (keyboard.Open(colorKeyboardKeyText) != -1)
-        {
-            set->Get().Keyboard.KeyText = Color(colorKeyboardKeyText);
-        }
+void PatchProcessKeyboardKeyBackgroundPressedColorEditor(MenuEntry* entry) {
+    Keyboard keyboard(patchProcessColorEditorTitle);
+    if (keyboard.Open(colorKeyboardKeyBackgroundPressed) != -1) {
+        set->Get().Keyboard.KeyBackgroundPressed = Color(colorKeyboardKeyBackgroundPressed);
     }
+}
 
-    void PatchProcessKeyboardKeyTextPressedColorEditor(MenuEntry* entry)
-    {
-        Keyboard keyboard(patchProcessColorEditorTitle);
-        if (keyboard.Open(colorKeyboardKeyTextPressed) != -1)
-        {
-            set->Get().Keyboard.KeyTextPressed = Color(colorKeyboardKeyTextPressed);
-        }
+void PatchProcessKeyboardKeyTextColorEditor(MenuEntry* entry) {
+    Keyboard keyboard(patchProcessColorEditorTitle);
+    if (keyboard.Open(colorKeyboardKeyText) != -1) {
+        set->Get().Keyboard.KeyText = Color(colorKeyboardKeyText);
     }
+}
 
-    void PatchProcessKeyboardCursorColorEditor(MenuEntry* entry)
-    {
-        Keyboard keyboard(patchProcessColorEditorTitle);
-        if (keyboard.Open(colorKeyboardCursor) != -1)
-        {
-            set->Get().Keyboard.Cursor = Color(colorKeyboardCursor);
-        }
+void PatchProcessKeyboardKeyTextPressedColorEditor(MenuEntry* entry) {
+    Keyboard keyboard(patchProcessColorEditorTitle);
+    if (keyboard.Open(colorKeyboardKeyTextPressed) != -1) {
+        set->Get().Keyboard.KeyTextPressed = Color(colorKeyboardKeyTextPressed);
     }
+}
 
-    void PatchProcessKeyboardInputColorEditor(MenuEntry* entry)
-    {
-        Keyboard keyboard(patchProcessColorEditorTitle);
-        if (keyboard.Open(colorKeyboardInput) != -1)
-        {
-            set->Get().Keyboard.Input = Color(colorKeyboardInput);
-        }
+void PatchProcessKeyboardCursorColorEditor(MenuEntry* entry) {
+    Keyboard keyboard(patchProcessColorEditorTitle);
+    if (keyboard.Open(colorKeyboardCursor) != -1) {
+        set->Get().Keyboard.Cursor = Color(colorKeyboardCursor);
     }
+}
 
-    void PatchProcessCustomKeyboardBackgroundMainColorEditor(MenuEntry* entry)
-    {
-        Keyboard keyboard(patchProcessColorEditorTitle);
-        if (keyboard.Open(colorCustomKeyboardBackgroundMain) != -1)
-        {
-            set->Get().CustomKeyboard.BackgroundMain = Color(colorCustomKeyboardBackgroundMain);
-        }
+void PatchProcessKeyboardInputColorEditor(MenuEntry* entry) {
+    Keyboard keyboard(patchProcessColorEditorTitle);
+    if (keyboard.Open(colorKeyboardInput) != -1) {
+        set->Get().Keyboard.Input = Color(colorKeyboardInput);
     }
+}
 
-    void PatchProcessCustomKeyboardBackgroundSecondaryColorEditor(MenuEntry* entry)
-    {
-        Keyboard keyboard(patchProcessColorEditorTitle);
-        if (keyboard.Open(colorCustomKeyboardBackgroundSecondary) != -1)
-        {
-            set->Get().CustomKeyboard.BackgroundSecondary = Color(colorCustomKeyboardBackgroundSecondary);
-        }
+void PatchProcessCustomKeyboardBackgroundMainColorEditor(MenuEntry* entry) {
+    Keyboard keyboard(patchProcessColorEditorTitle);
+    if (keyboard.Open(colorCustomKeyboardBackgroundMain) != -1) {
+        set->Get().CustomKeyboard.BackgroundMain = Color(colorCustomKeyboardBackgroundMain);
     }
+}
 
-    void PatchProcessCustomKeyboardBackgroundBorderColorEditor(MenuEntry* entry)
-    {
-        Keyboard keyboard(patchProcessColorEditorTitle);
-        if (keyboard.Open(colorCustomKeyboardBackgroundBorder) != -1)
-        {
-            set->Get().CustomKeyboard.BackgroundBorder = Color(colorCustomKeyboardBackgroundBorder);
-        }
+void PatchProcessCustomKeyboardBackgroundSecondaryColorEditor(MenuEntry* entry) {
+    Keyboard keyboard(patchProcessColorEditorTitle);
+    if (keyboard.Open(colorCustomKeyboardBackgroundSecondary) != -1) {
+        set->Get().CustomKeyboard.BackgroundSecondary = Color(colorCustomKeyboardBackgroundSecondary);
     }
+}
 
-    void PatchProcessCustomKeyboardKeyBackgroundColorEditor(MenuEntry* entry)
-    {
-        Keyboard keyboard(patchProcessColorEditorTitle);
-        if (keyboard.Open(colorCustomKeyboardKeyBackground) != -1)
-        {
-            set->Get().CustomKeyboard.KeyBackground = Color(colorCustomKeyboardKeyBackground);
-        }
+void PatchProcessCustomKeyboardBackgroundBorderColorEditor(MenuEntry* entry) {
+    Keyboard keyboard(patchProcessColorEditorTitle);
+    if (keyboard.Open(colorCustomKeyboardBackgroundBorder) != -1) {
+        set->Get().CustomKeyboard.BackgroundBorder = Color(colorCustomKeyboardBackgroundBorder);
     }
+}
 
-    void PatchProcessCustomKeyboardKeyBackgroundPressedColorEditor(MenuEntry* entry)
-    {
-        Keyboard keyboard(patchProcessColorEditorTitle);
-        if (keyboard.Open(colorCustomKeyboardKeyBackgroundPressed) != -1)
-        {
-            set->Get().CustomKeyboard.KeyBackgroundPressed = Color(colorCustomKeyboardKeyBackgroundPressed);
-        }
+void PatchProcessCustomKeyboardKeyBackgroundColorEditor(MenuEntry* entry) {
+    Keyboard keyboard(patchProcessColorEditorTitle);
+    if (keyboard.Open(colorCustomKeyboardKeyBackground) != -1) {
+        set->Get().CustomKeyboard.KeyBackground = Color(colorCustomKeyboardKeyBackground);
     }
+}
 
-    void PatchProcessCustomKeyboardKeyTextColorEditor(MenuEntry* entry)
-    {
-        Keyboard keyboard(patchProcessColorEditorTitle);
-        if (keyboard.Open(colorCustomKeyboardKeyText) != -1)
-        {
-            set->Get().CustomKeyboard.KeyText = Color(colorCustomKeyboardKeyText);
-        }
+void PatchProcessCustomKeyboardKeyBackgroundPressedColorEditor(MenuEntry* entry) {
+    Keyboard keyboard(patchProcessColorEditorTitle);
+    if (keyboard.Open(colorCustomKeyboardKeyBackgroundPressed) != -1) {
+        set->Get().CustomKeyboard.KeyBackgroundPressed = Color(colorCustomKeyboardKeyBackgroundPressed);
     }
+}
 
-    void PatchProcessCustomKeyboardKeyTextPressedColorEditor(MenuEntry* entry)
-    {
-        Keyboard keyboard(patchProcessColorEditorTitle);
-        if (keyboard.Open(colorCustomKeyboardKeyTextPressed) != -1)
-        {
-            set->Get().CustomKeyboard.KeyTextPressed = Color(colorCustomKeyboardKeyTextPressed);
-        }
+void PatchProcessCustomKeyboardKeyTextColorEditor(MenuEntry* entry) {
+    Keyboard keyboard(patchProcessColorEditorTitle);
+    if (keyboard.Open(colorCustomKeyboardKeyText) != -1) {
+        set->Get().CustomKeyboard.KeyText = Color(colorCustomKeyboardKeyText);
     }
+}
 
-    void PatchProcessCustomKeyboardScrollBarBackgroundColorEditor(MenuEntry* entry)
-    {
-        Keyboard keyboard(patchProcessColorEditorTitle);
-        if (keyboard.Open(colorCustomKeyboardScrollBarBackground) != -1)
-        {
-            set->Get().CustomKeyboard.ScrollBarBackground = Color(colorCustomKeyboardScrollBarBackground);
-        }
+void PatchProcessCustomKeyboardKeyTextPressedColorEditor(MenuEntry* entry) {
+    Keyboard keyboard(patchProcessColorEditorTitle);
+    if (keyboard.Open(colorCustomKeyboardKeyTextPressed) != -1) {
+        set->Get().CustomKeyboard.KeyTextPressed = Color(colorCustomKeyboardKeyTextPressed);
     }
+}
 
-    void PatchProcessCustomKeyboardScrollBarThumbColorEditor(MenuEntry* entry)
-    {
-        Keyboard keyboard(patchProcessColorEditorTitle);
-        if (keyboard.Open(colorCustomKeyboardScrollBarThumb) != -1)
-        {
-            set->Get().CustomKeyboard.ScrollBarThumb = Color(colorCustomKeyboardScrollBarThumb);
-        }
+void PatchProcessCustomKeyboardScrollBarBackgroundColorEditor(MenuEntry* entry) {
+    Keyboard keyboard(patchProcessColorEditorTitle);
+    if (keyboard.Open(colorCustomKeyboardScrollBarBackground) != -1) {
+        set->Get().CustomKeyboard.ScrollBarBackground = Color(colorCustomKeyboardScrollBarBackground);
     }
+}
 
-    void PatchProcessDefaultTheme(MenuEntry* entry)
-    {
-        Keyboard keyboard("CTRPFの色を元に戻しますか？", { "はい", "いいえ" });
-        int choice = keyboard.Open();
-        if (choice == 0)
-        {
-            set->SetThemeDefault();
-        }
+void PatchProcessCustomKeyboardScrollBarThumbColorEditor(MenuEntry* entry) {
+    Keyboard keyboard(patchProcessColorEditorTitle);
+    if (keyboard.Open(colorCustomKeyboardScrollBarThumb) != -1) {
+        set->Get().CustomKeyboard.ScrollBarThumb = Color(colorCustomKeyboardScrollBarThumb);
     }
-} // namespace CTRPluginFramework
+}
+
+void PatchProcessDefaultTheme(MenuEntry* entry) {
+    Keyboard keyboard("CTRPFの色を元に戻しますか？", {"はい", "いいえ"});
+    int choice = keyboard.Open();
+    if (choice == 0) {
+        set->SetThemeDefault();
+    }
+}
+
+}  // namespace CTRPluginFramework
