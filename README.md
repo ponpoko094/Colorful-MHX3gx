@@ -54,6 +54,9 @@ build.batを起動してください。または、**MHX3gxフォルダ上**で`
 ## さいごに
 プルリクエストは大歓迎です！
 
+もしぽこの開発環境に興味があったら → [ぽこの開発環境紹介
+](https://gist.github.com/ponpoko094/586fd8a17122d8fd1f028211f2465144)
+
 バグ報告等は Twitter [@ponpoko094](https://twitter.com/ponpoko094) までどうぞ！
 
 MHX3gx 2019-2021
