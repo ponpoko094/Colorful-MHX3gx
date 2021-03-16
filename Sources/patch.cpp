@@ -1,4 +1,4 @@
-#include "Patch.hpp"
+#include "patch.h"
 
 namespace CTRPluginFramework {
 

@@ -1,1 +1,8 @@
-#include "Player.hpp"
+#include "player.h"
+namespace CTRPluginFramework {
+
+Player::Player() {}
+
+Player::~Player() {}
+
+}  // namespace CTRPluginFramework
