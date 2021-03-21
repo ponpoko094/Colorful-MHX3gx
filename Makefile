@@ -13,8 +13,12 @@ TARGET		:= 	$(notdir $(CURDIR))
 PLGINFO 	:= 	CTRPluginFramework.plgInfo
 
 BUILD		:= 	Build
-INCLUDES	:= 	Includes
-SOURCES 	:= 	Sources
+INCLUDES	:= 	Includes \
+				Includes\Helpers \
+				Includes\ponlib
+SOURCES 	:= 	Sources \
+				Sources\Helpers \
+				Sources\ponlib
 
 #---------------------------------------------------------------------------------
 # options for code generation
