@@ -4,6 +4,7 @@
 
 #include "cheats.h"
 #include "offset.h"
+#include "ponlib/security.h"
 #include "team_and_conditions.h"
 
 namespace CTRPluginFramework {
@@ -1360,6 +1361,10 @@ void InitMenu(PluginMenu& menu) {
                             LocalTimeDisplay, "時刻を表示します。");
     *bonus += new MenuEntry("3DSの情報を確認" + workInProgress, nullptr,
                             Information, "3DSの情報を確認できます。");
+    *bonus += new MenuEntry(
+        "フレンドコードシード値確認", nullptr, [](MenuEntry* entry) {
+          MessageBox(Utils::Format("%X", Security::GetFriendCodeSeed))();
+        });
   }
   menu += bonus;
 }
