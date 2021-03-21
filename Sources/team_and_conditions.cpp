@@ -23,14 +23,9 @@ void TeamAndCondition() {
   const std::string teamAndConditionMessageTitle = "利用規約";
 
   const std::string teamAndConditionMessage =
-      "利用規約\n"
-      "①この3gxは無料で提供されます。\n"
+      "①この3gxは無料で提供されます。もしこのプラグインを購入した場合は、ただちに返金を求めてください。\n"
       "②他人に譲渡する場合、MHX3gxのGithubのリンクを提示すること。\n"
-      "③この3gxを使用しデータが破損する等の\n"
-      "損害に対して、ぽんぽこは一切の責任を負いません。\n"
-      "④この3gxは日本版MHX\n"
-      "(タイトルID:0004000000155400)\n"
-      "でのみ使用できるものとします。\n"
+      "③この3gxを使用しデータが破損する等の損害に対して、ぽんぽこは一切の責任を負いません。\n"
       "利用規約に同意しますか？";
 
   const std::string askOpeningMessageSkipMessage =
