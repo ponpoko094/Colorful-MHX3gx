@@ -20,6 +20,8 @@ void TeamAndCondition() {
       "ありがとうございます。\n"
       "利用規約の同意をお願いします。";
 
+  const std::string teamAndConditionMessageTitle = "利用規約";
+
   const std::string teamAndConditionMessage =
       "利用規約\n"
       "①この3gxは無料で提供されます。\n"
@@ -37,7 +39,7 @@ void TeamAndCondition() {
       "次回からオープニングメッセージを\n"
       "スキップしますか？";
 
-  const std::string createdOpskipBinMessage =
+  const std::string createdOpSkipBinMessage =
       "opskip.binを作成しました。\n"
       "設定を変更するために\n"
       "再起動をお願いします。";
@@ -50,32 +52,34 @@ void TeamAndCondition() {
   const std::string otherGameMessage =
       "この3gxは日本版MHX(タイトルID:0004000000155400)でのみ動作します。";
 
+  Process::Pause();
   Process::GetTitleID(titleID);
   if (titleID == mhxTitleID) {
     if (!file) {
       if (!File::Exists(skipSaveFileName)) {
-        MessageBox(openingMessage, thanksMessage)();
-        if (MessageBox(openingMessage, teamAndConditionMessage,
-                       DialogType::DialogYesNo)()) {
-          if (MessageBox(openingMessage, askOpeningMessageSkipMessage,
-                         DialogType::DialogYesNo)()) {
+        MessageBox(openingMessage, thanksMessage).SetClear(ClearScreen::Top)();
+        if (MessageBox(teamAndConditionMessageTitle, teamAndConditionMessage,
+                       DialogType::DialogYesNo).SetClear(ClearScreen::Top)()) {
+          if (MessageBox(askOpeningMessageSkipMessage,
+                         DialogType::DialogYesNo).SetClear(ClearScreen::Top)()) {
             File::Create(skipSaveFileName);
-            MessageBox(openingMessage, createdOpskipBinMessage)();
+            MessageBox(createdOpSkipBinMessage).SetClear(ClearScreen::Top)();
             Process::ReturnToHomeMenu();
           } else {
-            MessageBox(openingMessage, enjoyPluginMessage)();
+            MessageBox(enjoyPluginMessage).SetClear(ClearScreen::Top)();
           }
         } else {
-          MessageBox(openingMessage, teamAndConditionAgreementMessage)();
+          MessageBox(teamAndConditionAgreementMessage).SetClear(ClearScreen::Top)();
           Process::ReturnToHomeMenu();
         }
       }
       file = true;
     }
   } else {
-    MessageBox(openingMessage, otherGameMessage)();
+    MessageBox(otherGameMessage).SetClear(ClearScreen::Top)();
     Process::ReturnToHomeMenu();
   }
+  Process::Play();
 }
 
 }  // namespace CTRPluginFramework
