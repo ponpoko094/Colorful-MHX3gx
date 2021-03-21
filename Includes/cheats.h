@@ -9,7 +9,7 @@
 #include <vector>
 
 #include "csvc.h"
-#include "keyboard.h"
+#include "ponlib/keyboard_plus.h"
 #include "patch.h"
 #include "team_and_conditions.h"
 #include "types.h"

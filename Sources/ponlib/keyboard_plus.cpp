@@ -1,4 +1,4 @@
-#include "keyboard.h"
+#include "ponlib/keyboard_plus.h"
 
 namespace CTRPluginFramework {
 
@@ -6,35 +6,42 @@ Keyboard* KB = new Keyboard("ダミー");
 Keyboard* OptionsKB = new Keyboard("ダミー");
 const StringVector listToggle{"はい", "いいえ"};
 
-bool KBD::Set(const std::string message, bool hexadecimal, const int length,
-              u32 output, u32 define) {
+bool KeyboardPlus::Set(u32& input, const std::string& message,
+                       bool hexadecimal) {
   KB->GetMessage() = message;
   KB->IsHexadecimal(hexadecimal);
-  KB->SetMaxLength(length);
-  return KB->Open(output, define) == 0;
+  if (KB->Open(input, input) != -1) {
+    return (true);
+  }
+  return (false);
 }
 
-bool KBD::Set(const std::string message, bool hexadecimal, const int length,
-              u16 output, u16 define) {
+bool KeyboardPlus::Set(u16& input, const std::string& message,
+                       bool hexadecimal) {
   KB->GetMessage() = message;
   KB->IsHexadecimal(hexadecimal);
-  KB->SetMaxLength(length);
-  return KB->Open(output, define) == 0;
+  if (KB->Open(input, input) != -1) {
+    return (true);
+  }
+  return (false);
 }
 
-bool KBD::Set(const std::string message, bool hexadecimal, const int length,
-              u8 output, u8 define) {
+bool KeyboardPlus::Set(u8& input, const std::string& message,
+                       bool hexadecimal) {
   KB->GetMessage() = message;
   KB->IsHexadecimal(hexadecimal);
-  KB->SetMaxLength(length);
-  return KB->Open(output, define) == 0;
+  if (KB->Open(input, input) != -1) {
+    return (true);
+  }
+  return (false);
 }
 
-void KBD::Toggle32(const std::string message, u32 offset, u32 enable,
-                   u32 disable) {
+bool KeyboardPlus::Toggle32(const std::string& message, const u32& offset,
+                            const u32& enable, const u32& disable) {
   OptionsKB->GetMessage() = message;
   OptionsKB->Populate(listToggle);
-  switch (OptionsKB->Open()) {
+  int choice = OptionsKB->Open();
+  switch (choice) {
     case -1:
       break;
     case 0:
@@ -44,13 +51,15 @@ void KBD::Toggle32(const std::string message, u32 offset, u32 enable,
       Process::Write32(offset, disable);
       break;
   }
+  return choice;
 }
 
-void KBD::Toggle16(const std::string message, u32 offset, u16 enable,
-                   u16 disable) {
+bool KeyboardPlus::Toggle16(const std::string& message, const u32& offset,
+                            const u16& enable, const u16& disable) {
   OptionsKB->GetMessage() = message;
   OptionsKB->Populate(listToggle);
-  switch (OptionsKB->Open()) {
+  int choice = OptionsKB->Open();
+  switch (choice) {
     case -1:
       break;
     case 0:
@@ -60,13 +69,15 @@ void KBD::Toggle16(const std::string message, u32 offset, u16 enable,
       Process::Write16(offset, disable);
       break;
   }
+  return choice;
 }
 
-void KBD::Toggle8(const std::string message, u32 offset, u8 enable,
-                  u8 disable) {
+bool KeyboardPlus::Toggle8(const std::string& message, const u32& offset,
+                           const u8& enable, const u8& disable) {
   OptionsKB->GetMessage() = message;
   OptionsKB->Populate(listToggle);
-  switch (OptionsKB->Open()) {
+  int choice = OptionsKB->Open();
+  switch (choice) {
     case -1:
       break;
     case 0:
@@ -76,13 +87,15 @@ void KBD::Toggle8(const std::string message, u32 offset, u8 enable,
       Process::Write8(offset, disable);
       break;
   }
+  return choice;
 }
 
-void KBD::MultiToggle32(const std::string message,
-                        std::vector<std::vector<u32>> value) {
+bool KeyboardPlus::MultiToggle32(const std::string message,
+                                 std::vector<std::vector<u32>> value) {
   OptionsKB->GetMessage() = message;
   OptionsKB->Populate(listToggle);
-  switch (OptionsKB->Open()) {
+  int choice = OptionsKB->Open();
+  switch (choice) {
     case -1:
       break;
     case 0:
@@ -96,31 +109,31 @@ void KBD::MultiToggle32(const std::string message,
       }
       break;
   }
+  return choice;
 }
 
-void KBD::LengthToggle32(const std::string message, const int length,
-                         u32 base_offset, std::vector<u32> value) {
-  KBD kbd;
+bool KeyboardPlus::LengthToggle32(const std::string message, const int length,
+                                  u32 base_address, std::vector<u32> value) {
   OptionsKB->GetMessage() = message;
   OptionsKB->Populate(listToggle);
-  kbd.choice_ = 1;
   int choice = OptionsKB->Open();
   switch (choice) {
     case -1:
       break;
     case 0:
       for (int i = 0; i < length; i++) {
-        Process::Write32(base_offset + i * 0x4, value[i]);
+        Process::Write32(base_address + i * 0x4, value[i]);
       }
       break;
     case 1:
       for (int i = 0; i < length; i++) {
-        Process::Write32(base_offset + i * 0x4, 0);
+        Process::Write32(base_address + i * 0x4, 0);
       }
   }
+  return choice;
 }
 
-KBD::~KBD() {
+KeyboardPlus::~KeyboardPlus() {
   delete KB;
   delete OptionsKB;
 }
