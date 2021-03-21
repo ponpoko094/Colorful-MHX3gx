@@ -1,4 +1,4 @@
-#include "bitmap.h"
+#include "ponlib/bitmap.h"
 
 #include <CTRPluginFramework.hpp>
 
