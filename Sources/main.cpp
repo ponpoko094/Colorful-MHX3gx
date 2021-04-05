@@ -1397,7 +1397,7 @@ int main() {
   menu->ShowWelcomeMessage(false);
 
   // 利用規約の表示
-  TeamAndCondition();
+  menu->OnFirstOpening = TeamAndCondition;
 
   Initialization();
 
