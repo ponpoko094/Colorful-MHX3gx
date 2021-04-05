@@ -7,6 +7,7 @@
 
 #include "ponlib/bitmap.h"
 #include "ponlib/keyboard_plus.h"
+#include "ponlib/osd_plus.h"
 #include "ponlib/process_plus.h"
 #include "ponlib/security.h"
 
