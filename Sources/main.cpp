@@ -1390,7 +1390,7 @@ int main() {
   menu->ShowWelcomeMessage(false);
 
   // 利用規約の表示
-  TeamAndCondition();
+  menu->OnFirstOpening = TeamAndCondition;
 
   // Plugin Ready!の代わり
   OSD::Notify(Color(234, 145, 152) << "ponpoko094's 3gx!");
