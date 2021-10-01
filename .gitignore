@@ -1,7 +1,3 @@
 /Build
 /.vscode
 /.vs
-/.idea
-/CMakeFiles.txt
-/cmake-build-debug
-/*.3gx
