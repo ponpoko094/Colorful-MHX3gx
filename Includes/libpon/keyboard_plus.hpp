@@ -1,9 +1,8 @@
 #ifndef MHX3GX_INCLUDES_KEYBOARD_PLUS_H_
 #define MHX3GX_INCLUDES_KEYBOARD_PLUS_H_
+#include <CTRPluginFramework.hpp>
 #include <string>
 #include <vector>
-
-#include <CTRPluginFramework.hpp>
 
 namespace CTRPluginFramework {
 

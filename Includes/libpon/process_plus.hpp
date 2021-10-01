@@ -1,9 +1,8 @@
 #ifndef MHX3GX_INCLUDES_PROCESS_PLUS_H_
 #define MHX3GX_INCLUDES_PROCESS_PLUS_H_
 
-#include <vector>
-
 #include <CTRPluginFramework.hpp>
+#include <vector>
 
 namespace CTRPluginFramework {
 
