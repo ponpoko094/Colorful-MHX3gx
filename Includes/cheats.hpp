@@ -410,7 +410,28 @@ void ViewingAngleOption(MenuEntry* entry);
 void ViewingAngleChangeV2(MenuEntry* entry);
 void WeaponSizeChange(MenuEntry* entry);
 void ContrastChange(MenuEntry* entry);
+
+void GuildCardTitleChange();
+void GuildCardClearCountChange();
+void GuildCardPassingCommunicationCountChange();
+void GuildCardFriendshipPointChange();
+void GuildCardBackGroundInvisible();
+void GuildCardTPose();
+void GuildCardWeaponUseCountWeaponSelect(int group);
+void GuildCardWeaponUseCountChange(int group, int choice);
+void GuildCardWeaponUseCountMax();
+void GuildCardWeaponUseCountChanger();
+void GuildCardPlayTimeChange();
+void GuildCardMonsterHuntingCountChanger();
+void GuildCardSmallMonsterHuntingCountChange();
+void GuildCardMonsterHuntingCountChange(
+    const std::vector<std::string>& listGuildCardChangeMonsterHuntingBig);
+void GuildCardMonsterCaptureCountChange(
+    const std::vector<std::string>& listGuildCardChangeMonsterHuntingBig);
+void GuildCardMonsterHuntingCountMax();
+void GuildCardMonsterHuntingCountChanger();
 void GuildCardChange(MenuEntry* entry);
+
 void RegionChange(MenuEntry* entry);
 void VillageContributionPointChange(MenuEntry* entry);
 void RoomServiceChange(MenuEntry* entry);

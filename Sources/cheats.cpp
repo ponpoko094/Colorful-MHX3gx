@@ -1409,22 +1409,77 @@ void RoomServiceChange(MenuEntry *entry) {
   }
 }
 
-// ギルドカード変更
-void GuildCardChange(MenuEntry *entry) {
-  std::vector<std::string> listGuildCardChangeGroup{
-      "称号",         "クリア回数", "すれ違い回数",
-      "友好度",       "背景",       "ポーズ",
-      "武器使用回数", "プレイ時間", "モンスター狩猟記録"};
+// 称号変更
+void GuildCardTitleChange() {
+  const std::vector<std::string> listGuildCardChangeTitle{"称号1", "称号2",
+                                                          "称号3"};
+  u16 title1, title2, title3;
+    Keyboard keyboard("下画面の説明文に変更する称号を選んでください。",
+                      listGuildCardChangeTitle);
+  int choice = keyboard.Open();
+  if (choice == 0) {
+      Process::Read16(0x8436978, title1);
+    Process::Write16(0x8436978, title1 + 0x3D4);
+    }
+  if (choice == 1) {
+      Process::Write16(0x843697A, 0x65);
+    }
+  if (choice == 2) {
+      Process::Read16(0x843697C, title3);
+      Process::Write16(0x843697C, title3 + 0x3D4);
+    }
+  }
 
-  std::vector<std::string> listGuildCardChangeTitle{"称号1", "称号2", "称号3"};
-
-  std::vector<std::string> listGuildCardChangeClearValue{
+void GuildCardClearCountChange() {
+  const std::vector<std::string> listGuildCardChangeClearValue{
       "村", "集会所下位", "集会所上位", "特殊許可クエスト", "闘技大会"};
+  u16 value;
+    Keyboard keyboard("変更するクリア回数を選んでください。",
+                      listGuildCardChangeClearValue);
+  int choice = keyboard.Open();
+    Keyboard key("クリア回数を入力してください。");
+    key.IsHexadecimal(false);
+  if (key.Open(value) == 0 && choice >= 0) {
+    Process::Write16(choice * 0x2 + 0x843697E, value);
+        }
+      }
 
-  std::vector<std::string> listGuildCardChangeWeaponUseGroup{
-      "村", "集会所", "闘技大会", "全てカンスト"};
+void GuildCardPassingCommunicationCountChange() {
+  u16 value;
+    Keyboard keyboard("すれ違い回数を入力してください。");
+    keyboard.IsHexadecimal(false);
+  if (keyboard.Open(value) == 0) {
+      Process::Write16(0x843698C, value);
+    }
+  }
 
-  std::vector<std::string> listGuildCardChangeWeaponUseType{
+void GuildCardFriendshipPointChange() {
+  float friendShipPoint;
+    Keyboard keyboard("友好度を入力してください。");
+    keyboard.IsHexadecimal(false);
+  if (keyboard.Open(friendShipPoint) == 0) {
+      Process::WriteFloat(0x8436988, friendShipPoint);
+    }
+  }
+
+void GuildCardBackGroundInvisible() {
+    Keyboard keyboard("背景を透明にしますか？", listToggle);
+    int choice = keyboard.Open();
+    if (choice == 0) {
+      Process::Write8(0x84369CA, 0x5E);
+    }
+  }
+
+void GuildCardTPose() {
+    Keyboard keyboard("ポーズをTポーズにしますか？", listToggle);
+    int choice = keyboard.Open();
+    if (choice == 0) {
+      Process::Write8(0x84369CB, 0x16);
+    }
+  }
+
+void GuildCardWeaponUseCountWeaponSelect(int group) {
+  const std::vector<std::string> listGuildCardChangeWeaponUseType{
       "大剣",           "片手剣",
       "ハンマー",       "ランス",
       "ヘビィボウガン", "ライトボウガン",
@@ -1434,13 +1489,149 @@ void GuildCardChange(MenuEntry *entry) {
       "操虫棍",         "チャージアックス",
       "ニャンター"};
 
-  std::vector<std::string> listGuildCardChangeMonsterHuntingGroup{
-      "狩猟数", "捕獲数", "どちらもカンスト"};
+      Keyboard keyboard("武器種を選んでください。",
+                        listGuildCardChangeWeaponUseType);
+      int choice = keyboard.Open();
+      if (choice >= 0) {
+    GuildCardWeaponUseCountChange(group, choice);
+  }
+}
 
-  std::vector<std::string> listGuildCardChangeMonsterHuntingBigSmall{
+void GuildCardWeaponUseCountChange(int group, int choice) {
+  u16 value;
+        Keyboard keyboard("武器使用回数を入力してください。");
+        keyboard.IsHexadecimal(false);
+  if (keyboard.Open(value) == 0) {
+    Process::Write16(group * 0x1E + choice * 0x2 + 0x84369D4, value);
+          }
+        }
+
+void GuildCardWeaponUseCountMax() {
+      Keyboard keyboard("全ての武器使用回数を9999にしますか？", listToggle);
+      int choice = keyboard.Open();
+      if (choice == 0) {
+        for (int i = 0; i < 45; i++) {
+          Process::Write16(i * 0x2 + 0x84369D4, 0x270F);
+        }
+      }
+    }
+
+void GuildCardWeaponUseCountChanger() {
+  const std::vector<std::string> listGuildCardChangeWeaponUseGroup{
+      "村", "集会所", "闘技大会", "全てカンスト"};
+
+  Keyboard keyboard("グループを選んでください。",
+                    listGuildCardChangeWeaponUseGroup);
+  int group = keyboard.Open();
+  if (group >= 0 && group <= 2) {
+    GuildCardWeaponUseCountWeaponSelect(group);
+  } else if (group == 3) {
+    GuildCardWeaponUseCountMax();
+  }
+}
+
+void GuildCardPlayTimeChange() {
+    u32 timeSecond, timeMinute, timeHour, time;
+    Keyboard secondKeyboard("プレイ時間(秒)を入力してください。");
+    secondKeyboard.IsHexadecimal(false);
+    secondKeyboard.Open(timeSecond);
+    Keyboard minuteKeyboard("プレイ時間(分)を入力してください。");
+    minuteKeyboard.IsHexadecimal(false);
+    minuteKeyboard.Open(timeMinute);
+    Keyboard hourKeyboard("プレイ時間(時)を入力してください。");
+    hourKeyboard.IsHexadecimal(false);
+    hourKeyboard.Open(timeHour);
+  timeMinute *= 60;
+  timeHour *= 3600;
+    time = timeSecond + timeMinute + timeHour;
+    Process::Write32(0x831B1CC, time);
+  }
+
+void GuildCardBigMonsterHuntingCountChange(
+    const std::vector<std::string> &listGuildCardChangeMonsterHuntingBig) {
+  u16 value;
+        Keyboard monsterChoice("モンスターを選んでください。",
+                               listGuildCardChangeMonsterHuntingBig);
+        int bigMonster = monsterChoice.Open();
+        Keyboard keyboard("討伐数を入力してください。");
+        keyboard.IsHexadecimal(false);
+        keyboard.Open(value);
+        if (value >= 0) {
+    Process::Write16(bigMonster * 2 + 0x83B3D6C, value);
+            }
+          }
+
+void GuildCardSmallMonsterHuntingCountChange() {
+  const std::vector<std::string> listGuildCardChangeMonsterHuntingSmall{
+      "アプトノス", "アプケロス", "ケルビ",       "モス",     "カンタロス",
+      "ランゴスタ", "アイルー",   "メラルー",     "ランポス", "ゲネポス",
+      "イーオス",   "ガレオス",   "ブルファンゴ", "ポポ",     "ギアノス",
+      "ガウシカ",   "ガブラス",   "ヤオザミ",     "ガミザミ", "ブランゴ",
+      "リノプロス", "ブナハブラ", "オルタロス",   "ジャギィ", "ジャギィノス",
+      "ルドロス",   "ウロコトル", "ズワロポス",   "ガーグァ", "スクアギル",
+      "クンチュウ", "マッカォ",   "リモセトス",   "ムーファ"};
+
+  u16 value;
+        Keyboard monsterChoice("小型モンスターを選んでください。",
+                               listGuildCardChangeMonsterHuntingSmall);
+        monsterChoice.IsHexadecimal(false);
+        int smallMonster = monsterChoice.Open();
+        Keyboard keyboard("討伐数を入力してください。");
+        keyboard.IsHexadecimal(false);
+        keyboard.Open(value);
+        if (value >= 0) {
+    Process::Write16(smallMonster * 2 + 0x83B3E06, value);
+            }
+          }
+
+void GuildCardMonsterHuntingCountChange(
+    const std::vector<std::string> &listGuildCardChangeMonsterHuntingBig) {
+  const std::vector<std::string> listGuildCardChangeMonsterHuntingBigOrSmall{
       "大型モンスター", "小型モンスター"};
 
-  std::vector<std::string> listGuildCardChangeMonsterHuntingBig{
+  Keyboard keyboard("ページを選んでください。\n(ギルドカードの並びです)",
+                    listGuildCardChangeMonsterHuntingBigOrSmall);
+  int huntPage = keyboard.Open();
+  if (huntPage == 0) {
+    GuildCardBigMonsterHuntingCountChange(listGuildCardChangeMonsterHuntingBig);
+  } else if (huntPage == 1) {
+    GuildCardSmallMonsterHuntingCountChange();
+        }
+      }
+
+void GuildCardMonsterCaptureCountChange(
+    const std::vector<std::string> &listGuildCardChangeMonsterHuntingBig) {
+  u16 value;
+      Keyboard monsterChoice("モンスターを選んでください。",
+                             listGuildCardChangeMonsterHuntingBig);
+      monsterChoice.IsHexadecimal(false);
+      int bigMonster = monsterChoice.Open();
+      Keyboard keyboard("捕獲数を入力してください。");
+      keyboard.IsHexadecimal(false);
+      keyboard.Open(value);
+      if (value >= 0) {
+    Process::Write16(bigMonster * 2 + 0x83B3E4C, value);
+          }
+        }
+
+void GuildCardMonsterHuntingCountMax() {
+      Keyboard keyboard("全ての狩猟数と捕獲数を9999にしますか？", listToggle);
+      int choice = keyboard.Open();
+      if (choice == 0) {
+        for (int i = 0; i < 71; i++) {
+          Process::Write16(i * 2 + 0x83B3D6C, 9999);
+        }
+        for (int i = 0; i < 71; i++) {
+          Process::Write16(i * 2 + 0x83B3E4C, 9999);
+        }
+      }
+    }
+
+void GuildCardMonsterHuntingCountChanger() {
+  const std::vector<std::string> listGuildCardChangeMonsterHuntingGroup{
+      "狩猟数", "捕獲数", "どちらもカンスト"};
+
+  const std::vector<std::string> &listGuildCardChangeMonsterHuntingBig{
       "リオレイア",
       "リオレイア希少種",
       "紫毒姫リオレイア",
@@ -1513,193 +1704,46 @@ void GuildCardChange(MenuEntry *entry) {
       "オストガロア",
       "ドスマッカォ"};
 
-  std::vector<std::string> listGuildCardChangeMonsterHuntingSmall{
-      "アプトノス", "アプケロス", "ケルビ",       "モス",     "カンタロス",
-      "ランゴスタ", "アイルー",   "メラルー",     "ランポス", "ゲネポス",
-      "イーオス",   "ガレオス",   "ブルファンゴ", "ポポ",     "ギアノス",
-      "ガウシカ",   "ガブラス",   "ヤオザミ",     "ガミザミ", "ブランゴ",
-      "リノプロス", "ブナハブラ", "オルタロス",   "ジャギィ", "ジャギィノス",
-      "ルドロス",   "ウロコトル", "ズワロポス",   "ガーグァ", "スクアギル",
-      "クンチュウ", "マッカォ",   "リモセトス",   "ムーファ"};
+  u16 value;
+  Keyboard keyboard("グループを選んでください。",
+                    listGuildCardChangeMonsterHuntingGroup);
+  int huntingGroup = keyboard.Open();
+  if (huntingGroup == 0) {
+    GuildCardMonsterHuntingCountChange(listGuildCardChangeMonsterHuntingBig);
+  } else if (huntingGroup == 1) {
+    GuildCardMonsterCaptureCountChange(listGuildCardChangeMonsterHuntingBig);
+  } else if (huntingGroup == 2) {
+    GuildCardMonsterHuntingCountMax();
+  }
+}
 
-  u16 title1, title2, title3, value;
-  float friendShipPoint;
+// ギルドカード変更
+void GuildCardChange(MenuEntry *entry) {
+  const std::vector<std::string> listGuildCardChangeGroup{
+      "称号",         "クリア回数", "すれ違い回数",
+      "友好度",       "背景",       "ポーズ",
+      "武器使用回数", "プレイ時間", "モンスター狩猟記録"};
+
   Keyboard keyboard("グループを選択してください。", listGuildCardChangeGroup);
-  int result = keyboard.Open();
-  if (result == 0) {
-    Keyboard keyboard("下画面の説明文に変更する称号を選んでください。",
-                      listGuildCardChangeTitle);
-    int title = keyboard.Open();
-    if (title == 0) {
-      Process::Read16(0x8436978, title1);
-      Process::Write16(0x8436978, title + 0x3D4);
-    }
-    if (title == 1) {
-      Process::Write16(0x843697A, 0x65);
-    }
-    if (title == 2) {
-      Process::Read16(0x843697C, title3);
-      Process::Write16(0x843697C, title3 + 0x3D4);
-    }
-  }
-  if (result == 1) {
-    Keyboard keyboard("変更するクリア回数を選んでください。",
-                      listGuildCardChangeClearValue);
-    int clear = keyboard.Open();
-    Keyboard key("クリア回数を入力してください。");
-    key.IsHexadecimal(false);
-    key.Open(value);
-    if (clear >= 0) {
-      for (int i = 0; i < 5; i++) {
-        if (clear == i) {
-          Process::Write16(i * 0x2 + 0x843697E, value);
-        }
-      }
-    }
-  }
-  if (result == 2) {
-    Keyboard keyboard("すれ違い回数を入力してください。");
-    keyboard.IsHexadecimal(false);
-    int sure = keyboard.Open(value);
-    if (sure >= 0) {
-      Process::Write16(0x843698C, value);
-    }
-  }
-  if (result == 3) {
-    Keyboard keyboard("友好度を入力してください。");
-    keyboard.IsHexadecimal(false);
-    int friendShip = keyboard.Open(friendShipPoint);
-    if (friendShip >= 0) {
-      Process::WriteFloat(0x8436988, friendShipPoint);
-    }
-  }
-  if (result == 4) {
-    Keyboard keyboard("背景を透明にしますか？", listToggle);
-    int choice = keyboard.Open();
-    if (choice == 0) {
-      Process::Write8(0x84369CA, 0x5E);
-    }
-  }
-  if (result == 5) {
-    Keyboard keyboard("ポーズをTポーズにしますか？", listToggle);
-    int choice = keyboard.Open();
-    if (choice == 0) {
-      Process::Write8(0x84369CB, 0x16);
-    }
-  }
-  if (result == 6) {
-    Keyboard keyboard("グループを選んでください。",
-                      listGuildCardChangeWeaponUseGroup);
-    int gurupu = keyboard.Open();
-    if (gurupu >= 0 && gurupu <= 2) {
-      Keyboard keyboard("武器種を選んでください。",
-                        listGuildCardChangeWeaponUseType);
-      int choice = keyboard.Open();
-      if (choice >= 0) {
-        Keyboard keyboard("武器使用回数を入力してください。");
-        keyboard.IsHexadecimal(false);
-        keyboard.Open(value);
-        for (int i = 0; i < 14; i++) {
-          if (choice == i) {
-            Process::Write16(i * 0x2 + gurupu * 0x1E + 0x84369D4, value);
-          }
-        }
-      }
-    }
-    if (gurupu == 3) {
-      Keyboard keyboard("全ての武器使用回数を9999にしますか？", listToggle);
-      int choice = keyboard.Open();
-      if (choice == 0) {
-        for (int i = 0; i < 45; i++) {
-          Process::Write16(i * 0x2 + 0x84369D4, 0x270F);
-        }
-      }
-    }
-  }
-  if (result == 7) {
-    u32 timeSecond, timeMinute, timeHour, time;
-    Keyboard secondKeyboard("プレイ時間(秒)を入力してください。");
-    secondKeyboard.IsHexadecimal(false);
-    secondKeyboard.Open(timeSecond);
-    Keyboard minuteKeyboard("プレイ時間(分)を入力してください。");
-    minuteKeyboard.IsHexadecimal(false);
-    minuteKeyboard.Open(timeMinute);
-    Keyboard hourKeyboard("プレイ時間(時)を入力してください。");
-    hourKeyboard.IsHexadecimal(false);
-    hourKeyboard.Open(timeHour);
-    timeMinute = timeMinute * 60;
-    timeHour = timeHour * 3600;
-    time = timeSecond + timeMinute + timeHour;
-    Process::Write32(0x831B1CC, time);
-  }
-  if (result == 8) {
-    Keyboard keyboard("グループを選んでください。",
-                      listGuildCardChangeMonsterHuntingGroup);
-    int huntingGroup = keyboard.Open();
-    if (huntingGroup == 0) {
-      Keyboard keyboard("ページを選んでください。\n(ギルドカードの並びです)",
-                        listGuildCardChangeMonsterHuntingBigSmall);
-      int huntPage = keyboard.Open();
-      if (huntPage == 0) {
-        Keyboard monsterChoice("モンスターを選んでください。",
-                               listGuildCardChangeMonsterHuntingBig);
-        int bigMonster = monsterChoice.Open();
-        Keyboard keyboard("討伐数を入力してください。");
-        keyboard.IsHexadecimal(false);
-        keyboard.Open(value);
-        if (value >= 0) {
-          for (int i = 0; i < 71; i++) {
-            if (bigMonster == i) {
-              Process::Write16(i * 2 + 0x83B3D6C, value);
-            }
-          }
-        }
-      }
-      if (huntPage == 1) {
-        Keyboard monsterChoice("小型モンスターを選んでください。",
-                               listGuildCardChangeMonsterHuntingSmall);
-        monsterChoice.IsHexadecimal(false);
-        int smallMonster = monsterChoice.Open();
-        Keyboard keyboard("討伐数を入力してください。");
-        keyboard.IsHexadecimal(false);
-        keyboard.Open(value);
-        if (value >= 0) {
-          for (int i = 0; i < 34; i++) {
-            if (smallMonster == i) {
-              Process::Write16(i * 2 + 0x83B3E06, value);
-            }
-          }
-        }
-      }
-    }
-    if (huntingGroup == 1) {
-      Keyboard monsterChoice("モンスターを選んでください。",
-                             listGuildCardChangeMonsterHuntingBig);
-      monsterChoice.IsHexadecimal(false);
-      int bigMonster = monsterChoice.Open();
-      Keyboard keyboard("捕獲数を入力してください。");
-      keyboard.IsHexadecimal(false);
-      keyboard.Open(value);
-      if (value >= 0) {
-        for (int i = 0; i < 71; i++) {
-          if (bigMonster == i) {
-            Process::Write16(i * 2 + 0x83B3E4C, value);
-          }
-        }
-      }
-    }
-    if (huntingGroup == 2) {
-      Keyboard keyboard("全ての狩猟数と捕獲数を9999にしますか？", listToggle);
-      int choice = keyboard.Open();
-      if (choice == 0) {
-        for (int i = 0; i < 71; i++) {
-          Process::Write16(i * 2 + 0x83B3D6C, 9999);
-        }
-        for (int i = 0; i < 71; i++) {
-          Process::Write16(i * 2 + 0x83B3E4C, 9999);
-        }
-      }
-    }
+  int choice = keyboard.Open();
+  if (choice == 0)
+    GuildCardTitleChange();
+  else if (choice == 1) {
+    GuildCardClearCountChange();
+  } else if (choice == 2) {
+    GuildCardPassingCommunicationCountChange();
+  } else if (choice == 3) {
+    GuildCardFriendshipPointChange();
+  } else if (choice == 4) {
+    GuildCardBackGroundInvisible();
+  } else if (choice == 5) {
+    GuildCardTPose();
+  } else if (choice == 6) {
+    GuildCardWeaponUseCountChanger();
+  } else if (choice == 7) {
+    GuildCardPlayTimeChange();
+  } else if (choice == 8) {
+    GuildCardMonsterHuntingCountChanger();
   }
 }
 
