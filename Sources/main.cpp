@@ -3,9 +3,9 @@
 #include <CTRPluginFramework.hpp>
 
 #include "cheats.hpp"
+#include "libpon.hpp"
 #include "offset.hpp"
 #include "patch.hpp"
-#include "libpon.hpp"
 #include "team_and_conditions.hpp"
 
 namespace CTRPluginFramework {
@@ -286,15 +286,12 @@ void InitMenu(PluginMenu &menu) {
     }
     *player += playerChange;
 
-    *player += new MenuEntry(
-        "攻撃力倍率変更" + workInProgress, PlayerAttackPowerMagnificationChange,
-        PlayerAttackPowerMagnificationOption,
-        "Y+UPでON、Y+DOWNでOFF\n攻撃力の倍率を変更します。");
-    *player +=
-        new MenuEntry("防御力倍率変更" + workInProgress,
-                      playerDefencePowerMagnificationChange,
-                      PlayerDefencePowerMagnificationOption,
-                      "X+UPでON、X+DOWNでOFF\n防御力の倍率を変更します。");
+    *player += new MenuEntry("攻撃力倍率変更" + workInProgress, nullptr,
+                             PlayerAttackPowerMagnificationOption,
+                             "攻撃力の倍率を変更します。");
+    *player += new MenuEntry("防御力倍率変更" + workInProgress, nullptr,
+                             PlayerDefencePowerMagnificationOption,
+                             "防御力の倍率を変更します。");
     *player += new MenuEntry("速度変更" + workInProgress, PlayerSpeedChange,
                              PlayerSpeedOption,
                              "SELECT+LでON、SELECT+RでOFF\n速度を変更します。");
@@ -501,9 +498,9 @@ void InitMenu(PluginMenu &menu) {
     {
       MenuFolder *gunlance = new MenuFolder("ガンランスチート");
       {
-        *gunlance += new MenuEntry("ヒートゲージ固定" + workInProgress,
-                                   GunlanceHeatGageFix, GunlanceHeatGageOption,
-                                   "ヒートゲージを固定します。");
+        *gunlance +=
+            new MenuEntry("ヒートゲージ固定" + workInProgress, nullptr,
+                          GunlanceHeatGageOption, "ヒートゲージを固定します。");
         *gunlance += new MenuEntry("ガンランスの弾無限" + workInProgress,
                                    GunlanceAmmoInfinite,
                                    "ガンランスの弾を無限にします。");
@@ -1004,13 +1001,11 @@ void InitMenu(PluginMenu &menu) {
     *palico += palicoEdit;
 
     *palico += new MenuEntry(
-        "ねこの攻撃力倍率変更" + workInProgress,
-        PalicoAttackPowerMagnificationChange,
+        "ねこの攻撃力倍率変更" + workInProgress, nullptr,
         PalicoAttackPowerMagnificationOption,
         "Y+UPでON、Y+DOWNでOFF\nねこの攻撃力の倍率を変更します。");
     *palico += new MenuEntry(
-        "ねこの防御力倍率変更" + workInProgress,
-        PalicoDefencePowerMagnificationChange,
+        "ねこの防御力倍率変更" + workInProgress, nullptr,
         PalicoDefencePowerMagnificationOption,
         "X+UPでON、X+DOWNでOFF\nねこの防御力変更の倍率を変更します。");
     *palico += new MenuEntry(
@@ -1078,7 +1073,7 @@ void InitMenu(PluginMenu &menu) {
     MenuFolder *quest = new MenuFolder("クエスト");
     {
       *quest += new MenuEntry("クエストステータス変更" + workInProgress,
-                              QuestClear, QuestClearOption,
+                              nullptr, QuestClearOption,
                               "クエストクリアか失敗を選択できます。");
       *quest += new MenuEntry("クエストクリア後即リザルト" + workInProgress,
                               QuestWaitSkip,
@@ -1186,7 +1181,7 @@ void InitMenu(PluginMenu &menu) {
         new MenuEntry("宙に浮くバグ" + workInProgress, FloatBug,
                       "L+Selectでオン、R+Selectでオフにできます。\n"
                       "高確率でエラーになります。注意してオンにしてください。");
-    *other += new MenuEntry("視野角変更" + workInProgress, ViewingAngleChange,
+    *other += new MenuEntry("視野角変更" + workInProgress, nullptr,
                             ViewingAngleOption,
                             "視野角を変更します。\n(画面酔い注意)");
     *other += new MenuEntry("視野角変更改良版" + workInProgress, nullptr,
@@ -1198,8 +1193,8 @@ void InitMenu(PluginMenu &menu) {
     *other +=
         new MenuEntry("ギルドカード情報変更" + workInProgress, nullptr,
                       GuildCardChange, "ギルドカードの情報を変更できます。");
-    *other += new MenuEntry("リージョン変更" + workInProgress, nullptr,
-                            RegionChange, "日本かヨーロッパに変更できます。");
+    *other += new MenuEntry("リージョン変更" + stable, nullptr, RegionChange,
+                            "日本かヨーロッパに変更できます。");
     *other += new MenuEntry("村の貢献度変更" + workInProgress, nullptr,
                             VillageContributionPointChange,
                             "村の貢献度を変更します。");
