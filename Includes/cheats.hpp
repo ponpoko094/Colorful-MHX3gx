@@ -18,13 +18,9 @@ namespace CTRPluginFramework {
 using CallbackPointer = void (*)(void);
 using StringVector = std::vector<std::string>;
 
-void AttackPowerChange(MenuEntry* entry);
 void AttackPowerOption(MenuEntry* entry);
-void DefencePowerChange(MenuEntry* entry);
 void DefencePowerOption(MenuEntry* entry);
-void AttributeChange(MenuEntry* entry);
 void AttributeOption(MenuEntry* entry);
-void ResistanceChange(MenuEntry* entry);
 void ResistanceOption(MenuEntry* entry);
 
 void HunterArt1Change(MenuEntry* entry);
@@ -64,7 +60,6 @@ void PlayerCosmeticsChange(MenuEntry* entry);
 
 void PlayerAttackPowerMagnificationOption(MenuEntry* entry);
 void PlayerDefencePowerMagnificationOption(MenuEntry* entry);
-void PlayerSpeedChange(MenuEntry* entry);
 void PlayerSpeedOption(MenuEntry* entry);
 void PlayerCoordinateModifier(MenuEntry* entry);
 void PlayerMoonJump(MenuEntry* entry);
@@ -73,7 +68,6 @@ void Stalker(MenuEntry* entry);
 void Repeatmove(MenuEntry* entry);
 void HunterArtRelease(MenuEntry* entry);
 void HungryInvalid(MenuEntry* entry);
-void HunterSizeChange(MenuEntry* entry);
 void HunterSizeOption(MenuEntry* entry);
 void InfiniteHP(MenuEntry* entry);
 void Invincible(MenuEntry* entry);
@@ -163,13 +157,9 @@ void MonsterStalker(MenuEntry* entry);
 void MonsterActionRepeat(MenuEntry* entry);
 void MonsterActionRepeatOption(MenuEntry* entry);
 void Monster1And2Stop(MenuEntry* entry);
-void Monster1SizeChange(MenuEntry* entry);
 void Monster1SizeOption(MenuEntry* entry);
-void Monster2SizeChange(MenuEntry* entry);
 void Monster2SizeOption(MenuEntry* entry);
-void Monster1SpeedAttributeChange(MenuEntry* entry);
 void Monster1SpeedAttributeOption(MenuEntry* entry);
-void Monster2SpeedAttributeChange(MenuEntry* entry);
 void Monster2SpeedAttributeOption(MenuEntry* entry);
 void Monster1And2AlwaysPoison(MenuEntry* entry);
 void Monster1And2AlwaysParalysis(MenuEntry* entry);
@@ -284,12 +274,9 @@ void FenyAndPugyNameChange(MenuEntry* entry);
 void QuestClearOption(MenuEntry* entry);
 void QuestWaitSkip(MenuEntry* entry);
 void QuestResultSkip(MenuEntry* entry);
-void QuestDownMaxChange(MenuEntry* entry);
 void QuestDownMaxOption(MenuEntry* entry);
-void QuestDownNowChange(MenuEntry* entry);
 void QuestDownNowOption(MenuEntry* entry);
 void QuestTimeDisplay(MenuEntry* entry);
-void SaveScreenFix(MenuEntry* entry);
 void SaveScreenOption(MenuEntry* entry);
 void QuestTimeStop(MenuEntry* entry);
 void AllQuestClearChange(MenuEntry* entry);
@@ -361,9 +348,9 @@ void HexadecimalCalculator(MenuEntry* entry);
 void DecimalCalculator(MenuEntry* entry);
 void DoubleCalculator(MenuEntry* entry);
 
-void RedInput(MenuEntry* entry);
-void GreenInput(MenuEntry* entry);
-void BlueInput(MenuEntry* entry);
+int RedInput();
+int GreenInput();
+int BlueInput();
 void RGBOutput(MenuEntry* entry);
 
 void HexEditor(MenuEntry* entry);
@@ -374,8 +361,6 @@ void ProcessNameID();
 void ConsoleType();
 void WiFiStatus();
 void BatteryLevel();
-
-void KeyboardInput(MenuEntry* entry);
 
 }  // namespace CTRPluginFramework
 

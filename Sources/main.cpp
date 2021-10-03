@@ -167,13 +167,13 @@ void InitMenu(PluginMenu &menu) {
   {
     MenuFolder *statusV2 = new MenuFolder("ステータス変更");
     {
-      *statusV2 += new MenuEntry("攻撃力変更" + stable, AttackPowerChange,
+      *statusV2 += new MenuEntry("攻撃力変更" + stable, nullptr,
                                  AttackPowerOption, "攻撃力を変更できます。");
-      *statusV2 += new MenuEntry("防御力変更" + stable, DefencePowerChange,
+      *statusV2 += new MenuEntry("防御力変更" + stable, nullptr,
                                  DefencePowerOption, "防御力を変更できます。");
-      *statusV2 += new MenuEntry("属性値変更" + stable, AttributeChange,
+      *statusV2 += new MenuEntry("属性値変更" + stable, nullptr,
                                  AttributeOption, "属性値を変更できます。");
-      *statusV2 += new MenuEntry("耐性値変更" + stable, ResistanceChange,
+      *statusV2 += new MenuEntry("耐性値変更" + stable, nullptr,
                                  ResistanceOption, "耐性値を変更できます。");
     }
     *player += statusV2;
@@ -286,66 +286,67 @@ void InitMenu(PluginMenu &menu) {
     }
     *player += playerChange;
 
-    *player += new MenuEntry("攻撃力倍率変更" + workInProgress, nullptr,
+    *player += new MenuEntry("攻撃力倍率変更" + stable, nullptr,
                              PlayerAttackPowerMagnificationOption,
                              "攻撃力の倍率を変更します。");
-    *player += new MenuEntry("防御力倍率変更" + workInProgress, nullptr,
+    *player += new MenuEntry("防御力倍率変更" + stable, nullptr,
                              PlayerDefencePowerMagnificationOption,
                              "防御力の倍率を変更します。");
-    *player += new MenuEntry("速度変更" + workInProgress, PlayerSpeedChange,
-                             PlayerSpeedOption,
-                             "SELECT+LでON、SELECT+RでOFF\n速度を変更します。");
+    *player += new MenuEntry("速度変更" + stable, nullptr, PlayerSpeedOption,
+                             "速度を変更します。");
     *player +=
-        new MenuEntry("プレイヤー座標移動" + workInProgress,
-                      PlayerCoordinateModifier, "A+十字キーで移動できます。");
-    *player += new MenuEntry("ムーンジャンプ" + workInProgress, PlayerMoonJump,
-                             "R+"
-                             "Bでジャンプできます。\n上がり続けるにはリピートム"
-                             "ーブもオンにして、R+B+Yを押してください。");
-    *player +=
-        new MenuEntry("保存式テレポート" + workInProgress, Teleport,
-                      "R + → 現在位置を読み込む。\nR + ← 現在位置に書き込む");
+        new MenuEntry("プレイヤー座標移動" + stable, PlayerCoordinateModifier,
+                      "A+十字キーで移動できます。");
     *player += new MenuEntry(
-        "他プレイヤーストーカー" + workInProgress, Stalker,
+        "ムーンジャンプ" + stable, PlayerMoonJump,
+        "R+Bでジャンプできます。\n"
+        "上がり続けるにはリピートムーブもオンにして、R+B+Yを押してください。");
+    *player +=
+        new MenuEntry("保存式テレポート" + stable, Teleport,
+                      "X + → 現在位置を読み込む。\nX + ← 現在位置に書き込む");
+    *player += new MenuEntry(
+        "他プレイヤーストーカー" + stable, Stalker,
         "R+十字キーで追跡設定ができます。\nR↑ P1を追跡有効\n"
         "R+→ P2を追跡有効\nR+↓ P3を追跡有効\nR+←で追跡無効にできます。");
-    *player += new MenuEntry("リピートムーブ" + workInProgress, Repeatmove,
+    *player += new MenuEntry("リピートムーブ" + stable, Repeatmove,
                              "B+Yで動きを繰り返します。");
-    *player += new MenuEntry("狩技解放" + workInProgress, HunterArtRelease,
+    *player += new MenuEntry("狩技解放" + stable, HunterArtRelease,
                              "狩技を全て解放します。");
-    *player += new MenuEntry("腹減り無効" + workInProgress, HungryInvalid,
+    *player += new MenuEntry("腹減り無効" + stable, HungryInvalid,
                              "時間経過でスタミナが減らなくなります。");
     *player +=
-        new MenuEntry("プレイヤーサイズ変更" + workInProgress, HunterSizeChange,
+        new MenuEntry("プレイヤーサイズ変更" + stable, nullptr,
                       HunterSizeOption, "ハンターのサイズを変更できます。");
-    *player += new MenuEntry("HP無限" + workInProgress, nullptr, InfiniteHP,
+    *player += new MenuEntry("HP無限" + stable, nullptr, InfiniteHP,
                              "HPを無限にします。");
-    *player += new MenuEntry("無敵" + workInProgress, nullptr, Invincible,
-                             "無敵になります。");
-    *player += new MenuEntry("スーパーアーマー" + workInProgress, nullptr,
-                             SuperArmor, "スーパーアーマーになります。");
-    *player += new MenuEntry("スタミナ無限" + workInProgress, nullptr,
-                             InfiniteStamina, "スタミナを無限にします。");
-    *player += new MenuEntry("狩技ゲージ無限" + workInProgress, nullptr,
+    *player +=
+        new MenuEntry("無敵" + stable, nullptr, Invincible, "無敵になります。");
+    *player +=
+        new MenuEntry("スーパーアーマー" + workInProgress, nullptr, SuperArmor,
+                      "スーパーアーマーになります。\n"
+                      "オンにした後オフにして被弾するとエラーになります。");
+    *player += new MenuEntry("スタミナ無限" + stable, nullptr, InfiniteStamina,
+                             "スタミナを無限にします。");
+    *player += new MenuEntry("狩技ゲージ無限" + stable, nullptr,
                              InfiniteHunterArt, "狩技ゲージが無限になります。");
-    *player += new MenuEntry("全スタイルで狩技3つ装着可能" + workInProgress,
-                             nullptr, Always3HunterArtEquip,
+    *player += new MenuEntry("全スタイルで狩技3つ装着可能" + stable, nullptr,
+                             Always3HunterArtEquip,
                              "全スタイルで狩技を3つ装着可能になります。");
-    *player += new MenuEntry("常時地図表示" + workInProgress, nullptr,
-                             AlwaysDisplayMap, "常に地図を表示します。");
+    *player += new MenuEntry("常時地図表示" + stable, nullptr, AlwaysDisplayMap,
+                             "常に地図を表示します。");
     *player +=
-        new MenuEntry("常にモンスターペイント" + workInProgress, nullptr,
-                      AlwaysPaint, "常にマップにモンスターが表示されます。");
-    *player += new MenuEntry("スピードハック" + workInProgress, nullptr,
-                             SpeedHack, "速度の変更ができます。");
+        new MenuEntry("常にモンスターペイント" + stable, nullptr, AlwaysPaint,
+                      "常にマップにモンスターが表示されます。");
+    *player += new MenuEntry("スピードハック" + stable, nullptr, SpeedHack,
+                             "速度の変更ができます。");
     *player +=
-        new MenuEntry("クエスト中スピードハック" + workInProgress, nullptr,
+        new MenuEntry("クエスト中スピードハック" + stable, nullptr,
                       InQuestSpeedHack, "クエスト中での速度を変更できます。");
     *player +=
-        new MenuEntry("走った時にムーンウォーク" + workInProgress, nullptr,
+        new MenuEntry("走った時にムーンウォーク" + stable, nullptr,
                       IfRunMoonWalk, "走った時にムーンウォークをします。");
     *player += new MenuEntry(
-        "プレイヤー名前変更" + workInProgress, nullptr, HunterNameChange,
+        "プレイヤー名前変更" + stable, nullptr, HunterNameChange,
         "定型文では1ページ目の一番左下にある定型文を名前にコピーします。\n"
         "キーボードでは、メニュー内で直接変更することができます。\n"
         "変換候補変換の改行やタブが使えます。");
@@ -363,16 +364,16 @@ void InitMenu(PluginMenu &menu) {
                          "14ページ目がない場合は、アイテムフォルダにある"
                          "「ボックス1400個に拡張」をオンにしてください。");
       {
-        *amulet += new MenuEntry("新護石作成" + workInProgress, nullptr,
-                                 AmuletCreate, "新たに護石を作成できます。");
-        *amulet += new MenuEntry("護石種類変更" + workInProgress, nullptr,
+        *amulet += new MenuEntry("新護石作成" + stable, nullptr, AmuletCreate,
+                                 "新たに護石を作成できます。");
+        *amulet += new MenuEntry("護石種類変更" + stable, nullptr,
                                  AmuletTypeChange, "護石の種類を変更します。");
         *amulet += new MenuEntry("スキル変更" + workInProgress, nullptr,
                                  AmuletSkillChange, "スキルを変更します。");
-        *amulet += new MenuEntry("スキルポイント変更" + workInProgress, nullptr,
+        *amulet += new MenuEntry("スキルポイント変更" + stable, nullptr,
                                  AmuletSkillPointChange,
                                  "スキルポイントを変更します。");
-        *amulet += new MenuEntry("スロット数変更" + workInProgress, nullptr,
+        *amulet += new MenuEntry("スロット数変更" + stable, nullptr,
                                  AmuletSlotChange, "スロット数を変更します。");
       }
       *equipment += amulet;
@@ -384,40 +385,41 @@ void InitMenu(PluginMenu &menu) {
                          "14ページ目がない場合は、アイテムフォルダにある「ボッ"
                          "クス1400個に拡張」をオンにしてください。");
       {
-        *insect += new MenuEntry("猟虫種類変更" + workInProgress, nullptr,
+        *insect += new MenuEntry("猟虫種類変更" + stable, nullptr,
                                  InsectTypeChange, "猟虫の種類を変更します。");
         *insect +=
-            new MenuEntry("猟虫レベル変更" + workInProgress, nullptr,
-                          InsectLevelChange, "猟虫のレベルを変更します。");
+            new MenuEntry("猟虫レベル変更" + stable, nullptr, InsectLevelChange,
+                          "猟虫のレベルを変更します。");
         *insect +=
-            new MenuEntry("猟虫パワー補正変更" + workInProgress, nullptr,
+            new MenuEntry("猟虫パワー補正変更" + stable, nullptr,
                           InsectPowerChange, "猟虫のパワー補正を変更します。");
-        *insect += new MenuEntry("猟虫ウェイト補正変更" + workInProgress,
-                                 nullptr, InsectWeightChange,
+        *insect += new MenuEntry("猟虫ウェイト補正変更" + stable, nullptr,
+                                 InsectWeightChange,
                                  "猟虫のウェイト補正を変更します。");
-        *insect += new MenuEntry("猟虫スタミナ補正変更" + workInProgress,
-                                 nullptr, InsectStaminaChange,
+        *insect += new MenuEntry("猟虫スタミナ補正変更" + stable, nullptr,
+                                 InsectStaminaChange,
                                  "猟虫のスタミナ補正を変更します。");
-        *insect += new MenuEntry("猟虫火属性変更" + workInProgress, nullptr,
+        *insect += new MenuEntry("猟虫火属性変更" + stable, nullptr,
                                  InsectFireAttributeChange,
                                  "猟虫の火属性を変更します。");
-        *insect += new MenuEntry("猟虫水属性変更" + workInProgress, nullptr,
+        *insect += new MenuEntry("猟虫水属性変更" + stable, nullptr,
                                  InsectWaterAttributeChange,
                                  "猟虫の水属性を変更します。");
-        *insect += new MenuEntry("猟虫雷属性変更" + workInProgress, nullptr,
+        *insect += new MenuEntry("猟虫雷属性変更" + stable, nullptr,
                                  InsectThunderAttributeChange,
                                  "猟虫の雷属性を変更します。");
-        *insect += new MenuEntry("猟虫氷属性変更" + workInProgress, nullptr,
+        *insect += new MenuEntry("猟虫氷属性変更" + stable, nullptr,
                                  InsectIceAttributeChange,
                                  "猟虫の氷属性を変更します。");
-        *insect += new MenuEntry("猟虫龍属性変更" + workInProgress, nullptr,
+        *insect += new MenuEntry("猟虫龍属性変更" + stable, nullptr,
                                  InsectDragonAttributeChange,
                                  "猟虫の龍属性を変更します。");
       }
       *equipment += insect;
 
       *equipment += new MenuEntry(
-          "他プレイヤーの装備コピー", nullptr, OtherPlayerEquipmentCopy,
+          "他プレイヤーの装備コピー" + workInProgress, nullptr,
+          OtherPlayerEquipmentCopy,
           "コピーしたいプレイヤーが猫の場合、コピーしないでください。");
     }
     *item += equipment;
@@ -619,19 +621,19 @@ void InitMenu(PluginMenu &menu) {
         "1番目と2番目のモンスターの動き停止" + workInProgress, Monster1And2Stop,
         "動き停止は、速度変更より優先されます。");
     *monster += new MenuEntry("1番目のモンスターのサイズ変更" + workInProgress,
-                              Monster1SizeChange, Monster1SizeOption,
+                              nullptr, Monster1SizeOption,
                               "1番目のモンスターのサイズの変更ができます。");
     *monster += new MenuEntry("2番目のモンスターのサイズ変更" + workInProgress,
-                              Monster2SizeChange, Monster2SizeOption,
+                              nullptr, Monster2SizeOption,
                               "2番目のモンスターのサイズの変更ができます。");
-    *monster += new MenuEntry(
-        "1番目のモンスターの速度倍率変更" + workInProgress,
-        Monster1SpeedAttributeChange, Monster1SpeedAttributeOption,
-        "1番目のモンスターの速度の変更ができます。");
-    *monster += new MenuEntry(
-        "2番目のモンスターの速度倍率変更" + workInProgress,
-        Monster2SpeedAttributeChange, Monster2SpeedAttributeOption,
-        "2番目のモンスターの速度の変更ができます。");
+    *monster +=
+        new MenuEntry("1番目のモンスターの速度倍率変更" + workInProgress,
+                      nullptr, Monster1SpeedAttributeOption,
+                      "1番目のモンスターの速度の変更ができます。");
+    *monster +=
+        new MenuEntry("2番目のモンスターの速度倍率変更" + workInProgress,
+                      nullptr, Monster2SpeedAttributeOption,
+                      "2番目のモンスターの速度の変更ができます。");
     *monster +=
         new MenuEntry("1番目と2番目のモンスター常時毒" + workInProgress,
                       Monster1And2AlwaysPoison,
@@ -1081,17 +1083,17 @@ void InitMenu(PluginMenu &menu) {
       *quest +=
           new MenuEntry("報酬画面スキップ" + workInProgress, QuestResultSkip,
                         "報酬受取の時間を0にし、スキップします。");
-      *quest += new MenuEntry("最大ダウン回数変更" + workInProgress,
-                              QuestDownMaxChange, QuestDownMaxOption,
-                              "最大ダウン回数を変更できます。");
-      *quest += new MenuEntry("現在のダウン回数変更" + workInProgress,
-                              QuestDownNowChange, QuestDownNowOption,
-                              "現在のダウン回数を変更します。");
+      *quest +=
+          new MenuEntry("最大ダウン回数変更" + workInProgress, nullptr,
+                        QuestDownMaxOption, "最大ダウン回数を変更できます。");
+      *quest +=
+          new MenuEntry("現在のダウン回数変更" + workInProgress, nullptr,
+                        QuestDownNowOption, "現在のダウン回数を変更します。");
       *quest += new MenuEntry(
           "クエスト残り時間表示" + workInProgress, QuestTimeDisplay,
           "QT = Quest Timeです。\n時:分:秒:フレーム\nと表示します。");
       *quest +=
-          new MenuEntry("選択肢を固定" + workInProgress, SaveScreenFix,
+          new MenuEntry("選択肢を固定" + workInProgress, nullptr,
                         SaveScreenOption, "Rボタンを押すと固定できます。");
       *quest += new MenuEntry("クエスト時間停止" + workInProgress, nullptr,
                               QuestTimeStop, "クエスト時間を停止します。");
@@ -1241,39 +1243,30 @@ void InitMenu(PluginMenu &menu) {
     }
     *bonus += calculator;
 
-    MenuFolder *RGBChecker = new MenuFolder("RGBチェッカー");
-    {
-      *RGBChecker += new MenuEntry("R値入力" + stable, nullptr, RedInput);
-      *RGBChecker += new MenuEntry("G値入力" + stable, nullptr, GreenInput);
-      *RGBChecker += new MenuEntry("B値入力" + stable, nullptr, BlueInput);
-      *RGBChecker += new MenuEntry("色確認" + stable, nullptr, RGBOutput);
-    }
-    *bonus += RGBChecker;
-
     MenuFolder *patchProcessEditor = new MenuFolder("CTRPFの色を変更");
     {
       MenuFolder *patchProcessEditorUi = new MenuFolder("UI");
       {
         *patchProcessEditorUi +=
-            new MenuEntry("Main Text Color" + workInProgress, nullptr,
+            new MenuEntry("Main Text Color" + stable, nullptr,
                           PatchProcessUiMainTextColorEditor);
         *patchProcessEditorUi +=
-            new MenuEntry("Window Title Color" + workInProgress, nullptr,
+            new MenuEntry("Window Title Color" + stable, nullptr,
                           PatchProcessUiWindowTitleColorEditor);
         *patchProcessEditorUi +=
-            new MenuEntry("Menu Selected Item Color" + workInProgress, nullptr,
+            new MenuEntry("Menu Selected Item Color" + stable, nullptr,
                           PatchProcessUiMenuSelectedItemColorEditor);
         *patchProcessEditorUi +=
-            new MenuEntry("Menu Unselected Item Color" + workInProgress,
-                          nullptr, PatchProcessUiMenuUnselectedItemColorEditor);
+            new MenuEntry("Menu Unselected Item Color" + stable, nullptr,
+                          PatchProcessUiMenuUnselectedItemColorEditor);
         *patchProcessEditorUi +=
-            new MenuEntry("Background Main Color" + workInProgress, nullptr,
+            new MenuEntry("Background Main Color" + stable, nullptr,
                           PatchProcessUiBackgroundMainColorEditor);
-        *patchProcessEditorUi += new MenuEntry(
-            "Background Secondary Color" + workInProgress, nullptr,
-            PatchProcessUiBackgroundSecondaryColorEditor);
         *patchProcessEditorUi +=
-            new MenuEntry("Background Border Color" + workInProgress, nullptr,
+            new MenuEntry("Background Secondary Color" + stable, nullptr,
+                          PatchProcessUiBackgroundSecondaryColorEditor);
+        *patchProcessEditorUi +=
+            new MenuEntry("Background Border Color" + stable, nullptr,
                           PatchProcessUiBackgroundBorderColorEditor);
       }
       *patchProcessEditor += patchProcessEditorUi;
@@ -1281,26 +1274,24 @@ void InitMenu(PluginMenu &menu) {
       MenuFolder *patchProcessEditorKeyboard = new MenuFolder("Keyboard");
       {
         *patchProcessEditorKeyboard +=
-            new MenuEntry("Background" + workInProgress, nullptr,
+            new MenuEntry("Background" + stable, nullptr,
                           PatchProcessKeyboardBackgroundColorEditor);
         *patchProcessEditorKeyboard +=
-            new MenuEntry("Key Background" + workInProgress, nullptr,
+            new MenuEntry("Key Background" + stable, nullptr,
                           PatchProcessKeyboardKeyBackgroundColorEditor);
         *patchProcessEditorKeyboard +=
-            new MenuEntry("Key Background Pressed" + workInProgress, nullptr,
+            new MenuEntry("Key Background Pressed" + stable, nullptr,
                           PatchProcessKeyboardKeyBackgroundPressedColorEditor);
         *patchProcessEditorKeyboard +=
-            new MenuEntry("Key Text" + workInProgress, nullptr,
+            new MenuEntry("Key Text" + stable, nullptr,
                           PatchProcessKeyboardKeyTextColorEditor);
         *patchProcessEditorKeyboard +=
-            new MenuEntry("Key Text Pressed" + workInProgress, nullptr,
+            new MenuEntry("Key Text Pressed" + stable, nullptr,
                           PatchProcessKeyboardKeyTextPressedColorEditor);
-        *patchProcessEditorKeyboard +=
-            new MenuEntry("Cursor" + workInProgress, nullptr,
-                          PatchProcessKeyboardCursorColorEditor);
-        *patchProcessEditorKeyboard +=
-            new MenuEntry("Input" + workInProgress, nullptr,
-                          PatchProcessKeyboardInputColorEditor);
+        *patchProcessEditorKeyboard += new MenuEntry(
+            "Cursor" + stable, nullptr, PatchProcessKeyboardCursorColorEditor);
+        *patchProcessEditorKeyboard += new MenuEntry(
+            "Input" + stable, nullptr, PatchProcessKeyboardInputColorEditor);
       }
       *patchProcessEditor += patchProcessEditorKeyboard;
 
@@ -1308,59 +1299,58 @@ void InitMenu(PluginMenu &menu) {
           new MenuFolder("Custom Keyboard");
       {
         *patchProcessEditorCustomKeyboard +=
-            new MenuEntry("Background Main" + workInProgress, nullptr,
+            new MenuEntry("Background Main" + stable, nullptr,
                           PatchProcessCustomKeyboardBackgroundMainColorEditor);
         *patchProcessEditorCustomKeyboard += new MenuEntry(
-            "Background Secondary" + workInProgress, nullptr,
+            "Background Secondary" + stable, nullptr,
             PatchProcessCustomKeyboardBackgroundSecondaryColorEditor);
         *patchProcessEditorCustomKeyboard += new MenuEntry(
-            "Background Border" + workInProgress, nullptr,
+            "Background Border" + stable, nullptr,
             PatchProcessCustomKeyboardBackgroundBorderColorEditor);
         *patchProcessEditorCustomKeyboard +=
-            new MenuEntry("Key Background" + workInProgress, nullptr,
+            new MenuEntry("Key Background" + stable, nullptr,
                           PatchProcessCustomKeyboardKeyBackgroundColorEditor);
         *patchProcessEditorCustomKeyboard += new MenuEntry(
-            "Key Background Pressed" + workInProgress, nullptr,
+            "Key Background Pressed" + stable, nullptr,
             PatchProcessCustomKeyboardKeyBackgroundPressedColorEditor);
         *patchProcessEditorCustomKeyboard +=
-            new MenuEntry("Key Text" + workInProgress, nullptr,
+            new MenuEntry("Key Text" + stable, nullptr,
                           PatchProcessCustomKeyboardKeyTextColorEditor);
         *patchProcessEditorCustomKeyboard +=
-            new MenuEntry("Key Text Pressed" + workInProgress, nullptr,
+            new MenuEntry("Key Text Pressed" + stable, nullptr,
                           PatchProcessCustomKeyboardKeyTextPressedColorEditor);
         *patchProcessEditorCustomKeyboard += new MenuEntry(
-            "Scroll Bar Background" + workInProgress, nullptr,
+            "Scroll Bar Background" + stable, nullptr,
             PatchProcessCustomKeyboardScrollBarBackgroundColorEditor);
         *patchProcessEditorCustomKeyboard +=
-            new MenuEntry("Scroll Bar Thumb" + workInProgress, nullptr,
+            new MenuEntry("Scroll Bar Thumb" + stable, nullptr,
                           PatchProcessCustomKeyboardScrollBarThumbColorEditor);
       }
       *patchProcessEditor += patchProcessEditorCustomKeyboard;
 
-      *patchProcessEditor += new MenuEntry("Set Default Theme" + workInProgress,
+      *patchProcessEditor += new MenuEntry("Set Default Theme" + stable,
                                            nullptr, PatchProcessDefaultTheme);
     }
     *bonus += patchProcessEditor;
 
+    *bonus += new MenuEntry("RGBチェッカー" + stable, nullptr, RGBOutput,
+                            "入力されたRGB値がどういう色かが分かります。");
+
     *bonus += EntryWithHotkey(
-        new MenuEntry("アドレス監視" + workInProgress, HexEditor,
+        new MenuEntry("アドレス監視" + stable, HexEditor,
                       "アドレスと値の監視ができます。\nA+"
                       "↑で上に移動できます。\nA+↓で下に移動できます。"),
         {Hotkey(Key::R | A, "アドレス変更"), Hotkey(Key::R | B, "値を入力")});
-    *bonus += new MenuEntry("時刻を確認" + workInProgress, nullptr,
-                            LocalTimeDisplay, "時刻を表示します。");
-    *bonus += new MenuEntry("3DSの情報を確認" + workInProgress, nullptr,
-                            Information, "3DSの情報を確認できます。");
+    *bonus += new MenuEntry("時刻を確認" + stable, nullptr, LocalTimeDisplay,
+                            "時刻を表示します。");
+    *bonus += new MenuEntry("3DSの情報を確認" + stable, nullptr, Information,
+                            "3DSの情報を確認できます。");
     *bonus += new MenuEntry(
-        "フレンドコードシード値確認", nullptr, [](MenuEntry *entry) {
+        "フレンドコードシード値確認" + stable, nullptr, [](MenuEntry *entry) {
           MessageBox(Utils::Format("%X", Security::GetFriendCodeSeed))();
         });
-    *bonus += new MenuEntry("jpn OSD", [](MenuEntry *entry) {
-      OSDPlus::DrawSystemFont("フレンド", 0, 0, true, Color::Red, Color::White);
-    });
   }
   menu += bonus;
-  menu += new MenuEntry("aaa", nullptr, KeyboardInput);
 }
 
 // Plugin menu
@@ -1373,7 +1363,7 @@ int main() {
       "github.com/ponpoko094/MHX3gx";
 
   // タイトルやAbout等作成
-  PluginMenu *menu = new PluginMenu(title, 2, 0, 0, about, 0);
+  PluginMenu *menu = new PluginMenu(title, 3, 0, 0, about, 0);
 
   // Synchronize the menu with frame event
   menu->SynchronizeWithFrame(true);
