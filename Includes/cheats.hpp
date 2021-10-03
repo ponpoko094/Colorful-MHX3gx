@@ -322,6 +322,7 @@ void WeaponSizeChange(MenuEntry* entry);
 void ContrastChange(MenuEntry* entry);
 
 void GuildCardTitleChange();
+void GuildCardClearCount(int choice);
 void GuildCardClearCountChange();
 void GuildCardPassingCommunicationCountChange();
 void GuildCardFriendshipPointChange();

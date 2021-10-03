@@ -1339,18 +1339,22 @@ void GuildCardTitleChange() {
   }
 }
 
+void GuildCardClearCount(int choice) {
+  u16 value;
+  Keyboard keyboard("クリア回数を入力してください。");
+  keyboard.IsHexadecimal(false);
+  if (keyboard.Open(value) == 0 && choice >= 0) {
+    Process::Write16(choice * 0x2 + 0x843697E, value);
+  }
+}
+
 void GuildCardClearCountChange() {
   const std::vector<std::string> listGuildCardChangeClearValue{
       "村", "集会所下位", "集会所上位", "特殊許可クエスト", "闘技大会"};
-  u16 value;
   Keyboard keyboard("変更するクリア回数を選んでください。",
                     listGuildCardChangeClearValue);
   int choice = keyboard.Open();
-  Keyboard key("クリア回数を入力してください。");
-  key.IsHexadecimal(false);
-  if (key.Open(value) == 0 && choice >= 0) {
-    Process::Write16(choice * 0x2 + 0x843697E, value);
-  }
+  GuildCardClearCount(choice);
 }
 
 void GuildCardPassingCommunicationCountChange() {
