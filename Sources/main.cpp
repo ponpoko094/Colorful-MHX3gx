@@ -1200,7 +1200,7 @@ void InitMenu(PluginMenu &menu) {
     *other += new MenuEntry("村の貢献度変更" + workInProgress, nullptr,
                             VillageContributionPointChange,
                             "村の貢献度を変更します。");
-    *other += new MenuEntry("ルームサービス変更" + workInProgress, nullptr,
+    *other += new MenuEntry("ルームサービス変更" + stable, nullptr,
                             RoomServiceChange, "ルームサービスを変更します。");
     *other += new MenuEntry("障害物無視" + workInProgress, nullptr, WallThrough,
                             "障害物を無視するかどうか選択できます。");
