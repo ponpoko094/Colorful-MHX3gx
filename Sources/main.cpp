@@ -368,7 +368,7 @@ void InitMenu(PluginMenu &menu) {
                                  "新たに護石を作成できます。");
         *amulet += new MenuEntry("護石種類変更" + stable, nullptr,
                                  AmuletTypeChange, "護石の種類を変更します。");
-        *amulet += new MenuEntry("スキル変更" + workInProgress, nullptr,
+        *amulet += new MenuEntry("スキル変更" + stable, nullptr,
                                  AmuletSkillChange, "スキルを変更します。");
         *amulet += new MenuEntry("スキルポイント変更" + stable, nullptr,
                                  AmuletSkillPointChange,
