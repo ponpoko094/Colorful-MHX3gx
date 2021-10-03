@@ -1204,7 +1204,7 @@ void InitMenu(PluginMenu &menu) {
                             RoomServiceChange, "ルームサービスを変更します。");
     *other += new MenuEntry("障害物無視" + workInProgress, nullptr, WallThrough,
                             "障害物を無視するかどうか選択できます。");
-    *other += new MenuEntry("最大FPS変更" + workInProgress, nullptr,
+    *other += new MenuEntry("最大FPS変更" + stable, nullptr,
                             MaximumFpsChange, "最大FPSを変更できます。");
   }
   menu += other;
