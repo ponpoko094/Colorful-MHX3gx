@@ -1,3 +1,6 @@
 /Build
 /.vscode
 /.vs
+/.idea
+/CMakeFiles.txt
+/cmake-build-debug
