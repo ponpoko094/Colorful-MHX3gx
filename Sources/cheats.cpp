@@ -3953,7 +3953,7 @@ void ResistanceOption(MenuEntry *entry) {
 }
 
 int RedInput() {
-  u8 redInput = 0;
+  static u8 redInput = 0;
   Keyboard keyboard("入力モードを選んでください。", {"10進数", "16進数"});
   int choice = keyboard.Open();
   if (choice == 0) {
@@ -3968,7 +3968,7 @@ int RedInput() {
 }
 
 int GreenInput() {
-  u8 greenInput = 0;
+  static u8 greenInput = 0;
   Keyboard keyboard("入力モードを選んでください。", {"10進数", "16進数"});
   int choice = keyboard.Open();
   if (choice == 0) {
@@ -3983,7 +3983,7 @@ int GreenInput() {
 }
 
 int BlueInput() {
-  u8 blueInput = 0;
+  static u8 blueInput = 0;
   Keyboard keyboard("入力モードを選んでください。", {"10進数", "16進数"});
   int choice = keyboard.Open();
   if (choice == 0) {
@@ -3999,9 +3999,17 @@ int BlueInput() {
 
 void RGBOutput(MenuEntry *entry) {
   static u8 redInput = 0, greenInput = 0, blueInput = 0;
-  Keyboard keyboard("グループを選んでください。",
-                    {"R値を入力", "G値を入力", "B値を入力",
-                     "入力された値を確認", "出力された色を確認"});
+  Keyboard keyboard(
+      "グループを選んでください。\n"
+      "入力された値です。\n" +
+              Utils::Format("10進数: R[%03d] G[%03d] B[%03d]\n", redInput,
+                            greenInput, blueInput) +
+              Utils::Format("16進数: R[%02X] G[%02X] B[%02X]\n", redInput,
+                            greenInput, blueInput) +
+              "出力された色です。\n"
+          << Color(redInput, greenInput, blueInput)
+          << "■■■■■■■■■\n■■■■■■■■■\n■■■■■■■■■",
+      {"R値を入力", "G値を入力", "B値を入力"});
   int choice = keyboard.Open();
   if (choice == 0) {
     redInput = RedInput();
@@ -4009,13 +4017,6 @@ void RGBOutput(MenuEntry *entry) {
     greenInput = GreenInput();
   } else if (choice == 2) {
     blueInput = BlueInput();
-  } else if (choice == 3) {
-    MessageBox(Utils::Format("入力された値です。\nR[%02X]\nG[%02X]\nB[%02X]",
-                             redInput, greenInput, blueInput))();
-  } else if (choice == 4) {
-    MessageBox("出力された色です。\n"
-               << Color(redInput, greenInput, blueInput)
-               << "■■■■■■■■■\n■■■■■■■■■\n■■■■■■■■■")();
   }
 }
 
