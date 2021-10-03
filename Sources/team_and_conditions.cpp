@@ -1,4 +1,4 @@
-#include "team_and_conditions.h"
+#include "team_and_conditions.hpp"
 
 #include <string>
 
@@ -23,9 +23,11 @@ void TeamAndCondition() {
   const std::string teamAndConditionMessageTitle = "利用規約";
 
   const std::string teamAndConditionMessage =
-      "①この3gxは無料で提供されます。もしこのプラグインを購入した場合は、ただちに返金を求めてください。\n"
+      "①この3gxは無料で提供されます。もしこのプラグインを購入した場合は、ただち"
+      "に返金を求めてください。\n"
       "②他人に譲渡する場合、MHX3gxのGithubのリンクを提示すること。\n"
-      "③この3gxを使用しデータが破損する等の損害に対して、ぽんぽこは一切の責任を負いません。\n"
+      "③この3gxを使用しデータが破損する等の損害に対して、ぽんぽこは一切の責任を"
+      "負いません。\n"
       "利用規約に同意しますか？";
 
   const std::string askOpeningMessageSkipMessage =
@@ -54,9 +56,10 @@ void TeamAndCondition() {
       if (!File::Exists(skipSaveFileName)) {
         MessageBox(openingMessage, thanksMessage).SetClear(ClearScreen::Top)();
         if (MessageBox(teamAndConditionMessageTitle, teamAndConditionMessage,
-                       DialogType::DialogYesNo).SetClear(ClearScreen::Top)()) {
-          if (MessageBox(askOpeningMessageSkipMessage,
-                         DialogType::DialogYesNo).SetClear(ClearScreen::Top)()) {
+                       DialogType::DialogYesNo)
+                .SetClear(ClearScreen::Top)()) {
+          if (MessageBox(askOpeningMessageSkipMessage, DialogType::DialogYesNo)
+                  .SetClear(ClearScreen::Top)()) {
             File::Create(skipSaveFileName);
             MessageBox(createdOpSkipBinMessage).SetClear(ClearScreen::Top)();
             Process::ReturnToHomeMenu();
@@ -64,7 +67,8 @@ void TeamAndCondition() {
             MessageBox(enjoyPluginMessage).SetClear(ClearScreen::Top)();
           }
         } else {
-          MessageBox(teamAndConditionAgreementMessage).SetClear(ClearScreen::Top)();
+          MessageBox(teamAndConditionAgreementMessage)
+              .SetClear(ClearScreen::Top)();
           Process::ReturnToHomeMenu();
         }
       }
