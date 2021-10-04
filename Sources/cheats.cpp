@@ -815,23 +815,16 @@ void ChatInfinite(MenuEntry *entry) { Process::Write8(0xDD4CA0, 0x0); }
 // 装備コピー
 void OtherPlayerEquipmentCopy(MenuEntry *entry) {
   const std::vector<std::string> list1to4Player{"P1", "P2", "P3", "P4"};
-  std::vector<std::vector<u32>> equip(2, std::vector<u32>(6));
-  u32 online;
+  u32 equip, online;
   Process::Read32(0x80913EC, online);
   Keyboard keyboard("装備をコピーしたいプレイヤーを選んで下さい",
                     list1to4Player);
   int choice = keyboard.Open();
-  if (choice >= 0 && choice <= 3) {
+  if (choice >= 0) {
     if (online == 0x100) {
-      for (int i = 0; i < 6; i++) {
-        Process::Read32(choice * 0x494 + i * 0x30 + 0x831C9E4,
-                        equip.at(0).at(i));
-        Process::Write32(choice * 0x494 + i * 0x30 + 0x8386C58,
-                         equip.at(0).at(i));
-        Process::Read32(choice * 0x494 + i * 0x4 + 0x831CB04,
-                        equip.at(1).at(i));
-        Process::Write32(choice * 0x494 + i * 0x4 + 0x8386D78,
-                         equip.at(1).at(i));
+      for (int i = 0; i < 0x138; i++) {
+        Process::Read32(choice * 0x494 + i * 0x4 + 0x831C9E4, equip);
+        Process::Write32(i * 0x4 + 0x8386C58, equip);
       }
     } else {
       MessageBox("オフラインではコピーできません")();
@@ -1656,7 +1649,7 @@ void ItemBoxEdit(MenuEntry *entry) {
       Process::Write16(i * 4 + 0x8372566, data16 + 1);
     }
   } else if (choice == 1) {
-    Process::Write16(0x8372562, 0x578);
+    Process::Write16(0x8372562, 0x579);
     for (int i = 0; i < 548; i++) {
       Process::Read16(i * 4 + 0x8372562, data16);
       Process::Write16(i * 4 + 0x8372566, data16 + 1);
@@ -1666,7 +1659,7 @@ void ItemBoxEdit(MenuEntry *entry) {
     }
   } else if (choice == 2) {
     for (int i = 0; i < 1400; i++) {
-      Process::Write16(i * 4 + 0x8372564, 0x63);
+      Process::Write16(i * 4 + 0x8372564, 99);
     }
   } else if (choice == 3) {
     if (MessageBox("確認です", "全て削除してもいいですか？",
@@ -3953,7 +3946,7 @@ void ResistanceOption(MenuEntry *entry) {
 }
 
 int RedInput() {
-  u8 redInput = 0;
+  static u8 redInput = 0;
   Keyboard keyboard("入力モードを選んでください。", {"10進数", "16進数"});
   int choice = keyboard.Open();
   if (choice == 0) {
@@ -3968,7 +3961,7 @@ int RedInput() {
 }
 
 int GreenInput() {
-  u8 greenInput = 0;
+  static u8 greenInput = 0;
   Keyboard keyboard("入力モードを選んでください。", {"10進数", "16進数"});
   int choice = keyboard.Open();
   if (choice == 0) {
@@ -3983,7 +3976,7 @@ int GreenInput() {
 }
 
 int BlueInput() {
-  u8 blueInput = 0;
+  static u8 blueInput = 0;
   Keyboard keyboard("入力モードを選んでください。", {"10進数", "16進数"});
   int choice = keyboard.Open();
   if (choice == 0) {
@@ -3999,9 +3992,17 @@ int BlueInput() {
 
 void RGBOutput(MenuEntry *entry) {
   static u8 redInput = 0, greenInput = 0, blueInput = 0;
-  Keyboard keyboard("グループを選んでください。",
-                    {"R値を入力", "G値を入力", "B値を入力",
-                     "入力された値を確認", "出力された色を確認"});
+  Keyboard keyboard(
+      "グループを選んでください。\n"
+      "入力された値です。\n" +
+              Utils::Format("10進数: R[%03d] G[%03d] B[%03d]\n", redInput,
+                            greenInput, blueInput) +
+              Utils::Format("16進数: R[%02X] G[%02X] B[%02X]\n", redInput,
+                            greenInput, blueInput) +
+              "出力された色です。\n"
+          << Color(redInput, greenInput, blueInput)
+          << "■■■■■■■■■\n■■■■■■■■■\n■■■■■■■■■",
+      {"R値を入力", "G値を入力", "B値を入力"});
   int choice = keyboard.Open();
   if (choice == 0) {
     redInput = RedInput();
@@ -4009,13 +4010,6 @@ void RGBOutput(MenuEntry *entry) {
     greenInput = GreenInput();
   } else if (choice == 2) {
     blueInput = BlueInput();
-  } else if (choice == 3) {
-    MessageBox(Utils::Format("入力された値です。\nR[%02X]\nG[%02X]\nB[%02X]",
-                             redInput, greenInput, blueInput))();
-  } else if (choice == 4) {
-    MessageBox("出力された色です。\n"
-               << Color(redInput, greenInput, blueInput)
-               << "■■■■■■■■■\n■■■■■■■■■\n■■■■■■■■■")();
   }
 }
 
@@ -4064,14 +4058,13 @@ void MySetToPorchItemCopy(MenuEntry *entry) {
                         StringFormat::Utf8);
   }
   Keyboard keyboard(
-      "アイテムポーチにコピーしたいアイテムマイセットを選んでください。\n"
-      "名前の表示がおかしいのは仕様です。",
+      "アイテムポーチにコピーしたいアイテムマイセットを選んでください。\n",
       list_my_set);
   int choice = keyboard.Open();
   if (choice >= 0) {
     for (int i = 0; i < 32; i++) {
-      Process::Read32(i * 4 + choice * 0xAA + 0x83761BA, item);
-      Process::Write32(i * 4 + choice * 0xAA + 0x8372392, item);
+      Process::Read32(0x83761BA + choice * 0xAA + i * 4, item);
+      Process::Write32(0x8372392 + i * 4, item);
     }
   }
 }
@@ -4105,24 +4098,6 @@ void DeliveryItemToPorchCopy(MenuEntry *entry) {
       Process::Write16(0x8372396, item2);
       Process::Write16(0x8372398, quantity2);
     }
-  }
-}
-
-void PorchToDeliveryItemCopy(MenuEntry *entry) {
-  u16 itemRead1, itemRead2;
-  u16 quantity1, quantity2;
-  Process::Read16(0x8372392, itemRead1);
-  Process::Read16(0x8372394, quantity1);
-  Process::Read16(0x8372396, itemRead2);
-  Process::Read16(0x8372398, quantity2);
-  Keyboard keyboard("アイテムポーチのアイテムを納品アイテムにコピーしますか？",
-                    listToggle);
-  int choice = keyboard.Open();
-  if (choice == 0) {
-    Process::Write16(0x8363F98, itemRead1);
-    Process::Write16(0x8363F98, quantity1);
-    Process::Write16(0x8363F98, itemRead2);
-    Process::Write16(0x8363F98, quantity2);
   }
 }
 

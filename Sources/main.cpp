@@ -368,7 +368,7 @@ void InitMenu(PluginMenu &menu) {
                                  "新たに護石を作成できます。");
         *amulet += new MenuEntry("護石種類変更" + stable, nullptr,
                                  AmuletTypeChange, "護石の種類を変更します。");
-        *amulet += new MenuEntry("スキル変更" + workInProgress, nullptr,
+        *amulet += new MenuEntry("スキル変更" + stable, nullptr,
                                  AmuletSkillChange, "スキルを変更します。");
         *amulet += new MenuEntry("スキルポイント変更" + stable, nullptr,
                                  AmuletSkillPointChange,
@@ -418,77 +418,72 @@ void InitMenu(PluginMenu &menu) {
       *equipment += insect;
 
       *equipment += new MenuEntry(
-          "他プレイヤーの装備コピー" + workInProgress, nullptr,
+          "他プレイヤーの装備コピー" + stable, nullptr,
           OtherPlayerEquipmentCopy,
           "コピーしたいプレイヤーが猫の場合、コピーしないでください。");
     }
     *item += equipment;
 
-    *item += new MenuEntry("爆弾を無限に置ける" + workInProgress,
+    *item += new MenuEntry("爆弾を無限に置ける" + stable,
                            InfiniteBombPut, "見た目だけです。");
     *item +=
-        new MenuEntry("たんほれアイテムセット" + workInProgress, TanhoreItemSet,
+        new MenuEntry("たんほれアイテムセット" + stable, TanhoreItemSet,
                       "ポーチの\n"
                       "1枠目を 燃石炭\n"
                       "2枠目を ネコタクチケット\n"
                       "3枠目を モドリ玉\n"
                       "にします。");
-    *item += new MenuEntry("所持金最大" + workInProgress, nullptr, MoneyChange,
+    *item += new MenuEntry("所持金最大" + stable, nullptr, MoneyChange,
                            "所持金を変更できます。");
     *item +=
-        new MenuEntry("龍歴院ポイント最大" + workInProgress, nullptr,
+        new MenuEntry("龍歴院ポイント最大" + stable, nullptr,
                       WycademyPointChange, "龍歴院ポイントを変更できます。");
-    *item += new MenuEntry("アイテム&弾丸無限" + workInProgress, nullptr,
+    *item += new MenuEntry("アイテム&弾丸無限" + stable, nullptr,
                            InfiniteItemAmmo,
                            "アイテムと弾丸を無限にします。\n"
                            "しゃがみの弾は無限になりません。");
     *item +=
-        new MenuEntry("素材無しで調合可能" + workInProgress, nullptr,
+        new MenuEntry("素材無しで調合可能" + stable, nullptr,
                       NoMaterialCompound, "素材無しで調合を可能にします。");
     *item +=
-        new MenuEntry("運搬物を持たずにポーチに入れる" + workInProgress,
+        new MenuEntry("運搬物を持たずにポーチに入れる" + stable,
                       nullptr, CargoPutInPorch, "運搬物がポーチに入ります。");
     *item +=
-        new MenuEntry("採取無限" + workInProgress, nullptr, InfiniteCollect,
+        new MenuEntry("採取無限" + stable, nullptr, InfiniteCollect,
                       "採集ポイントで無限に採取ができます。");
-    *item += new MenuEntry("装備を素材無しで作れる" + workInProgress, nullptr,
+    *item += new MenuEntry("装備を素材無しで作れる" + stable, nullptr,
                            NoMaterialEquipmentCreate,
                            "素材なしで装備生産をすることができます。");
     *item +=
-        new MenuEntry("装備欄全て解放" + workInProgress, nullptr,
+        new MenuEntry("装備欄全て解放" + stable, nullptr,
                       EquipmentAllRelease, "装備生産リストを全て解放します。");
     *item += new MenuEntry(
-        "全てのアイテム販売" + workInProgress, nullptr, AllItemSold,
+        "全てのアイテム販売" + stable, nullptr, AllItemSold,
         "全てのアイテムがギルドストアや雑貨屋に売り出されます。");
-    *item += new MenuEntry("ボックス1400個に拡張" + workInProgress, nullptr,
+    *item += new MenuEntry("ボックス1400個に拡張" + stable, nullptr,
                            ItemBox1400Expansion,
                            "ボックスのページを1400個に拡張します。");
     *item +=
-        new MenuEntry("持てるアイテム99個" + workInProgress, nullptr,
+        new MenuEntry("持てるアイテム99個" + stable, nullptr,
                       HaveItem99, "持てるアイテムの最大数を99個にします。");
-    *item += new MenuEntry("アイテムボックス編集" + workInProgress, nullptr,
+    *item += new MenuEntry("アイテムボックス編集" + stable, nullptr,
                            ItemBoxEdit, "アイテムボックスの編集をします。");
     *item +=
-        new MenuEntry("アイテムマイセットをポーチにコピー" + workInProgress,
+        new MenuEntry("アイテムマイセットをポーチにコピー" + stable,
                       nullptr, MySetToPorchItemCopy,
                       "アイテムマイセットに登録されているアイテムを、アイテムポ"
                       "ーチにコピーします。");
     *item += new MenuEntry(
-        "納品アイテムをポーチにコピー" + workInProgress, nullptr,
+        "納品アイテムをポーチにコピー" + stable, nullptr,
         DeliveryItemToPorchCopy,
         "納品アイテムを、アイテムポーチの1番目と2番目にコピーします。\n"
         "空きを作ってください。");
-    *item += new MenuEntry("ポーチを納品アイテムにコピー" + workInProgress,
-                           nullptr, PorchToDeliveryItemCopy,
-                           "アイテムポーチの1番目をメインの納品に、2番目をサブ"
-                           "の納品にコピーします。\n"
-                           "空きを作ってください。");
-    *item += new MenuEntry("ポーチのアイテム全消去" + workInProgress, nullptr,
+    *item += new MenuEntry("ポーチのアイテム全消去" + stable, nullptr,
                            PorchAllClear,
                            "ポーチのアイテムを全消去します。\n"
                            "消せないアイテムや、ボックスにしまえないアイテムが"
                            "あるときに実行してください。");
-    *item += new MenuEntry("特殊許可チケットの数変更" + workInProgress, nullptr,
+    *item += new MenuEntry("特殊許可チケットの数変更" + stable, nullptr,
                            SpecialPermitQuestTicketChange,
                            "特殊許可チケットの枚数を変更します。");
   }
@@ -1200,11 +1195,11 @@ void InitMenu(PluginMenu &menu) {
     *other += new MenuEntry("村の貢献度変更" + workInProgress, nullptr,
                             VillageContributionPointChange,
                             "村の貢献度を変更します。");
-    *other += new MenuEntry("ルームサービス変更" + workInProgress, nullptr,
+    *other += new MenuEntry("ルームサービス変更" + stable, nullptr,
                             RoomServiceChange, "ルームサービスを変更します。");
     *other += new MenuEntry("障害物無視" + workInProgress, nullptr, WallThrough,
                             "障害物を無視するかどうか選択できます。");
-    *other += new MenuEntry("最大FPS変更" + workInProgress, nullptr,
+    *other += new MenuEntry("最大FPS変更" + stable, nullptr,
                             MaximumFpsChange, "最大FPSを変更できます。");
   }
   menu += other;

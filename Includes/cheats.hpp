@@ -117,7 +117,6 @@ void HaveItem99(MenuEntry* entry);
 void ItemBoxEdit(MenuEntry* entry);
 void MySetToPorchItemCopy(MenuEntry* entry);
 void DeliveryItemToPorchCopy(MenuEntry* entry);
-void PorchToDeliveryItemCopy(MenuEntry* entry);
 void PorchAllClear(MenuEntry* entry);
 void SpecialPermitQuestTicketChange(MenuEntry* entry);
 
