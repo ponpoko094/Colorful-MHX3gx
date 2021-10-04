@@ -823,10 +823,8 @@ void OtherPlayerEquipmentCopy(MenuEntry *entry) {
   if (choice >= 0) {
     if (online == 0x100) {
       for (int i = 0; i < 0x138; i++) {
-        Process::Read32(choice * 0x494 + i * 0x4 + 0x831C9E4,
-                        equip);
-        Process::Write32(i * 0x4 + 0x8386C58,
-                         equip);
+        Process::Read32(choice * 0x494 + i * 0x4 + 0x831C9E4, equip);
+        Process::Write32(i * 0x4 + 0x8386C58, equip);
       }
     } else {
       MessageBox("オフラインではコピーできません")();
@@ -1651,7 +1649,7 @@ void ItemBoxEdit(MenuEntry *entry) {
       Process::Write16(i * 4 + 0x8372566, data16 + 1);
     }
   } else if (choice == 1) {
-    Process::Write16(0x8372562, 0x578);
+    Process::Write16(0x8372562, 0x579);
     for (int i = 0; i < 548; i++) {
       Process::Read16(i * 4 + 0x8372562, data16);
       Process::Write16(i * 4 + 0x8372566, data16 + 1);
@@ -1661,7 +1659,7 @@ void ItemBoxEdit(MenuEntry *entry) {
     }
   } else if (choice == 2) {
     for (int i = 0; i < 1400; i++) {
-      Process::Write16(i * 4 + 0x8372564, 0x63);
+      Process::Write16(i * 4 + 0x8372564, 99);
     }
   } else if (choice == 3) {
     if (MessageBox("確認です", "全て削除してもいいですか？",
@@ -4060,14 +4058,13 @@ void MySetToPorchItemCopy(MenuEntry *entry) {
                         StringFormat::Utf8);
   }
   Keyboard keyboard(
-      "アイテムポーチにコピーしたいアイテムマイセットを選んでください。\n"
-      "名前の表示がおかしいのは仕様です。",
+      "アイテムポーチにコピーしたいアイテムマイセットを選んでください。\n",
       list_my_set);
   int choice = keyboard.Open();
   if (choice >= 0) {
     for (int i = 0; i < 32; i++) {
-      Process::Read32(i * 4 + choice * 0xAA + 0x83761BA, item);
-      Process::Write32(i * 4 + choice * 0xAA + 0x8372392, item);
+      Process::Read32(0x83761BA + choice * 0xAA + i * 4, item);
+      Process::Write32(0x8372392 + i * 4, item);
     }
   }
 }
@@ -4101,24 +4098,6 @@ void DeliveryItemToPorchCopy(MenuEntry *entry) {
       Process::Write16(0x8372396, item2);
       Process::Write16(0x8372398, quantity2);
     }
-  }
-}
-
-void PorchToDeliveryItemCopy(MenuEntry *entry) {
-  u16 itemRead1, itemRead2;
-  u16 quantity1, quantity2;
-  Process::Read16(0x8372392, itemRead1);
-  Process::Read16(0x8372394, quantity1);
-  Process::Read16(0x8372396, itemRead2);
-  Process::Read16(0x8372398, quantity2);
-  Keyboard keyboard("アイテムポーチのアイテムを納品アイテムにコピーしますか？",
-                    listToggle);
-  int choice = keyboard.Open();
-  if (choice == 0) {
-    Process::Write16(0x8363F98, itemRead1);
-    Process::Write16(0x8363F98, quantity1);
-    Process::Write16(0x8363F98, itemRead2);
-    Process::Write16(0x8363F98, quantity2);
   }
 }
 
