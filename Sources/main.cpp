@@ -418,7 +418,7 @@ void InitMenu(PluginMenu &menu) {
       *equipment += insect;
 
       *equipment += new MenuEntry(
-          "他プレイヤーの装備コピー" + workInProgress, nullptr,
+          "他プレイヤーの装備コピー" + stable, nullptr,
           OtherPlayerEquipmentCopy,
           "コピーしたいプレイヤーが猫の場合、コピーしないでください。");
     }

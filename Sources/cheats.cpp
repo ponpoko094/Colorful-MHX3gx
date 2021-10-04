@@ -815,23 +815,18 @@ void ChatInfinite(MenuEntry *entry) { Process::Write8(0xDD4CA0, 0x0); }
 // 装備コピー
 void OtherPlayerEquipmentCopy(MenuEntry *entry) {
   const std::vector<std::string> list1to4Player{"P1", "P2", "P3", "P4"};
-  std::vector<std::vector<u32>> equip(2, std::vector<u32>(6));
-  u32 online;
+  u32 equip, online;
   Process::Read32(0x80913EC, online);
   Keyboard keyboard("装備をコピーしたいプレイヤーを選んで下さい",
                     list1to4Player);
   int choice = keyboard.Open();
-  if (choice >= 0 && choice <= 3) {
+  if (choice >= 0) {
     if (online == 0x100) {
-      for (int i = 0; i < 6; i++) {
-        Process::Read32(choice * 0x494 + i * 0x30 + 0x831C9E4,
-                        equip.at(0).at(i));
-        Process::Write32(choice * 0x494 + i * 0x30 + 0x8386C58,
-                         equip.at(0).at(i));
-        Process::Read32(choice * 0x494 + i * 0x4 + 0x831CB04,
-                        equip.at(1).at(i));
-        Process::Write32(choice * 0x494 + i * 0x4 + 0x8386D78,
-                         equip.at(1).at(i));
+      for (int i = 0; i < 0x138; i++) {
+        Process::Read32(choice * 0x494 + i * 0x4 + 0x831C9E4,
+                        equip);
+        Process::Write32(i * 0x4 + 0x8386C58,
+                         equip);
       }
     } else {
       MessageBox("オフラインではコピーできません")();
