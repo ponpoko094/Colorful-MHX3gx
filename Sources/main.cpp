@@ -424,53 +424,49 @@ void InitMenu(PluginMenu &menu) {
     }
     *item += equipment;
 
-    *item += new MenuEntry("爆弾を無限に置ける" + stable,
-                           InfiniteBombPut, "見た目だけです。");
-    *item +=
-        new MenuEntry("たんほれアイテムセット" + stable, TanhoreItemSet,
-                      "ポーチの\n"
-                      "1枠目を 燃石炭\n"
-                      "2枠目を ネコタクチケット\n"
-                      "3枠目を モドリ玉\n"
-                      "にします。");
+    *item += new MenuEntry("爆弾を無限に置ける" + stable, InfiniteBombPut,
+                           "見た目だけです。");
+    *item += new MenuEntry("たんほれアイテムセット" + stable, TanhoreItemSet,
+                           "ポーチの\n"
+                           "1枠目を 燃石炭\n"
+                           "2枠目を ネコタクチケット\n"
+                           "3枠目を モドリ玉\n"
+                           "にします。");
     *item += new MenuEntry("所持金最大" + stable, nullptr, MoneyChange,
                            "所持金を変更できます。");
     *item +=
         new MenuEntry("龍歴院ポイント最大" + stable, nullptr,
                       WycademyPointChange, "龍歴院ポイントを変更できます。");
-    *item += new MenuEntry("アイテム&弾丸無限" + stable, nullptr,
-                           InfiniteItemAmmo,
-                           "アイテムと弾丸を無限にします。\n"
-                           "しゃがみの弾は無限になりません。");
+    *item +=
+        new MenuEntry("アイテム&弾丸無限" + stable, nullptr, InfiniteItemAmmo,
+                      "アイテムと弾丸を無限にします。\n"
+                      "しゃがみの弾は無限になりません。");
     *item +=
         new MenuEntry("素材無しで調合可能" + stable, nullptr,
                       NoMaterialCompound, "素材無しで調合を可能にします。");
-    *item +=
-        new MenuEntry("運搬物を持たずにポーチに入れる" + stable,
-                      nullptr, CargoPutInPorch, "運搬物がポーチに入ります。");
-    *item +=
-        new MenuEntry("採取無限" + stable, nullptr, InfiniteCollect,
-                      "採集ポイントで無限に採取ができます。");
+    *item += new MenuEntry("運搬物を持たずにポーチに入れる" + stable, nullptr,
+                           CargoPutInPorch, "運搬物がポーチに入ります。");
+    *item += new MenuEntry("採取無限" + stable, nullptr, InfiniteCollect,
+                           "採集ポイントで無限に採取ができます。");
     *item += new MenuEntry("装備を素材無しで作れる" + stable, nullptr,
                            NoMaterialEquipmentCreate,
                            "素材なしで装備生産をすることができます。");
     *item +=
-        new MenuEntry("装備欄全て解放" + stable, nullptr,
-                      EquipmentAllRelease, "装備生産リストを全て解放します。");
-    *item += new MenuEntry(
-        "全てのアイテム販売" + stable, nullptr, AllItemSold,
-        "全てのアイテムがギルドストアや雑貨屋に売り出されます。");
+        new MenuEntry("装備欄全て解放" + stable, nullptr, EquipmentAllRelease,
+                      "装備生産リストを全て解放します。");
+    *item +=
+        new MenuEntry("全てのアイテム販売" + stable, nullptr, AllItemSold,
+                      "全てのアイテムがギルドストアや雑貨屋に売り出されます。");
     *item += new MenuEntry("ボックス1400個に拡張" + stable, nullptr,
                            ItemBox1400Expansion,
                            "ボックスのページを1400個に拡張します。");
-    *item +=
-        new MenuEntry("持てるアイテム99個" + stable, nullptr,
-                      HaveItem99, "持てるアイテムの最大数を99個にします。");
+    *item += new MenuEntry("持てるアイテム99個" + stable, nullptr, HaveItem99,
+                           "持てるアイテムの最大数を99個にします。");
     *item += new MenuEntry("アイテムボックス編集" + stable, nullptr,
                            ItemBoxEdit, "アイテムボックスの編集をします。");
     *item +=
-        new MenuEntry("アイテムマイセットをポーチにコピー" + stable,
-                      nullptr, MySetToPorchItemCopy,
+        new MenuEntry("アイテムマイセットをポーチにコピー" + stable, nullptr,
+                      MySetToPorchItemCopy,
                       "アイテムマイセットに登録されているアイテムを、アイテムポ"
                       "ーチにコピーします。");
     *item += new MenuEntry(
@@ -478,11 +474,11 @@ void InitMenu(PluginMenu &menu) {
         DeliveryItemToPorchCopy,
         "納品アイテムを、アイテムポーチの1番目と2番目にコピーします。\n"
         "空きを作ってください。");
-    *item += new MenuEntry("ポーチのアイテム全消去" + stable, nullptr,
-                           PorchAllClear,
-                           "ポーチのアイテムを全消去します。\n"
-                           "消せないアイテムや、ボックスにしまえないアイテムが"
-                           "あるときに実行してください。");
+    *item +=
+        new MenuEntry("ポーチのアイテム全消去" + stable, nullptr, PorchAllClear,
+                      "ポーチのアイテムを全消去します。\n"
+                      "消せないアイテムや、ボックスにしまえないアイテムが"
+                      "あるときに実行してください。");
     *item += new MenuEntry("特殊許可チケットの数変更" + stable, nullptr,
                            SpecialPermitQuestTicketChange,
                            "特殊許可チケットの枚数を変更します。");
@@ -496,12 +492,12 @@ void InitMenu(PluginMenu &menu) {
       MenuFolder *gunlance = new MenuFolder("ガンランスチート");
       {
         *gunlance +=
-            new MenuEntry("ヒートゲージ固定" + workInProgress, nullptr,
+            new MenuEntry("ヒートゲージ固定" + stable, nullptr,
                           GunlanceHeatGageOption, "ヒートゲージを固定します。");
-        *gunlance += new MenuEntry("ガンランスの弾無限" + workInProgress,
-                                   GunlanceAmmoInfinite,
-                                   "ガンランスの弾を無限にします。");
-        *gunlance += new MenuEntry("オーバーヒート無効" + workInProgress,
+        *gunlance +=
+            new MenuEntry("ガンランスの弾無限" + stable, GunlanceAmmoInfinite,
+                          "ガンランスの弾を無限にします。");
+        *gunlance += new MenuEntry("オーバーヒート無効" + stable,
                                    GunlanceInvalidOverHeat,
                                    "オーバーヒートを無効にします。");
       }
@@ -509,10 +505,10 @@ void InitMenu(PluginMenu &menu) {
 
       MenuFolder *insectGlaive = new MenuFolder("操虫棍チート");
       {
-        *insectGlaive += new MenuEntry("常時トリプルアップ" + workInProgress,
+        *insectGlaive += new MenuEntry("常時トリプルアップ" + stable,
                                        InsectGlaiveAlwaysTripleUp,
                                        "常時トリプルアップになります。");
-        *insectGlaive += new MenuEntry("虫のスタミナ無限" + workInProgress,
+        *insectGlaive += new MenuEntry("虫のスタミナ無限" + stable,
                                        InsectGlaiveInsectStaminaInfinite,
                                        "虫のスタミナが無限になります。");
       }
@@ -521,47 +517,44 @@ void InitMenu(PluginMenu &menu) {
       MenuFolder *bowgun = new MenuFolder("ボウガンチート");
       {
         *bowgun +=
-            new MenuEntry("ボウガンの弾無限" + workInProgress,
+            new MenuEntry("ボウガンの弾無限" + stable,
                           BowgunAmmoInfinite, "ボウガンの弾が無限になります。");
-        *bowgun += new MenuEntry("しゃがみの弾無限" + workInProgress,
+        *bowgun += new MenuEntry("しゃがみの弾無限" + stable,
                                  BowgunCrouchingShot,
                                  "しゃがみ撃ちの弾が無限になります。");
       }
       *weaponType += bowgun;
-
       *weaponType +=
-          new MenuEntry("溜め段階固定" + workInProgress, ChargeStageFix,
+          new MenuEntry("溜め段階固定" + stable, nullptr,
                         ChageStageOption, "大剣などの溜め段階を固定します。");
+      *weaponType += new MenuEntry("武器ゲージ固定" + stable, WeaponGageFix,
+                                   "太刀や双剣のゲージを固定します。");
       *weaponType +=
-          new MenuEntry("武器ゲージ固定" + workInProgress, WeaponGageFix,
-                        "太刀や双剣のゲージを固定します。");
-      *weaponType += new MenuEntry("チャージアックスビン固定" + workInProgress,
-                                   ChargeAxeBinFix,
-                                   "チャージアックスのビン数を固定します。");
-      *weaponType += new MenuEntry("狩猟笛の全効果付与" + workInProgress,
+          new MenuEntry("チャージアックスビン固定" + stable, ChargeAxeBinFix,
+                        "チャージアックスのビン数を固定します。");
+      *weaponType += new MenuEntry("狩猟笛の全効果付与" + stable,
                                    HuntingHornAllEffectGrant,
                                    "反映されない効果があります。");
     }
     *weapon += weaponType;
 
-    *weapon += new MenuEntry("属性値変更" + workInProgress, nullptr,
+    *weapon += new MenuEntry("属性値変更" + stable, nullptr,
                              AttributePointChange, "属性値を変更できます。");
-    *weapon += new MenuEntry("モーション無し" + workInProgress, nullptr,
-                             NoMotion, "モーションを無くします。");
-    *weapon += new MenuEntry("会心率100%" + workInProgress, nullptr,
-                             CriticalRate100, "会心率が100%になります。");
+    *weapon += new MenuEntry("モーション無し" + stable, nullptr, NoMotion,
+                             "モーションを無くします。");
+    *weapon += new MenuEntry("会心率100%" + stable, nullptr, CriticalRate100,
+                             "会心率が100%になります。");
     *weapon +=
-        new MenuEntry("ボウガン自動装填" + workInProgress, nullptr,
+        new MenuEntry("ボウガン自動装填" + stable, nullptr,
                       BowgunAutoReload, "ボウガンの弾が自動で装填されます。");
-    *weapon += new MenuEntry("斬れ味無限" + workInProgress, nullptr,
-                             InfiniteSharpness, "斬れ味が無限になります。");
-    *weapon +=
-        new MenuEntry("斬れ味+2" + workInProgress, nullptr, SharpnessPlus2,
-                      "斬れ味レベル+2の効果を付与します。");
-    *weapon += new MenuEntry("高速溜め短縮" + workInProgress, nullptr,
-                             ChargeSpeedUp, "大剣等の溜めが短縮されます。");
-    *weapon += new MenuEntry("チャージゲージ最大" + workInProgress, nullptr,
-                             ChargeGageMax, "チャージゲージが最大になります。");
+    *weapon += new MenuEntry("斬れ味無限" + stable, nullptr, InfiniteSharpness,
+                             "斬れ味が無限になります。");
+    *weapon += new MenuEntry("斬れ味+2" + stable, nullptr, SharpnessPlus2,
+                             "斬れ味レベル+2の効果を付与します。");
+    *weapon += new MenuEntry("高速溜め短縮" + stable, nullptr, ChargeSpeedUp,
+                             "大剣等の溜めが短縮されます。");
+    *weapon += new MenuEntry("チャージゲージ最大" + stable, nullptr,
+                             ChargeGageMax, "太刀等のゲージが最大になります。");
   }
   menu += weapon;
 
@@ -1199,8 +1192,8 @@ void InitMenu(PluginMenu &menu) {
                             RoomServiceChange, "ルームサービスを変更します。");
     *other += new MenuEntry("障害物無視" + workInProgress, nullptr, WallThrough,
                             "障害物を無視するかどうか選択できます。");
-    *other += new MenuEntry("最大FPS変更" + stable, nullptr,
-                            MaximumFpsChange, "最大FPSを変更できます。");
+    *other += new MenuEntry("最大FPS変更" + stable, nullptr, MaximumFpsChange,
+                            "最大FPSを変更できます。");
   }
   menu += other;
 

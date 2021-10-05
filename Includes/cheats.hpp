@@ -18,6 +18,8 @@ namespace CTRPluginFramework {
 using CallbackPointer = void (*)(void);
 using StringVector = std::vector<std::string>;
 
+bool IsInQuest();
+
 void AttackPowerOption(MenuEntry* entry);
 void DefencePowerOption(MenuEntry* entry);
 void AttributeOption(MenuEntry* entry);
@@ -130,7 +132,6 @@ void InsectGlaiveInsectStaminaInfinite(MenuEntry* entry);
 void BowgunAmmoInfinite(MenuEntry* entry);
 void BowgunCrouchingShot(MenuEntry* entry);
 
-void ChargeStageFix(MenuEntry* entry);
 void ChageStageOption(MenuEntry* entry);
 void WeaponGageFix(MenuEntry* entry);
 void ChargeAxeBinFix(MenuEntry* entry);
