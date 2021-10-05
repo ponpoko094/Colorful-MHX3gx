@@ -141,6 +141,17 @@ const std::vector<std::string> listToggle{
     "いいえ",
 };
 
+// クエスト中か？
+bool IsInQuest() {
+  u32 questFrame;
+  Process::Read32(0x8360ED4, questFrame);
+  if (questFrame == 0) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
 // スーパーノヴァ連射等
 void NoMotion(MenuEntry *entry) {
   KeyboardPlus::Toggle32("モーションを無くしますか？", 0xAF55A8, 0xE3A00001,
@@ -1684,6 +1695,9 @@ void PorchAllClear(MenuEntry *entry) {
 // トリプルアップ
 void InsectGlaiveAlwaysTripleUp(MenuEntry *entry) {
   u32 offset;
+  if (!IsInQuest()) {
+    return;
+  }
   Process::Read32(0x8360F24, offset);
   Process::Read32(offset + 0xB4, offset);
   Process::WriteFloat(offset + 0x1FF8, 3600);
@@ -1694,14 +1708,17 @@ void InsectGlaiveAlwaysTripleUp(MenuEntry *entry) {
 // 猟虫スタミナ無限
 void InsectGlaiveInsectStaminaInfinite(MenuEntry *entry) {
   u32 offset;
+  if (!IsInQuest()) {
+    return;
+  }
   Process::Read32(0x8360F24, offset);
   Process::Read32(offset + 0xB4, offset);
   Process::Write16(offset + 0x2010, 0x82);
 }
 
 // 溜め段階固定設定
-static float tame = 0;
 void ChageStageOption(MenuEntry *entry) {
+  static float tame = 0;
   const std::vector<std::string> listStageSelect{
       "0段階目", "1段階目", "2段階目", "3段階目", "4段階目"};
   const std::vector<int> listChargeValue{0, 40, 80, 120, 144};
@@ -1713,20 +1730,26 @@ void ChageStageOption(MenuEntry *entry) {
   if (choice >= 0) {
     tame = listChargeValue.at(choice);
     stage = choice;
+  } else {
+    return;
   }
-}
-
-// 溜め段階固定
-void ChargeStageFix(MenuEntry *entry) {
-  u32 offset;
-  Process::Read32(0x8360F24, offset);
-  Process::Read32(offset + 0xB4, offset);
-  Process::WriteFloat(offset + 0x1914, tame);
+  entry->SetGameFunc([](MenuEntry *entry) {
+    u32 offset;
+    if (!IsInQuest()) {
+      return;
+    }
+    Process::Read32(0x8360F24, offset);
+    Process::Read32(offset + 0xB4, offset);
+    Process::WriteFloat(offset + 0x1914, tame);
+  });
 }
 
 // 武器ゲージ
 void WeaponGageFix(MenuEntry *entry) {
   u32 offset;
+  if (!IsInQuest()) {
+    return;
+  }
   Process::Read32(0x8360F24, offset);
   Process::Read32(offset + 0xB4, offset);
   Process::Write16(offset + 0x1598, 0x64);
@@ -1735,6 +1758,9 @@ void WeaponGageFix(MenuEntry *entry) {
 // チャアクビン
 void ChargeAxeBinFix(MenuEntry *entry) {
   u32 offset;
+  if (!IsInQuest()) {
+    return;
+  }
   Process::Read32(0x8360F24, offset);
   Process::Read32(offset + 0xB4, offset);
   Process::Write8(offset + 0x1922, 0x5);
@@ -1742,14 +1768,14 @@ void ChargeAxeBinFix(MenuEntry *entry) {
 
 // 笛全効果付与
 void HuntingHornAllEffectGrant(MenuEntry *entry) {
-  u32 questFrame1, offset;
-  Process::Read32(0x8363ED4, questFrame1);
+  u32 offset;
+  if (!IsInQuest()) {
+    return;
+  }
   Process::Read32(0x8360F24, offset);
   Process::Read32(offset + 0xB4, offset);
-  if (questFrame1 != 0) {
-    for (int i = 0; i < 32; i++) {
-      Process::WriteFloat(offset + i * 4 + 0x17D0, 10);
-    }
+  for (int i = 0; i < 32; i++) {
+    Process::WriteFloat(offset + i * 4 + 0x17D0, 10);
   }
 }
 
@@ -1757,6 +1783,9 @@ void HuntingHornAllEffectGrant(MenuEntry *entry) {
 void BowgunAmmoInfinite(MenuEntry *entry) {
   u8 ammo;
   u32 offset;
+  if (!IsInQuest()) {
+    return;
+  }
   Process::Read32(0x8360F24, offset);
   Process::Read32(offset + 0xB4, offset);
   Process::Read8(offset + 0x1924, ammo);
@@ -1766,6 +1795,9 @@ void BowgunAmmoInfinite(MenuEntry *entry) {
 // しゃがみ
 void BowgunCrouchingShot(MenuEntry *entry) {
   u32 offset;
+  if (!IsInQuest()) {
+    return;
+  }
   Process::Read32(0x8360F24, offset);
   Process::Read32(offset + 0xB4, offset);
   Process::Write8(offset + 0x1FF6, 0x7F);
