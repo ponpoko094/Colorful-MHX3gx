@@ -1011,14 +1011,14 @@ void InitMenu(PluginMenu &menu) {
   {
     MenuFolder *chat = new MenuFolder("チャット");
     {
-      *chat += new MenuEntry("チャット無限" + workInProgress, ChatInfinite,
+      *chat += new MenuEntry("チャット無限" + stable, ChatInfinite,
                              "オンラインで赤文字を出現させなくします。");
       *chat +=
-          new MenuEntry("変換候補変換" + workInProgress, ChatConversionChange,
+          new MenuEntry("変換候補変換" + stable, ChatConversionChange,
                         "キーボードを開いて、Rを押しながら文字を打つ"
                         "ことで、変換候補の文字が変わります。");
       *chat += new MenuEntry(
-          "変換候補変換対応文字一覧" + workInProgress, nullptr,
+          "変換候補変換対応文字一覧" + stable, nullptr,
           ChatConversionList,
           "変換対応文字が書かれています。\n"
           "変換しづらい文字や、改造でしか入力できない文字を入れています。");
