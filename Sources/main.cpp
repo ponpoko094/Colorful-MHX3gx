@@ -517,16 +517,16 @@ void InitMenu(PluginMenu &menu) {
       MenuFolder *bowgun = new MenuFolder("ボウガンチート");
       {
         *bowgun +=
-            new MenuEntry("ボウガンの弾無限" + stable,
-                          BowgunAmmoInfinite, "ボウガンの弾が無限になります。");
-        *bowgun += new MenuEntry("しゃがみの弾無限" + stable,
-                                 BowgunCrouchingShot,
-                                 "しゃがみ撃ちの弾が無限になります。");
+            new MenuEntry("ボウガンの弾無限" + stable, BowgunAmmoInfinite,
+                          "ボウガンの弾が無限になります。");
+        *bowgun +=
+            new MenuEntry("しゃがみの弾無限" + stable, BowgunCrouchingShot,
+                          "しゃがみ撃ちの弾が無限になります。");
       }
       *weaponType += bowgun;
       *weaponType +=
-          new MenuEntry("溜め段階固定" + stable, nullptr,
-                        ChageStageOption, "大剣などの溜め段階を固定します。");
+          new MenuEntry("溜め段階固定" + stable, nullptr, ChageStageOption,
+                        "大剣などの溜め段階を固定します。");
       *weaponType += new MenuEntry("武器ゲージ固定" + stable, WeaponGageFix,
                                    "太刀や双剣のゲージを固定します。");
       *weaponType +=
@@ -545,8 +545,8 @@ void InitMenu(PluginMenu &menu) {
     *weapon += new MenuEntry("会心率100%" + stable, nullptr, CriticalRate100,
                              "会心率が100%になります。");
     *weapon +=
-        new MenuEntry("ボウガン自動装填" + stable, nullptr,
-                      BowgunAutoReload, "ボウガンの弾が自動で装填されます。");
+        new MenuEntry("ボウガン自動装填" + stable, nullptr, BowgunAutoReload,
+                      "ボウガンの弾が自動で装填されます。");
     *weapon += new MenuEntry("斬れ味無限" + stable, nullptr, InfiniteSharpness,
                              "斬れ味が無限になります。");
     *weapon += new MenuEntry("斬れ味+2" + stable, nullptr, SharpnessPlus2,
@@ -572,13 +572,13 @@ void InitMenu(PluginMenu &menu) {
       *monsterDisplay += new MenuEntry(
           "1番目のモンスターのサイズ倍率表示" + workInProgress,
           Monster1SizeMagnificationDisplay,
-          "1番目のモンスターのサイズ倍率を画面上に表示します。\n1."
-          "2付近がキンズサイズ、0.9付近がスモールサイズの目安です。");
+          "1番目のモンスターのサイズ倍率を画面上に表示します。\n"
+          "1.2付近がキンズサイズ、0.9付近がスモールサイズの目安です。");
       *monsterDisplay += new MenuEntry(
           "2番目のモンスターのサイズ倍率表示" + workInProgress,
           Monster2SizeMagnificationDisplay,
-          "2番目のモンスターのサイズ倍率を画面上に表示します。\n1."
-          "2付近がキングサイズ、0.9付近がスモールサイズの目安です。");
+          "2番目のモンスターのサイズ倍率を画面上に表示します。\n"
+          "1.2付近がキングサイズ、0.9付近がスモールサイズの目安です。");
     }
     *monster += monsterDisplay;
 
@@ -587,24 +587,22 @@ void InitMenu(PluginMenu &menu) {
                               "ターの乗りゲージが増えないようにします。");
     *monster += new MenuEntry(
         "モンスター座標移動" + workInProgress, MonsterCoordinateModifier,
-        "1番目のモンスターはX+"
-        "十字キーで操作できます。\n2番目のモンスターはX+"
-        "スライドパッドで操作できます。\n操作したいモンスターと同じエリアに"
-        "いてください。");
+        "1番目のモンスターはX+十字キーで操作できます。\n"
+        "2番目のモンスターはX+スライドパッドで操作できます。\n"
+        "操作したいモンスターと同じエリアにいてください。");
     *monster +=
         new MenuEntry("モンスターストーカー" + workInProgress, MonsterStalker,
-                      "1番目のモンスターはX+R+"
-                      "↑で追跡有効にできます。\n2番目のモンスターは"
-                      "X+L+↑で追跡有効にできます。\nX+R+"
-                      "↓で追跡停止できます。\n追跡したいモンスター"
-                      "と同じエリアにいてください。");
+                      "1番目のモンスターはX+R+↑で追跡有効にできます。\n"
+                      "2番目のモンスターはX+L+↑で追跡有効にできます。\n"
+                      "X+R+↓で追跡停止できます。\n"
+                      "追跡したいモンスターと同じエリアにいてください。");
     *monster += new MenuEntry(
         "モンスターリピートムーブ" + workInProgress, MonsterActionRepeat,
         MonsterActionRepeatOption,
-        "リピートムーブの挙動の変更と、操作のオンオフができます。\n1番目の"
-        "モンスターはX+R+→で操作できます。\n2番目のモンスターはX+L+"
-        "→で操作できます。\n操作したいモンスターと同じエリアにいてください"
-        "。");
+        "リピートムーブの挙動の変更と、操作のオンオフができます。\n"
+        "1番目のモンスターはX+R+→で操作できます。\n"
+        "2番目のモンスターはX+L+→で操作できます。\n"
+        "操作したいモンスターと同じエリアにいてください。");
     *monster += new MenuEntry(
         "1番目と2番目のモンスターの動き停止" + workInProgress, Monster1And2Stop,
         "動き停止は、速度変更より優先されます。");
@@ -1011,14 +1009,14 @@ void InitMenu(PluginMenu &menu) {
   {
     MenuFolder *chat = new MenuFolder("チャット");
     {
-      *chat += new MenuEntry("チャット無限" + workInProgress, ChatInfinite,
+      *chat += new MenuEntry("チャット無限" + stable, ChatInfinite,
                              "オンラインで赤文字を出現させなくします。");
       *chat +=
-          new MenuEntry("変換候補変換" + workInProgress, ChatConversionChange,
+          new MenuEntry("変換候補変換" + stable, ChatConversionChange,
                         "キーボードを開いて、Rを押しながら文字を打つ"
                         "ことで、変換候補の文字が変わります。");
       *chat += new MenuEntry(
-          "変換候補変換対応文字一覧" + workInProgress, nullptr,
+          "変換候補変換対応文字一覧" + stable, nullptr,
           ChatConversionList,
           "変換対応文字が書かれています。\n"
           "変換しづらい文字や、改造でしか入力できない文字を入れています。");
@@ -1351,7 +1349,7 @@ int main() {
       "github.com/ponpoko094/MHX3gx";
 
   // タイトルやAbout等作成
-  PluginMenu *menu = new PluginMenu(title, 3, 0, 2, about, 0);
+  PluginMenu *menu = new PluginMenu(title, 3, 0, 3, about, 0);
 
   // Synchronize the menu with frame event
   menu->SynchronizeWithFrame(true);

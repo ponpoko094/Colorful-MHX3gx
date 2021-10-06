@@ -2849,7 +2849,7 @@ void DoubleCalculator(MenuEntry *entry) {
 
 // 変換候補変換
 void ChatConversionChange(MenuEntry *entry) {
-  std::vector<std::vector<std::string>> listPredictiveConversion{
+  const std::vector<std::vector<std::string>> listPredictiveConversion{
       {"るーと", "√"},       {"まるいち", "①"},    {"まるに", "②"},
       {"まるさん", "③"},     {"まるよん", "④"},    {"まるご", "⑤"},
       {"まるろく", "⑥"},     {"まるなな", "⑦"},    {"まるはち", "⑧"},
@@ -2866,30 +2866,34 @@ void ChatConversionChange(MenuEntry *entry) {
       {"しょうわ", "㍼"},    {"たいしょう", "㍽"}, {"めいじ", "㍾"},
       {"なんばー", "№"},     {"けーけー", "㏍"},   {"てる", "℡"},
       {"たぶ", "\t"},        {"かいぎょう", "\n"}, {"ごう", "爻"}};
-  u32 a, b, c, aaa, bbb, ccc;
-  std::vector<std::string> listCharacter(3);
-  Process::Read32(0x878CF80, a);
-  Process::Read32(0x8790F80, b);
-  Process::Read32(0x8791F80, c);
-  aaa = a + 0xF8;
-  bbb = b + 0xF8;
-  ccc = c + 0xF8;
-  Process::ReadString(a + 0x18, listCharacter.at(0), 12, StringFormat::Utf16);
-  Process::ReadString(b + 0x18, listCharacter.at(1), 12, StringFormat::Utf16);
-  Process::ReadString(c + 0x18, listCharacter.at(2), 12, StringFormat::Utf16);
+  const std::vector<u32> listAddr{0x878CF80, 0x8790F80, 0x8791F80};
+  std::vector<u32> listValues(listAddr.size());
+  std::string targetCharacter;
+  int index = 0;
+  for (int i = 0; i < listAddr.size(); i++) {
+    Process::Read32(listAddr.at(i), listValues.at(i));
+    if (listValues.at(i) < 0x30000000) {
+      continue;
+    }
+    Process::ReadString(listValues.at(i) + 0x18, targetCharacter, 12,
+                        StringFormat::Utf16);
+    index = i;
+  }
+  if (index == listAddr.size()) {
+    return;
+  }
   if (Controller::IsKeysDown(R)) {
     for (int i = 0; i < listPredictiveConversion.size(); i++) {
-      if (listCharacter.at(i) == listPredictiveConversion.at(i).at(0)) {
-        Process::WriteString(aaa, listPredictiveConversion.at(i).at(1),
-                             StringFormat::Utf16);
-        Process::WriteString(bbb, listPredictiveConversion.at(i).at(1),
-                             StringFormat::Utf16);
-        Process::WriteString(ccc, listPredictiveConversion.at(i).at(1),
+      if (listPredictiveConversion.at(i).at(0) == targetCharacter) {
+        Process::WriteString(listValues.at(index) + 0xF8,
+                             listPredictiveConversion.at(i).at(1),
                              StringFormat::Utf16);
       }
     }
   }
 }
+
+// 32E12004
 
 // 変換候補変換可能文字一覧
 void ChatConversionList(MenuEntry *entry) {
