@@ -682,6 +682,9 @@ void DisplayBasePassword(MenuEntry *entry) {
 // ガンランス弾無限
 void GunlanceAmmoInfinite(MenuEntry *entry) {
   u32 offset;
+  if (!IsInQuest()) {
+    return;
+  }
   Process::Read32(0x8360F24, offset);
   Process::Read32(offset + 0xB4, offset);
   Process::Write8(offset + 0x1922, 0xFF);
@@ -703,6 +706,9 @@ void GunlanceHeatGageOption(MenuEntry *entry) {
   if (keyboard.Open(heat) == 0) {
     entry->SetGameFunc([](MenuEntry *entry) {
       u32 offset;
+      if (!IsInQuest()) {
+        return;
+      }
       Process::Read32(0x8360F24, offset);
       Process::Read32(offset + 0xB4, offset);
       Process::Write16(offset + 0x2018, heat);
@@ -1828,50 +1834,49 @@ void Monster2SizeMagnificationDisplay(MenuEntry *entry) {
 }
 
 // モンスターリピート設定
-static int mon1act, mon2act;
 void MonsterActionRepeatOption(MenuEntry *entry) {
+  static int mon1act, mon2act;
   Keyboard keyboard("挙動を選んでください。", {"固まる", "なめらか"});
   int choice = keyboard.Open();
   if (choice == 0) {
     mon1act = true;
     mon2act = true;
-  }
-  if (choice == 1) {
+  } else if (choice == 1) {
     mon1act = false;
     mon2act = false;
+  } else {
+    return;
   }
-}
-
-// モンスターリピート
-void MonsterActionRepeat(MenuEntry *entry) {
-  u32 mon1, mon2;
-  u8 area1, area2;
-  Process::Read32(0x8325244, mon1);
-  Process::Read32(0x8325248, mon2);
-  Process::Read8(mon1 + 0xD, area1);
-  Process::Read8(mon2 + 0xD, area2);
-  if (Controller::IsKeysDown(X + DPadRight)) {
-    if (Controller::IsKeysDown(R)) {
-      if (area1 == 0x4C) {
-        if (mon1act == true) {
-          Process::Write16(mon1 + 0x1158, 0x0);
+  entry->SetGameFunc([](MenuEntry *entry) {
+    u32 mon1, mon2;
+    u8 area1, area2;
+    Process::Read32(0x8325244, mon1);
+    Process::Read32(0x8325248, mon2);
+    Process::Read8(mon1 + 0xD, area1);
+    Process::Read8(mon2 + 0xD, area2);
+    if (Controller::IsKeysDown(X + DPadRight)) {
+      if (Controller::IsKeysDown(R)) {
+        if (area1 == 0x4C) {
+          if (mon1act == true) {
+            Process::Write16(mon1 + 0x1158, 0x0);
+          }
+          if (mon1act == false) {
+            Process::Write8(mon1 + 0x1159, 0x0);
+          }
         }
-        if (mon1act == false) {
-          Process::Write8(mon1 + 0x1159, 0x0);
+      }
+      if (Controller::IsKeysDown(L)) {
+        if (area2 == 0x4C) {
+          if (mon2act == true) {
+            Process::Write16(mon2 + 0x1158, 0x0);
+          }
+          if (mon2act == false) {
+            Process::Write8(mon2 + 0x1159, 0x0);
+          }
         }
       }
     }
-    if (Controller::IsKeysDown(L)) {
-      if (area2 == 0x4C) {
-        if (mon2act == true) {
-          Process::Write16(mon1 + 0x1158, 0x0);
-        }
-        if (mon2act == false) {
-          Process::Write8(mon1 + 0x1159, 0x0);
-        }
-      }
-    }
-  }
+  });
 }
 
 // 1番目と2番目のモンスター停止
@@ -2134,28 +2139,34 @@ void FenyAndPugyClothes(MenuEntry *entry) {
 }
 
 // 酔っぱらい設定
-static u8 drunk;
 void InstantDrunkOption(MenuEntry *entry) {
+  static u8 drunk;
   Keyboard keyboard("酔っぱらいになりますか？", listToggle);
   int choice = keyboard.Open();
   if (choice == 0) {
     drunk = 0x02;
   } else if (choice == 1) {
     drunk = 0x00;
+  } else {
+    return;
   }
-}
-
-// 酔っぱらい
-void InstantDrunk(MenuEntry *entry) {
-  u32 offset;
-  Process::Read32(0x8360F24, offset);
-  Process::Read32(offset + 0xB4, offset);
-  Process::Write8(offset + 0x1510, drunk);
+  entry->SetGameFunc([](MenuEntry *entry) {
+    u32 offset;
+    if (!IsInQuest()) {
+      return;
+    }
+    Process::Read32(0x8360F24, offset);
+    Process::Read32(offset + 0xB4, offset);
+    Process::Write8(offset + 0x1510, drunk);
+  });
 }
 
 // 1回飲んだら酔っぱらい
 void Drunk1(MenuEntry *entry) {
   u32 offset;
+  if (!IsInQuest()) {
+    return;
+  }
   Process::Read32(0x8360F24, offset);
   Process::Read32(offset + 0xB4, offset);
   Process::Write8(offset + 0x1538, 0xA);
@@ -2172,6 +2183,9 @@ void RideGageMax(MenuEntry *entry) {
 // 腹減り無効
 void HungryInvalid(MenuEntry *entry) {
   u32 offset;
+  if (!IsInQuest()) {
+    return;
+  }
   Process::Read32(0x8360F24, offset);
   Process::Read32(offset + 0xB4, offset);
   Process::WriteFloat(offset + 0x2DC, 10000);

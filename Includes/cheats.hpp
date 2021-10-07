@@ -154,7 +154,6 @@ void Monster2SizeMagnificationDisplay(MenuEntry* entry);
 void RideGageMax(MenuEntry* entry);
 void MonsterCoordinateModifier(MenuEntry* entry);
 void MonsterStalker(MenuEntry* entry);
-void MonsterActionRepeat(MenuEntry* entry);
 void MonsterActionRepeatOption(MenuEntry* entry);
 void Monster1And2Stop(MenuEntry* entry);
 void Monster1SizeOption(MenuEntry* entry);
@@ -261,7 +260,6 @@ void ChatInfinite(MenuEntry* entry);
 void ChatConversionChange(MenuEntry* entry);
 void ChatConversionList(MenuEntry* entry);
 
-void InstantDrunk(MenuEntry* entry);
 void InstantDrunkOption(MenuEntry* entry);
 void Drunk1(MenuEntry* entry);
 
