@@ -168,53 +168,21 @@ void OneAttackKill(MenuEntry* entry);
 
 void PalicoChoice(MenuEntry* entry);
 
-void PalicoEquipmentSupportAction1Change(MenuEntry* entry);
-void PalicoEquipmentSupportAction2Change(MenuEntry* entry);
-void PalicoEquipmentSupportAction3Change(MenuEntry* entry);
-void PalicoEquipmentSupportAction4Change(MenuEntry* entry);
-void PalicoEquipmentSupportAction5Change(MenuEntry* entry);
-void PalicoEquipmentSupportAction6Change(MenuEntry* entry);
-void PalicoEquipmentSupportAction7Change(MenuEntry* entry);
-void PalicoEquipmentSupportAction8Change(MenuEntry* entry);
+std::vector<std::string> GetPalicoEquipmentSupportAction();
+void PalicoEquipmentSupportActionChange(int number);
+void PalicoEquipmentSupportActionChanger(MenuEntry *entry);
 
-void PalicoEquipmentSkill1Change(MenuEntry* entry);
-void PalicoEquipmentSkill2Change(MenuEntry* entry);
-void PalicoEquipmentSkill3Change(MenuEntry* entry);
-void PalicoEquipmentSkill4Change(MenuEntry* entry);
-void PalicoEquipmentSkill5Change(MenuEntry* entry);
-void PalicoEquipmentSkill6Change(MenuEntry* entry);
-void PalicoEquipmentSkill7Change(MenuEntry* entry);
-void PalicoEquipmentSkill8Change(MenuEntry* entry);
+std::vector<std::string> GetPalicoEquipmentSkill();
+void PalicoEquipmentSkillChange(int number);
+void PalicoEquipmentSkillChanger(MenuEntry *entry);
 
-void PalicoLearnSupportAction1Change(MenuEntry* entry);
-void PalicoLearnSupportAction2Change(MenuEntry* entry);
-void PalicoLearnSupportAction3Change(MenuEntry* entry);
-void PalicoLearnSupportAction4Change(MenuEntry* entry);
-void PalicoLearnSupportAction5Change(MenuEntry* entry);
-void PalicoLearnSupportAction6Change(MenuEntry* entry);
-void PalicoLearnSupportAction7Change(MenuEntry* entry);
-void PalicoLearnSupportAction8Change(MenuEntry* entry);
-void PalicoLearnSupportAction9Change(MenuEntry* entry);
-void PalicoLearnSupportAction10Change(MenuEntry* entry);
-void PalicoLearnSupportAction11Change(MenuEntry* entry);
-void PalicoLearnSupportAction12Change(MenuEntry* entry);
-void PalicoLearnSupportAction13Change(MenuEntry* entry);
-void PalicoLearnSupportAction14Change(MenuEntry* entry);
-void PalicoLearnSupportAction15Change(MenuEntry* entry);
-void PalicoLearnSupportAction16Change(MenuEntry* entry);
+std::vector<std::string> GetPalicoLearnSupportAction();
+void PalicoLearnSupportActionChange(int number);
+void PalicoLearnSupportActionChanger(MenuEntry *entry);
 
-void PalicoLearnSupportSkill1Change(MenuEntry* entry);
-void PalicoLearnSupportSkill2Change(MenuEntry* entry);
-void PalicoLearnSupportSkill3Change(MenuEntry* entry);
-void PalicoLearnSupportSkill4Change(MenuEntry* entry);
-void PalicoLearnSupportSkill5Change(MenuEntry* entry);
-void PalicoLearnSupportSkill6Change(MenuEntry* entry);
-void PalicoLearnSupportSkill7Change(MenuEntry* entry);
-void PalicoLearnSupportSkill8Change(MenuEntry* entry);
-void PalicoLearnSupportSkill9Change(MenuEntry* entry);
-void PalicoLearnSupportSkill10Change(MenuEntry* entry);
-void PalicoLearnSupportSkill11Change(MenuEntry* entry);
-void PalicoLearnSupportSkill12Change(MenuEntry* entry);
+std::vector<std::string> GetPalicoLearnSkill();
+void PalicoLearnSkillChange(int number);
+void PalicoLearnSkillChanger(MenuEntry *entry);
 
 void PalicoBodyHairColorRedChange(MenuEntry* entry);
 void PalicoBodyHairColorGreenChange(MenuEntry* entry);
