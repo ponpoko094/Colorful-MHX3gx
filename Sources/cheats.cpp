@@ -1828,50 +1828,49 @@ void Monster2SizeMagnificationDisplay(MenuEntry *entry) {
 }
 
 // モンスターリピート設定
-static int mon1act, mon2act;
 void MonsterActionRepeatOption(MenuEntry *entry) {
+  static int mon1act, mon2act;
   Keyboard keyboard("挙動を選んでください。", {"固まる", "なめらか"});
   int choice = keyboard.Open();
   if (choice == 0) {
     mon1act = true;
     mon2act = true;
-  }
-  if (choice == 1) {
+  } else if (choice == 1) {
     mon1act = false;
     mon2act = false;
+  } else {
+    return;
   }
-}
-
-// モンスターリピート
-void MonsterActionRepeat(MenuEntry *entry) {
-  u32 mon1, mon2;
-  u8 area1, area2;
-  Process::Read32(0x8325244, mon1);
-  Process::Read32(0x8325248, mon2);
-  Process::Read8(mon1 + 0xD, area1);
-  Process::Read8(mon2 + 0xD, area2);
-  if (Controller::IsKeysDown(X + DPadRight)) {
-    if (Controller::IsKeysDown(R)) {
-      if (area1 == 0x4C) {
-        if (mon1act == true) {
-          Process::Write16(mon1 + 0x1158, 0x0);
+  entry->SetGameFunc([](MenuEntry *entry) {
+    u32 mon1, mon2;
+    u8 area1, area2;
+    Process::Read32(0x8325244, mon1);
+    Process::Read32(0x8325248, mon2);
+    Process::Read8(mon1 + 0xD, area1);
+    Process::Read8(mon2 + 0xD, area2);
+    if (Controller::IsKeysDown(X + DPadRight)) {
+      if (Controller::IsKeysDown(R)) {
+        if (area1 == 0x4C) {
+          if (mon1act == true) {
+            Process::Write16(mon1 + 0x1158, 0x0);
+          }
+          if (mon1act == false) {
+            Process::Write8(mon1 + 0x1159, 0x0);
+          }
         }
-        if (mon1act == false) {
-          Process::Write8(mon1 + 0x1159, 0x0);
+      }
+      if (Controller::IsKeysDown(L)) {
+        if (area2 == 0x4C) {
+          if (mon2act == true) {
+            Process::Write16(mon2 + 0x1158, 0x0);
+          }
+          if (mon2act == false) {
+            Process::Write8(mon2 + 0x1159, 0x0);
+          }
         }
       }
     }
-    if (Controller::IsKeysDown(L)) {
-      if (area2 == 0x4C) {
-        if (mon2act == true) {
-          Process::Write16(mon1 + 0x1158, 0x0);
-        }
-        if (mon2act == false) {
-          Process::Write8(mon1 + 0x1159, 0x0);
-        }
-      }
-    }
-  }
+  });
 }
 
 // 1番目と2番目のモンスター停止

@@ -563,80 +563,76 @@ void InitMenu(PluginMenu &menu) {
   {
     MenuFolder *monsterDisplay = new MenuFolder("モンスター情報画面表示");
     {
+      *monsterDisplay +=
+          new MenuEntry("1番目のモンスターのHP表示" + stable, Monster1HpDisplay,
+                        "1番目のモンスターのHPを画面上に表示します。");
+      *monsterDisplay +=
+          new MenuEntry("2番目のモンスターのHP表示" + stable, Monster2HpDisplay,
+                        "2番目のモンスターのHPを画面上に表示します。");
       *monsterDisplay += new MenuEntry(
-          "1番目のモンスターのHP表示" + workInProgress, Monster1HpDisplay,
-          "1番目のモンスターのHPを画面上に表示します。");
-      *monsterDisplay += new MenuEntry(
-          "2番目のモンスターのHP表示" + workInProgress, Monster2HpDisplay,
-          "2番目のモンスターのHPを画面上に表示します。");
-      *monsterDisplay += new MenuEntry(
-          "1番目のモンスターのサイズ倍率表示" + workInProgress,
+          "1番目のモンスターのサイズ倍率表示" + stable,
           Monster1SizeMagnificationDisplay,
           "1番目のモンスターのサイズ倍率を画面上に表示します。\n"
           "1.2付近がキンズサイズ、0.9付近がスモールサイズの目安です。");
       *monsterDisplay += new MenuEntry(
-          "2番目のモンスターのサイズ倍率表示" + workInProgress,
+          "2番目のモンスターのサイズ倍率表示" + stable,
           Monster2SizeMagnificationDisplay,
           "2番目のモンスターのサイズ倍率を画面上に表示します。\n"
           "1.2付近がキングサイズ、0.9付近がスモールサイズの目安です。");
     }
     *monster += monsterDisplay;
 
-    *monster += new MenuEntry("乗り成功" + workInProgress, RideGageMax,
+    *monster += new MenuEntry("乗り成功" + stable, RideGageMax,
                               "ハンターの乗りゲージを最大にします。\nモンス"
                               "ターの乗りゲージが増えないようにします。");
-    *monster += new MenuEntry(
-        "モンスター座標移動" + workInProgress, MonsterCoordinateModifier,
-        "1番目のモンスターはX+十字キーで操作できます。\n"
-        "2番目のモンスターはX+スライドパッドで操作できます。\n"
-        "操作したいモンスターと同じエリアにいてください。");
     *monster +=
-        new MenuEntry("モンスターストーカー" + workInProgress, MonsterStalker,
+        new MenuEntry("モンスター座標移動" + stable, MonsterCoordinateModifier,
+                      "1番目のモンスターはX+十字キーで操作できます。\n"
+                      "2番目のモンスターはX+スライドパッドで操作できます。\n"
+                      "操作したいモンスターと同じエリアにいてください。");
+    *monster +=
+        new MenuEntry("モンスターストーカー" + stable, MonsterStalker,
                       "1番目のモンスターはX+R+↑で追跡有効にできます。\n"
                       "2番目のモンスターはX+L+↑で追跡有効にできます。\n"
                       "X+R+↓で追跡停止できます。\n"
                       "追跡したいモンスターと同じエリアにいてください。");
     *monster += new MenuEntry(
-        "モンスターリピートムーブ" + workInProgress, MonsterActionRepeat,
-        MonsterActionRepeatOption,
+        "モンスターリピートムーブ" + stable, nullptr, MonsterActionRepeatOption,
         "リピートムーブの挙動の変更と、操作のオンオフができます。\n"
         "1番目のモンスターはX+R+→で操作できます。\n"
         "2番目のモンスターはX+L+→で操作できます。\n"
         "操作したいモンスターと同じエリアにいてください。");
-    *monster += new MenuEntry(
-        "1番目と2番目のモンスターの動き停止" + workInProgress, Monster1And2Stop,
-        "動き停止は、速度変更より優先されます。");
-    *monster += new MenuEntry("1番目のモンスターのサイズ変更" + workInProgress,
-                              nullptr, Monster1SizeOption,
+    *monster += new MenuEntry("1番目と2番目のモンスターの動き停止" + stable,
+                              Monster1And2Stop,
+                              "動き停止は、速度変更より優先されます。\n"
+                              "当たり判定がなくなります。");
+    *monster += new MenuEntry("1番目のモンスターのサイズ変更" + stable, nullptr,
+                              Monster1SizeOption,
                               "1番目のモンスターのサイズの変更ができます。");
-    *monster += new MenuEntry("2番目のモンスターのサイズ変更" + workInProgress,
-                              nullptr, Monster2SizeOption,
+    *monster += new MenuEntry("2番目のモンスターのサイズ変更" + stable, nullptr,
+                              Monster2SizeOption,
                               "2番目のモンスターのサイズの変更ができます。");
+    *monster += new MenuEntry("1番目のモンスターの速度倍率変更" + stable,
+                              nullptr, Monster1SpeedAttributeOption,
+                              "1番目のモンスターの速度の変更ができます。");
+    *monster += new MenuEntry("2番目のモンスターの速度倍率変更" + stable,
+                              nullptr, Monster2SpeedAttributeOption,
+                              "2番目のモンスターの速度の変更ができます。");
+    *monster += new MenuEntry(
+        "1番目と2番目のモンスター常時毒" + stable, Monster1And2AlwaysPoison,
+        "1番目と2番目のモンスターのサイズの変更ができます。");
     *monster +=
-        new MenuEntry("1番目のモンスターの速度倍率変更" + workInProgress,
-                      nullptr, Monster1SpeedAttributeOption,
-                      "1番目のモンスターの速度の変更ができます。");
-    *monster +=
-        new MenuEntry("2番目のモンスターの速度倍率変更" + workInProgress,
-                      nullptr, Monster2SpeedAttributeOption,
-                      "2番目のモンスターの速度の変更ができます。");
-    *monster +=
-        new MenuEntry("1番目と2番目のモンスター常時毒" + workInProgress,
-                      Monster1And2AlwaysPoison,
-                      "1番目と2番目のモンスターのサイズの変更ができます。");
-    *monster +=
-        new MenuEntry("1番目と2番目のモンスター常時麻痺" + workInProgress,
+        new MenuEntry("1番目と2番目のモンスター常時麻痺" + stable,
                       Monster1And2AlwaysParalysis,
                       "1番目と2番目のモンスターのサイズの変更ができます。");
+    *monster += new MenuEntry(
+        "1番目と2番目のモンスター常時睡眠" + stable, Monster1And2AlwaysSleep,
+        "1番目と2番目のモンスターのサイズの変更ができます。");
     *monster +=
-        new MenuEntry("1番目と2番目のモンスター常時睡眠" + workInProgress,
-                      Monster1And2AlwaysSleep,
+        new MenuEntry("1番目と2番目のモンスター透明化" + stable, nullptr,
+                      Monster1And2AlwaysInvisible,
                       "1番目と2番目のモンスターのサイズの変更ができます。");
-    *monster +=
-        new MenuEntry("1番目と2番目のモンスター透明化" + workInProgress,
-                      nullptr, Monster1And2AlwaysInvisible,
-                      "1番目と2番目のモンスターのサイズの変更ができます。");
-    *monster += new MenuEntry("瞬殺" + workInProgress, nullptr, OneAttackKill,
+    *monster += new MenuEntry("瞬殺" + stable, nullptr, OneAttackKill,
                               "モンスターを瞬殺できます。");
   }
   menu += monster;

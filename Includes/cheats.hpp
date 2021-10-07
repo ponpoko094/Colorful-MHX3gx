@@ -154,7 +154,6 @@ void Monster2SizeMagnificationDisplay(MenuEntry* entry);
 void RideGageMax(MenuEntry* entry);
 void MonsterCoordinateModifier(MenuEntry* entry);
 void MonsterStalker(MenuEntry* entry);
-void MonsterActionRepeat(MenuEntry* entry);
 void MonsterActionRepeatOption(MenuEntry* entry);
 void Monster1And2Stop(MenuEntry* entry);
 void Monster1SizeOption(MenuEntry* entry);
