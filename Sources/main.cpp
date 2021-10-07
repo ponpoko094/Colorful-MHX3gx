@@ -1007,13 +1007,11 @@ void InitMenu(PluginMenu &menu) {
     {
       *chat += new MenuEntry("チャット無限" + stable, ChatInfinite,
                              "オンラインで赤文字を出現させなくします。");
-      *chat +=
-          new MenuEntry("変換候補変換" + stable, ChatConversionChange,
-                        "キーボードを開いて、Rを押しながら文字を打つ"
-                        "ことで、変換候補の文字が変わります。");
+      *chat += new MenuEntry("変換候補変換" + stable, ChatConversionChange,
+                             "キーボードを開いて、Rを押しながら文字を打つ"
+                             "ことで、変換候補の文字が変わります。");
       *chat += new MenuEntry(
-          "変換候補変換対応文字一覧" + stable, nullptr,
-          ChatConversionList,
+          "変換候補変換対応文字一覧" + stable, nullptr, ChatConversionList,
           "変換対応文字が書かれています。\n"
           "変換しづらい文字や、改造でしか入力できない文字を入れています。");
     }
@@ -1023,7 +1021,7 @@ void InitMenu(PluginMenu &menu) {
         new MenuFolder("酔っぱらい", "クエスト中は酔っぱらえません。");
     {
       *drunk +=
-          new MenuEntry("即酔っぱらい" + workInProgress, InstantDrunk,
+          new MenuEntry("即酔っぱらい" + workInProgress, nullptr,
                         InstantDrunkOption, "酔っぱらいになるか変更できます。");
       *drunk += new MenuEntry("1回お酒を飲むと酔っぱらい" + workInProgress,
                               Drunk1, "1回お酒を飲むと酔っぱらいになります。");

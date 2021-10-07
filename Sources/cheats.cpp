@@ -682,6 +682,9 @@ void DisplayBasePassword(MenuEntry *entry) {
 // ガンランス弾無限
 void GunlanceAmmoInfinite(MenuEntry *entry) {
   u32 offset;
+  if (!IsInQuest()) {
+    return;
+  }
   Process::Read32(0x8360F24, offset);
   Process::Read32(offset + 0xB4, offset);
   Process::Write8(offset + 0x1922, 0xFF);
@@ -703,6 +706,9 @@ void GunlanceHeatGageOption(MenuEntry *entry) {
   if (keyboard.Open(heat) == 0) {
     entry->SetGameFunc([](MenuEntry *entry) {
       u32 offset;
+      if (!IsInQuest()) {
+        return;
+      }
       Process::Read32(0x8360F24, offset);
       Process::Read32(offset + 0xB4, offset);
       Process::Write16(offset + 0x2018, heat);
@@ -2133,28 +2139,34 @@ void FenyAndPugyClothes(MenuEntry *entry) {
 }
 
 // 酔っぱらい設定
-static u8 drunk;
 void InstantDrunkOption(MenuEntry *entry) {
+  static u8 drunk;
   Keyboard keyboard("酔っぱらいになりますか？", listToggle);
   int choice = keyboard.Open();
   if (choice == 0) {
     drunk = 0x02;
   } else if (choice == 1) {
     drunk = 0x00;
+  } else {
+    return;
   }
-}
-
-// 酔っぱらい
-void InstantDrunk(MenuEntry *entry) {
-  u32 offset;
-  Process::Read32(0x8360F24, offset);
-  Process::Read32(offset + 0xB4, offset);
-  Process::Write8(offset + 0x1510, drunk);
+  entry->SetGameFunc([](MenuEntry *entry) {
+    u32 offset;
+    if (!IsInQuest()) {
+      return;
+    }
+    Process::Read32(0x8360F24, offset);
+    Process::Read32(offset + 0xB4, offset);
+    Process::Write8(offset + 0x1510, drunk);
+  });
 }
 
 // 1回飲んだら酔っぱらい
 void Drunk1(MenuEntry *entry) {
   u32 offset;
+  if (!IsInQuest()) {
+    return;
+  }
   Process::Read32(0x8360F24, offset);
   Process::Read32(offset + 0xB4, offset);
   Process::Write8(offset + 0x1538, 0xA);
@@ -2171,6 +2183,9 @@ void RideGageMax(MenuEntry *entry) {
 // 腹減り無効
 void HungryInvalid(MenuEntry *entry) {
   u32 offset;
+  if (!IsInQuest()) {
+    return;
+  }
   Process::Read32(0x8360F24, offset);
   Process::Read32(offset + 0xB4, offset);
   Process::WriteFloat(offset + 0x2DC, 10000);
