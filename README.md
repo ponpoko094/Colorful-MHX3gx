@@ -12,7 +12,7 @@
 このプラグインはもともと舞姫氏のActionReplayチートがベースとなっています。
 ぽこはそれをフォークし、3gxならではの機能（キーボードやOSD等）を用いてさらに使いやすくしようとしました。しかし、最初の頃はバグだらけでコンパイル時にはいつもエラー文が出ていました。ですが、ぽこは多くの3gx開発者にアドバイスを頂き、ここまで成長できました。本当に感謝しています。
 
-このプラグインは主にC++で書かれていて、[CTRPluginFramework(v0.7.0)](https://github.com/mariohackandglitch/CTRPluginFramework-BlankTemplate)をベースとしています。
+このプラグインは主にC++で書かれていて、[CTRPluginFramework(v0.7.1)](https://github.com/mariohackandglitch/CTRPluginFramework-BlankTemplate)をベースとしています。
 
 ## プラグインの紹介
 チートの種類は200種類近くあるので、きっと使いたいチートが見つかるはずです。ネタチートもありますが、ほとんどのチートはニーズに沿っていることを考えているので心配ありません。もしMHX3gxだけだと物足りない場合はActionReplayを使えるようにしてあるので、ユーザーが作ったコードで遊ぶこともできます。
@@ -46,7 +46,7 @@ exeファイルを開きインストールしてください。
 `C:\devkitPro\tools\bin`にコピーしてください。
 
 **※CTRPFv0.5.1のコンパイル時に必要となる3gxtool.exeはMHX3gxでは使えません。**
-### [libCTRPF](https://cdn.discordapp.com/attachments/479233979271086090/803683007067848774/libctrpf-0.7.0-0ad93110.zip)
+### [libCTRPF(v0.7.1)](https://cdn.discordapp.com/attachments/479233979271086090/895012182604021810/libctrpf-0.7.1.tar.bz2)
 解凍し、中にあるincludeとlibフォルダーを`C:\devkitPro\libctrpf`の中にコピーしてください。もしもフォルダーがなかったら作成してください。
 
 ### コンパイル方法
