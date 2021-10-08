@@ -4,6 +4,10 @@
 ![Stars](https://img.shields.io/github/stars/ponpoko094/MHX3gx)
 ![CodeSize](https://img.shields.io/github/languages/code-size/ponpoko094/MHX3gx)
 
+## とりあえずチートしたい方へ
+この3gxは多分動かないのとほぼ更新が止まっているので、舞姫氏のActionReplayチートを使ってください。
+[舞姫のあっぷろーだー](https://ux.getuploader.com/1456723/)
+
 ## はじめに
 このプラグインはもともと舞姫氏のActionReplayチートがベースとなっています。
 ぽこはそれをフォークし、3gxならではの機能（キーボードやOSD等）を用いてさらに使いやすくしようとしました。しかし、最初の頃はバグだらけでコンパイル時にはいつもエラー文が出ていました。ですが、ぽこは多くの3gx開発者にアドバイスを頂き、ここまで成長できました。本当に感謝しています。
