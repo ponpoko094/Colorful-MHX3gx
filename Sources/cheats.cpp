@@ -456,7 +456,7 @@ void AllItemSold(MenuEntry *entry) {
 void ProwlerSupportGageMax(MenuEntry *entry) {
   u32 offset, cmp32;
   Process::Read32(0xDD5348, offset);
-  if (Process::Read32(offset + 0x14, cmp32) && cmp32 != 0x0) {
+  if (offset != 0x0) {
     Process::Read32(offset + 0x14, offset);
     Process::Write16(offset + 0x2220, 0x384);
   }
@@ -601,7 +601,7 @@ void SkinBlueChange(MenuEntry *entry) {
 void PalicoAttackPowerMagnificationOption(MenuEntry *entry) {
   static u8 palicoAttack = 0x1;
   u32 data32, cmp32;
-  Keyboard keyboard("防御力を何倍にしますか?\n1~255の間");
+  Keyboard keyboard("攻撃力を何倍にしますか?\n1~255の間");
   keyboard.IsHexadecimal(false);
   if (keyboard.Open(palicoAttack) == 0) {
     Process::Write32(0xC18F80, 0xE92D400C);
@@ -3183,8 +3183,7 @@ void PalicoLearnSkillChange(int number) {
 }
 
 void PalicoLearnSkillChanger(MenuEntry *entry) {
-  Keyboard keyboard("どのオトモスキルを変更しますか？",
-                    GetPalicoLearnSkill());
+  Keyboard keyboard("どのオトモスキルを変更しますか？", GetPalicoLearnSkill());
   int choice = keyboard.Open();
   if (choice >= 0) {
     PalicoLearnSkillChange(choice);
@@ -3207,13 +3206,8 @@ void PalicoVoiceChange(MenuEntry *entry) {
 
 void PalicoEyeChange(MenuEntry *entry) {
   u8 eye;
-  const std::vector<std::string> listPalicoEye{"ふつう",
-                                               "ほそ目",
-                                               "つり目",
-                                               "ニヤケ目",
-                                               "閉じ目",
-                                               "キズ目"
-                                               "透明"};
+  const std::vector<std::string> listPalicoEye{
+      "ふつう", "ほそ目", "つり目", "ニヤケ目", "閉じ目", "キズ目", "透明"};
   Process::Read8(0x8338AC2 + palicoChoice * 0x494, eye);
   Keyboard keyboard("目を選んでください。\n現在[" + listPalicoEye[eye] + "]",
                     listPalicoEye);
@@ -3279,111 +3273,79 @@ void PalicoTailChange(MenuEntry *entry) {
   }
 }
 
-void PalicoBodyHairColorRedChange(MenuEntry *entry) {
-  u8 a;
-  Keyboard keyboard("赤の値を入力してください\n1~255の間");
+void PalicoBodyHairColorChange(int choice) {
+  u8 color, nowColor;
+  Process::Read8(0x8338ACC + palicoChoice * 0x494 + choice, nowColor);
+  Keyboard keyboard("値を入力してください。\n現在[" + std::to_string(nowColor) +
+                    "]");
   keyboard.IsHexadecimal(false);
-  if (keyboard.Open(a) == 0) {
-    Process::Write8(0x8338ACC + palicoChoice * 0x494, a);
+  if (keyboard.Open(color) == 0) {
+    Process::Write8(0x8338ACC + palicoChoice * 0x494 + choice, color);
   }
 }
 
-void PalicoBodyHairColorGreenChange(MenuEntry *entry) {
-  u8 a;
-  Keyboard keyboard("緑の値を入力してください\n1~255の間");
-  keyboard.IsHexadecimal(false);
-  if (keyboard.Open(a) == 0) {
-    Process::Write8(0x8338ACD + palicoChoice * 0x494, a);
+void PalicoBodyHairColorChanger(MenuEntry *entry) {
+  Keyboard keyboard("どの値を変更しますか？", {"R", "G", "B"});
+  int choice = keyboard.Open();
+  if (choice >= 0) {
+    PalicoBodyHairColorChange(choice);
   }
 }
 
-void PalicoBodyHairColorBlueChange(MenuEntry *entry) {
-  u8 a;
-  Keyboard keyboard("青の値を入力してください\n1~255の間");
+void PalicoRightEyeColorChange(int choice) {
+  u8 color, nowColor;
+  Process::Read8(0x8338AD0 + palicoChoice * 0x494 + choice, nowColor);
+  Keyboard keyboard("値を入力してください。\n現在[" + std::to_string(nowColor) +
+                    "]");
   keyboard.IsHexadecimal(false);
-  if (keyboard.Open(a) == 0) {
-    Process::Write8(0x8338ACE + palicoChoice * 0x494, a);
+  if (keyboard.Open(color) == 0) {
+    Process::Write8(0x8338AD0 + palicoChoice * 0x494 + choice, color);
   }
 }
 
-void PalicoRightEyeColorRedChange(MenuEntry *entry) {
-  u8 a;
-  Keyboard keyboard("赤の値を入力してください\n1~255の間");
-  keyboard.IsHexadecimal(false);
-  if (keyboard.Open(a) == 0) {
-    Process::Write8(0x8338AD0 + palicoChoice * 0x494, a);
+void PalicoRightEyeColorChanger(MenuEntry *entry) {
+  Keyboard keyboard("どの値を変更しますか？", {"R", "G", "B"});
+  int choice = keyboard.Open();
+  if (choice >= 0) {
+    PalicoRightEyeColorChange(choice);
   }
 }
 
-void PalicoRightEyeColorGreenChange(MenuEntry *entry) {
-  u8 a;
-  Keyboard keyboard("緑の値を入力してください\n1~255の間");
+void PalicoLeftEyeColorChange(int choice) {
+  u8 color, nowColor;
+  Process::Read8(0x8338AD4 + palicoChoice * 0x494 + choice, nowColor);
+  Keyboard keyboard("値を入力してください。\n現在[" + std::to_string(nowColor) +
+                    "]");
   keyboard.IsHexadecimal(false);
-  if (keyboard.Open(a) == 0) {
-    Process::Write8(0x8338AD1 + palicoChoice * 0x494, a);
+  if (keyboard.Open(color) == 0) {
+    Process::Write8(0x8338AD4 + palicoChoice * 0x494 + choice, color);
   }
 }
 
-void PalicoRightEyeColorBlueChange(MenuEntry *entry) {
-  u8 a;
-  Keyboard keyboard("青の値を入力してください\n1~255の間");
-  keyboard.IsHexadecimal(false);
-  if (keyboard.Open(a) == 0) {
-    Process::Write8(0x8338AD2 + palicoChoice * 0x494, a);
+void PalicoLeftEyeColorChanger(MenuEntry *entry) {
+  Keyboard keyboard("どの値を変更しますか？", {"R", "G", "B"});
+  int choice = keyboard.Open();
+  if (choice >= 0) {
+    PalicoLeftEyeColorChange(choice);
   }
 }
 
-void PalicoLeftEyeColorRedChange(MenuEntry *entry) {
-  u8 a;
-  Keyboard keyboard("赤の値を入力してください\n1~255の間");
+void PalicoInnerColorChange(int choice) {
+  u8 color, nowColor;
+  Process::Read8(0x8338AD8 + palicoChoice * 0x494 + choice, nowColor);
+  Keyboard keyboard("値を入力してください。\n現在[" + std::to_string(nowColor) +
+                    "]");
   keyboard.IsHexadecimal(false);
-  if (keyboard.Open(a) == 0) {
-    Process::Write8(0x8338AD4 + palicoChoice * 0x494, a);
+  if (keyboard.Open(color) == 0) {
+    Process::Write8(0x8338AD8 + palicoChoice * 0x494 + choice, color);
   }
 }
 
-void PalicoLeftEyeColorGreenChange(MenuEntry *entry) {
-  u8 a;
-  Keyboard keyboard("緑の値を入力してください\n1~255の間");
-  keyboard.IsHexadecimal(false);
-  if (keyboard.Open(a) == 0) {
-    Process::Write8(0x8338AD5 + palicoChoice * 0x494, a);
-  }
-}
-
-void PalicoLeftEyeColorBlueChange(MenuEntry *entry) {
-  u8 a;
-  Keyboard keyboard("青の値を入力してください\n1~255の間");
-  keyboard.IsHexadecimal(false);
-  if (keyboard.Open(a) == 0) {
-    Process::Write8(0x8338AD6 + palicoChoice * 0x494, a);
-  }
-}
-
-void PalicoInnerColorRedChange(MenuEntry *entry) {
-  u8 a;
-  Keyboard keyboard("赤の値を入力してください\n1~255の間");
-  keyboard.IsHexadecimal(false);
-  if (keyboard.Open(a) == 0) {
-    Process::Write8(0x8338AD8 + palicoChoice * 0x494, a);
-  }
-}
-
-void PalicoInnerColorGreenChange(MenuEntry *entry) {
-  u8 a;
-  Keyboard keyboard("緑の値を入力してください\n1~255の間");
-  keyboard.IsHexadecimal(false);
-  if (keyboard.Open(a) == 0) {
-    Process::Write8(0x8338AD9 + palicoChoice * 0x494, a);
-  }
-}
-
-void PalicoInnerColorBlueChange(MenuEntry *entry) {
-  u8 a;
-  Keyboard keyboard("青の値を入力してください\n1~255の間");
-  keyboard.IsHexadecimal(false);
-  if (keyboard.Open(a) == 0) {
-    Process::Write8(0x8338ADA + palicoChoice * 0x494, a);
+void PalicoInnerColorChanger(MenuEntry *entry) {
+  Keyboard keyboard("どの値を変更しますか？", {"R", "G", "B"});
+  int choice = keyboard.Open();
+  if (choice >= 0) {
+    PalicoInnerColorChange(choice);
   }
 }
 
