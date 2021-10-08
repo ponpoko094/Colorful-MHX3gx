@@ -5,8 +5,8 @@
 ![CodeSize](https://img.shields.io/github/languages/code-size/ponpoko094/MHX3gx)
 
 ## とりあえずチートしたい方へ
-この3gxは多分動かないのとほぼ更新が止まっているので、舞姫氏のActionReplayチートを使ってください。
-[舞姫のあっぷろーだー](https://ux.getuploader.com/1456723/)
+この3gxは不具合や動作の確認がすべて終わってないので、もしそういったのが気になるようでしたら舞姫氏のActionReplayチートを使ってください。
+[舞姫のあっぷろーだー](https://ux.getuploader.com/1456723/download/9)
 
 ## はじめに
 このプラグインはもともと舞姫氏のActionReplayチートがベースとなっています。
