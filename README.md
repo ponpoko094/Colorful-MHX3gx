@@ -1,5 +1,9 @@
 # MHX3gx
 
+![TotalDownloads](https://img.shields.io/github/downloads/ponpoko094/MHX3gx/total)
+![Stars](https://img.shields.io/github/stars/ponpoko094/MHX3gx)
+![CodeSize](https://img.shields.io/github/languages/code-size/ponpoko094/MHX3gx)
+
 ## はじめに
 このプラグインはもともと舞姫氏のActionReplayチートがベースとなっています。
 ぽこはそれをフォークし、3gxならではの機能（キーボードやOSD等）を用いてさらに使いやすくしようとしました。しかし、最初の頃はバグだらけでコンパイル時にはいつもエラー文が出ていました。ですが、ぽこは多くの3gx開発者にアドバイスを頂き、ここまで成長できました。本当に感謝しています。
