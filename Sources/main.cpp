@@ -677,71 +677,71 @@ void InitMenu(PluginMenu &menu) {
         *palicoAppearance += palicoAppearanceColor;
 
         *palicoAppearance +=
-            new MenuEntry("声変更" + workInProgress, nullptr, PalicoVoiceChange,
+            new MenuEntry("声変更" + stable, nullptr, PalicoVoiceChange,
                           "ねこの声を変更します。");
         *palicoAppearance +=
-            new MenuEntry("目変更" + workInProgress, nullptr, PalicoEyeChange,
+            new MenuEntry("目変更" + stable, nullptr, PalicoEyeChange,
                           "ねこの目を変更します。");
         *palicoAppearance +=
-            new MenuEntry("インナー変更" + workInProgress, nullptr,
-                          PalicoInnerChange, "ねこのインナーを変更します。");
+            new MenuEntry("インナー変更" + stable, nullptr, PalicoInnerChange,
+                          "ねこのインナーを変更します。");
         *palicoAppearance +=
-            new MenuEntry("毛並み変更" + workInProgress, nullptr,
-                          PalicoFurCoatChange, "ねこの毛並みを変更します。");
+            new MenuEntry("毛並み変更" + stable, nullptr, PalicoFurCoatChange,
+                          "ねこの毛並みを変更します。");
         *palicoAppearance +=
-            new MenuEntry("耳変更" + workInProgress, nullptr, PalicoEarChange,
+            new MenuEntry("耳変更" + stable, nullptr, PalicoEarChange,
                           "ねこの耳を変更します。");
         *palicoAppearance +=
-            new MenuEntry("尻尾変更" + workInProgress, nullptr,
-                          PalicoTailChange, "ねこの尻尾を変更します。");
+            new MenuEntry("尻尾変更" + stable, nullptr, PalicoTailChange,
+                          "ねこの尻尾を変更します。");
       }
       *palicoEdit += palicoAppearance;
 
       *palicoEdit +=
-          new MenuEntry("経験値変更" + workInProgress, nullptr,
+          new MenuEntry("経験値変更" + stable, nullptr,
                         PalicoExperienceChange, "ねこの経験値を変更します。");
       *palicoEdit +=
-          new MenuEntry("レベル変更" + workInProgress, nullptr,
+          new MenuEntry("レベル変更" + stable, nullptr,
                         PalicoLevelChange, "ねこのレベルを変更します。");
-      *palicoEdit += new MenuEntry("サポート傾向変更" + workInProgress, nullptr,
+      *palicoEdit += new MenuEntry("サポート傾向変更" + stable, nullptr,
                                    PalicoSupportTrendChange,
                                    "ねこのサポート傾向を変更します。");
       *palicoEdit +=
-          new MenuEntry("親密度変更" + workInProgress, nullptr,
+          new MenuEntry("親密度変更" + stable, nullptr,
                         PalicoClosenessChange, "ねこの親密度を変更します。");
       *palicoEdit +=
-          new MenuEntry("ターゲット変更" + workInProgress, nullptr,
+          new MenuEntry("ターゲット変更" + stable, nullptr,
                         PalicoTargetChange, "ねこのターゲットを変更します。");
       *palicoEdit +=
-          new MenuEntry("オトモコメント編集可能変更" + workInProgress, nullptr,
+          new MenuEntry("オトモコメント編集可能変更" + stable, nullptr,
                         PalicoCommentEditPossibleChange,
                         "ねこのオトモコメントを編集可能にするか選べます。");
-      *palicoEdit += new MenuEntry("特別配信表示変更" + workInProgress, nullptr,
+      *palicoEdit += new MenuEntry("特別配信表示変更" + stable, nullptr,
                                    SpecialDeliveryDisplayChange,
                                    "ねこの特別配信の表示を変更します。");
       *palicoEdit += new MenuEntry(
-          "名前変更" + workInProgress, nullptr, PalicoNameChange,
+          "名前変更" + stable, nullptr, PalicoNameChange,
           "ねこの名前を変更します。\n"
           "定型文では1ページ目の一番左下にある定型文をねこの名前にコピーします"
           "。\n"
           "キーボードでは、メニュー内で直接変更することができます。\n"
           "変換候補変換の改行やタブが使えます。");
       *palicoEdit += new MenuEntry(
-          "コメント変更" + workInProgress, nullptr, PalicoCommentChange,
+          "コメント変更" + stable, nullptr, PalicoCommentChange,
           "ねこのコメントを変更します。\n"
           "定型文では1ページ目の一番左下にある定型文をねこのコメントにコピーし"
           "ます。\n"
           "キーボードでは、メニュー内で直接変更することができます。\n"
           "変換候補変換の改行やタブが使えます。");
       *palicoEdit += new MenuEntry(
-          "名付け親変更" + workInProgress, nullptr, PalicoGodParentChange,
+          "名付け親変更" + stable, nullptr, PalicoGodParentChange,
           "ねこの名付け親を変更します。\n"
           "定型文では1ページ目の一番左下にある定型文をねこの名付け親にコピーし"
           "ます。\n"
           "キーボードでは、メニュー内で直接変更することができます。\n"
           "変換候補変換の改行やタブが使えます。");
       *palicoEdit += new MenuEntry(
-          "先代旦那さん変更" + workInProgress, nullptr,
+          "先代旦那さん変更" + stable, nullptr,
           PalicoPredecessorHusbandChange,
           "ねこの先代旦那さんを変更します。\n"
           "定型文では1ページ目の一番左下にある定型文をねこの先代旦那さんにコピ"
@@ -752,17 +752,17 @@ void InitMenu(PluginMenu &menu) {
     *palico += palicoEdit;
 
     *palico += new MenuEntry(
-        "ねこの攻撃力倍率変更" + workInProgress, nullptr,
+        "ねこの攻撃力倍率変更" + stable, nullptr,
         PalicoAttackPowerMagnificationOption,
-        "Y+UPでON、Y+DOWNでOFF\nねこの攻撃力の倍率を変更します。");
+        "ねこの攻撃力の倍率を変更します。");
     *palico += new MenuEntry(
-        "ねこの防御力倍率変更" + workInProgress, nullptr,
+        "ねこの防御力倍率変更" + stable, nullptr,
         PalicoDefencePowerMagnificationOption,
-        "X+UPでON、X+DOWNでOFF\nねこの防御力変更の倍率を変更します。");
+        "ねこの防御力変更の倍率を変更します。");
     *palico += new MenuEntry(
-        "ねこ吸収" + workInProgress, PalicoAbsorption,
+        "ねこ吸収" + stable, PalicoAbsorption,
         "ねこをハンターに吸収させます。\n他プレイヤーからは見えません。");
-    *palico += new MenuEntry("サポートゲージ最大" + workInProgress,
+    *palico += new MenuEntry("サポートゲージ最大" + stable,
                              ProwlerSupportGageMax,
                              "ニャンターのサポートゲージを最大にします。");
   }
