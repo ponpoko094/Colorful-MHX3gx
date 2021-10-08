@@ -661,67 +661,18 @@ void InitMenu(PluginMenu &menu) {
       {
         MenuFolder *palicoAppearanceColor = new MenuFolder("見た目の色変更");
         {
-          MenuFolder *palicoBodyHairColor = new MenuFolder("毛色");
-          {
-            *palicoBodyHairColor += new MenuEntry(
-                "R値変更" + workInProgress, nullptr,
-                PalicoBodyHairColorRedChange, "ねこの毛色の赤色を変更します。");
-            *palicoBodyHairColor +=
-                new MenuEntry("G値変更" + workInProgress, nullptr,
-                              PalicoBodyHairColorGreenChange,
-                              "ねこの毛色の緑色を変更します。");
-            *palicoBodyHairColor +=
-                new MenuEntry("B値変更" + workInProgress, nullptr,
-                              PalicoBodyHairColorBlueChange,
-                              "ねこの毛色の青色を変更します。");
-          }
-          *palicoAppearanceColor += palicoBodyHairColor;
-
-          MenuFolder *palicoRightEyeColor = new MenuFolder("右目の色");
-          {
-            *palicoRightEyeColor += new MenuEntry(
-                "R値変更" + workInProgress, nullptr,
-                PalicoRightEyeColorRedChange, "ねこの右目の赤色を変更します。");
-            *palicoRightEyeColor +=
-                new MenuEntry("G値変更" + workInProgress, nullptr,
-                              PalicoRightEyeColorGreenChange,
-                              "ねこの右目の緑色を変更します。");
-            *palicoRightEyeColor +=
-                new MenuEntry("B値変更" + workInProgress, nullptr,
-                              PalicoRightEyeColorBlueChange,
-                              "ねこの右目の青色を変更します。");
-          }
-          *palicoAppearanceColor += palicoRightEyeColor;
-
-          MenuFolder *palicoLeftEyeColor = new MenuFolder("左目の色");
-          {
-            *palicoLeftEyeColor += new MenuEntry(
-                "R値変更" + workInProgress, nullptr,
-                PalicoLeftEyeColorRedChange, "ねこの左目の赤色を変更します。");
-            *palicoLeftEyeColor +=
-                new MenuEntry("G値変更" + workInProgress, nullptr,
-                              PalicoLeftEyeColorGreenChange,
-                              "ねこの左目の緑色を変更します。");
-            *palicoLeftEyeColor += new MenuEntry(
-                "B値変更" + workInProgress, nullptr,
-                PalicoLeftEyeColorBlueChange, "ねこの左目の青色を変更します。");
-          }
-          *palicoAppearanceColor += palicoLeftEyeColor;
-
-          MenuFolder *palicoInnerColor = new MenuFolder("インナーの色");
-          {
-            *palicoInnerColor += new MenuEntry(
-                "R値変更" + workInProgress, nullptr, PalicoInnerColorRedChange,
-                "ねこのインナーの色の赤色を変更します。");
-            *palicoInnerColor +=
-                new MenuEntry("G値変更" + workInProgress, nullptr,
-                              PalicoInnerColorGreenChange,
-                              "ねこのインナーの色の緑色を変更します。");
-            *palicoInnerColor += new MenuEntry(
-                "B値変更" + workInProgress, nullptr, PalicoInnerColorBlueChange,
-                "ねこのインナーの色の青色を変更します。");
-          }
-          *palicoAppearanceColor += palicoInnerColor;
+          *palicoAppearanceColor += new MenuEntry(
+              "毛色変更" + stable, nullptr, PalicoBodyHairColorChanger,
+              "ねこの毛色を変更します。");
+          *palicoAppearanceColor += new MenuEntry(
+              "右目の色変更" + stable, nullptr,
+              PalicoRightEyeColorChanger, "ねこの右目の色を変更します。");
+          *palicoAppearanceColor += new MenuEntry(
+              "左目の色変更" + stable, nullptr,
+              PalicoLeftEyeColorChanger, "ねこの左目の色を変更します。");
+          *palicoAppearanceColor += new MenuEntry(
+              "インナーの色変更" + stable, nullptr,
+              PalicoInnerColorChanger, "ねこのインナーの色を変更します。");
         }
         *palicoAppearance += palicoAppearanceColor;
 

@@ -184,21 +184,17 @@ std::vector<std::string> GetPalicoLearnSkill();
 void PalicoLearnSkillChange(int number);
 void PalicoLearnSkillChanger(MenuEntry *entry);
 
-void PalicoBodyHairColorRedChange(MenuEntry* entry);
-void PalicoBodyHairColorGreenChange(MenuEntry* entry);
-void PalicoBodyHairColorBlueChange(MenuEntry* entry);
+void PalicoBodyHairColorChange(int choice);
+void PalicoBodyHairColorChanger(MenuEntry *entry);
 
-void PalicoRightEyeColorRedChange(MenuEntry* entry);
-void PalicoRightEyeColorGreenChange(MenuEntry* entry);
-void PalicoRightEyeColorBlueChange(MenuEntry* entry);
+void PalicoRightEyeColorChange(int choice);
+void PalicoRightEyeColorChanger(MenuEntry *entry);
 
-void PalicoLeftEyeColorRedChange(MenuEntry* entry);
-void PalicoLeftEyeColorGreenChange(MenuEntry* entry);
-void PalicoLeftEyeColorBlueChange(MenuEntry* entry);
+void PalicoLeftEyeColorChange(int choice);
+void PalicoLeftEyeColorChanger(MenuEntry *entry);
 
-void PalicoInnerColorRedChange(MenuEntry* entry);
-void PalicoInnerColorGreenChange(MenuEntry* entry);
-void PalicoInnerColorBlueChange(MenuEntry* entry);
+void PalicoInnerColorChange(int choice);
+void PalicoInnerColorChanger(MenuEntry *entry);
 
 void PalicoVoiceChange(MenuEntry* entry);
 void PalicoEyeChange(MenuEntry* entry);
