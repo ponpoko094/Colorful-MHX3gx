@@ -1,5 +1,9 @@
 # MHX3gx
 
+![TotalDownloads](https://img.shields.io/github/downloads/ponpoko094/MHX3gx/total)
+![Stars](https://img.shields.io/github/stars/ponpoko094/MHX3gx)
+![CodeSize](https://img.shields.io/github/languages/code-size/ponpoko094/MHX3gx)
+
 ## とりあえずチートしたい方へ
 この3gxは多分動かないのとほぼ更新が止まっているので、舞姫氏のActionReplayチートを使ってください。
 [舞姫のあっぷろーだー](https://ux.getuploader.com/1456723/)

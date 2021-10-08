@@ -641,205 +641,21 @@ void InitMenu(PluginMenu &menu) {
   {
     MenuFolder *palicoEdit = new MenuFolder("ねこ編集");
     {
-      *palicoEdit += new MenuEntry("ねこ選択", nullptr, PalicoChoice,
+      *palicoEdit += new MenuEntry("ねこ選択" + stable, nullptr, PalicoChoice,
                                    "編集するねこを選択します。");
-
-      MenuFolder *palicoEquipmentSupportAction =
-          new MenuFolder("装備サポート行動");
-      {
-        *palicoEquipmentSupportAction +=
-            new MenuEntry("装備サポート行動1番目変更" + workInProgress, nullptr,
-                          PalicoEquipmentSupportAction1Change,
-                          "ねこの装備サポート行動の1番目を変更します。");
-        *palicoEquipmentSupportAction +=
-            new MenuEntry("装備サポート行動2番目変更" + workInProgress, nullptr,
-                          PalicoEquipmentSupportAction2Change,
-                          "ねこの装備サポート行動の2番目を変更します。");
-        *palicoEquipmentSupportAction +=
-            new MenuEntry("装備サポート行動3番目変更" + workInProgress, nullptr,
-                          PalicoEquipmentSupportAction3Change,
-                          "ねこの装備サポート行動の3番目を変更します。");
-        *palicoEquipmentSupportAction +=
-            new MenuEntry("装備サポート行動4番目変更" + workInProgress, nullptr,
-                          PalicoEquipmentSupportAction4Change,
-                          "ねこの装備サポート行動の4番目を変更します。");
-        *palicoEquipmentSupportAction +=
-            new MenuEntry("装備サポート行動5番目変更" + workInProgress, nullptr,
-                          PalicoEquipmentSupportAction5Change,
-                          "ねこの装備サポート行動の5番目を変更します。");
-        *palicoEquipmentSupportAction +=
-            new MenuEntry("装備サポート行動6番目変更" + workInProgress, nullptr,
-                          PalicoEquipmentSupportAction6Change,
-                          "ねこの装備サポート行動の6番目を変更します。");
-        *palicoEquipmentSupportAction +=
-            new MenuEntry("装備サポート行動7番目変更" + workInProgress, nullptr,
-                          PalicoEquipmentSupportAction7Change,
-                          "ねこの装備サポート行動の7番目を変更します。");
-        *palicoEquipmentSupportAction +=
-            new MenuEntry("装備サポート行動8番目変更" + workInProgress, nullptr,
-                          PalicoEquipmentSupportAction8Change,
-                          "ねこの装備サポート行動の8番目を変更します。");
-      }
-      *palicoEdit += palicoEquipmentSupportAction;
-
-      MenuFolder *palicoEquipmentSkill = new MenuFolder("装備オトモスキル");
-      {
-        *palicoEquipmentSkill +=
-            new MenuEntry("装備オトモスキル1番目変更" + workInProgress, nullptr,
-                          PalicoEquipmentSkill1Change,
-                          "ねこの装備オトモスキルの1番目を変更します。");
-        *palicoEquipmentSkill +=
-            new MenuEntry("装備オトモスキル2番目変更" + workInProgress, nullptr,
-                          PalicoEquipmentSkill2Change,
-                          "ねこの装備オトモスキルの2番目を変更します。");
-        *palicoEquipmentSkill +=
-            new MenuEntry("装備オトモスキル3番目変更" + workInProgress, nullptr,
-                          PalicoEquipmentSkill3Change,
-                          "ねこの装備オトモスキルの3番目を変更します。");
-        *palicoEquipmentSkill +=
-            new MenuEntry("装備オトモスキル4番目変更" + workInProgress, nullptr,
-                          PalicoEquipmentSkill4Change,
-                          "ねこの装備オトモスキルの4番目を変更します。");
-        *palicoEquipmentSkill +=
-            new MenuEntry("装備オトモスキル5番目変更" + workInProgress, nullptr,
-                          PalicoEquipmentSkill5Change,
-                          "ねこの装備オトモスキルの5番目を変更します。");
-        *palicoEquipmentSkill +=
-            new MenuEntry("装備オトモスキル6番目変更" + workInProgress, nullptr,
-                          PalicoEquipmentSkill6Change,
-                          "ねこの装備オトモスキルの6番目を変更します。");
-        *palicoEquipmentSkill +=
-            new MenuEntry("装備オトモスキル7番目変更" + workInProgress, nullptr,
-                          PalicoEquipmentSkill7Change,
-                          "ねこの装備オトモスキルの7番目を変更します。");
-        *palicoEquipmentSkill +=
-            new MenuEntry("装備オトモスキル8番目変更" + workInProgress, nullptr,
-                          PalicoEquipmentSkill8Change,
-                          "ねこの装備オトモスキルの8番目を変更します。");
-      }
-      *palicoEdit += palicoEquipmentSkill;
-
-      MenuFolder *palicoLearnSupportAction = new MenuFolder("習得サポート行動");
-      {
-        *palicoLearnSupportAction +=
-            new MenuEntry("習得サポート行動1番目変更" + workInProgress, nullptr,
-                          PalicoLearnSupportAction1Change,
-                          "ねこの習得サポート行動の1番目を変更します。");
-        *palicoLearnSupportAction +=
-            new MenuEntry("習得サポート行動2番目変更" + workInProgress, nullptr,
-                          PalicoLearnSupportAction2Change,
-                          "ねこの習得サポート行動の2番目を変更します。");
-        *palicoLearnSupportAction +=
-            new MenuEntry("習得サポート行動3番目変更" + workInProgress, nullptr,
-                          PalicoLearnSupportAction3Change,
-                          "ねこの習得サポート行動の3番目を変更します。");
-        *palicoLearnSupportAction +=
-            new MenuEntry("習得サポート行動4番目変更" + workInProgress, nullptr,
-                          PalicoLearnSupportAction4Change,
-                          "ねこの習得サポート行動の4番目を変更します。");
-        *palicoLearnSupportAction +=
-            new MenuEntry("習得サポート行動5番目変更" + workInProgress, nullptr,
-                          PalicoLearnSupportAction5Change,
-                          "ねこの習得サポート行動の5番目を変更します。");
-        *palicoLearnSupportAction +=
-            new MenuEntry("習得サポート行動6番目変更" + workInProgress, nullptr,
-                          PalicoLearnSupportAction6Change,
-                          "ねこの習得サポート行動の6番目を変更します。");
-        *palicoLearnSupportAction +=
-            new MenuEntry("習得サポート行動7番目変更" + workInProgress, nullptr,
-                          PalicoLearnSupportAction7Change,
-                          "ねこの習得サポート行動の7番目を変更します。");
-        *palicoLearnSupportAction +=
-            new MenuEntry("習得サポート行動8番目変更" + workInProgress, nullptr,
-                          PalicoLearnSupportAction8Change,
-                          "ねこの習得サポート行動の8番目を変更します。");
-        *palicoLearnSupportAction +=
-            new MenuEntry("習得サポート行動9番目変更" + workInProgress, nullptr,
-                          PalicoLearnSupportAction9Change,
-                          "ねこの習得サポート行動の9番目を変更します。");
-        *palicoLearnSupportAction +=
-            new MenuEntry("習得サポート行動10番目変更" + workInProgress,
-                          nullptr, PalicoLearnSupportAction10Change,
-                          "ねこの習得サポート行動の10番目を変更します。");
-        *palicoLearnSupportAction +=
-            new MenuEntry("習得サポート行動11番目変更" + workInProgress,
-                          nullptr, PalicoLearnSupportAction11Change,
-                          "ねこの習得サポート行動の11番目を変更します。");
-        *palicoLearnSupportAction +=
-            new MenuEntry("習得サポート行動12番目変更" + workInProgress,
-                          nullptr, PalicoLearnSupportAction12Change,
-                          "ねこの習得サポート行動の12番目を変更します。");
-        *palicoLearnSupportAction +=
-            new MenuEntry("習得サポート行動13番目変更" + workInProgress,
-                          nullptr, PalicoLearnSupportAction13Change,
-                          "ねこの習得サポート行動の13番目を変更します。");
-        *palicoLearnSupportAction +=
-            new MenuEntry("習得サポート行動14番目変更" + workInProgress,
-                          nullptr, PalicoLearnSupportAction14Change,
-                          "ねこの習得サポート行動の14番目を変更します。");
-        *palicoLearnSupportAction +=
-            new MenuEntry("習得サポート行動15番目変更" + workInProgress,
-                          nullptr, PalicoLearnSupportAction15Change,
-                          "ねこの習得サポート行動の15番目を変更します。");
-        *palicoLearnSupportAction +=
-            new MenuEntry("習得サポート行動16番目変更" + workInProgress,
-                          nullptr, PalicoLearnSupportAction16Change,
-                          "ねこの習得サポート行動の16番目を変更します。");
-      }
-      *palicoEdit += palicoLearnSupportAction;
-
-      MenuFolder *palicoLearnSkill = new MenuFolder("習得オトモスキル");
-      {
-        *palicoLearnSkill +=
-            new MenuEntry("習得オトモスキル1番目変更" + workInProgress, nullptr,
-                          PalicoLearnSupportSkill1Change,
-                          "ねこの習得オトモスキルの1番目を変更します。");
-        *palicoLearnSkill +=
-            new MenuEntry("習得オトモスキル2番目変更" + workInProgress, nullptr,
-                          PalicoLearnSupportSkill2Change,
-                          "ねこの習得オトモスキルの2番目を変更します。");
-        *palicoLearnSkill +=
-            new MenuEntry("習得オトモスキル3番目変更" + workInProgress, nullptr,
-                          PalicoLearnSupportSkill3Change,
-                          "ねこの習得オトモスキルの3番目を変更します。");
-        *palicoLearnSkill +=
-            new MenuEntry("習得オトモスキル4番目変更" + workInProgress, nullptr,
-                          PalicoLearnSupportSkill4Change,
-                          "ねこの習得オトモスキルの4番目を変更します。");
-        *palicoLearnSkill +=
-            new MenuEntry("習得オトモスキル5番目変更" + workInProgress, nullptr,
-                          PalicoLearnSupportSkill5Change,
-                          "ねこの習得オトモスキルの5番目を変更します。");
-        *palicoLearnSkill +=
-            new MenuEntry("習得オトモスキル6番目変更" + workInProgress, nullptr,
-                          PalicoLearnSupportSkill6Change,
-                          "ねこの習得オトモスキルの6番目を変更します。");
-        *palicoLearnSkill +=
-            new MenuEntry("習得オトモスキル7番目変更" + workInProgress, nullptr,
-                          PalicoLearnSupportSkill7Change,
-                          "ねこの習得オトモスキルの7番目を変更します。");
-        *palicoLearnSkill +=
-            new MenuEntry("習得オトモスキル8番目変更" + workInProgress, nullptr,
-                          PalicoLearnSupportSkill8Change,
-                          "ねこの習得オトモスキルの8番目を変更します。");
-        *palicoLearnSkill +=
-            new MenuEntry("習得オトモスキル9番目変更" + workInProgress, nullptr,
-                          PalicoLearnSupportSkill9Change,
-                          "ねこの習得オトモスキルの9番目を変更します。");
-        *palicoLearnSkill +=
-            new MenuEntry("習得オトモスキル10番目変更" + workInProgress,
-                          nullptr, PalicoLearnSupportSkill10Change,
-                          "ねこの習得オトモスキルの10番目を変更します。");
-        *palicoLearnSkill +=
-            new MenuEntry("習得オトモスキル11番目変更" + workInProgress,
-                          nullptr, PalicoLearnSupportSkill11Change,
-                          "ねこの習得オトモスキルの11番目を変更します。");
-        *palicoLearnSkill +=
-            new MenuEntry("習得オトモスキル12番目変更" + workInProgress,
-                          nullptr, PalicoLearnSupportSkill12Change,
-                          "ねこの習得オトモスキルの12番目を変更します。");
-      }
-      *palicoEdit += palicoLearnSkill;
+      *palicoEdit += new MenuEntry("装備サポート行動変更" + stable, nullptr,
+                                   PalicoEquipmentSupportActionChanger,
+                                   "ねこの装備サポート行動を変更します。");
+      *palicoEdit += new MenuEntry("装備オトモスキル変更" + stable, nullptr,
+                                   PalicoEquipmentSkillChanger,
+                                   "ねこの装備オトモスキルを変更します。\n"
+                                   "最大スキル枠を超えるとエラーになります。");
+      *palicoEdit += new MenuEntry("習得サポート行動変更" + stable, nullptr,
+                                   PalicoLearnSupportActionChanger,
+                                   "ねこの習得サポート行動を変更します。");
+      *palicoEdit += new MenuEntry("習得オトモスキル変更" + stable, nullptr,
+                                   PalicoLearnSkillChanger,
+                                   "ねこの習得オトモスキルを変更します。");
 
       MenuFolder *palicoAppearance = new MenuFolder("見た目");
       {
