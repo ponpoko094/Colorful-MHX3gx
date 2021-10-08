@@ -601,7 +601,7 @@ void SkinBlueChange(MenuEntry *entry) {
 void PalicoAttackPowerMagnificationOption(MenuEntry *entry) {
   static u8 palicoAttack = 0x1;
   u32 data32, cmp32;
-  Keyboard keyboard("防御力を何倍にしますか?\n1~255の間");
+  Keyboard keyboard("攻撃力を何倍にしますか?\n1~255の間");
   keyboard.IsHexadecimal(false);
   if (keyboard.Open(palicoAttack) == 0) {
     Process::Write32(0xC18F80, 0xE92D400C);
