@@ -456,7 +456,7 @@ void AllItemSold(MenuEntry *entry) {
 void ProwlerSupportGageMax(MenuEntry *entry) {
   u32 offset, cmp32;
   Process::Read32(0xDD5348, offset);
-  if (Process::Read32(offset + 0x14, cmp32) && cmp32 != 0x0) {
+  if (offset != 0x0) {
     Process::Read32(offset + 0x14, offset);
     Process::Write16(offset + 0x2220, 0x384);
   }
@@ -3183,8 +3183,7 @@ void PalicoLearnSkillChange(int number) {
 }
 
 void PalicoLearnSkillChanger(MenuEntry *entry) {
-  Keyboard keyboard("どのオトモスキルを変更しますか？",
-                    GetPalicoLearnSkill());
+  Keyboard keyboard("どのオトモスキルを変更しますか？", GetPalicoLearnSkill());
   int choice = keyboard.Open();
   if (choice >= 0) {
     PalicoLearnSkillChange(choice);
@@ -3207,13 +3206,8 @@ void PalicoVoiceChange(MenuEntry *entry) {
 
 void PalicoEyeChange(MenuEntry *entry) {
   u8 eye;
-  const std::vector<std::string> listPalicoEye{"ふつう",
-                                               "ほそ目",
-                                               "つり目",
-                                               "ニヤケ目",
-                                               "閉じ目",
-                                               "キズ目"
-                                               "透明"};
+  const std::vector<std::string> listPalicoEye{
+      "ふつう", "ほそ目", "つり目", "ニヤケ目", "閉じ目", "キズ目", "透明"};
   Process::Read8(0x8338AC2 + palicoChoice * 0x494, eye);
   Keyboard keyboard("目を選んでください。\n現在[" + listPalicoEye[eye] + "]",
                     listPalicoEye);
