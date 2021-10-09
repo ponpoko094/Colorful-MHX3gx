@@ -5,14 +5,12 @@
 ![CodeSize](https://img.shields.io/github/languages/code-size/ponpoko094/MHX3gx)
 
 ## とりあえずチートしたい方へ
-この3gxは不具合や動作の確認がすべて終わってないので、もしそういったのが気になるようでしたら舞姫氏のActionReplayチートを使ってください。
+この3gxには、まだ未確認のバグがあるかもしれません。そういったのが気になる方は舞姫氏のActionReplayチートを使ってください。
 [舞姫のあっぷろーだー](https://ux.getuploader.com/1456723/download/9)
 
 ## はじめに
 このプラグインはもともと舞姫氏のActionReplayチートがベースとなっています。
 ぽこはそれをフォークし、3gxならではの機能（キーボードやOSD等）を用いてさらに使いやすくしようとしました。しかし、最初の頃はバグだらけでコンパイル時にはいつもエラー文が出ていました。ですが、ぽこは多くの3gx開発者にアドバイスを頂き、ここまで成長できました。本当に感謝しています。
-
-このプラグインは主にC++で書かれていて、[CTRPluginFramework(v0.7.1)](https://github.com/mariohackandglitch/CTRPluginFramework-BlankTemplate)をベースとしています。
 
 ## プラグインの紹介
 チートの種類は200種類近くあるので、きっと使いたいチートが見つかるはずです。ネタチートもありますが、ほとんどのチートはニーズに沿っていることを考えているので心配ありません。もしMHX3gxだけだと物足りない場合はActionReplayを使えるようにしてあるので、ユーザーが作ったコードで遊ぶこともできます。
@@ -25,28 +23,23 @@
 4. 3DSを起動し、ホームメニューで`L+↓+Select`を押しRosalina menuを開き、Plugin Loaderの項目を**Enabled**にしてください。
 5. MHXを起動し、画面が一瞬青く光ったら使えます。
 
-### もしも初回起動時で不具合が発生したら
-初回起動時に不具合が出る場合は、MHX3gx.3gxが置いてあるディレクトリに、
-`opskip.bin`という名前のファイルを作成して起動してください。
-```
-sdmc
-└luma
- └plugin
-  └000400000015540
-   ├MHX3gx.3gx
-   └opskip.bin
-```
+## 開発者向け
 
-## MHX3gxをコンパイルするには
+### 何のプログラミング言語で開発しているの？
+この3gx自体は主にC++で書かれています。また、pythonを使って3dsに3gxの送信をしています。
 
-### 必要なファイル
-### [devkitpro](https://github.com/devkitPro/installer/releases/latest)
+### フレームワークやライブラリは何を使ってるの？
+[CTRPluginFramework](https://github.com/mariohackandglitch/CTRPluginFramework-BlankTemplate)と[nlohmnn-json](https://github.com/nlohmann/json)を使っています。
+
+### MHX3gxをコンパイルするには
+
+#### 必要なファイル
+#### [devkitpro](https://github.com/devkitPro/installer/releases/latest)
 exeファイルを開きインストールしてください。
-### [3gxtool](https://cdn.discordapp.com/attachments/479233979271086090/707634663765573753/3gxtool.exe)
+#### [3gxtool](https://cdn.discordapp.com/attachments/479233979271086090/707634663765573753/3gxtool.exe)
 `C:\devkitPro\tools\bin`にコピーしてください。
-
 **※CTRPFv0.5.1のコンパイル時に必要となる3gxtool.exeはMHX3gxでは使えません。**
-### [libCTRPF(v0.7.1)](https://cdn.discordapp.com/attachments/479233979271086090/895012182604021810/libctrpf-0.7.1.tar.bz2)
+#### [libCTRPF(v0.7.1)](https://cdn.discordapp.com/attachments/479233979271086090/895012182604021810/libctrpf-0.7.1.tar.bz2)
 解凍し、中にあるincludeとlibフォルダーを`C:\devkitPro\libctrpf`の中にコピーしてください。もしもフォルダーがなかったら作成してください。
 
 ### コンパイル方法
@@ -56,7 +49,8 @@ build.batを起動してください。または、**MHX3gxフォルダー上**�
 `make send`コマンドを動かすと、コンパイルとファイルの送信が同時に行われます。
 
 ## クレジット（協力して頂いた人たち、また参考にしたサイト）
-ソースの記述:ぽんぽこ
+### ソースの記述
+- ぽんぽこ
 
 ### サーチした人
 - ぽんぽこ
