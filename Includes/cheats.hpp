@@ -4,12 +4,26 @@
 #include <3ds.h>
 
 #include <CTRPluginFramework.hpp>
+#include <algorithm>
+#include <chrono>
+#include <cmath>
+#include <cstdarg>
+#include <cstdio>
+#include <cstring>
 #include <ctime>
+#include <fstream>
+#include <istream>
+#include <iterator>
+#include <ostream>
+#include <random>
+#include <sstream>
 #include <string>
+#include <thread>
 #include <vector>
 
 #include "Helpers.hpp"
 #include "csvc.h"
+#include "json.hpp"
 #include "libpon.hpp"
 #include "types.h"
 
@@ -170,31 +184,31 @@ void PalicoChoice(MenuEntry* entry);
 
 std::vector<std::string> GetPalicoEquipmentSupportAction();
 void PalicoEquipmentSupportActionChange(int number);
-void PalicoEquipmentSupportActionChanger(MenuEntry *entry);
+void PalicoEquipmentSupportActionChanger(MenuEntry* entry);
 
 std::vector<std::string> GetPalicoEquipmentSkill();
 void PalicoEquipmentSkillChange(int number);
-void PalicoEquipmentSkillChanger(MenuEntry *entry);
+void PalicoEquipmentSkillChanger(MenuEntry* entry);
 
 std::vector<std::string> GetPalicoLearnSupportAction();
 void PalicoLearnSupportActionChange(int number);
-void PalicoLearnSupportActionChanger(MenuEntry *entry);
+void PalicoLearnSupportActionChanger(MenuEntry* entry);
 
 std::vector<std::string> GetPalicoLearnSkill();
 void PalicoLearnSkillChange(int number);
-void PalicoLearnSkillChanger(MenuEntry *entry);
+void PalicoLearnSkillChanger(MenuEntry* entry);
 
 void PalicoBodyHairColorChange(int choice);
-void PalicoBodyHairColorChanger(MenuEntry *entry);
+void PalicoBodyHairColorChanger(MenuEntry* entry);
 
 void PalicoRightEyeColorChange(int choice);
-void PalicoRightEyeColorChanger(MenuEntry *entry);
+void PalicoRightEyeColorChanger(MenuEntry* entry);
 
 void PalicoLeftEyeColorChange(int choice);
-void PalicoLeftEyeColorChanger(MenuEntry *entry);
+void PalicoLeftEyeColorChanger(MenuEntry* entry);
 
 void PalicoInnerColorChange(int choice);
-void PalicoInnerColorChanger(MenuEntry *entry);
+void PalicoInnerColorChanger(MenuEntry* entry);
 
 void PalicoVoiceChange(MenuEntry* entry);
 void PalicoEyeChange(MenuEntry* entry);
