@@ -321,10 +321,10 @@ void InitMenu(PluginMenu &menu) {
                              "HPを無限にします。");
     *player +=
         new MenuEntry("無敵" + stable, nullptr, Invincible, "無敵になります。");
-    *player +=
-        new MenuEntry("スーパーアーマー" + workInProgress, nullptr, SuperArmor,
+    *player += new MenuEntry("スーパーアーマー" + stable, nullptr, SuperArmor,
                       "スーパーアーマーになります。\n"
-                      "オンにした後オフにして被弾するとエラーになります。");
+                             "オンにした後オフにすると被弾したときに"
+                             "のけぞりのモーションになります。");
     *player += new MenuEntry("スタミナ無限" + stable, nullptr, InfiniteStamina,
                              "スタミナを無限にします。");
     *player += new MenuEntry("狩技ゲージ無限" + stable, nullptr,

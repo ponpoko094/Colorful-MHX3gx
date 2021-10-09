@@ -375,10 +375,17 @@ void Always3HunterArtEquip(MenuEntry *entry) {
 
 // スーパーアーマー
 void SuperArmor(MenuEntry *entry) {
+  static bool flag = false;
+  u32 data1, data2;
+  if(!flag) {
+    Process::Read32(0x322C60, data1);
+    Process::Read32(0x3322F0, data2);
+    flag = true;
+  }
   KeyboardPlus::MultiToggle32("スーパーアーマーにしますか？",
                               {
-                                  {0x322C60, 0xE3A05001, 0xE4A05000},
-                                  {0x3322F0, 0xE3A00001, 0xE3A00000},
+                                  {0x322C60, 0xE3A05001, data1},
+                                  {0x3322F0, 0xE3A00001, data2},
                               });
 }
 
