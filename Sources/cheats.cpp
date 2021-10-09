@@ -1608,16 +1608,20 @@ void GuildCardChange(MenuEntry *entry) {
 
 // セーブ画面選択肢固定設定
 void SaveScreenOption(MenuEntry *entry) {
+  static u8 select;
   Keyboard keyboard("セーブ画面をどちらで固定しますか？", listToggle);
-  static int choice = keyboard.Open();
+  int choice = keyboard.Open();
   if (choice >= 0) {
+    select = choice;
+  } else {
+    return;
+  }
     entry->SetGameFunc([](MenuEntry *entry) {
       if (Controller::IsKeysDown(R)) {
-        Process::Write8(0x306E29A0, choice);
+      Process::Write8(0x306E29A0, select);
       }
     });
   }
-}
 
 // アイテムボックス編集
 void ItemBoxEdit(MenuEntry *entry) {

@@ -840,9 +840,8 @@ void InitMenu(PluginMenu &menu) {
           "クエスト残り時間表示" + workInProgress, QuestTimeDisplay,
           "QT = Quest Timeです。\n時:分:秒:フレーム\nと表示します。");
       *quest +=
-          new MenuEntry("選択肢を固定" + workInProgress, nullptr,
-                        SaveScreenOption, "Rボタンを押すと固定できます。");
-      *quest += new MenuEntry("クエスト時間停止" + workInProgress, nullptr,
+          new MenuEntry("選択肢を固定" + stable, nullptr, SaveScreenOption,
+                        "Rボタンを押すと固定できます。");
                               QuestTimeStop, "クエスト時間を停止します。");
       *quest += new MenuEntry(
           "全クエストクリア変更" + workInProgress, nullptr, AllQuestClearChange,
