@@ -2634,20 +2634,6 @@ Result mcuGetBatteryLevel(u8 *out) {
 }
 
 void BatteryLevel() {
-  // u8 percent = 0;
-  // MCUHWC_GetBatteryLevel(&percent);
-  // std::string percent_string = std::to_string(percent) + "%";
-  // MessageBox("バッテリー残量は" + percent_string + "です。")();
-
-  // static float batteryPercentage;
-  // Result res = 0;
-  // u8 data[4];
-  // res = MCUHWC_ReadRegister(0xA, data, 4);
-  // batteryPercentage = data[1] + data[2] / 256.0f;
-  // batteryPercentage = (u32)((batteryPercentage + 0.05f) * 10.0f) / 10.0f;
-  // MessageBox(Utils::Format("バッテリー残量は%3.fです。",
-  // batteryPercentage))();
-
   u8 batteryPercentage;
   mcuInit();
   mcuGetBatteryLevel(&batteryPercentage);
