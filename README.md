@@ -40,7 +40,7 @@ sdmc
 ## MHX3gxをコンパイルするには
 
 ### 必要なファイル
-### [devkitpro](https://github.com/devkitPro/installer/releases)
+### [devkitpro](https://github.com/devkitPro/installer/releases/latest)
 exeファイルを開きインストールしてください。
 ### [3gxtool](https://cdn.discordapp.com/attachments/479233979271086090/707634663765573753/3gxtool.exe)
 `C:\devkitPro\tools\bin`にコピーしてください。
@@ -51,6 +51,9 @@ exeファイルを開きインストールしてください。
 
 ### コンパイル方法
 build.batを起動してください。または、**MHX3gxフォルダー上**で`make re`コマンドを動かしてください。
+
+3ds側で[FTPD](https://github.com/mtheall/ftpd/releases/latest)や[3DShell](https://github.com/joel16/3DShell/releases/latest)を使ってFTPサーバーを立てた状態で、
+`make send`コマンドを動かすと、コンパイルとファイルの送信が同時に行われます。
 
 ## クレジット（協力して頂いた人たち、また参考にしたサイト）
 ソースの記述:ぽんぽこ
@@ -66,6 +69,7 @@ build.batを起動してください。または、**MHX3gxフォルダー上**�
 - クレラビ
 - だいち村長
 - けんじい
+- Kominost
 
 ### 参考にしたサイト
 [kiranico](http://mhgen.kiranico.com/)
@@ -74,8 +78,7 @@ build.batを起動してください。または、**MHX3gxフォルダー上**�
 
 ## さいごに
 
-もしぽこの開発環境に興味があったら → [ぽこの開発環境紹介
-](https://gist.github.com/ponpoko094/586fd8a17122d8fd1f028211f2465144)
+もしぽこの開発環境に興味があったら → [ぽこの開発環境紹介](https://gist.github.com/ponpoko094/586fd8a17122d8fd1f028211f2465144)
 
 バグ報告等はTwitter [@ponpoko094](https://twitter.com/ponpoko094) までどうぞ！
 

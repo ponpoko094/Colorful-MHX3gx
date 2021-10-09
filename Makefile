@@ -76,7 +76,13 @@ clean:
 	@echo clean ... 
 	@rm -fr $(BUILD) $(OUTPUT).3gx
 
+ftp:
+	@echo;
+	@python .\sendfile.py
+
 re: clean all
+
+send: clean all ftp
 
 #---------------------------------------------------------------------------------
 
