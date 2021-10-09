@@ -1616,12 +1616,12 @@ void SaveScreenOption(MenuEntry *entry) {
   } else {
     return;
   }
-    entry->SetGameFunc([](MenuEntry *entry) {
-      if (Controller::IsKeysDown(R)) {
+  entry->SetGameFunc([](MenuEntry *entry) {
+    if (Controller::IsKeysDown(R)) {
       Process::Write8(0x306E29A0, select);
-      }
-    });
-  }
+    }
+  });
+}
 
 // アイテムボックス編集
 void ItemBoxEdit(MenuEntry *entry) {
