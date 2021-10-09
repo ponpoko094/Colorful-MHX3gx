@@ -1,0 +1,25 @@
+from ftplib import FTP
+
+print("--------------------------")
+print("Trying to Send the Plugin over FTP...")
+
+get_ftp = FTP()
+
+HOST_ADDRESS = "192.168.0.50"
+PORT = 5000
+
+try:
+    get_ftp.connect(HOST_ADDRESS, PORT)
+except BaseException:
+    print("Failed to Connect on " + HOST_ADDRESS + " : " + str(PORT))
+
+PATH = "luma/plugins/0004000000155400"
+PLUGIN = "/MHX3gx.3gx"
+
+try:
+    print("Successfully Logged in " + HOST_ADDRESS + "\nResponse : " + get_ftp.getwelcome())
+    get_ftp.login()
+    get_ftp.storbinary("STOR " + PATH + PLUGIN, open(PLUGIN.replace("/", ""), "rb"), blocksize=8192, callback=None, rest=None)
+    print("Sending Plugin to " + PATH + "\n")
+except BaseException:
+    print("Login Failed!\n")

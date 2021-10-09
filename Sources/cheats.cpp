@@ -212,26 +212,6 @@ void OneAttackKill(MenuEntry *entry) {
   KeyboardPlus::Toggle32("瞬殺しますか？", 0x8CF54C, 0xE3A01000, 0xE0911003);
 }
 
-// 宙に浮くバグ
-void FloatBug(MenuEntry *entry) {
-  Process::Write32(0xC01414, 0xE51F000C);
-  Process::Write32(0xC01418, 0xE5860040);
-  Process::Write32(0xC0141C, 0xED960A10);
-  Process::Write32(0xC01420, 0xE12FFF1E);
-  Process::Write32(0xC01424, 0xE51F001C);
-  Process::Write32(0xC01428, 0xE5860040);
-  Process::Write32(0xC0142C, 0xE3A00000);
-  Process::Write32(0xC01430, 0xE12FFF1E);
-  Process::Write32(0x2F7BA4, 0xEB24261E);
-  Process::Write32(0x30A2AC, 0xEB23DC58);
-  if (Controller::IsKeysPressed(L + Select)) {
-    Process::WriteFloat(0xC01410, 2);
-  }
-  if (Controller::IsKeysPressed(R + Select)) {
-    Process::WriteFloat(0xC01410, 1);
-  }
-}
-
 // 属性
 void AttributePointChange(MenuEntry *entry) {
   u16 attributePoint;
@@ -395,10 +375,17 @@ void Always3HunterArtEquip(MenuEntry *entry) {
 
 // スーパーアーマー
 void SuperArmor(MenuEntry *entry) {
+  static bool flag = false;
+  u32 data1, data2;
+  if(!flag) {
+    Process::Read32(0x322C60, data1);
+    Process::Read32(0x3322F0, data2);
+    flag = true;
+  }
   KeyboardPlus::MultiToggle32("スーパーアーマーにしますか？",
                               {
-                                  {0x322C60, 0xE3A05001, 0xE4A05000},
-                                  {0x3322F0, 0xE3A00001, 0xE3A00000},
+                                  {0x322C60, 0xE3A05001, data1},
+                                  {0x3322F0, 0xE3A00001, data2},
                               });
 }
 
@@ -656,25 +643,6 @@ void PalicoDefencePowerMagnificationOption(MenuEntry *entry) {
     }
     if (Process::Read32(0xC18FFC, cmp32) && cmp32 == 0x1) {
       Process::Write32(0x5D60BC, 0xA000002);
-    }
-  }
-}
-
-// 画面にパス表示
-void DisplayBasePassword(MenuEntry *entry) {
-  std::string str;
-  static u16 pass;
-  u16 online;
-  Process::Read16(0xE2251C, pass);
-  Process::Read16(0x80913EC, online);
-  if (online == 0x100) {
-    if (pass <= 9999) {
-      if (pass <= 999) {
-        str = Utils::Format("Pass 0%u", pass);
-      } else {
-        str = Utils::Format("Pass %u", pass);
-      }
-      OSDPlus::Draw(str, 10, 80, true, Color::Yellow);
     }
   }
 }
@@ -1640,15 +1608,19 @@ void GuildCardChange(MenuEntry *entry) {
 
 // セーブ画面選択肢固定設定
 void SaveScreenOption(MenuEntry *entry) {
+  static u8 select;
   Keyboard keyboard("セーブ画面をどちらで固定しますか？", listToggle);
-  static int choice = keyboard.Open();
+  int choice = keyboard.Open();
   if (choice >= 0) {
-    entry->SetGameFunc([](MenuEntry *entry) {
-      if (Controller::IsKeysDown(R)) {
-        Process::Write8(0x306E29A0, choice);
-      }
-    });
+    select = choice;
+  } else {
+    return;
   }
+  entry->SetGameFunc([](MenuEntry *entry) {
+    if (Controller::IsKeysDown(R)) {
+      Process::Write8(0x306E29A0, select);
+    }
+  });
 }
 
 // アイテムボックス編集
@@ -2017,12 +1989,12 @@ void QuestDownMaxOption(MenuEntry *entry) {
 
 // クエスト現在ダウン回数設定
 void QuestDownNowOption(MenuEntry *entry) {
-  Process::Read8(0x8365440, quedownnow);
+  Process::Read8(0x8365441, quedownnow);
   Keyboard keyboard(Utils::Format(
       "現在のダウン回数を入力してください。\n現在[%u]", quedownnow));
   keyboard.IsHexadecimal(false);
   if (keyboard.Open(quedownnow) == 0) {
-    Process::Write8(0x8365440, quedownnow);
+    Process::Write8(0x8365441, quedownnow);
   }
 }
 
@@ -2088,14 +2060,11 @@ void FenyAndPugyNameChange(MenuEntry *entry) {
   Process::ReadString(0x83AE380, name, 0x1E, StringFormat::Utf8);
   Keyboard keyboard("グループを選んでください。", listVillage);
   int choice = keyboard.Open();
-  if (choice == 0) {
-    Process::WriteString(0x83B3648, name, StringFormat::Utf8);
-  } else if (choice == 1) {
-    Process::WriteString(0x83B3668, name, StringFormat::Utf8);
-  } else if (choice == 2) {
-    Process::WriteString(0x83B3688, name, StringFormat::Utf8);
-  } else if (choice == 3) {
-    Process::WriteString(0x83B36A8, name, StringFormat::Utf8);
+  if (choice >= 0) {
+    for (int i = 0; i < 8; i++) {
+      Process::Write32(0x83B3648 + choice * 0x20 + i * 0x4, 0x0);
+    }
+    Process::WriteString(0x83B3648 + choice * 0x20, name, StringFormat::Utf8);
   }
 }
 

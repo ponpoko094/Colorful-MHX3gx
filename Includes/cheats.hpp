@@ -262,9 +262,7 @@ void BaseSearchHostHunterRankMaximumChange(MenuEntry* entry);
 void BaseSearchInQuestChange(MenuEntry* entry);
 void BaseSearchPasswordExistChange(MenuEntry* entry);
 
-void DisplayBasePassword(MenuEntry* entry);
 void DisplayPlayerCoordinate(MenuEntry* entry);
-void FloatBug(MenuEntry* entry);
 void ViewingAngleOption(MenuEntry* entry);
 void ViewingAngleChangeV2(MenuEntry* entry);
 void WeaponSizeChange(MenuEntry* entry);
