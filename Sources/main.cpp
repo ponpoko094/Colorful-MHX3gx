@@ -322,7 +322,7 @@ void InitMenu(PluginMenu &menu) {
     *player +=
         new MenuEntry("無敵" + stable, nullptr, Invincible, "無敵になります。");
     *player += new MenuEntry("スーパーアーマー" + stable, nullptr, SuperArmor,
-                      "スーパーアーマーになります。\n"
+                             "スーパーアーマーになります。\n"
                              "オンにした後オフにすると被弾したときに"
                              "のけぞりのモーションになります。");
     *player += new MenuEntry("スタミナ無限" + stable, nullptr, InfiniteStamina,
@@ -661,18 +661,18 @@ void InitMenu(PluginMenu &menu) {
       {
         MenuFolder *palicoAppearanceColor = new MenuFolder("見た目の色変更");
         {
+          *palicoAppearanceColor += new MenuEntry("毛色変更" + stable, nullptr,
+                                                  PalicoBodyHairColorChanger,
+                                                  "ねこの毛色を変更します。");
           *palicoAppearanceColor += new MenuEntry(
-              "毛色変更" + stable, nullptr, PalicoBodyHairColorChanger,
-              "ねこの毛色を変更します。");
+              "右目の色変更" + stable, nullptr, PalicoRightEyeColorChanger,
+              "ねこの右目の色を変更します。");
           *palicoAppearanceColor += new MenuEntry(
-              "右目の色変更" + stable, nullptr,
-              PalicoRightEyeColorChanger, "ねこの右目の色を変更します。");
+              "左目の色変更" + stable, nullptr, PalicoLeftEyeColorChanger,
+              "ねこの左目の色を変更します。");
           *palicoAppearanceColor += new MenuEntry(
-              "左目の色変更" + stable, nullptr,
-              PalicoLeftEyeColorChanger, "ねこの左目の色を変更します。");
-          *palicoAppearanceColor += new MenuEntry(
-              "インナーの色変更" + stable, nullptr,
-              PalicoInnerColorChanger, "ねこのインナーの色を変更します。");
+              "インナーの色変更" + stable, nullptr, PalicoInnerColorChanger,
+              "ねこのインナーの色を変更します。");
         }
         *palicoAppearance += palicoAppearanceColor;
 
@@ -698,20 +698,20 @@ void InitMenu(PluginMenu &menu) {
       *palicoEdit += palicoAppearance;
 
       *palicoEdit +=
-          new MenuEntry("経験値変更" + stable, nullptr,
-                        PalicoExperienceChange, "ねこの経験値を変更します。");
+          new MenuEntry("経験値変更" + stable, nullptr, PalicoExperienceChange,
+                        "ねこの経験値を変更します。");
       *palicoEdit +=
-          new MenuEntry("レベル変更" + stable, nullptr,
-                        PalicoLevelChange, "ねこのレベルを変更します。");
+          new MenuEntry("レベル変更" + stable, nullptr, PalicoLevelChange,
+                        "ねこのレベルを変更します。");
       *palicoEdit += new MenuEntry("サポート傾向変更" + stable, nullptr,
                                    PalicoSupportTrendChange,
                                    "ねこのサポート傾向を変更します。");
       *palicoEdit +=
-          new MenuEntry("親密度変更" + stable, nullptr,
-                        PalicoClosenessChange, "ねこの親密度を変更します。");
+          new MenuEntry("親密度変更" + stable, nullptr, PalicoClosenessChange,
+                        "ねこの親密度を変更します。");
       *palicoEdit +=
-          new MenuEntry("ターゲット変更" + stable, nullptr,
-                        PalicoTargetChange, "ねこのターゲットを変更します。");
+          new MenuEntry("ターゲット変更" + stable, nullptr, PalicoTargetChange,
+                        "ねこのターゲットを変更します。");
       *palicoEdit +=
           new MenuEntry("オトモコメント編集可能変更" + stable, nullptr,
                         PalicoCommentEditPossibleChange,
@@ -741,8 +741,7 @@ void InitMenu(PluginMenu &menu) {
           "キーボードでは、メニュー内で直接変更することができます。\n"
           "変換候補変換の改行やタブが使えます。");
       *palicoEdit += new MenuEntry(
-          "先代旦那さん変更" + stable, nullptr,
-          PalicoPredecessorHusbandChange,
+          "先代旦那さん変更" + stable, nullptr, PalicoPredecessorHusbandChange,
           "ねこの先代旦那さんを変更します。\n"
           "定型文では1ページ目の一番左下にある定型文をねこの先代旦那さんにコピ"
           "ーします。\n"
@@ -751,20 +750,18 @@ void InitMenu(PluginMenu &menu) {
     }
     *palico += palicoEdit;
 
-    *palico += new MenuEntry(
-        "ねこの攻撃力倍率変更" + stable, nullptr,
-        PalicoAttackPowerMagnificationOption,
-        "ねこの攻撃力の倍率を変更します。");
-    *palico += new MenuEntry(
-        "ねこの防御力倍率変更" + stable, nullptr,
-        PalicoDefencePowerMagnificationOption,
-        "ねこの防御力変更の倍率を変更します。");
+    *palico += new MenuEntry("ねこの攻撃力倍率変更" + stable, nullptr,
+                             PalicoAttackPowerMagnificationOption,
+                             "ねこの攻撃力の倍率を変更します。");
+    *palico += new MenuEntry("ねこの防御力倍率変更" + stable, nullptr,
+                             PalicoDefencePowerMagnificationOption,
+                             "ねこの防御力変更の倍率を変更します。");
     *palico += new MenuEntry(
         "ねこ吸収" + stable, PalicoAbsorption,
         "ねこをハンターに吸収させます。\n他プレイヤーからは見えません。");
-    *palico += new MenuEntry("サポートゲージ最大" + stable,
-                             ProwlerSupportGageMax,
-                             "ニャンターのサポートゲージを最大にします。");
+    *palico +=
+        new MenuEntry("サポートゲージ最大" + stable, ProwlerSupportGageMax,
+                      "ニャンターのサポートゲージを最大にします。");
   }
   menu += palico;
 
@@ -788,26 +785,29 @@ void InitMenu(PluginMenu &menu) {
         new MenuFolder("酔っぱらい", "クエスト中は酔っぱらえません。");
     {
       *drunk +=
-          new MenuEntry("即酔っぱらい" + workInProgress, nullptr,
-                        InstantDrunkOption, "酔っぱらいになるか変更できます。");
-      *drunk += new MenuEntry("1回お酒を飲むと酔っぱらい" + workInProgress,
-                              Drunk1, "1回お酒を飲むと酔っぱらいになります。");
+          new MenuEntry("即酔っぱらい" + stable, nullptr, InstantDrunkOption,
+                        "酔っぱらいになるか変更できます。");
+      *drunk += new MenuEntry("1回お酒を飲むと酔っぱらい" + stable, Drunk1,
+                              "1回お酒を飲むと酔っぱらいになります。");
     }
     *other += drunk;
 
     MenuFolder *hunterRank = new MenuFolder("ハンターランク");
     {
       *hunterRank +=
-          new MenuEntry("ハンターランク変更" + workInProgress, nullptr,
+          new MenuEntry("ハンターランク変更" + stable, nullptr,
                         HunterRankChange, "ハンターランクを変更できます。");
-      *hunterRank += new MenuEntry(
-          "ハンターランクポイント変更" + workInProgress, nullptr,
-          HunterRankPointChange, "ハンターランクポイントを変更できます。");
+      *hunterRank += new MenuEntry("ハンターランクポイント変更" + stable,
+                                   nullptr, HunterRankPointChange,
+                                   "ハンターランクポイントを変更できます。");
     }
     *other += hunterRank;
 
     MenuFolder *fenyAndPugy = new MenuFolder("プーギー&フェニー");
     {
+      *fenyAndPugy += new MenuEntry("フェニー&プーギーの服変更" + stable,
+                                    nullptr, FenyAndPugyClothes,
+                                    "フェニー&プーギーの服を変更できます。");
       *fenyAndPugy += new MenuEntry(
           "定型文でフェニー&プーギーの名前変更" + stable, nullptr,
           FenyAndPugyNameChange,
@@ -818,72 +818,73 @@ void InitMenu(PluginMenu &menu) {
 
     MenuFolder *quest = new MenuFolder("クエスト");
     {
-      *quest += new MenuEntry("クエストステータス変更" + workInProgress,
-                              nullptr, QuestClearOption,
+      *quest += new MenuEntry("クエストステータス変更" + stable, nullptr,
+                              QuestClearOption,
                               "クエストクリアか失敗を選択できます。");
-      *quest += new MenuEntry("クエストクリア後即リザルト" + workInProgress,
-                              QuestWaitSkip,
-                              "クエストクリア後の待ち時間をスキップします。");
       *quest +=
-          new MenuEntry("報酬画面スキップ" + workInProgress, QuestResultSkip,
-                        "報酬受取の時間を0にし、スキップします。");
+          new MenuEntry("クエストクリア後即リザルト" + stable, QuestWaitSkip,
+                        "クエストクリア後の待ち時間をスキップします。");
+      *quest += new MenuEntry("報酬画面スキップ" + stable, QuestResultSkip,
+                              "報酬受取の時間を0にし、スキップします。");
       *quest +=
-          new MenuEntry("最大ダウン回数変更" + workInProgress, nullptr,
+          new MenuEntry("最大ダウン回数変更" + stable, nullptr,
                         QuestDownMaxOption, "最大ダウン回数を変更できます。");
       *quest +=
           new MenuEntry("現在のダウン回数変更" + stable, nullptr,
                         QuestDownNowOption, "現在のダウン回数を変更します。");
       *quest += new MenuEntry(
-          "クエスト残り時間表示" + workInProgress, QuestTimeDisplay,
+          "クエスト残り時間表示" + stable, QuestTimeDisplay,
           "QT = Quest Timeです。\n時:分:秒:フレーム\nと表示します。");
       *quest +=
           new MenuEntry("選択肢を固定" + stable, nullptr, SaveScreenOption,
                         "Rボタンを押すと固定できます。");
+      *quest += new MenuEntry("クエスト時間停止" + stable, nullptr,
                               QuestTimeStop, "クエスト時間を停止します。");
       *quest += new MenuEntry(
-          "全クエストクリア変更" + workInProgress, nullptr, AllQuestClearChange,
+          "全クエストクリア変更" + stable, nullptr, AllQuestClearChange,
           "ストーリーに不具合が起きる可能性があります。\n予めバックアップ"
           "を取ったり、サブキャラクターで実行してください。");
     }
     *other += quest;
 
-    MenuFolder *base = new MenuFolder("集会所");
+    MenuFolder *base =
+        new MenuFolder("集会所", "ベルナ村にいる状態で変更してください。");
     {
       MenuFolder *baseCreate = new MenuFolder("集会所を作る");
       {
-        *baseCreate += new MenuEntry("ターゲット変更" + workInProgress, nullptr,
+        *baseCreate += new MenuEntry("ターゲット変更" + stable, nullptr,
                                      BaseCreateTargetChange,
                                      "ターゲットを？？？？？にできます。");
-        *baseCreate += new MenuEntry("クエスト形式変更" + workInProgress,
+        *baseCreate += new MenuEntry("クエスト形式変更" + stable,
                                      nullptr, BaseCreateQuestTypeChange,
                                      "クエスト形式を変更できます。");
         *baseCreate +=
-            new MenuEntry("募集HR下限変更" + workInProgress, nullptr,
+            new MenuEntry("募集HR下限変更" + stable, nullptr,
                           BaseCreateRecruitmentHunterRankMinimumChange,
                           "募集HRの下限を変更できます。");
         *baseCreate +=
-            new MenuEntry("募集HR上限変更" + workInProgress, nullptr,
+            new MenuEntry("募集HR上限変更" + stable, nullptr,
                           BaseCreateRecruitmentHunterRankMaximumChange,
                           "募集HRの上限を変更できます。");
-        *baseCreate += new MenuEntry("入室人数変更" + workInProgress, nullptr,
+        *baseCreate += new MenuEntry("入室人数変更" + stable, nullptr,
                                      BaseCreateEntryPeopleChange,
                                      "入室人数を変更できます。");
-        *baseCreate += new MenuEntry("入室制限変更" + workInProgress, nullptr,
+        *baseCreate += new MenuEntry("入室制限変更" + stable, nullptr,
                                      BaseCreateEntryLimitChange,
                                      "入室制限を変更できます。");
-        *baseCreate += new MenuEntry("パスワード有無変更" + workInProgress,
+        *baseCreate += new MenuEntry("パスワード有無変更" + stable,
                                      nullptr, BaseCreatePasswordExistChange,
                                      "パスワードの有無を変更できます。");
-        *baseCreate += new MenuEntry("募集文①変更" + workInProgress, nullptr,
+        *baseCreate += new MenuEntry("募集文①変更" + stable, nullptr,
                                      BaseCreateRecruitmentMessage1Change,
                                      "募集文①を変更できます。");
-        *baseCreate += new MenuEntry("募集文②変更" + workInProgress, nullptr,
+        *baseCreate += new MenuEntry("募集文②変更" + stable, nullptr,
                                      BaseCreateRecruitmentMessage2Change,
                                      "募集文②を変更できます。");
-        *baseCreate += new MenuEntry("募集文③変更" + workInProgress, nullptr,
+        *baseCreate += new MenuEntry("募集文③変更" + stable, nullptr,
                                      BaseCreateRecruitmentMessage3Change,
                                      "募集文③を変更できます。");
-        *baseCreate += new MenuEntry("募集文④変更" + workInProgress, nullptr,
+        *baseCreate += new MenuEntry("募集文④変更" + stable, nullptr,
                                      BaseCreateRecruitmentMessage4Change,
                                      "募集文④を変更できます。");
       }
@@ -892,23 +893,23 @@ void InitMenu(PluginMenu &menu) {
       MenuFolder *baseSearch = new MenuFolder("集会所を探す");
       {
         *baseSearch +=
-            new MenuEntry("ターゲット変更" + workInProgress, nullptr,
+            new MenuEntry("ターゲット変更" + stable, nullptr,
                           BaseSearchTargetChange, "ターゲットを変更できます。");
-        *baseSearch += new MenuEntry("クエスト形式変更" + workInProgress,
+        *baseSearch += new MenuEntry("クエスト形式変更" + stable,
                                      nullptr, BaseSearchQuestTypeChange,
                                      "クエスト形式を変更できます。");
         *baseSearch +=
-            new MenuEntry("ホストHR下限変更" + workInProgress, nullptr,
+            new MenuEntry("ホストHR下限変更" + stable, nullptr,
                           BaseSearchHostHunterRankMinimumChange,
                           "ホストHRの下限を変更できます");
         *baseSearch +=
-            new MenuEntry("ホストHR上限変更" + workInProgress, nullptr,
+            new MenuEntry("ホストHR上限変更" + stable, nullptr,
                           BaseSearchHostHunterRankMaximumChange,
                           "ホストHRの上限を変更できます");
-        *baseSearch += new MenuEntry("クエスト中変更" + workInProgress, nullptr,
+        *baseSearch += new MenuEntry("クエスト中変更" + stable, nullptr,
                                      BaseSearchInQuestChange,
                                      "クエスト中を変更できます。");
-        *baseSearch += new MenuEntry("パスワード有無変更" + workInProgress,
+        *baseSearch += new MenuEntry("パスワード有無変更" + stable,
                                      nullptr, BaseSearchPasswordExistChange,
                                      "パスワードの有無を変更できます。");
       }
@@ -921,25 +922,26 @@ void InitMenu(PluginMenu &menu) {
                             "プレイヤーの現在座標を表示します。");
     *other += new MenuEntry("クエスト中の視野角変更" + stable, nullptr,
                             ViewingAngleOption,
-                            "視野角を変更します。\n(画面酔い注意)");
-    *other += new MenuEntry("視野角変更改良版" + workInProgress, nullptr,
+                            "クエスト中の視野角を変更します。\n(画面酔い注意)");
+    *other += new MenuEntry("視野角変更" + stable, nullptr,
                             ViewingAngleChangeV2, "視野の倍率を変更できます。");
-    *other += new MenuEntry("武器サイズ変更" + workInProgress, nullptr,
+    *other += new MenuEntry("武器サイズ変更" + stable, nullptr,
                             WeaponSizeChange, "武器のサイズを変更できます。");
-    *other += new MenuEntry("画面の明るさ変更" + workInProgress, nullptr,
+    *other += new MenuEntry("画面の明るさ変更" + stable, nullptr,
                             ContrastChange, "画面の明るさ変更を変更できます。");
     *other +=
-        new MenuEntry("ギルドカード情報変更" + workInProgress, nullptr,
-                      GuildCardChange, "ギルドカードの情報を変更できます。");
+        new MenuEntry("ギルドカード情報変更" + stable, nullptr, GuildCardChange,
+                      "ギルドカードの情報を変更できます。");
     *other += new MenuEntry("リージョン変更" + stable, nullptr, RegionChange,
                             "日本かヨーロッパに変更できます。");
-    *other += new MenuEntry("村の貢献度変更" + workInProgress, nullptr,
+    *other += new MenuEntry("村の貢献度変更" + stable, nullptr,
                             VillageContributionPointChange,
                             "村の貢献度を変更します。");
     *other += new MenuEntry("ルームサービス変更" + stable, nullptr,
                             RoomServiceChange, "ルームサービスを変更します。");
-    *other += new MenuEntry("障害物無視" + workInProgress, nullptr, WallThrough,
-                            "障害物を無視するかどうか選択できます。");
+    *other +=
+        new MenuEntry("障害物無視" + stable, nullptr, WallThrough,
+                      "クエスト中に障害物を無視するかどうか選択できます。");
     *other += new MenuEntry("最大FPS変更" + stable, nullptr, MaximumFpsChange,
                             "最大FPSを変更できます。");
   }
