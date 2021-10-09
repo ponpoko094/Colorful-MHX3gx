@@ -920,10 +920,7 @@ void InitMenu(PluginMenu &menu) {
     }
     *other += base;
 
-    *other += new MenuEntry("画面に集会所のパス表示" + workInProgress,
-                            DisplayBasePassword,
-                            "現在の部屋のパスワードを表示します。");
-    *other += new MenuEntry("プレイヤーの現在座標表示" + workInProgress,
+    *other += new MenuEntry("プレイヤーの現在座標表示" + stable,
                             DisplayPlayerCoordinate,
                             "プレイヤーの現在座標を表示します。");
     *other += new MenuEntry("クエスト中の視野角変更" + stable, nullptr,

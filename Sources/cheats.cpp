@@ -640,25 +640,6 @@ void PalicoDefencePowerMagnificationOption(MenuEntry *entry) {
   }
 }
 
-// 画面にパス表示
-void DisplayBasePassword(MenuEntry *entry) {
-  std::string str;
-  static u16 pass;
-  u16 online;
-  Process::Read16(0xE2251C, pass);
-  Process::Read16(0x80913EC, online);
-  if (online == 0x100) {
-    if (pass <= 9999) {
-      if (pass <= 999) {
-        str = Utils::Format("Pass 0%u", pass);
-      } else {
-        str = Utils::Format("Pass %u", pass);
-      }
-      OSDPlus::Draw(str, 10, 80, true, Color::Yellow);
-    }
-  }
-}
-
 // ガンランス弾無限
 void GunlanceAmmoInfinite(MenuEntry *entry) {
   u32 offset;
