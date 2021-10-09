@@ -834,7 +834,7 @@ void InitMenu(PluginMenu &menu) {
           new MenuEntry("最大ダウン回数変更" + workInProgress, nullptr,
                         QuestDownMaxOption, "最大ダウン回数を変更できます。");
       *quest +=
-          new MenuEntry("現在のダウン回数変更" + workInProgress, nullptr,
+          new MenuEntry("現在のダウン回数変更" + stable, nullptr,
                         QuestDownNowOption, "現在のダウン回数を変更します。");
       *quest += new MenuEntry(
           "クエスト残り時間表示" + workInProgress, QuestTimeDisplay,

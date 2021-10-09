@@ -1989,12 +1989,12 @@ void QuestDownMaxOption(MenuEntry *entry) {
 
 // クエスト現在ダウン回数設定
 void QuestDownNowOption(MenuEntry *entry) {
-  Process::Read8(0x8365440, quedownnow);
+  Process::Read8(0x8365441, quedownnow);
   Keyboard keyboard(Utils::Format(
       "現在のダウン回数を入力してください。\n現在[%u]", quedownnow));
   keyboard.IsHexadecimal(false);
   if (keyboard.Open(quedownnow) == 0) {
-    Process::Write8(0x8365440, quedownnow);
+    Process::Write8(0x8365441, quedownnow);
   }
 }
 
