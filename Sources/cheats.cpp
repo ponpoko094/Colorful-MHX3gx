@@ -212,26 +212,6 @@ void OneAttackKill(MenuEntry *entry) {
   KeyboardPlus::Toggle32("瞬殺しますか？", 0x8CF54C, 0xE3A01000, 0xE0911003);
 }
 
-// 宙に浮くバグ
-void FloatBug(MenuEntry *entry) {
-  Process::Write32(0xC01414, 0xE51F000C);
-  Process::Write32(0xC01418, 0xE5860040);
-  Process::Write32(0xC0141C, 0xED960A10);
-  Process::Write32(0xC01420, 0xE12FFF1E);
-  Process::Write32(0xC01424, 0xE51F001C);
-  Process::Write32(0xC01428, 0xE5860040);
-  Process::Write32(0xC0142C, 0xE3A00000);
-  Process::Write32(0xC01430, 0xE12FFF1E);
-  Process::Write32(0x2F7BA4, 0xEB24261E);
-  Process::Write32(0x30A2AC, 0xEB23DC58);
-  if (Controller::IsKeysPressed(L + Select)) {
-    Process::WriteFloat(0xC01410, 2);
-  }
-  if (Controller::IsKeysPressed(R + Select)) {
-    Process::WriteFloat(0xC01410, 1);
-  }
-}
-
 // 属性
 void AttributePointChange(MenuEntry *entry) {
   u16 attributePoint;

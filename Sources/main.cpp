@@ -926,11 +926,7 @@ void InitMenu(PluginMenu &menu) {
     *other += new MenuEntry("プレイヤーの現在座標表示" + workInProgress,
                             DisplayPlayerCoordinate,
                             "プレイヤーの現在座標を表示します。");
-    *other +=
-        new MenuEntry("宙に浮くバグ" + workInProgress, FloatBug,
-                      "L+Selectでオン、R+Selectでオフにできます。\n"
-                      "高確率でエラーになります。注意してオンにしてください。");
-    *other += new MenuEntry("視野角変更" + workInProgress, nullptr,
+    *other += new MenuEntry("クエスト中の視野角変更" + stable, nullptr,
                             ViewingAngleOption,
                             "視野角を変更します。\n(画面酔い注意)");
     *other += new MenuEntry("視野角変更改良版" + workInProgress, nullptr,
