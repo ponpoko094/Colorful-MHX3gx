@@ -2060,14 +2060,11 @@ void FenyAndPugyNameChange(MenuEntry *entry) {
   Process::ReadString(0x83AE380, name, 0x1E, StringFormat::Utf8);
   Keyboard keyboard("グループを選んでください。", listVillage);
   int choice = keyboard.Open();
-  if (choice == 0) {
-    Process::WriteString(0x83B3648, name, StringFormat::Utf8);
-  } else if (choice == 1) {
-    Process::WriteString(0x83B3668, name, StringFormat::Utf8);
-  } else if (choice == 2) {
-    Process::WriteString(0x83B3688, name, StringFormat::Utf8);
-  } else if (choice == 3) {
-    Process::WriteString(0x83B36A8, name, StringFormat::Utf8);
+  if (choice >= 0) {
+    for (int i = 0; i < 8; i++) {
+      Process::Write32(0x83B3648 + choice * 0x20 + i * 0x4, 0x0);
+    }
+    Process::WriteString(0x83B3648 + choice * 0x20, name, StringFormat::Utf8);
   }
 }
 

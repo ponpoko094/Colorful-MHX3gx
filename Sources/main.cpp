@@ -809,10 +809,7 @@ void InitMenu(PluginMenu &menu) {
     MenuFolder *fenyAndPugy = new MenuFolder("プーギー&フェニー");
     {
       *fenyAndPugy += new MenuEntry(
-          "フェニー&プーギーの服変更" + workInProgress, nullptr,
-          FenyAndPugyClothes, "フェニー&プーギーの服を変更できます。");
-      *fenyAndPugy += new MenuEntry(
-          "定型文でフェニー&プーギーの名前変更" + workInProgress, nullptr,
+          "定型文でフェニー&プーギーの名前変更" + stable, nullptr,
           FenyAndPugyNameChange,
           "1ページ目の一番左下にある定型文を名前にコピーします。\nフェニ"
           "ー&プーギーの名前を変更できます。");
