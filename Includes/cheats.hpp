@@ -1,36 +1,9 @@
-#ifndef MHX3GX_INCLUDES_CHEATS_H_
-#define MHX3GX_INCLUDES_CHEATS_H
+#ifndef CHEATS_HPP
+#define CHEATS_HPP
 
-#include <3ds.h>
-
-#include <CTRPluginFramework.hpp>
-#include <algorithm>
-#include <chrono>
-#include <cmath>
-#include <cstdarg>
-#include <cstdio>
-#include <cstring>
-#include <ctime>
-#include <fstream>
-#include <istream>
-#include <iterator>
-#include <ostream>
-#include <random>
-#include <sstream>
-#include <string>
-#include <thread>
-#include <vector>
-
-#include "Helpers.hpp"
-#include "csvc.h"
-#include "json.hpp"
-#include "libpon.hpp"
-#include "types.h"
+#include "stdafx.hpp"
 
 namespace CTRPluginFramework {
-
-using CallbackPointer = void (*)(void);
-using StringVector = std::vector<std::string>;
 
 bool IsInQuest();
 
@@ -338,4 +311,4 @@ void BatteryLevel();
 
 }  // namespace CTRPluginFramework
 
-#endif  // MHX3GX_INCLUDES_CHEATS_H
+#endif  // CHEATS_HPP
