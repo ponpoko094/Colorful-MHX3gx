@@ -1,8 +1,5 @@
 #include "cheats.hpp"
 
-#include <string>
-#include <vector>
-
 namespace CTRPluginFramework {
 
 const std::vector<std::string> listPalicoSkill{

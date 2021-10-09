@@ -23,11 +23,11 @@ void TeamAndCondition() {
   const std::string teamAndConditionMessageTitle = "利用規約";
 
   const std::string teamAndConditionMessage =
-      "①この3gxは無料で提供されます。もしこのプラグインを購入した場合は、ただち"
-      "に返金を求めてください。\n"
+      "①この3gxは無料で提供されます。"
+      "もしこのプラグインを購入した場合は、ただちに返金を求めてください。\n"
       "②他人に譲渡する場合、MHX3gxのGithubのリンクを提示すること。\n"
-      "③この3gxを使用しデータが破損する等の損害に対して、ぽんぽこは一切の責任を"
-      "負いません。\n"
+      "③この3gxを使用しデータが破損する等の損害に対して、"
+      "ぽんぽこは一切の責任を負いません。\n"
       "利用規約に同意しますか？";
 
   const std::string askOpeningMessageSkipMessage =
@@ -41,7 +41,7 @@ void TeamAndCondition() {
       "設定を変更するために\n"
       "再起動をお願いします。";
 
-  const std::string enjoyPluginMessage = "プラグインを楽しんでください。";
+  const std::string enjoyPluginMessage = "プラグインを楽しんでください！";
 
   const std::string teamAndConditionAgreementMessage =
       "利用規約に同意する必要があります。";
