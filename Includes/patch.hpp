@@ -1,5 +1,5 @@
-#ifndef MHX3GX_INCLUDES_PATCH_H_
-#define MHX3GX_INCLUDES_PATCH_H_
+#ifndef MHX3GX_INCLUDES_PATCH_HPP_
+#define MHX3GX_INCLUDES_PATCH_HPP_
 
 #include "stdafx.hpp"
 
@@ -7,83 +7,85 @@ namespace CTRPluginFramework {
 
 struct PatchColorData {
   // Ui Color
-  u8 uiMainTextR = 0xFF;
-  u8 uiMainTextG = 0xFF;
-  u8 uiMainTextB = 0xFF;
-  u8 uiWindowTitleR = 0xFF;
-  u8 uiWindowTitleG = 0xFF;
-  u8 uiWindowTitleB = 0xFF;
-  u8 uiMenuSelectedItemR = 0xFF;
-  u8 uiMenuSelectedItemG = 0xFF;
-  u8 uiMenuSelectedItemB = 0xFF;
-  u8 uiMenuUnselectedItemR = 0xC0;
-  u8 uiMenuUnselectedItemG = 0xC0;
-  u8 uiMenuUnselectedItemB = 0xC0;
-  u8 uiBackgroundMainR = 0x00;
-  u8 uiBackgroundMainG = 0x00;
-  u8 uiBackgroundMainB = 0x00;
-  u8 uiBackgroundSecondaryR = 0x15;
-  u8 uiBackgroundSecondaryG = 0x15;
-  u8 uiBackgroundSecondaryB = 0x15;
-  u8 uiBackgroundBorderR = 0xFF;
-  u8 uiBackgroundBorderG = 0xFF;
-  u8 uiBackgroundBorderB = 0xFF;
+  u8 ui_main_text_r = 0xFF;
+  u8 ui_main_text_g = 0xFF;
+  u8 ui_main_text_b = 0xFF;
+  u8 ui_window_title_r = 0xFF;
+  u8 ui_window_title_g = 0xFF;
+  u8 ui_window_title_b = 0xFF;
+  u8 ui_menu_selected_item_r = 0xFF;
+  u8 ui_menu_selected_item_g = 0xFF;
+  u8 ui_menu_selected_item_b = 0xFF;
+  u8 ui_menu_unselected_item_r = 0xC0;
+  u8 ui_menu_unselected_item_g = 0xC0;
+  u8 ui_menu_unselected_item_b = 0xC0;
+  u8 ui_background_main_r = 0x00;
+  u8 ui_background_main_g = 0x00;
+  u8 ui_background_main_b = 0x00;
+  u8 ui_background_secondary_r = 0x15;
+  u8 ui_background_secondary_g = 0x15;
+  u8 ui_background_secondary_b = 0x15;
+  u8 ui_background_border_r = 0xFF;
+  u8 ui_background_border_g = 0xFF;
+  u8 ui_background_border_b = 0xFF;
 
   // Keyboard Color
-  u8 keyboardBackgroundR = 0x00;
-  u8 keyboardBackgroundG = 0x00;
-  u8 keyboardBackgroundB = 0x00;
-  u8 keyboardKeyBackgroundR = 0x00;
-  u8 keyboardKeyBackgroundG = 0x00;
-  u8 keyboardKeyBackgroundB = 0x00;
-  u8 keyboardKeyBackgroundPressedR = 0xC0;
-  u8 keyboardKeyBackgroundPressedG = 0xC0;
-  u8 keyboardKeyBackgroundPressedB = 0xC0;
-  u8 keyboardKeyTextR = 0xFF;
-  u8 keyboardKeyTextG = 0xFF;
-  u8 keyboardKeyTextB = 0xFF;
-  u8 keyboardKeyTextPressedR = 0xFF;
-  u8 keyboardKeyTextPressedG = 0xFF;
-  u8 keyboardKeyTextPressedB = 0xFF;
-  u8 keyboardKeyTextDisabledR = 0x69;
-  u8 keyboardKeyTextDisabledG = 0x69;
-  u8 keyboardKeyTextDisabledB = 0x69;
-  u8 keyboardCursorR = 0xFF;
-  u8 keyboardCursorG = 0xFF;
-  u8 keyboardCursorB = 0xFF;
-  u8 keyboardInputR = 0xFF;
-  u8 keyboardInputG = 0xFF;
-  u8 keyboardInputB = 0xFF;
+  u8 keyboard_background_r = 0x00;
+  u8 keyboard_background_g = 0x00;
+  u8 keyboard_background_b = 0x00;
+  u8 keyboard_key_background_r = 0x00;
+  u8 keyboard_key_background_g = 0x00;
+  u8 keyboard_key_background_b = 0x00;
+  u8 keyboard_key_background_pressed_r = 0xC0;
+  u8 keyboard_key_background_pressed_g = 0xC0;
+  u8 keyboard_key_background_pressed_b = 0xC0;
+  u8 keyboard_key_text_r = 0xFF;
+  u8 keyboard_key_text_g = 0xFF;
+  u8 keyboard_key_text_b = 0xFF;
+  u8 keyboard_key_text_pressed_r = 0xFF;
+  u8 keyboard_key_text_pressed_g = 0xFF;
+  u8 keyboard_key_text_pressed_b = 0xFF;
+  u8 keyboard_key_text_disabled_r = 0x69;
+  u8 keyboard_key_text_disabled_g = 0x69;
+  u8 keyboard_key_text_disabled_b = 0x69;
+  u8 keyboard_cursor_r = 0xFF;
+  u8 keyboard_cursor_g = 0xFF;
+  u8 keyboard_cursor_b = 0xFF;
+  u8 keyboard_input_r = 0xFF;
+  u8 keyboard_input_g = 0xFF;
+  u8 keyboard_input_b = 0xFF;
 
   // Custom Keyboard Color
-  u8 customKeyboardBackgroundMainR = 0x00;
-  u8 customKeyboardBackgroundMainG = 0x00;
-  u8 customKeyboardBackgroundMainB = 0x00;
-  u8 customKeyboardBackgroundSecondaryR = 0x15;
-  u8 customKeyboardBackgroundSecondaryG = 0x15;
-  u8 customKeyboardBackgroundSecondaryB = 0x15;
-  u8 customKeyboardBackgroundBorderR = 0xFF;
-  u8 customKeyboardBackgroundBorderG = 0xFF;
-  u8 customKeyboardBackgroundBorderB = 0xFF;
-  u8 customKeyboardKeyBackgroundR = 0x51;
-  u8 customKeyboardKeyBackgroundG = 0x51;
-  u8 customKeyboardKeyBackgroundB = 0x51;
-  u8 customKeyboardKeyBackgroundPressedR = 0xDC;
-  u8 customKeyboardKeyBackgroundPressedG = 0xDC;
-  u8 customKeyboardKeyBackgroundPressedB = 0xDC;
-  u8 customKeyboardKeyTextR = 0xFF;
-  u8 customKeyboardKeyTextG = 0xFF;
-  u8 customKeyboardKeyTextB = 0xFF;
-  u8 customKeyboardKeyTextPressedR = 0x00;
-  u8 customKeyboardKeyTextPressedG = 0x00;
-  u8 customKeyboardKeyTextPressedB = 0x00;
-  u8 customKeyboardScrollBarBackgroundR = 0xC0;
-  u8 customKeyboardScrollBarBackgroundG = 0xC0;
-  u8 customKeyboardScrollBarBackgroundB = 0xC0;
-  u8 customKeyboardScrollBarThumbR = 0xDC;
-  u8 customKeyboardScrollBarThumbG = 0xDC;
-  u8 customKeyboardScrollBarThumbB = 0xDC;
+  u8 custom_keyboard_background_main_r = 0x00;
+  u8 custom_keyboard_background_main_g = 0x00;
+  u8 custom_keyboard_background_main_b = 0x00;
+  u8 custom_keyboard_background_secondary_r = 0x15;
+  u8 custom_keyboard_background_secondary_g = 0x15;
+  u8 custom_keyboard_background_secondary_b = 0x15;
+  u8 custom_keyboard_background_border_r = 0xFF;
+  u8 custom_keyboard_background_border_g = 0xFF;
+  u8 custom_keyboard_background_border_b = 0xFF;
+  u8 custom_keyboard_key_background_r = 0x51;
+  u8 custom_keyboard_key_background_g = 0x51;
+  u8 custom_keyboard_key_background_b = 0x51;
+  u8 custom_keyboard_key_background_pressed_r = 0xDC;
+  u8 custom_keyboard_key_background_pressed_g = 0xDC;
+  u8 custom_keyboard_key_background_pressed_b = 0xDC;
+  u8 custom_keyboard_key_text_r = 0xFF;
+  u8 custom_keyboard_key_text_g = 0xFF;
+  u8 custom_keyboard_key_text_b = 0xFF;
+  u8 custom_keyboard_key_text_pressed_r = 0x00;
+  u8 custom_keyboard_key_text_pressed_g = 0x00;
+  u8 custom_keyboard_key_text_pressed_b = 0x00;
+  u8 custom_keyboard_scroll_bar_background_r = 0xC0;
+  u8 custom_keyboard_scroll_bar_background_g = 0xC0;
+  u8 custom_keyboard_scroll_bar_background_b = 0xC0;
+  u8 custom_keyboard_scroll_bar_thumb_r = 0xDC;
+  u8 custom_keyboard_scroll_bar_thumb_g = 0xDC;
+  u8 custom_keyboard_scroll_bar_thumb_b = 0xDC;
 };
+
+std::string GetPathToBin();
 
 void CreateDefaultFile();
 void CreateDefaultFile(MenuEntry *entry);
@@ -121,4 +123,4 @@ void PatchProcessDefaultTheme(MenuEntry *entry);
 
 }  // namespace CTRPluginFramework
 
-#endif  // MHX3GX_INCLUDES_PATCH_H_
+#endif  // MHX3GX_INCLUDES_PATCH_HPP_

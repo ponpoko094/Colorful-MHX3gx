@@ -1,5 +1,5 @@
-#ifndef CHEATS_HPP
-#define CHEATS_HPP
+#ifndef MHX3GX_INCLUDES_CHEATS_HPP_
+#define MHX3GX_INCLUDES_CHEATS_HPP_
 
 #include "stdafx.hpp"
 
@@ -62,7 +62,7 @@ void RepeatMove(MenuEntry *entry);
 void HunterArtRelease(MenuEntry *entry);
 void HungryInvalid(MenuEntry *entry);
 void HunterSizeOption(MenuEntry *entry);
-void InfiniteHP(MenuEntry *entry);
+void InfiniteHp(MenuEntry *entry);
 void Invincible(MenuEntry *entry);
 void SuperArmor(MenuEntry *entry);
 void InfiniteStamina(MenuEntry *entry);
@@ -273,9 +273,9 @@ void GuildCardWeaponUseCountChanger();
 void GuildCardPlayTimeChange();
 void GuildCardSmallMonsterHuntingCountChange();
 void GuildCardMonsterHuntingCountChange(
-    const std::vector<std::string> &listGuildCardChangeMonsterHuntingBig);
+    const std::vector<std::string> &list_guild_card_change_monster_hunt_big);
 void GuildCardMonsterCaptureCountChange(
-    const std::vector<std::string> &listGuildCardChangeMonsterHuntingBig);
+    const std::vector<std::string> &list_guild_card_change_monster_hunt_big);
 void GuildCardMonsterHuntingCountMax();
 void GuildCardMonsterHuntingCountChanger();
 void GuildCardChange(MenuEntry *entry);
@@ -301,17 +301,17 @@ void DoubleCalculator(MenuEntry *entry);
 int RedInput();
 int GreenInput();
 int BlueInput();
-void RGBOutput(MenuEntry *entry);
+void RgbOutput(MenuEntry *entry);
 
 void HexEditor(MenuEntry *entry);
 void LocalTimeDisplay(MenuEntry *entry);
 void Information(MenuEntry *entry);
-void TitleID();
-void ProcessNameID();
+void TitleId();
+void ProcessNameId();
 void ConsoleType();
 void WiFiStatus();
 void BatteryLevel();
 
 }  // namespace CTRPluginFramework
 
-#endif  // CHEATS_HPP
+#endif  // MHX3GX_INCLUDES_CHEATS_HPP_

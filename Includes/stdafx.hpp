@@ -1,5 +1,5 @@
-#ifndef STDAFX_HPP
-#define STDAFX_HPP
+#ifndef MHX3GX_INCLUDES_STDAFX_HPP_
+#define MHX3GX_INCLUDES_STDAFX_HPP_
 
 #include <3ds.h>
 
@@ -26,8 +26,8 @@
 #include "types.h"
 
 namespace CTRPluginFramework {
-using CallbackPointer = void (*)(void);
+using CallbackPointer = void (*)();
 using StringVector = std::vector<std::string>;
 }  // namespace CTRPluginFramework
 
-#endif  // STDAFX_HPP
+#endif  // MHX3GX_INCLUDES_STDAFX_HPP_

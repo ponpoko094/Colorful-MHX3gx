@@ -1,5 +1,5 @@
-#ifndef LIBPON_PROCESS_PLUS_HPP
-#define LIBPON_PROCESS_PLUS_HPP
+#ifndef MHX3GX_INCLUDES_LIBPON_PROCESS_PLUS_HPP_
+#define MHX3GX_INCLUDES_LIBPON_PROCESS_PLUS_HPP_
 
 namespace CTRPluginFramework {
 
@@ -8,10 +8,8 @@ class Bitmap {
   void Draw();
   Bitmap();
   ~Bitmap();
-
- private:
 };
 
 }  // namespace CTRPluginFramework
 
-#endif  // LIBPON_PROCESS_PLUS_HPP
+#endif  // MHX3GX_INCLUDES_LIBPON_PROCESS_PLUS_HPP_
