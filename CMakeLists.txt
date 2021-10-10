@@ -12,7 +12,6 @@ add_executable(MHX3gx
         Sources/main.cpp
         Sources/cheats.cpp
         Sources/patch.cpp
-        Sources/player.cpp
         Sources/team_and_conditions.cpp
         Sources/Helpers/AutoRegion.cpp
         Sources/Helpers/HoldKey.cpp
