@@ -36,8 +36,10 @@ static void ToggleTouchscreenForceOn() {
   svcGetProcessInfo(&start_address, process_handle, 0x10005);
   if (R_FAILED(svcMapProcessMemoryEx(CUR_PROCESS_HANDLE, 0x14000000,
                                      process_handle, (u32)start_address,
+                                     text_total_size))) {
                                      text_total_size)))
     goto exit;
+  }
 
   found = (u32 *)Utils::Search<u32>(0x14000000, (u32)text_total_size, kPattern);
 
@@ -62,16 +64,14 @@ static MenuEntry *EntryWithHotkey(MenuEntry *entry, const Hotkey &hotkey) {
       entry->Name() = *name + " " + entry->Hotkeys[0].ToString();
     });
   }
-
   return (entry);
 }
 
 static MenuEntry *EntryWithHotkey(MenuEntry *entry,
                                   const std::vector<Hotkey> &hotkeys) {
-  if (entry != nullptr) {
-    for (const Hotkey &hotkey: hotkeys) entry->Hotkeys += hotkey;
+  for (const Hotkey &hotkey: hotkeys) {
+    entry->Hotkeys += hotkey;
   }
-
   return (entry);
 }
 
@@ -96,67 +96,13 @@ void PatchProcess(FwkSettings &settings) {
   settings.AllowSearchEngine = true;
   // 起動時間
   settings.WaitTimeToBoot = Seconds(3);
-
-  // UIの色
-  // テキストの色
-  // settings.WindowTitleColor = Color(colorUiWindowTitle);
-  // タイトルの色
-  // settings.MainTextColor = Color(colorUiMainText);
-  // 普通のメニューの色
-  // settings.MenuSelectedItemColor = Color(colorUiMenuSelectedItem);
-  // ActionReplayとかの色
-  // settings.MenuUnselectedItemColor = Color(colorUiMenuUnselectedItem);
-  // 背景の色
-  // settings.BackgroundMainColor = Color(colorUiBackgroundMain);
-  // 背景の細線の色
-  // settings.BackgroundSecondaryColor = Color(colorUiBackgroundSecondary);
-  // 背景の枠線の色
-  // settings.BackgroundBorderColor = Color(colorUiBackgroundBorder);
-
-  // キーボードの色
-  // キーボードの背景の色
-  // settings.Keyboard.Background = Color(colorKeyboardBackground);
-  // キーの色
-  // settings.Keyboard.KeyBackground = Color(colorKeyboardKeyBackground);
-  // 押された時のキーの背景の色
-  // settings.Keyboard.KeyBackgroundPressed =
-  // Color(colorKeyboardKeyBackgroundPressed); キー数字の色
-  // settings.Keyboard.KeyText = Color(colorKeyboardKeyText);
-  //押された時のキーの数字の色
-  // settings.Keyboard.KeyTextPressed = Color(colorKeyboardKeyTextPressed);
-  // カーソルの色
-  // settings.Keyboard.Cursor = Color(colorKeyboardCursor);
-  // 上に表示されてる数字の色
-  // settings.Keyboard.Input = Color(colorKeyboardInput);
-
-  // カスタムキーボードの色
-  // カスタムキーボードの背景の色
-  // settings.CustomKeyboard.BackgroundMain =
-  // Color(colorCustomKeyboardBackgroundMain); カスタムキーボードの背景細線の色
-  // settings.CustomKeyboard.BackgroundSecondary =
-  // Color(colorCustomKeyboardBackgroundSecondary);
-  // カスタムキーボードの枠線の色 settings.CustomKeyboard.BackgroundBorder =
-  // Color(colorCustomKeyboardBackgroundBorder);
-  // カスタムキーボードのメニューの色
-  // settings.CustomKeyboard.KeyBackground =
-  // Color(colorCustomKeyboardKeyBackground);
-  // カスタムキーボードのメニューが押された時の色
-  // settings.CustomKeyboard.KeyBackgroundPressed =
-  // Color(colorCustomKeyboardKeyBackgroundPressed);
-  // カスタムキーボードのキーの色
-  // settings.CustomKeyboard.KeyText = Color(colorCustomKeyboardKeyText);
-  // カスタムキーボードのキーが押された時の色
-  // settings.CustomKeyboard.KeyTextPressed =
-  // Color(colorCustomKeyboardKeyTextPressed); スクロールバーの背景の色
-  // settings.CustomKeyboard.ScrollBarBackground =
-  // Color(colorCustomKeyboardScrollBarBackground); スクロールバーの動く色
-  // settings.CustomKeyboard.ScrollBarThumb =
-  // Color(colorCustomKeyboardScrollBarThumb);
 }
 
 // This function is called when the process exits
 // Useful to save settings, undo patchs or clean up things
-void OnProcessExit() { ToggleTouchscreenForceOn(); }
+void OnProcessExit() {
+  ToggleTouchscreenForceOn();
+}
 
 // チートメニュー作成
 void InitMenu(PluginMenu &menu) {
