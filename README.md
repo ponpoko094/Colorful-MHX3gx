@@ -31,7 +31,7 @@
 ### フレームワークやライブラリは何を使ってるの？
 [CTRPluginFramework](https://github.com/mariohackandglitch/CTRPluginFramework-BlankTemplate)とC++標準ライブラリを使っています。
 
-### MHX3gxをコンパイルするには
+### MHX3gxをコンパイルするにはどうすればいいの？
 
 #### 必要なファイル
 #### [devkitpro](https://github.com/devkitPro/installer/releases/latest)
@@ -45,7 +45,11 @@ exeファイルを開きインストールしてください。
 ### コンパイル方法
 build.batを起動してください。または、**MHX3gxフォルダー上**で`make re`コマンドを動かしてください。
 
+### どうやって3dsに3gxを送信すればいいの？
 3ds側で[FTPD](https://github.com/mtheall/ftpd/releases/latest)や[3DShell](https://github.com/joel16/3DShell/releases/latest)を使ってFTPサーバーを立てた状態で、
+
+`make ftp`コマンドを動かすと、ファイルの送信が行われます。
+
 `make send`コマンドを動かすと、コンパイルとファイルの送信が同時に行われます。
 
 ## クレジット（協力して頂いた人たち、また参考にしたサイト）
