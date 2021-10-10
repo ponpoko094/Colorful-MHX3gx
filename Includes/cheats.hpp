@@ -1,22 +1,11 @@
-#ifndef MHX3GX_INCLUDES_CHEATS_H_
-#define MHX3GX_INCLUDES_CHEATS_H
+#ifndef CHEATS_HPP
+#define CHEATS_HPP
 
-#include <3ds.h>
-
-#include <CTRPluginFramework.hpp>
-#include <ctime>
-#include <string>
-#include <vector>
-
-#include "Helpers.hpp"
-#include "csvc.h"
-#include "libpon.hpp"
-#include "types.h"
+#include "stdafx.hpp"
 
 namespace CTRPluginFramework {
 
-using CallbackPointer = void (*)(void);
-using StringVector = std::vector<std::string>;
+bool IsInQuest();
 
 void AttackPowerOption(MenuEntry* entry);
 void DefencePowerOption(MenuEntry* entry);
@@ -117,7 +106,6 @@ void HaveItem99(MenuEntry* entry);
 void ItemBoxEdit(MenuEntry* entry);
 void MySetToPorchItemCopy(MenuEntry* entry);
 void DeliveryItemToPorchCopy(MenuEntry* entry);
-void PorchToDeliveryItemCopy(MenuEntry* entry);
 void PorchAllClear(MenuEntry* entry);
 void SpecialPermitQuestTicketChange(MenuEntry* entry);
 
@@ -131,7 +119,6 @@ void InsectGlaiveInsectStaminaInfinite(MenuEntry* entry);
 void BowgunAmmoInfinite(MenuEntry* entry);
 void BowgunCrouchingShot(MenuEntry* entry);
 
-void ChargeStageFix(MenuEntry* entry);
 void ChageStageOption(MenuEntry* entry);
 void WeaponGageFix(MenuEntry* entry);
 void ChargeAxeBinFix(MenuEntry* entry);
@@ -154,7 +141,6 @@ void Monster2SizeMagnificationDisplay(MenuEntry* entry);
 void RideGageMax(MenuEntry* entry);
 void MonsterCoordinateModifier(MenuEntry* entry);
 void MonsterStalker(MenuEntry* entry);
-void MonsterActionRepeat(MenuEntry* entry);
 void MonsterActionRepeatOption(MenuEntry* entry);
 void Monster1And2Stop(MenuEntry* entry);
 void Monster1SizeOption(MenuEntry* entry);
@@ -169,69 +155,33 @@ void OneAttackKill(MenuEntry* entry);
 
 void PalicoChoice(MenuEntry* entry);
 
-void PalicoEquipmentSupportAction1Change(MenuEntry* entry);
-void PalicoEquipmentSupportAction2Change(MenuEntry* entry);
-void PalicoEquipmentSupportAction3Change(MenuEntry* entry);
-void PalicoEquipmentSupportAction4Change(MenuEntry* entry);
-void PalicoEquipmentSupportAction5Change(MenuEntry* entry);
-void PalicoEquipmentSupportAction6Change(MenuEntry* entry);
-void PalicoEquipmentSupportAction7Change(MenuEntry* entry);
-void PalicoEquipmentSupportAction8Change(MenuEntry* entry);
+std::vector<std::string> GetPalicoEquipmentSupportAction();
+void PalicoEquipmentSupportActionChange(int number);
+void PalicoEquipmentSupportActionChanger(MenuEntry* entry);
 
-void PalicoEquipmentSkill1Change(MenuEntry* entry);
-void PalicoEquipmentSkill2Change(MenuEntry* entry);
-void PalicoEquipmentSkill3Change(MenuEntry* entry);
-void PalicoEquipmentSkill4Change(MenuEntry* entry);
-void PalicoEquipmentSkill5Change(MenuEntry* entry);
-void PalicoEquipmentSkill6Change(MenuEntry* entry);
-void PalicoEquipmentSkill7Change(MenuEntry* entry);
-void PalicoEquipmentSkill8Change(MenuEntry* entry);
+std::vector<std::string> GetPalicoEquipmentSkill();
+void PalicoEquipmentSkillChange(int number);
+void PalicoEquipmentSkillChanger(MenuEntry* entry);
 
-void PalicoLearnSupportAction1Change(MenuEntry* entry);
-void PalicoLearnSupportAction2Change(MenuEntry* entry);
-void PalicoLearnSupportAction3Change(MenuEntry* entry);
-void PalicoLearnSupportAction4Change(MenuEntry* entry);
-void PalicoLearnSupportAction5Change(MenuEntry* entry);
-void PalicoLearnSupportAction6Change(MenuEntry* entry);
-void PalicoLearnSupportAction7Change(MenuEntry* entry);
-void PalicoLearnSupportAction8Change(MenuEntry* entry);
-void PalicoLearnSupportAction9Change(MenuEntry* entry);
-void PalicoLearnSupportAction10Change(MenuEntry* entry);
-void PalicoLearnSupportAction11Change(MenuEntry* entry);
-void PalicoLearnSupportAction12Change(MenuEntry* entry);
-void PalicoLearnSupportAction13Change(MenuEntry* entry);
-void PalicoLearnSupportAction14Change(MenuEntry* entry);
-void PalicoLearnSupportAction15Change(MenuEntry* entry);
-void PalicoLearnSupportAction16Change(MenuEntry* entry);
+std::vector<std::string> GetPalicoLearnSupportAction();
+void PalicoLearnSupportActionChange(int number);
+void PalicoLearnSupportActionChanger(MenuEntry* entry);
 
-void PalicoLearnSupportSkill1Change(MenuEntry* entry);
-void PalicoLearnSupportSkill2Change(MenuEntry* entry);
-void PalicoLearnSupportSkill3Change(MenuEntry* entry);
-void PalicoLearnSupportSkill4Change(MenuEntry* entry);
-void PalicoLearnSupportSkill5Change(MenuEntry* entry);
-void PalicoLearnSupportSkill6Change(MenuEntry* entry);
-void PalicoLearnSupportSkill7Change(MenuEntry* entry);
-void PalicoLearnSupportSkill8Change(MenuEntry* entry);
-void PalicoLearnSupportSkill9Change(MenuEntry* entry);
-void PalicoLearnSupportSkill10Change(MenuEntry* entry);
-void PalicoLearnSupportSkill11Change(MenuEntry* entry);
-void PalicoLearnSupportSkill12Change(MenuEntry* entry);
+std::vector<std::string> GetPalicoLearnSkill();
+void PalicoLearnSkillChange(int number);
+void PalicoLearnSkillChanger(MenuEntry* entry);
 
-void PalicoBodyHairColorRedChange(MenuEntry* entry);
-void PalicoBodyHairColorGreenChange(MenuEntry* entry);
-void PalicoBodyHairColorBlueChange(MenuEntry* entry);
+void PalicoBodyHairColorChange(int choice);
+void PalicoBodyHairColorChanger(MenuEntry* entry);
 
-void PalicoRightEyeColorRedChange(MenuEntry* entry);
-void PalicoRightEyeColorGreenChange(MenuEntry* entry);
-void PalicoRightEyeColorBlueChange(MenuEntry* entry);
+void PalicoRightEyeColorChange(int choice);
+void PalicoRightEyeColorChanger(MenuEntry* entry);
 
-void PalicoLeftEyeColorRedChange(MenuEntry* entry);
-void PalicoLeftEyeColorGreenChange(MenuEntry* entry);
-void PalicoLeftEyeColorBlueChange(MenuEntry* entry);
+void PalicoLeftEyeColorChange(int choice);
+void PalicoLeftEyeColorChanger(MenuEntry* entry);
 
-void PalicoInnerColorRedChange(MenuEntry* entry);
-void PalicoInnerColorGreenChange(MenuEntry* entry);
-void PalicoInnerColorBlueChange(MenuEntry* entry);
+void PalicoInnerColorChange(int choice);
+void PalicoInnerColorChanger(MenuEntry* entry);
 
 void PalicoVoiceChange(MenuEntry* entry);
 void PalicoEyeChange(MenuEntry* entry);
@@ -261,7 +211,6 @@ void ChatInfinite(MenuEntry* entry);
 void ChatConversionChange(MenuEntry* entry);
 void ChatConversionList(MenuEntry* entry);
 
-void InstantDrunk(MenuEntry* entry);
 void InstantDrunkOption(MenuEntry* entry);
 void Drunk1(MenuEntry* entry);
 
@@ -300,9 +249,7 @@ void BaseSearchHostHunterRankMaximumChange(MenuEntry* entry);
 void BaseSearchInQuestChange(MenuEntry* entry);
 void BaseSearchPasswordExistChange(MenuEntry* entry);
 
-void DisplayBasePassword(MenuEntry* entry);
 void DisplayPlayerCoordinate(MenuEntry* entry);
-void FloatBug(MenuEntry* entry);
 void ViewingAngleOption(MenuEntry* entry);
 void ViewingAngleChangeV2(MenuEntry* entry);
 void WeaponSizeChange(MenuEntry* entry);
@@ -364,4 +311,4 @@ void BatteryLevel();
 
 }  // namespace CTRPluginFramework
 
-#endif  // MHX3GX_INCLUDES_CHEATS_H
+#endif  // CHEATS_HPP

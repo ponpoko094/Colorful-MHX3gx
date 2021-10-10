@@ -1,9 +1,5 @@
-//
-// Created by ponpoko on 2021/03/21.
-//
-
-#ifndef MHX3GX_INCLUDES_PONLIB_OSD_PLUS_H_
-#define MHX3GX_INCLUDES_PONLIB_OSD_PLUS_H_
+#ifndef LIBPON_PONLIB_OSD_PLUS_H_
+#define LIBPON_PONLIB_OSD_PLUS_H_
 
 #include <CTRPluginFramework.hpp>
 
@@ -26,4 +22,4 @@ class OSDPlus {
 };
 
 }  // namespace libpon
-#endif  // MHX3GX_INCLUDES_PONLIB_OSD_PLUS_H_
+#endif  // LIBPON_PONLIB_OSD_PLUS_H_

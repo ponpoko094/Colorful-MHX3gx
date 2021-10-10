@@ -1,8 +1,5 @@
 #include "cheats.hpp"
 
-#include <string>
-#include <vector>
-
 namespace CTRPluginFramework {
 
 const std::vector<std::string> listPalicoSkill{
@@ -141,6 +138,17 @@ const std::vector<std::string> listToggle{
     "いいえ",
 };
 
+// クエスト中か？
+bool IsInQuest() {
+  u32 questFrame;
+  Process::Read32(0x8360ED4, questFrame);
+  if (questFrame == 0) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
 // スーパーノヴァ連射等
 void NoMotion(MenuEntry *entry) {
   KeyboardPlus::Toggle32("モーションを無くしますか？", 0xAF55A8, 0xE3A00001,
@@ -199,26 +207,6 @@ void HunterRankChange(MenuEntry *entry) {
 // モンスターワンパンキル
 void OneAttackKill(MenuEntry *entry) {
   KeyboardPlus::Toggle32("瞬殺しますか？", 0x8CF54C, 0xE3A01000, 0xE0911003);
-}
-
-// 宙に浮くバグ
-void FloatBug(MenuEntry *entry) {
-  Process::Write32(0xC01414, 0xE51F000C);
-  Process::Write32(0xC01418, 0xE5860040);
-  Process::Write32(0xC0141C, 0xED960A10);
-  Process::Write32(0xC01420, 0xE12FFF1E);
-  Process::Write32(0xC01424, 0xE51F001C);
-  Process::Write32(0xC01428, 0xE5860040);
-  Process::Write32(0xC0142C, 0xE3A00000);
-  Process::Write32(0xC01430, 0xE12FFF1E);
-  Process::Write32(0x2F7BA4, 0xEB24261E);
-  Process::Write32(0x30A2AC, 0xEB23DC58);
-  if (Controller::IsKeysPressed(L + Select)) {
-    Process::WriteFloat(0xC01410, 2);
-  }
-  if (Controller::IsKeysPressed(R + Select)) {
-    Process::WriteFloat(0xC01410, 1);
-  }
 }
 
 // 属性
@@ -384,10 +372,17 @@ void Always3HunterArtEquip(MenuEntry *entry) {
 
 // スーパーアーマー
 void SuperArmor(MenuEntry *entry) {
+  static bool flag = false;
+  u32 data1, data2;
+  if (!flag) {
+    Process::Read32(0x322C60, data1);
+    Process::Read32(0x3322F0, data2);
+    flag = true;
+  }
   KeyboardPlus::MultiToggle32("スーパーアーマーにしますか？",
                               {
-                                  {0x322C60, 0xE3A05001, 0xE4A05000},
-                                  {0x3322F0, 0xE3A00001, 0xE3A00000},
+                                  {0x322C60, 0xE3A05001, data1},
+                                  {0x3322F0, 0xE3A00001, data2},
                               });
 }
 
@@ -445,7 +440,7 @@ void AllItemSold(MenuEntry *entry) {
 void ProwlerSupportGageMax(MenuEntry *entry) {
   u32 offset, cmp32;
   Process::Read32(0xDD5348, offset);
-  if (Process::Read32(offset + 0x14, cmp32) && cmp32 != 0x0) {
+  if (offset != 0x0) {
     Process::Read32(offset + 0x14, offset);
     Process::Write16(offset + 0x2220, 0x384);
   }
@@ -590,7 +585,7 @@ void SkinBlueChange(MenuEntry *entry) {
 void PalicoAttackPowerMagnificationOption(MenuEntry *entry) {
   static u8 palicoAttack = 0x1;
   u32 data32, cmp32;
-  Keyboard keyboard("防御力を何倍にしますか?\n1~255の間");
+  Keyboard keyboard("攻撃力を何倍にしますか?\n1~255の間");
   keyboard.IsHexadecimal(false);
   if (keyboard.Open(palicoAttack) == 0) {
     Process::Write32(0xC18F80, 0xE92D400C);
@@ -649,28 +644,12 @@ void PalicoDefencePowerMagnificationOption(MenuEntry *entry) {
   }
 }
 
-// 画面にパス表示
-void DisplayBasePassword(MenuEntry *entry) {
-  std::string str;
-  static u16 pass;
-  u16 online;
-  Process::Read16(0xE2251C, pass);
-  Process::Read16(0x80913EC, online);
-  if (online == 0x100) {
-    if (pass <= 9999) {
-      if (pass <= 999) {
-        str = Utils::Format("Pass 0%u", pass);
-      } else {
-        str = Utils::Format("Pass %u", pass);
-      }
-      OSDPlus::Draw(str, 10, 80, true, Color::Yellow);
-    }
-  }
-}
-
 // ガンランス弾無限
 void GunlanceAmmoInfinite(MenuEntry *entry) {
   u32 offset;
+  if (!IsInQuest()) {
+    return;
+  }
   Process::Read32(0x8360F24, offset);
   Process::Read32(offset + 0xB4, offset);
   Process::Write8(offset + 0x1922, 0xFF);
@@ -692,6 +671,9 @@ void GunlanceHeatGageOption(MenuEntry *entry) {
   if (keyboard.Open(heat) == 0) {
     entry->SetGameFunc([](MenuEntry *entry) {
       u32 offset;
+      if (!IsInQuest()) {
+        return;
+      }
       Process::Read32(0x8360F24, offset);
       Process::Read32(offset + 0xB4, offset);
       Process::Write16(offset + 0x2018, heat);
@@ -815,23 +797,16 @@ void ChatInfinite(MenuEntry *entry) { Process::Write8(0xDD4CA0, 0x0); }
 // 装備コピー
 void OtherPlayerEquipmentCopy(MenuEntry *entry) {
   const std::vector<std::string> list1to4Player{"P1", "P2", "P3", "P4"};
-  std::vector<std::vector<u32>> equip(2, std::vector<u32>(6));
-  u32 online;
+  u32 equip, online;
   Process::Read32(0x80913EC, online);
   Keyboard keyboard("装備をコピーしたいプレイヤーを選んで下さい",
                     list1to4Player);
   int choice = keyboard.Open();
-  if (choice >= 0 && choice <= 3) {
+  if (choice >= 0) {
     if (online == 0x100) {
-      for (int i = 0; i < 6; i++) {
-        Process::Read32(choice * 0x494 + i * 0x30 + 0x831C9E4,
-                        equip.at(0).at(i));
-        Process::Write32(choice * 0x494 + i * 0x30 + 0x8386C58,
-                         equip.at(0).at(i));
-        Process::Read32(choice * 0x494 + i * 0x4 + 0x831CB04,
-                        equip.at(1).at(i));
-        Process::Write32(choice * 0x494 + i * 0x4 + 0x8386D78,
-                         equip.at(1).at(i));
+      for (int i = 0; i < 0x138; i++) {
+        Process::Read32(choice * 0x494 + i * 0x4 + 0x831C9E4, equip);
+        Process::Write32(i * 0x4 + 0x8386C58, equip);
       }
     } else {
       MessageBox("オフラインではコピーできません")();
@@ -1630,15 +1605,19 @@ void GuildCardChange(MenuEntry *entry) {
 
 // セーブ画面選択肢固定設定
 void SaveScreenOption(MenuEntry *entry) {
+  static u8 select;
   Keyboard keyboard("セーブ画面をどちらで固定しますか？", listToggle);
-  static int choice = keyboard.Open();
+  int choice = keyboard.Open();
   if (choice >= 0) {
-    entry->SetGameFunc([](MenuEntry *entry) {
-      if (Controller::IsKeysDown(R)) {
-        Process::Write8(0x306E29A0, choice);
-      }
-    });
+    select = choice;
+  } else {
+    return;
   }
+  entry->SetGameFunc([](MenuEntry *entry) {
+    if (Controller::IsKeysDown(R)) {
+      Process::Write8(0x306E29A0, select);
+    }
+  });
 }
 
 // アイテムボックス編集
@@ -1656,7 +1635,7 @@ void ItemBoxEdit(MenuEntry *entry) {
       Process::Write16(i * 4 + 0x8372566, data16 + 1);
     }
   } else if (choice == 1) {
-    Process::Write16(0x8372562, 0x578);
+    Process::Write16(0x8372562, 0x579);
     for (int i = 0; i < 548; i++) {
       Process::Read16(i * 4 + 0x8372562, data16);
       Process::Write16(i * 4 + 0x8372566, data16 + 1);
@@ -1666,7 +1645,7 @@ void ItemBoxEdit(MenuEntry *entry) {
     }
   } else if (choice == 2) {
     for (int i = 0; i < 1400; i++) {
-      Process::Write16(i * 4 + 0x8372564, 0x63);
+      Process::Write16(i * 4 + 0x8372564, 99);
     }
   } else if (choice == 3) {
     if (MessageBox("確認です", "全て削除してもいいですか？",
@@ -1691,6 +1670,9 @@ void PorchAllClear(MenuEntry *entry) {
 // トリプルアップ
 void InsectGlaiveAlwaysTripleUp(MenuEntry *entry) {
   u32 offset;
+  if (!IsInQuest()) {
+    return;
+  }
   Process::Read32(0x8360F24, offset);
   Process::Read32(offset + 0xB4, offset);
   Process::WriteFloat(offset + 0x1FF8, 3600);
@@ -1701,14 +1683,17 @@ void InsectGlaiveAlwaysTripleUp(MenuEntry *entry) {
 // 猟虫スタミナ無限
 void InsectGlaiveInsectStaminaInfinite(MenuEntry *entry) {
   u32 offset;
+  if (!IsInQuest()) {
+    return;
+  }
   Process::Read32(0x8360F24, offset);
   Process::Read32(offset + 0xB4, offset);
   Process::Write16(offset + 0x2010, 0x82);
 }
 
 // 溜め段階固定設定
-static float tame = 0;
 void ChageStageOption(MenuEntry *entry) {
+  static float tame = 0;
   const std::vector<std::string> listStageSelect{
       "0段階目", "1段階目", "2段階目", "3段階目", "4段階目"};
   const std::vector<int> listChargeValue{0, 40, 80, 120, 144};
@@ -1720,20 +1705,26 @@ void ChageStageOption(MenuEntry *entry) {
   if (choice >= 0) {
     tame = listChargeValue.at(choice);
     stage = choice;
+  } else {
+    return;
   }
-}
-
-// 溜め段階固定
-void ChargeStageFix(MenuEntry *entry) {
-  u32 offset;
-  Process::Read32(0x8360F24, offset);
-  Process::Read32(offset + 0xB4, offset);
-  Process::WriteFloat(offset + 0x1914, tame);
+  entry->SetGameFunc([](MenuEntry *entry) {
+    u32 offset;
+    if (!IsInQuest()) {
+      return;
+    }
+    Process::Read32(0x8360F24, offset);
+    Process::Read32(offset + 0xB4, offset);
+    Process::WriteFloat(offset + 0x1914, tame);
+  });
 }
 
 // 武器ゲージ
 void WeaponGageFix(MenuEntry *entry) {
   u32 offset;
+  if (!IsInQuest()) {
+    return;
+  }
   Process::Read32(0x8360F24, offset);
   Process::Read32(offset + 0xB4, offset);
   Process::Write16(offset + 0x1598, 0x64);
@@ -1742,6 +1733,9 @@ void WeaponGageFix(MenuEntry *entry) {
 // チャアクビン
 void ChargeAxeBinFix(MenuEntry *entry) {
   u32 offset;
+  if (!IsInQuest()) {
+    return;
+  }
   Process::Read32(0x8360F24, offset);
   Process::Read32(offset + 0xB4, offset);
   Process::Write8(offset + 0x1922, 0x5);
@@ -1749,14 +1743,14 @@ void ChargeAxeBinFix(MenuEntry *entry) {
 
 // 笛全効果付与
 void HuntingHornAllEffectGrant(MenuEntry *entry) {
-  u32 questFrame1, offset;
-  Process::Read32(0x8363ED4, questFrame1);
+  u32 offset;
+  if (!IsInQuest()) {
+    return;
+  }
   Process::Read32(0x8360F24, offset);
   Process::Read32(offset + 0xB4, offset);
-  if (questFrame1 != 0) {
-    for (int i = 0; i < 32; i++) {
-      Process::WriteFloat(offset + i * 4 + 0x17D0, 10);
-    }
+  for (int i = 0; i < 32; i++) {
+    Process::WriteFloat(offset + i * 4 + 0x17D0, 10);
   }
 }
 
@@ -1764,6 +1758,9 @@ void HuntingHornAllEffectGrant(MenuEntry *entry) {
 void BowgunAmmoInfinite(MenuEntry *entry) {
   u8 ammo;
   u32 offset;
+  if (!IsInQuest()) {
+    return;
+  }
   Process::Read32(0x8360F24, offset);
   Process::Read32(offset + 0xB4, offset);
   Process::Read8(offset + 0x1924, ammo);
@@ -1773,6 +1770,9 @@ void BowgunAmmoInfinite(MenuEntry *entry) {
 // しゃがみ
 void BowgunCrouchingShot(MenuEntry *entry) {
   u32 offset;
+  if (!IsInQuest()) {
+    return;
+  }
   Process::Read32(0x8360F24, offset);
   Process::Read32(offset + 0xB4, offset);
   Process::Write8(offset + 0x1FF6, 0x7F);
@@ -1803,50 +1803,49 @@ void Monster2SizeMagnificationDisplay(MenuEntry *entry) {
 }
 
 // モンスターリピート設定
-static int mon1act, mon2act;
 void MonsterActionRepeatOption(MenuEntry *entry) {
+  static int mon1act, mon2act;
   Keyboard keyboard("挙動を選んでください。", {"固まる", "なめらか"});
   int choice = keyboard.Open();
   if (choice == 0) {
     mon1act = true;
     mon2act = true;
-  }
-  if (choice == 1) {
+  } else if (choice == 1) {
     mon1act = false;
     mon2act = false;
+  } else {
+    return;
   }
-}
-
-// モンスターリピート
-void MonsterActionRepeat(MenuEntry *entry) {
-  u32 mon1, mon2;
-  u8 area1, area2;
-  Process::Read32(0x8325244, mon1);
-  Process::Read32(0x8325248, mon2);
-  Process::Read8(mon1 + 0xD, area1);
-  Process::Read8(mon2 + 0xD, area2);
-  if (Controller::IsKeysDown(X + DPadRight)) {
-    if (Controller::IsKeysDown(R)) {
-      if (area1 == 0x4C) {
-        if (mon1act == true) {
-          Process::Write16(mon1 + 0x1158, 0x0);
+  entry->SetGameFunc([](MenuEntry *entry) {
+    u32 mon1, mon2;
+    u8 area1, area2;
+    Process::Read32(0x8325244, mon1);
+    Process::Read32(0x8325248, mon2);
+    Process::Read8(mon1 + 0xD, area1);
+    Process::Read8(mon2 + 0xD, area2);
+    if (Controller::IsKeysDown(X + DPadRight)) {
+      if (Controller::IsKeysDown(R)) {
+        if (area1 == 0x4C) {
+          if (mon1act == true) {
+            Process::Write16(mon1 + 0x1158, 0x0);
+          }
+          if (mon1act == false) {
+            Process::Write8(mon1 + 0x1159, 0x0);
+          }
         }
-        if (mon1act == false) {
-          Process::Write8(mon1 + 0x1159, 0x0);
+      }
+      if (Controller::IsKeysDown(L)) {
+        if (area2 == 0x4C) {
+          if (mon2act == true) {
+            Process::Write16(mon2 + 0x1158, 0x0);
+          }
+          if (mon2act == false) {
+            Process::Write8(mon2 + 0x1159, 0x0);
+          }
         }
       }
     }
-    if (Controller::IsKeysDown(L)) {
-      if (area2 == 0x4C) {
-        if (mon2act == true) {
-          Process::Write16(mon1 + 0x1158, 0x0);
-        }
-        if (mon2act == false) {
-          Process::Write8(mon1 + 0x1159, 0x0);
-        }
-      }
-    }
-  }
+  });
 }
 
 // 1番目と2番目のモンスター停止
@@ -1974,8 +1973,8 @@ void Monster2SizeOption(MenuEntry *entry) {
 }
 
 // クエスト最大ダウン回数設定
-static u8 quedownmax, quedownnow;
 void QuestDownMaxOption(MenuEntry *entry) {
+  u8 quedownmax;
   Process::Read8(0x8365440, quedownmax);
   Keyboard keyboard(Utils::Format(
       "最大ダウン回数を入力してください。\n現在[%u]", quedownmax));
@@ -1987,12 +1986,13 @@ void QuestDownMaxOption(MenuEntry *entry) {
 
 // クエスト現在ダウン回数設定
 void QuestDownNowOption(MenuEntry *entry) {
-  Process::Read8(0x8365440, quedownnow);
+  u8 quedownnow;
+  Process::Read8(0x8365441, quedownnow);
   Keyboard keyboard(Utils::Format(
       "現在のダウン回数を入力してください。\n現在[%u]", quedownnow));
   keyboard.IsHexadecimal(false);
   if (keyboard.Open(quedownnow) == 0) {
-    Process::Write8(0x8365440, quedownnow);
+    Process::Write8(0x8365441, quedownnow);
   }
 }
 
@@ -2058,14 +2058,11 @@ void FenyAndPugyNameChange(MenuEntry *entry) {
   Process::ReadString(0x83AE380, name, 0x1E, StringFormat::Utf8);
   Keyboard keyboard("グループを選んでください。", listVillage);
   int choice = keyboard.Open();
-  if (choice == 0) {
-    Process::WriteString(0x83B3648, name, StringFormat::Utf8);
-  } else if (choice == 1) {
-    Process::WriteString(0x83B3668, name, StringFormat::Utf8);
-  } else if (choice == 2) {
-    Process::WriteString(0x83B3688, name, StringFormat::Utf8);
-  } else if (choice == 3) {
-    Process::WriteString(0x83B36A8, name, StringFormat::Utf8);
+  if (choice >= 0) {
+    for (int i = 0; i < 8; i++) {
+      Process::Write32(0x83B3648 + choice * 0x20 + i * 0x4, 0x0);
+    }
+    Process::WriteString(0x83B3648 + choice * 0x20, name, StringFormat::Utf8);
   }
 }
 
@@ -2109,28 +2106,34 @@ void FenyAndPugyClothes(MenuEntry *entry) {
 }
 
 // 酔っぱらい設定
-static u8 drunk;
 void InstantDrunkOption(MenuEntry *entry) {
+  static u8 drunk;
   Keyboard keyboard("酔っぱらいになりますか？", listToggle);
   int choice = keyboard.Open();
   if (choice == 0) {
     drunk = 0x02;
   } else if (choice == 1) {
     drunk = 0x00;
+  } else {
+    return;
   }
-}
-
-// 酔っぱらい
-void InstantDrunk(MenuEntry *entry) {
-  u32 offset;
-  Process::Read32(0x8360F24, offset);
-  Process::Read32(offset + 0xB4, offset);
-  Process::Write8(offset + 0x1510, drunk);
+  entry->SetGameFunc([](MenuEntry *entry) {
+    u32 offset;
+    if (!IsInQuest()) {
+      return;
+    }
+    Process::Read32(0x8360F24, offset);
+    Process::Read32(offset + 0xB4, offset);
+    Process::Write8(offset + 0x1510, drunk);
+  });
 }
 
 // 1回飲んだら酔っぱらい
 void Drunk1(MenuEntry *entry) {
   u32 offset;
+  if (!IsInQuest()) {
+    return;
+  }
   Process::Read32(0x8360F24, offset);
   Process::Read32(offset + 0xB4, offset);
   Process::Write8(offset + 0x1538, 0xA);
@@ -2147,6 +2150,9 @@ void RideGageMax(MenuEntry *entry) {
 // 腹減り無効
 void HungryInvalid(MenuEntry *entry) {
   u32 offset;
+  if (!IsInQuest()) {
+    return;
+  }
   Process::Read32(0x8360F24, offset);
   Process::Read32(offset + 0xB4, offset);
   Process::WriteFloat(offset + 0x2DC, 10000);
@@ -2628,20 +2634,6 @@ Result mcuGetBatteryLevel(u8 *out) {
 }
 
 void BatteryLevel() {
-  // u8 percent = 0;
-  // MCUHWC_GetBatteryLevel(&percent);
-  // std::string percent_string = std::to_string(percent) + "%";
-  // MessageBox("バッテリー残量は" + percent_string + "です。")();
-
-  // static float batteryPercentage;
-  // Result res = 0;
-  // u8 data[4];
-  // res = MCUHWC_ReadRegister(0xA, data, 4);
-  // batteryPercentage = data[1] + data[2] / 256.0f;
-  // batteryPercentage = (u32)((batteryPercentage + 0.05f) * 10.0f) / 10.0f;
-  // MessageBox(Utils::Format("バッテリー残量は%3.fです。",
-  // batteryPercentage))();
-
   u8 batteryPercentage;
   mcuInit();
   mcuGetBatteryLevel(&batteryPercentage);
@@ -2824,7 +2816,7 @@ void DoubleCalculator(MenuEntry *entry) {
 
 // 変換候補変換
 void ChatConversionChange(MenuEntry *entry) {
-  std::vector<std::vector<std::string>> listPredictiveConversion{
+  const std::vector<std::vector<std::string>> listPredictiveConversion{
       {"るーと", "√"},       {"まるいち", "①"},    {"まるに", "②"},
       {"まるさん", "③"},     {"まるよん", "④"},    {"まるご", "⑤"},
       {"まるろく", "⑥"},     {"まるなな", "⑦"},    {"まるはち", "⑧"},
@@ -2841,25 +2833,27 @@ void ChatConversionChange(MenuEntry *entry) {
       {"しょうわ", "㍼"},    {"たいしょう", "㍽"}, {"めいじ", "㍾"},
       {"なんばー", "№"},     {"けーけー", "㏍"},   {"てる", "℡"},
       {"たぶ", "\t"},        {"かいぎょう", "\n"}, {"ごう", "爻"}};
-  u32 a, b, c, aaa, bbb, ccc;
-  std::vector<std::string> listCharacter(3);
-  Process::Read32(0x878CF80, a);
-  Process::Read32(0x8790F80, b);
-  Process::Read32(0x8791F80, c);
-  aaa = a + 0xF8;
-  bbb = b + 0xF8;
-  ccc = c + 0xF8;
-  Process::ReadString(a + 0x18, listCharacter.at(0), 12, StringFormat::Utf16);
-  Process::ReadString(b + 0x18, listCharacter.at(1), 12, StringFormat::Utf16);
-  Process::ReadString(c + 0x18, listCharacter.at(2), 12, StringFormat::Utf16);
+  const std::vector<u32> listAddr{0x878CF80, 0x8790F80, 0x8791F80};
+  std::vector<u32> listValues(listAddr.size());
+  std::string targetCharacter;
+  int index = 0;
+  for (int i = 0; i < listAddr.size(); i++) {
+    Process::Read32(listAddr.at(i), listValues.at(i));
+    if (listValues.at(i) < 0x30000000) {
+      continue;
+    }
+    Process::ReadString(listValues.at(i) + 0x18, targetCharacter, 12,
+                        StringFormat::Utf16);
+    index = i;
+  }
+  if (index == listAddr.size()) {
+    return;
+  }
   if (Controller::IsKeysDown(R)) {
     for (int i = 0; i < listPredictiveConversion.size(); i++) {
-      if (listCharacter.at(i) == listPredictiveConversion.at(i).at(0)) {
-        Process::WriteString(aaa, listPredictiveConversion.at(i).at(1),
-                             StringFormat::Utf16);
-        Process::WriteString(bbb, listPredictiveConversion.at(i).at(1),
-                             StringFormat::Utf16);
-        Process::WriteString(ccc, listPredictiveConversion.at(i).at(1),
+      if (listPredictiveConversion.at(i).at(0) == targetCharacter) {
+        Process::WriteString(listValues.at(index) + 0xF8,
+                             listPredictiveConversion.at(i).at(1),
                              StringFormat::Utf16);
       }
     }
@@ -2897,41 +2891,45 @@ void ChatConversionList(MenuEntry *entry) {
   keyboard.Open();
 }
 
-static int palicoChoice;
+static int palicoChoice = 0;
 void PalicoChoice(MenuEntry *entry) {
-  std::vector<std::string> name(60);
+  int index = palicoChoice;
+  std::string name;
   std::vector<std::string> nameSave;
   for (int i = 0; i < 60; i++) {
-    Process::ReadString(i * 0x494 + 0x8338AFE, name.at(i), 30,
-                        StringFormat::Utf8);
-    nameSave.emplace_back(name.at(i));
+    name.clear();
+    Process::ReadString(i * 0x494 + 0x8338AFE, name, 30, StringFormat::Utf8);
+    nameSave.emplace_back(name);
   }
-  Keyboard keyboard("ねこを選択してください。", nameSave);
-  if (keyboard.Open() == 0) {
-    palicoChoice = keyboard.Open();
+  Keyboard keyboard(
+      "ねこを選択してください。\n現在[" + nameSave.at(palicoChoice) + "]",
+      nameSave);
+  int choice = keyboard.Open();
+  if (choice >= 0) {
+    palicoChoice = choice;
   }
 }
 
 void PalicoExperienceChange(MenuEntry *entry) {
   u32 exp;
-  Process::Read32(palicoChoice * 0x494 + 0x83388E0, exp);
+  Process::Read32(0x83388E0 + palicoChoice * 0x494, exp);
   Keyboard keyboard(Utils::Format("経験値を入力してください。\n現在[%d]", exp));
   keyboard.IsHexadecimal(false);
   if (keyboard.Open(exp) == 0) {
-    Process::Write32(palicoChoice * 0x494 + 0x83388E0, exp);
+    Process::Write32(0x83388E0 + palicoChoice * 0x494, exp);
   }
 }
 
 void PalicoLevelChange(MenuEntry *entry) {
   u8 lv, levelDisplay;
-  Process::Read8(palicoChoice * 0x494 + 0x83388E4, lv);
+  Process::Read8(0x83388E4 + palicoChoice * 0x494, lv);
   levelDisplay = lv + 1;
   Keyboard keyboard(Utils::Format(
-      "レベルを入力してください。\n50までで設定してください。\n現在[%d]",
+      "レベルを入力してください。\n0~49までの値を入力してください。\n現在[%d]",
       levelDisplay));
   keyboard.IsHexadecimal(false);
   if (keyboard.Open(lv) == 0) {
-    Process::Write8(palicoChoice * 0x494 * 0x83388E4, lv);
+    Process::Write8(0x83388E4 + palicoChoice * 0x494, lv);
   }
 }
 
@@ -2940,24 +2938,24 @@ void PalicoSupportTrendChange(MenuEntry *entry) {
   const std::vector<std::string> listPalicoSupportTrend{
       "カリスマ", "ファイト", "ガード",  "アシスト",
       "回復",     "ボマー",   "コレクト"};
-  Process::Read8(palicoChoice * 0x494 + 0x83388E5, sup);
+  Process::Read8(0x83388E5 + palicoChoice * 0x494, sup);
   Keyboard keyboard("サポート傾向を選んでください。\n現在[" +
-                        listPalicoSupportTrend[sup] + "]",
+                        listPalicoSupportTrend.at(sup) + "]",
                     listPalicoSupportTrend);
   int choice = keyboard.Open();
   if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x83388E5, choice);
+    Process::Write8(0x83388E5 + palicoChoice * 0x494, choice);
   }
 }
 
 void PalicoClosenessChange(MenuEntry *entry) {
   u8 closeness;
-  Process::Read8(palicoChoice * 0x494 + 0x83388E6, closeness);
+  Process::Read8(0x83388E6 + palicoChoice * 0x494, closeness);
   Keyboard keyboard(
       Utils::Format("親密度を入力してください。\n現在[%d]", closeness));
   keyboard.IsHexadecimal(false);
   if (keyboard.Open(closeness) == 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x83388E6, closeness);
+    Process::Write8(0x83388E6 + palicoChoice * 0x494, closeness);
   }
 }
 
@@ -2965,20 +2963,20 @@ void PalicoTargetChange(MenuEntry *entry) {
   u8 tar;
   const std::vector<std::string> listPalicoTarget{
       "指定なし", "小型一筋", "小型優先", "バランス", "大型優先", "大型一筋"};
-  Process::Read8(palicoChoice * 0x494 + 0x83388E7, tar);
+  Process::Read8(0x83388E7 + palicoChoice * 0x494, tar);
   Keyboard keyboard(
-      "ターゲットを選んでください。\n現在[" + listPalicoTarget[tar] + "]",
+      "ターゲットを選んでください。\n現在[" + listPalicoTarget.at(tar) + "]",
       listPalicoTarget);
   int choice = keyboard.Open();
   if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x83388E7, choice);
+    Process::Write8(0x83388E7 + palicoChoice * 0x494, choice);
   }
 }
 
 void PalicoCommentEditPossibleChange(MenuEntry *entry) {
   u8 comment;
   std::string ko;
-  Process::Read8(palicoChoice * 0x494 + 0x83389A0, comment);
+  Process::Read8(0x83389A0 + palicoChoice * 0x494, comment);
   if (comment < 0x80) {
     ko = "可能";
   } else if (comment >= 0x80) {
@@ -2991,9 +2989,9 @@ void PalicoCommentEditPossibleChange(MenuEntry *entry) {
   int choice = keyboard.Open();
   if (choice >= 0) {
     if (choice == 0) {
-      Process::Write8(palicoChoice * 0x494 + 0x83389A0, 0x20);
+      Process::Write8(0x83389A0 + palicoChoice * 0x494, 0x20);
     } else if (choice == 1) {
-      Process::Write8(palicoChoice * 0x494 + 0x83389A0, 0xA0);
+      Process::Write8(0x83389A0 + palicoChoice * 0x494, 0xA0);
     }
   }
 }
@@ -3001,7 +2999,7 @@ void PalicoCommentEditPossibleChange(MenuEntry *entry) {
 void SpecialDeliveryDisplayChange(MenuEntry *entry) {
   u8 isSpecial;
   std::string to;
-  Process::Read8(palicoChoice * 0x494 + 0x83389A1, isSpecial);
+  Process::Read8(0x83389A1 + palicoChoice * 0x494, isSpecial);
   if (isSpecial == 0) {
     to = "特別配信表示じゃない";
   } else if (isSpecial == 1) {
@@ -3011,538 +3009,137 @@ void SpecialDeliveryDisplayChange(MenuEntry *entry) {
   int choice = keyboard.Open();
   if (choice >= 0) {
     if (choice == 0) {
-      Process::Write8(palicoChoice * 0x494 + 0x83389A1, 0x1);
+      Process::Write8(0x83389A1 + palicoChoice * 0x494, 0x1);
     } else if (choice == 1) {
-      Process::Write8(palicoChoice * 0x494 + 0x83389A1, 0x0);
+      Process::Write8(0x83389A1 + palicoChoice * 0x494, 0x0);
     }
   }
 }
 
-void PalicoEquipmentSupportAction1Change(MenuEntry *entry) {
+std::vector<std::string> GetPalicoEquipmentSupportAction() {
+  std::vector<u8> listSupportActionID(8);
+  std::vector<std::string> listDisplaySupportActionName(8);
+  for (int i = 0; i < listSupportActionID.size(); i++) {
+    Process::Read8(0x83388E8 + palicoChoice * 0x494 + i,
+                   listSupportActionID.at(i));
+    listDisplaySupportActionName.at(i) =
+        listPalicoAction.at(listSupportActionID.at(i));
+  }
+  return listDisplaySupportActionName;
+}
+
+void PalicoEquipmentSupportActionChange(int number) {
   u8 sup;
-  Process::Read8(palicoChoice * 0x494 + 0x83388E8, sup);
-  Keyboard keyboard("1番目のサポート行動を選んでください。\n現在[" +
-                        listPalicoAction[sup] + "]",
-                    listPalicoAction);
+  Process::Read8(0x83388E8 + palicoChoice * 0x494 + number, sup);
+  Keyboard keyboard(
+      "サポート行動を選んでください。現在[" + listPalicoAction.at(sup) + "]",
+      listPalicoAction);
   int choice = keyboard.Open();
   if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x83388E8, choice);
+    Process::Write8(0x83388E8 + palicoChoice * 0x494 + number, choice);
   }
 }
 
-void PalicoEquipmentSupportAction2Change(MenuEntry *entry) {
-  u8 sup;
-  Process::Read8(palicoChoice * 0x494 + 0x83388E9, sup);
-  Keyboard keyboard("2番目のサポート行動を選んでください。\n現在[" +
-                        listPalicoAction[sup] + "]",
-                    listPalicoAction);
+void PalicoEquipmentSupportActionChanger(MenuEntry *entry) {
+  Keyboard keyboard("どのサポート行動を変更しますか？",
+                    GetPalicoEquipmentSupportAction());
   int choice = keyboard.Open();
   if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x83388E9, choice);
+    PalicoEquipmentSupportActionChange(choice);
   }
 }
 
-void PalicoEquipmentSupportAction3Change(MenuEntry *entry) {
-  u8 sup;
-  Process::Read8(palicoChoice * 0x494 + 0x83388EA, sup);
-  Keyboard keyboard("3番目のサポート行動を選んでください。\n現在[" +
-                        listPalicoAction[sup] + "]",
-                    listPalicoAction);
-  int choice = keyboard.Open();
-  if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x83388EA, choice);
+std::vector<std::string> GetPalicoEquipmentSkill() {
+  std::vector<u8> listSkillID(8);
+  std::vector<std::string> listDisplaySkillName(8);
+  for (int i = 0; i < listSkillID.size(); i++) {
+    Process::Read8(0x83388F0 + palicoChoice * 0x494 + i, listSkillID.at(i));
+    listDisplaySkillName.at(i) = listPalicoSkill.at(listSkillID.at(i));
   }
+  return listDisplaySkillName;
 }
 
-void PalicoEquipmentSupportAction4Change(MenuEntry *entry) {
-  u8 sup;
-  Process::Read8(palicoChoice * 0x494 + 0x83388EB, sup);
-  Keyboard keyboard("4番目のサポート行動を選んでください。\n現在[" +
-                        listPalicoAction[sup] + "]",
-                    listPalicoAction);
-  int choice = keyboard.Open();
-  if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x83388EB, choice);
-  }
-}
-
-void PalicoEquipmentSupportAction5Change(MenuEntry *entry) {
-  u8 sup;
-  Process::Read8(palicoChoice * 0x494 + 0x83388EC, sup);
-  Keyboard keyboard("5番目のサポート行動を選んでください。\n現在[" +
-                        listPalicoAction[sup] + "]",
-                    listPalicoAction);
-  int choice = keyboard.Open();
-  if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x83388EC, choice);
-  }
-}
-
-void PalicoEquipmentSupportAction6Change(MenuEntry *entry) {
-  u8 sup;
-  Process::Read8(palicoChoice * 0x494 + 0x83388ED, sup);
-  Keyboard keyboard("6番目のサポート行動を選んでください。\n現在[" +
-                        listPalicoAction[sup] + "]",
-                    listPalicoAction);
-  int choice = keyboard.Open();
-  if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x83388ED, choice);
-  }
-}
-
-void PalicoEquipmentSupportAction7Change(MenuEntry *entry) {
-  u8 sup;
-  Process::Read8(palicoChoice * 0x494 + 0x83388EE, sup);
-  Keyboard keyboard("7番目のサポート行動を選んでください。\n現在[" +
-                        listPalicoAction[sup] + "]",
-                    listPalicoAction);
-  int choice = keyboard.Open();
-  if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x83388EE, choice);
-  }
-}
-
-void PalicoEquipmentSupportAction8Change(MenuEntry *entry) {
-  u8 sup;
-  Process::Read8(palicoChoice * 0x494 + 0x83388EF, sup);
-  Keyboard keyboard("8番目のサポート行動を選んでください。\n現在[" +
-                        listPalicoAction[sup] + "]",
-                    listPalicoAction);
-  int choice = keyboard.Open();
-  if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x83388EF, choice);
-  }
-}
-
-void PalicoEquipmentSkill1Change(MenuEntry *entry) {
+void PalicoEquipmentSkillChange(int number) {
   u8 ski;
-  Process::Read8(palicoChoice * 0x494 + 0x83388F0, ski);
-  Keyboard keyboard("1番目のオトモスキルを選んでください。\n現在[" +
-                        listPalicoSkill[ski] + "]",
-                    listPalicoSkill);
+  Process::Read8(0x83388F0 + palicoChoice * 0x494 + number, ski);
+  Keyboard keyboard(
+      "オトモスキルを選んでください。\n現在[" + listPalicoSkill.at(ski) + "]",
+      listPalicoSkill);
   int choice = keyboard.Open();
   if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x83388F0, choice);
+    Process::Write8(0x83388F0 + palicoChoice * 0x494 + number, choice);
   }
 }
 
-void PalicoEquipmentSkill2Change(MenuEntry *entry) {
-  u8 ski;
-  Process::Read8(palicoChoice * 0x494 + 0x83388F1, ski);
-  Keyboard keyboard("2番目のオトモスキルを選んでください。\n現在[" +
-                        listPalicoSkill[ski] + "]",
-                    listPalicoSkill);
+void PalicoEquipmentSkillChanger(MenuEntry *entry) {
+  Keyboard keyboard("どのオトモスキルを変更しますか？",
+                    GetPalicoEquipmentSkill());
   int choice = keyboard.Open();
   if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x83388F1, choice);
+    PalicoEquipmentSkillChange(choice);
   }
 }
 
-void PalicoEquipmentSkill3Change(MenuEntry *entry) {
-  u8 ski;
-  Process::Read8(palicoChoice * 0x494 + 0x83388F2, ski);
-  Keyboard keyboard("3番目のオトモスキルを選んでください。\n現在[" +
-                        listPalicoSkill[ski] + "]",
-                    listPalicoSkill);
-  int choice = keyboard.Open();
-  if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x83388F2, choice);
+std::vector<std::string> GetPalicoLearnSupportAction() {
+  std::vector<u8> listSupportActionID(16);
+  std::vector<std::string> listDisplaySupportActionName(16);
+  for (int i = 0; i < listSupportActionID.size(); i++) {
+    Process::Read8(0x83388F8 + palicoChoice * 0x494 + i,
+                   listSupportActionID.at(i));
+    listDisplaySupportActionName.at(i) =
+        listPalicoAction.at(listSupportActionID.at(i));
   }
+  return listDisplaySupportActionName;
 }
 
-void PalicoEquipmentSkill4Change(MenuEntry *entry) {
-  u8 ski;
-  Process::Read8(palicoChoice * 0x494 + 0x83388F3, ski);
-  Keyboard keyboard("4番目のオトモスキルを選んでください。\n現在[" +
-                        listPalicoSkill[ski] + "]",
-                    listPalicoSkill);
-  int choice = keyboard.Open();
-  if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x83388F3, choice);
-  }
-}
-
-void PalicoEquipmentSkill5Change(MenuEntry *entry) {
-  u8 ski;
-  Process::Read8(palicoChoice * 0x494 + 0x83388F4, ski);
-  Keyboard keyboard("5番目のオトモスキルを選んでください。\n現在[" +
-                        listPalicoSkill[ski] + "]",
-                    listPalicoSkill);
-  int choice = keyboard.Open();
-  if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x83388F4, choice);
-  }
-}
-
-void PalicoEquipmentSkill6Change(MenuEntry *entry) {
-  u8 ski;
-  Process::Read8(palicoChoice * 0x494 + 0x83388F5, ski);
-  Keyboard keyboard("6番目のオトモスキルを選んでください。\n現在[" +
-                        listPalicoSkill[ski] + "]",
-                    listPalicoSkill);
-  int choice = keyboard.Open();
-  if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x83388F5, choice);
-  }
-}
-
-void PalicoEquipmentSkill7Change(MenuEntry *entry) {
-  u8 ski;
-  Process::Read8(palicoChoice * 0x494 + 0x83388F6, ski);
-  Keyboard keyboard("7番目のオトモスキルを選んでください。\n現在[" +
-                        listPalicoSkill[ski] + "]",
-                    listPalicoSkill);
-  int choice = keyboard.Open();
-  if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x83388F6, choice);
-  }
-}
-
-void PalicoEquipmentSkill8Change(MenuEntry *entry) {
-  u8 ski;
-  Process::Read8(palicoChoice * 0x494 + 0x83388F7, ski);
-  Keyboard keyboard("8番目のオトモスキルを選んでください。\n現在[" +
-                        listPalicoSkill[ski] + "]",
-                    listPalicoSkill);
-  int choice = keyboard.Open();
-  if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x83388F7, choice);
-  }
-}
-
-void PalicoLearnSupportAction1Change(MenuEntry *entry) {
+void PalicoLearnSupportActionChange(int number) {
   u8 sup;
-  Process::Read8(palicoChoice * 0x494 + 0x83388F8, sup);
-  Keyboard keyboard("1番目のサポート行動を選んでください。\n現在[" +
-                        listPalicoAction[sup] + "]",
-                    listPalicoAction);
+  Process::Read8(0x83388F8 + palicoChoice * 0x494 + number, sup);
+  Keyboard keyboard(
+      "サポート行動を選んでください。現在[" + listPalicoAction.at(sup) + "]",
+      listPalicoAction);
   int choice = keyboard.Open();
   if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x83388F8, choice);
+    Process::Write8(0x83388F8 + palicoChoice * 0x494 + number, choice);
   }
 }
 
-void PalicoLearnSupportAction2Change(MenuEntry *entry) {
-  u8 sup;
-  Process::Read8(palicoChoice * 0x494 + 0x83388F9, sup);
-  Keyboard keyboard("2番目のサポート行動を選んでください。\n現在[" +
-                        listPalicoAction[sup] + "]",
-                    listPalicoAction);
+void PalicoLearnSupportActionChanger(MenuEntry *entry) {
+  Keyboard keyboard("どのサポート行動を変更しますか？",
+                    GetPalicoLearnSupportAction());
   int choice = keyboard.Open();
   if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x83388F9, choice);
+    PalicoLearnSupportActionChange(choice);
   }
 }
 
-void PalicoLearnSupportAction3Change(MenuEntry *entry) {
-  u8 sup;
-  Process::Read8(palicoChoice * 0x494 + 0x83388FA, sup);
-  Keyboard keyboard("3番目のサポート行動を選んでください。\n現在[" +
-                        listPalicoAction[sup] + "]",
-                    listPalicoAction);
-  int choice = keyboard.Open();
-  if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x83388FA, choice);
+std::vector<std::string> GetPalicoLearnSkill() {
+  std::vector<u8> listSkillID(12);
+  std::vector<std::string> listDisplaySkillName(12);
+  for (int i = 0; i < listSkillID.size(); i++) {
+    Process::Read8(0x8338908 + palicoChoice * 0x494 + i, listSkillID.at(i));
+    listDisplaySkillName.at(i) = listPalicoSkill.at(listSkillID.at(i));
   }
+  return listDisplaySkillName;
 }
 
-void PalicoLearnSupportAction4Change(MenuEntry *entry) {
-  u8 sup;
-  Process::Read8(palicoChoice * 0x494 + 0x83388FB, sup);
-  Keyboard keyboard("4番目のサポート行動を選んでください。\n現在[" +
-                        listPalicoAction[sup] + "]",
-                    listPalicoAction);
-  int choice = keyboard.Open();
-  if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x83388FB, choice);
-  }
-}
-
-void PalicoLearnSupportAction5Change(MenuEntry *entry) {
-  u8 sup;
-  Process::Read8(palicoChoice * 0x494 + 0x83388FC, sup);
-  Keyboard keyboard("5番目のサポート行動を選んでください。\n現在[" +
-                        listPalicoAction[sup] + "]",
-                    listPalicoAction);
-  int choice = keyboard.Open();
-  if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x83388FC, choice);
-  }
-}
-
-void PalicoLearnSupportAction6Change(MenuEntry *entry) {
-  u8 sup;
-  Process::Read8(palicoChoice * 0x494 + 0x83388FD, sup);
-  Keyboard keyboard("6番目のサポート行動を選んでください。\n現在[" +
-                        listPalicoAction[sup] + "]",
-                    listPalicoAction);
-  int choice = keyboard.Open();
-  if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x83388FD, choice);
-  }
-}
-
-void PalicoLearnSupportAction7Change(MenuEntry *entry) {
-  u8 sup;
-  Process::Read8(palicoChoice * 0x494 + 0x83388FE, sup);
-  Keyboard keyboard("7番目のサポート行動を選んでください。\n現在[" +
-                        listPalicoAction[sup] + "]",
-                    listPalicoAction);
-  int choice = keyboard.Open();
-  if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x83388FE, choice);
-  }
-}
-
-void PalicoLearnSupportAction8Change(MenuEntry *entry) {
-  u8 sup;
-  Process::Read8(palicoChoice * 0x494 + 0x83388FF, sup);
-  Keyboard keyboard("8番目のサポート行動を選んでください。\n現在[" +
-                        listPalicoAction[sup] + "]",
-                    listPalicoAction);
-  int choice = keyboard.Open();
-  if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x83388FF, choice);
-  }
-}
-
-void PalicoLearnSupportAction9Change(MenuEntry *entry) {
-  u8 sup;
-  Process::Read8(palicoChoice * 0x494 + 0x8338900, sup);
-  Keyboard keyboard("9番目のサポート行動を選んでください。\n現在[" +
-                        listPalicoAction[sup] + "]",
-                    listPalicoAction);
-  int choice = keyboard.Open();
-  if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x8338900, choice);
-  }
-}
-
-void PalicoLearnSupportAction10Change(MenuEntry *entry) {
-  u8 sup;
-  Process::Read8(palicoChoice * 0x494 + 0x8338901, sup);
-  Keyboard keyboard("10番目のサポート行動を選んでください。\n現在[" +
-                        listPalicoAction[sup] + "]",
-                    listPalicoAction);
-  int choice = keyboard.Open();
-  if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x8338901, choice);
-  }
-}
-
-void PalicoLearnSupportAction11Change(MenuEntry *entry) {
-  u8 sup;
-  Process::Read8(palicoChoice * 0x494 + 0x8338902, sup);
-  Keyboard keyboard("11番目のサポート行動を選んでください。\n現在[" +
-                        listPalicoAction[sup] + "]",
-                    listPalicoAction);
-  int choice = keyboard.Open();
-  if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x8338902, choice);
-  }
-}
-
-void PalicoLearnSupportAction12Change(MenuEntry *entry) {
-  u8 sup;
-  Process::Read8(palicoChoice * 0x494 + 0x8338903, sup);
-  Keyboard keyboard("12番目のサポート行動を選んでください。\n現在[" +
-                        listPalicoAction[sup] + "]",
-                    listPalicoAction);
-  int choice = keyboard.Open();
-  if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x8338903, choice);
-  }
-}
-
-void PalicoLearnSupportAction13Change(MenuEntry *entry) {
-  u8 sup;
-  Process::Read8(palicoChoice * 0x494 + 0x8338904, sup);
-  Keyboard keyboard("13番目のサポート行動を選んでください。\n現在[" +
-                        listPalicoAction[sup] + "]",
-                    listPalicoAction);
-  int choice = keyboard.Open();
-  if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x8338904, choice);
-  }
-}
-
-void PalicoLearnSupportAction14Change(MenuEntry *entry) {
-  u8 sup;
-  Process::Read8(palicoChoice * 0x494 + 0x8338905, sup);
-  Keyboard keyboard("14番目のサポート行動を選んでください。\n現在[" +
-                        listPalicoAction[sup] + "]",
-                    listPalicoAction);
-  int choice = keyboard.Open();
-  if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x8338905, choice);
-  }
-}
-
-void PalicoLearnSupportAction15Change(MenuEntry *entry) {
-  u8 sup;
-  Process::Read8(palicoChoice * 0x494 + 0x8338906, sup);
-  Keyboard keyboard("15番目のサポート行動を選んでください。\n現在[" +
-                        listPalicoAction[sup] + "]",
-                    listPalicoAction);
-  int choice = keyboard.Open();
-  if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x8338906, choice);
-  }
-}
-
-void PalicoLearnSupportAction16Change(MenuEntry *entry) {
-  u8 sup;
-  Process::Read8(palicoChoice * 0x494 + 0x8338907, sup);
-  Keyboard keyboard("16番目のサポート行動を選んでください。\n現在[" +
-                        listPalicoAction[sup] + "]",
-                    listPalicoAction);
-  int choice = keyboard.Open();
-  if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x8338907, choice);
-  }
-}
-
-void PalicoLearnSupportSkill1Change(MenuEntry *entry) {
+void PalicoLearnSkillChange(int number) {
   u8 ski;
-  Process::Read8(palicoChoice * 0x494 + 0x8338908, ski);
-  Keyboard keyboard("1番目のオトモスキルを選んでください。\n現在[" +
-                        listPalicoSkill[ski] + "]",
-                    listPalicoSkill);
+  Process::Read8(0x8338908 + palicoChoice * 0x494 + number, ski);
+  Keyboard keyboard(
+      "オトモスキルを選んでください。\n現在[" + listPalicoSkill.at(ski) + "]",
+      listPalicoSkill);
   int choice = keyboard.Open();
   if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x8338908, choice);
+    Process::Write8(0x8338908 + palicoChoice * 0x494 + number, choice);
   }
 }
 
-void PalicoLearnSupportSkill2Change(MenuEntry *entry) {
-  u8 ski;
-  Process::Read8(palicoChoice * 0x494 + 0x8338909, ski);
-  Keyboard keyboard("2番目のオトモスキルを選んでください。\n現在[" +
-                        listPalicoSkill[ski] + "]",
-                    listPalicoSkill);
+void PalicoLearnSkillChanger(MenuEntry *entry) {
+  Keyboard keyboard("どのオトモスキルを変更しますか？", GetPalicoLearnSkill());
   int choice = keyboard.Open();
   if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x8338909, choice);
-  }
-}
-
-void PalicoLearnSupportSkill3Change(MenuEntry *entry) {
-  u8 ski;
-  Process::Read8(palicoChoice * 0x494 + 0x833890A, ski);
-  Keyboard keyboard("3番目のオトモスキルを選んでください。\n現在[" +
-                        listPalicoSkill[ski] + "]",
-                    listPalicoSkill);
-  int choice = keyboard.Open();
-  if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x833890A, choice);
-  }
-}
-
-void PalicoLearnSupportSkill4Change(MenuEntry *entry) {
-  u8 ski;
-  Process::Read8(palicoChoice * 0x494 + 0x833890B, ski);
-  Keyboard keyboard("4番目のオトモスキルを選んでください。\n現在[" +
-                        listPalicoSkill[ski] + "]",
-                    listPalicoSkill);
-  int choice = keyboard.Open();
-  if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x833890B, choice);
-  }
-}
-
-void PalicoLearnSupportSkill5Change(MenuEntry *entry) {
-  u8 ski;
-  Process::Read8(palicoChoice * 0x494 + 0x833890C, ski);
-  Keyboard keyboard("5番目のオトモスキルを選んでください。\n現在[" +
-                        listPalicoSkill[ski] + "]",
-                    listPalicoSkill);
-  int choice = keyboard.Open();
-  if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x833890C, choice);
-  }
-}
-
-void PalicoLearnSupportSkill6Change(MenuEntry *entry) {
-  u8 ski;
-  Process::Read8(palicoChoice * 0x494 + 0x833890D, ski);
-  Keyboard keyboard("6番目のオトモスキルを選んでください。\n現在[" +
-                        listPalicoSkill[ski] + "]",
-                    listPalicoSkill);
-  int choice = keyboard.Open();
-  if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x833890D, choice);
-  }
-}
-
-void PalicoLearnSupportSkill7Change(MenuEntry *entry) {
-  u8 ski;
-  Process::Read8(palicoChoice * 0x494 + 0x833890E, ski);
-  Keyboard keyboard("7番目のオトモスキルを選んでください。\n現在[" +
-                        listPalicoSkill[ski] + "]",
-                    listPalicoSkill);
-  int choice = keyboard.Open();
-  if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x833890E, choice);
-  }
-}
-
-void PalicoLearnSupportSkill8Change(MenuEntry *entry) {
-  u8 ski;
-  Process::Read8(palicoChoice * 0x494 + 0x833890F, ski);
-  Keyboard keyboard("8番目のオトモスキルを選んでください。\n現在[" +
-                        listPalicoSkill[ski] + "]",
-                    listPalicoSkill);
-  int choice = keyboard.Open();
-  if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x833890F, choice);
-  }
-}
-
-void PalicoLearnSupportSkill9Change(MenuEntry *entry) {
-  u8 ski;
-  Process::Read8(palicoChoice * 0x494 + 0x8338910, ski);
-  Keyboard keyboard("9番目のオトモスキルを選んでください。\n現在[" +
-                        listPalicoSkill[ski] + "]",
-                    listPalicoSkill);
-  int choice = keyboard.Open();
-  if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x8338910, choice);
-  }
-}
-
-void PalicoLearnSupportSkill10Change(MenuEntry *entry) {
-  u8 ski;
-  Process::Read8(palicoChoice * 0x494 + 0x8338911, ski);
-  Keyboard keyboard("10番目のオトモスキルを選んでください。\n現在[" +
-                        listPalicoSkill[ski] + "]",
-                    listPalicoSkill);
-  int choice = keyboard.Open();
-  if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x8338911, choice);
-  }
-}
-
-void PalicoLearnSupportSkill11Change(MenuEntry *entry) {
-  u8 ski;
-  Process::Read8(palicoChoice * 0x494 + 0x8338912, ski);
-  Keyboard keyboard("11番目のオトモスキルを選んでください。\n現在[" +
-                        listPalicoSkill[ski] + "]",
-                    listPalicoSkill);
-  int choice = keyboard.Open();
-  if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x8338912, choice);
-  }
-}
-
-void PalicoLearnSupportSkill12Change(MenuEntry *entry) {
-  u8 ski;
-  Process::Read8(palicoChoice * 0x494 + 0x8338913, ski);
-  Keyboard keyboard("12番目のオトモスキルを選んでください。\n現在[" +
-                        listPalicoSkill[ski] + "]",
-                    listPalicoSkill);
-  int choice = keyboard.Open();
-  if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x8338913, choice);
+    PalicoLearnSkillChange(choice);
   }
 }
 
@@ -3550,31 +3147,26 @@ void PalicoVoiceChange(MenuEntry *entry) {
   u8 voice;
   const std::vector<std::string> listPalicoVoice{"なし", "TYPE1", "TYPE2",
                                                  "TYPE3"};
-  Process::Read8(palicoChoice * 0x494 + 0x8338AC1, voice);
+  Process::Read8(0x8338AC1 + palicoChoice * 0x494, voice);
   Keyboard keyboard(
       "声を選んでください。\n現在[" + listPalicoVoice[voice] + "]",
       listPalicoVoice);
   int choice = keyboard.Open();
   if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x8338AC1, choice);
+    Process::Write8(0x8338AC1 + palicoChoice * 0x494, choice);
   }
 }
 
 void PalicoEyeChange(MenuEntry *entry) {
   u8 eye;
-  const std::vector<std::string> listPalicoEye{"ふつう",
-                                               "ほそ目",
-                                               "つり目",
-                                               "ニヤケ目",
-                                               "閉じ目",
-                                               "キズ目"
-                                               "透明"};
-  Process::Read8(palicoChoice * 0x494 + 0x8338AC2, eye);
+  const std::vector<std::string> listPalicoEye{
+      "ふつう", "ほそ目", "つり目", "ニヤケ目", "閉じ目", "キズ目", "透明"};
+  Process::Read8(0x8338AC2 + palicoChoice * 0x494, eye);
   Keyboard keyboard("目を選んでください。\n現在[" + listPalicoEye[eye] + "]",
                     listPalicoEye);
   int choice = keyboard.Open();
   if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x8338AC2, choice);
+    Process::Write8(0x8338AC2 + palicoChoice * 0x494, choice);
   }
 }
 
@@ -3582,13 +3174,13 @@ void PalicoInnerChange(MenuEntry *entry) {
   u8 inner;
   const std::vector<std::string> listPalicoInner{
       "TYPE1", "TYPE2", "ファラオ", "ゴア", "シャガル", "透明"};
-  Process::Read8(palicoChoice * 0x494 + 0x8338AC3, inner);
+  Process::Read8(0x8338AC3 + palicoChoice * 0x494, inner);
   Keyboard keyboard(
       "インナーを選んでください。\n現在[" + listPalicoInner[inner] + "]",
       listPalicoInner);
   int choice = keyboard.Open();
   if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x8338AC3, choice);
+    Process::Write8(0x8338AC3 + palicoChoice * 0x494, choice);
   }
 }
 
@@ -3597,13 +3189,13 @@ void PalicoFurCoatChange(MenuEntry *entry) {
   const std::vector<std::string> listPalicoFurCoat{
       "アイルー",   "メラルー", "アメショ", "ワントーン",
       "ツートーン", "ミケ",     "ハンテン"};
-  Process::Read8(palicoChoice * 0x494 + 0x8338AC6, kenami);
+  Process::Read8(0x8338AC6 + palicoChoice * 0x494, kenami);
   Keyboard keyboard(
       "毛並みを選んでください。\n現在[" + listPalicoFurCoat[kenami] + "]",
       listPalicoFurCoat);
   int choice = keyboard.Open();
   if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x8338AC6, choice);
+    Process::Write8(0x8338AC6 + palicoChoice * 0x494, choice);
   }
 }
 
@@ -3611,12 +3203,12 @@ void PalicoEarChange(MenuEntry *entry) {
   u8 mimi;
   const std::vector<std::string> listPalicoEar{"ふつう", "たれ耳", "聞き耳",
                                                "立ち耳", "まる耳", "透明"};
-  Process::Read8(palicoChoice * 0x494 + 0x8338AC7, mimi);
+  Process::Read8(0x8338AC7 + palicoChoice * 0x494, mimi);
   Keyboard keyboard("耳を選んでください。\n現在[" + listPalicoEar[mimi] + "]",
                     listPalicoEar);
   int choice = keyboard.Open();
   if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x8338AC7, choice);
+    Process::Write8(0x8338AC7 + palicoChoice * 0x494, choice);
   }
 }
 
@@ -3624,145 +3216,113 @@ void PalicoTailChange(MenuEntry *entry) {
   u8 tail;
   const std::vector<std::string> listPalicoTail{"ふつう",   "ダンゴ",   "カギ",
                                                 "ふさふさ", "ながまる", "透明"};
-  Process::Read8(palicoChoice * 0x494 + 0x8338AC8, tail);
+  Process::Read8(0x8338AC8 + palicoChoice * 0x494, tail);
   Keyboard keyboard(
       "尻尾を選んでください。\n現在[" + listPalicoTail[tail] + "]",
       listPalicoTail);
   int choice = keyboard.Open();
   if (choice >= 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x8338AC8, choice);
+    Process::Write8(0x8338AC8 + palicoChoice * 0x494, choice);
   }
 }
 
-void PalicoBodyHairColorRedChange(MenuEntry *entry) {
-  u8 a;
-  Keyboard keyboard("赤の値を入力してください\n1~255の間");
+void PalicoBodyHairColorChange(int choice) {
+  u8 color, nowColor;
+  Process::Read8(0x8338ACC + palicoChoice * 0x494 + choice, nowColor);
+  Keyboard keyboard("値を入力してください。\n現在[" + std::to_string(nowColor) +
+                    "]");
   keyboard.IsHexadecimal(false);
-  if (keyboard.Open(a) == 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x8338ACC, a);
+  if (keyboard.Open(color) == 0) {
+    Process::Write8(0x8338ACC + palicoChoice * 0x494 + choice, color);
   }
 }
 
-void PalicoBodyHairColorGreenChange(MenuEntry *entry) {
-  u8 a;
-  Keyboard keyboard("緑の値を入力してください\n1~255の間");
-  keyboard.IsHexadecimal(false);
-  if (keyboard.Open(a) == 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x8338ACD, a);
+void PalicoBodyHairColorChanger(MenuEntry *entry) {
+  Keyboard keyboard("どの値を変更しますか？", {"R", "G", "B"});
+  int choice = keyboard.Open();
+  if (choice >= 0) {
+    PalicoBodyHairColorChange(choice);
   }
 }
 
-void PalicoBodyHairColorBlueChange(MenuEntry *entry) {
-  u8 a;
-  Keyboard keyboard("青の値を入力してください\n1~255の間");
+void PalicoRightEyeColorChange(int choice) {
+  u8 color, nowColor;
+  Process::Read8(0x8338AD0 + palicoChoice * 0x494 + choice, nowColor);
+  Keyboard keyboard("値を入力してください。\n現在[" + std::to_string(nowColor) +
+                    "]");
   keyboard.IsHexadecimal(false);
-  if (keyboard.Open(a) == 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x8338ACE, a);
+  if (keyboard.Open(color) == 0) {
+    Process::Write8(0x8338AD0 + palicoChoice * 0x494 + choice, color);
   }
 }
 
-void PalicoRightEyeColorRedChange(MenuEntry *entry) {
-  u8 a;
-  Keyboard keyboard("赤の値を入力してください\n1~255の間");
-  keyboard.IsHexadecimal(false);
-  if (keyboard.Open(a) == 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x8338AD0, a);
+void PalicoRightEyeColorChanger(MenuEntry *entry) {
+  Keyboard keyboard("どの値を変更しますか？", {"R", "G", "B"});
+  int choice = keyboard.Open();
+  if (choice >= 0) {
+    PalicoRightEyeColorChange(choice);
   }
 }
 
-void PalicoRightEyeColorGreenChange(MenuEntry *entry) {
-  u8 a;
-  Keyboard keyboard("緑の値を入力してください\n1~255の間");
+void PalicoLeftEyeColorChange(int choice) {
+  u8 color, nowColor;
+  Process::Read8(0x8338AD4 + palicoChoice * 0x494 + choice, nowColor);
+  Keyboard keyboard("値を入力してください。\n現在[" + std::to_string(nowColor) +
+                    "]");
   keyboard.IsHexadecimal(false);
-  if (keyboard.Open(a) == 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x8338AD1, a);
+  if (keyboard.Open(color) == 0) {
+    Process::Write8(0x8338AD4 + palicoChoice * 0x494 + choice, color);
   }
 }
 
-void PalicoRightEyeColorBlueChange(MenuEntry *entry) {
-  u8 a;
-  Keyboard keyboard("青の値を入力してください\n1~255の間");
-  keyboard.IsHexadecimal(false);
-  if (keyboard.Open(a) == 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x8338AD2, a);
+void PalicoLeftEyeColorChanger(MenuEntry *entry) {
+  Keyboard keyboard("どの値を変更しますか？", {"R", "G", "B"});
+  int choice = keyboard.Open();
+  if (choice >= 0) {
+    PalicoLeftEyeColorChange(choice);
   }
 }
 
-void PalicoLeftEyeColorRedChange(MenuEntry *entry) {
-  u8 a;
-  Keyboard keyboard("赤の値を入力してください\n1~255の間");
+void PalicoInnerColorChange(int choice) {
+  u8 color, nowColor;
+  Process::Read8(0x8338AD8 + palicoChoice * 0x494 + choice, nowColor);
+  Keyboard keyboard("値を入力してください。\n現在[" + std::to_string(nowColor) +
+                    "]");
   keyboard.IsHexadecimal(false);
-  if (keyboard.Open(a) == 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x8338AD4, a);
+  if (keyboard.Open(color) == 0) {
+    Process::Write8(0x8338AD8 + palicoChoice * 0x494 + choice, color);
   }
 }
 
-void PalicoLeftEyeColorGreenChange(MenuEntry *entry) {
-  u8 a;
-  Keyboard keyboard("緑の値を入力してください\n1~255の間");
-  keyboard.IsHexadecimal(false);
-  if (keyboard.Open(a) == 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x8338AD5, a);
-  }
-}
-
-void PalicoLeftEyeColorBlueChange(MenuEntry *entry) {
-  u8 a;
-  Keyboard keyboard("青の値を入力してください\n1~255の間");
-  keyboard.IsHexadecimal(false);
-  if (keyboard.Open(a) == 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x8338AD6, a);
-  }
-}
-
-void PalicoInnerColorRedChange(MenuEntry *entry) {
-  u8 a;
-  Keyboard keyboard("赤の値を入力してください\n1~255の間");
-  keyboard.IsHexadecimal(false);
-  if (keyboard.Open(a) == 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x8338AD8, a);
-  }
-}
-
-void PalicoInnerColorGreenChange(MenuEntry *entry) {
-  u8 a;
-  Keyboard keyboard("緑の値を入力してください\n1~255の間");
-  keyboard.IsHexadecimal(false);
-  if (keyboard.Open(a) == 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x8338AD9, a);
-  }
-}
-
-void PalicoInnerColorBlueChange(MenuEntry *entry) {
-  u8 a;
-  Keyboard keyboard("青の値を入力してください\n1~255の間");
-  keyboard.IsHexadecimal(false);
-  if (keyboard.Open(a) == 0) {
-    Process::Write8(palicoChoice * 0x494 + 0x8338ADA, a);
+void PalicoInnerColorChanger(MenuEntry *entry) {
+  Keyboard keyboard("どの値を変更しますか？", {"R", "G", "B"});
+  int choice = keyboard.Open();
+  if (choice >= 0) {
+    PalicoInnerColorChange(choice);
   }
 }
 
 void PalicoNameChange(MenuEntry *entry) {
   std::string nameFix, namenow, namekbd;
   Process::ReadString(0x83AE380, nameFix, 0x1E, StringFormat::Utf8);
-  Process::ReadString(palicoChoice * 0x494 + 0x8338AFE, namenow, 0x1E,
+  Process::ReadString(0x8338AFE + palicoChoice * 0x494, namenow, 0x1E,
                       StringFormat::Utf8);
   Keyboard keyboard("どちらで変更しますか？\n現在の名前[" + namenow + "]",
                     {"定型文", "キーボード"});
   int choice = keyboard.Open();
   if (choice == 0) {
     for (int i = 0; i < 8; i++) {
-      Process::Write32(i * 4 + palicoChoice * 0x494 + 0x8338AFE, 0);
+      Process::Write32(i * 4 + 0x8338AFE + palicoChoice * 0x494, 0);
     }
-    Process::WriteString(palicoChoice * 0x494 + 0x8338AFE, nameFix,
+    Process::WriteString(0x8338AFE + palicoChoice * 0x494, nameFix,
                          StringFormat::Utf8);
   } else if (choice == 1) {
     Keyboard keyboard("名前を入力してください。");
     if (keyboard.Open(namekbd) == 0) {
       for (int i = 0; i < 8; i++) {
-        Process::Write32(i * 4 + palicoChoice * 0x494 + 0x8338AFE, 0);
+        Process::Write32(i * 4 + 0x8338AFE + palicoChoice * 0x494, 0);
       }
-      Process::WriteString(palicoChoice * 0x494 + 0x8338AFE, namekbd,
+      Process::WriteString(0x8338AFE + palicoChoice * 0x494, namekbd,
                            StringFormat::Utf8);
     }
   }
@@ -3771,24 +3331,24 @@ void PalicoNameChange(MenuEntry *entry) {
 void PalicoCommentChange(MenuEntry *entry) {
   std::string nameFix, namenow, namekbd;
   Process::ReadString(0x83AE380, nameFix, 0x1E, StringFormat::Utf8);
-  Process::ReadString(palicoChoice * 0x494 + 0x8338920, namenow, 0x1E,
+  Process::ReadString(0x8338920 + palicoChoice * 0x494, namenow, 0x1E,
                       StringFormat::Utf8);
   Keyboard keyboard("どちらで変更しますか？\n現在のコメント[" + namenow + "]",
                     {"定型文", "キーボード"});
   int choice = keyboard.Open();
   if (choice == 0) {
     for (int i = 0; i < 15; i++) {
-      Process::Write32(i * 4 + palicoChoice * 0x494 + 0x8338920, 0);
+      Process::Write32(i * 4 + 0x8338920 + palicoChoice * 0x494, 0);
     }
-    Process::WriteString(palicoChoice * 0x494 + 0x8338920, nameFix,
+    Process::WriteString(0x8338920 + palicoChoice * 0x494, nameFix,
                          StringFormat::Utf8);
   } else if (choice == 1) {
     Keyboard keyboard("コメントを入力してください。");
     if (keyboard.Open(namekbd) == 0) {
       for (int i = 0; i < 15; i++) {
-        Process::Write32(i * 4 + palicoChoice * 0x494 + 0x8338920, 0);
+        Process::Write32(i * 4 + 0x8338920 + palicoChoice * 0x494, 0);
       }
-      Process::WriteString(palicoChoice * 0x494 + 0x8338920, namekbd,
+      Process::WriteString(0x8338920 + palicoChoice * 0x494, namekbd,
                            StringFormat::Utf8);
     }
   }
@@ -3797,24 +3357,24 @@ void PalicoCommentChange(MenuEntry *entry) {
 void PalicoGodParentChange(MenuEntry *entry) {
   std::string nameFix, namenow, namekbd;
   Process::ReadString(0x83AE380, nameFix, 0x1E, StringFormat::Utf8);
-  Process::ReadString(palicoChoice * 0x494 + 0x833895C, namenow, 0x1E,
+  Process::ReadString(0x833895C + palicoChoice * 0x494, namenow, 0x1E,
                       StringFormat::Utf8);
   Keyboard keyboard("どちらで変更しますか？\n現在の名付け親[" + namenow + "]",
                     {"定型文", "キーボード"});
   int choice = keyboard.Open();
   if (choice == 0) {
     for (int i = 0; i < 8; i++) {
-      Process::Write32(i * 4 + palicoChoice * 0x494 + 0x833895C, 0);
+      Process::Write32(i * 4 + 0x833895C + palicoChoice * 0x494, 0);
     }
-    Process::WriteString(palicoChoice * 0x494 + 0x833895C, nameFix,
+    Process::WriteString(0x833895C + palicoChoice * 0x494, nameFix,
                          StringFormat::Utf8);
   } else if (choice == 1) {
     Keyboard keyboard("名付け親を入力してください。");
     if (keyboard.Open(namekbd) == 0) {
       for (int i = 0; i < 8; i++) {
-        Process::Write32(i * 4 + palicoChoice * 0x494 + 0x833895C, 0);
+        Process::Write32(i * 4 + 0x833895C + palicoChoice * 0x494, 0);
       }
-      Process::WriteString(palicoChoice * 0x494 + 0x833895C, namekbd,
+      Process::WriteString(0x833895C + palicoChoice * 0x494, namekbd,
                            StringFormat::Utf8);
     }
   }
@@ -3823,7 +3383,7 @@ void PalicoGodParentChange(MenuEntry *entry) {
 void PalicoPredecessorHusbandChange(MenuEntry *entry) {
   std::string nameFix, namenow, namekbd;
   Process::ReadString(0x83AE380, nameFix, 0x1E, StringFormat::Utf8);
-  Process::ReadString(palicoChoice * 0x494 + 0x833897C, namenow, 0x1E,
+  Process::ReadString(0x833897C + palicoChoice * 0x494, namenow, 0x1E,
                       StringFormat::Utf8);
   Keyboard keyboard(
       "どちらで変更しますか？\n現在の先代旦那さん[" + namenow + "]",
@@ -3831,17 +3391,17 @@ void PalicoPredecessorHusbandChange(MenuEntry *entry) {
   int choice = keyboard.Open();
   if (choice == 0) {
     for (int i = 0; i < 8; i++) {
-      Process::Write32(i * 4 + palicoChoice * 0x494 + 0x833897C, 0);
+      Process::Write32(i * 4 + 0x833897C + palicoChoice * 0x494, 0);
     }
-    Process::WriteString(palicoChoice * 0x494 + 0x833897C, nameFix,
+    Process::WriteString(0x833897C + palicoChoice * 0x494, nameFix,
                          StringFormat::Utf8);
   } else if (choice == 1) {
     Keyboard keyboard("先代旦那さんを入力してください。");
     if (keyboard.Open(namekbd) == 0) {
       for (int i = 0; i < 8; i++) {
-        Process::Write32(i * 4 + palicoChoice * 0x494 + 0x833897C, 0);
+        Process::Write32(i * 4 + 0x833897C + palicoChoice * 0x494, 0);
       }
-      Process::WriteString(palicoChoice * 0x494 + 0x833897C, namekbd,
+      Process::WriteString(0x833897C + palicoChoice * 0x494, namekbd,
                            StringFormat::Utf8);
     }
   }
@@ -3953,7 +3513,7 @@ void ResistanceOption(MenuEntry *entry) {
 }
 
 int RedInput() {
-  u8 redInput = 0;
+  static u8 redInput = 0;
   Keyboard keyboard("入力モードを選んでください。", {"10進数", "16進数"});
   int choice = keyboard.Open();
   if (choice == 0) {
@@ -3968,7 +3528,7 @@ int RedInput() {
 }
 
 int GreenInput() {
-  u8 greenInput = 0;
+  static u8 greenInput = 0;
   Keyboard keyboard("入力モードを選んでください。", {"10進数", "16進数"});
   int choice = keyboard.Open();
   if (choice == 0) {
@@ -3983,7 +3543,7 @@ int GreenInput() {
 }
 
 int BlueInput() {
-  u8 blueInput = 0;
+  static u8 blueInput = 0;
   Keyboard keyboard("入力モードを選んでください。", {"10進数", "16進数"});
   int choice = keyboard.Open();
   if (choice == 0) {
@@ -3999,9 +3559,17 @@ int BlueInput() {
 
 void RGBOutput(MenuEntry *entry) {
   static u8 redInput = 0, greenInput = 0, blueInput = 0;
-  Keyboard keyboard("グループを選んでください。",
-                    {"R値を入力", "G値を入力", "B値を入力",
-                     "入力された値を確認", "出力された色を確認"});
+  Keyboard keyboard(
+      "グループを選んでください。\n"
+      "入力された値です。\n" +
+              Utils::Format("10進数: R[%03d] G[%03d] B[%03d]\n", redInput,
+                            greenInput, blueInput) +
+              Utils::Format("16進数: R[%02X] G[%02X] B[%02X]\n", redInput,
+                            greenInput, blueInput) +
+              "出力された色です。\n"
+          << Color(redInput, greenInput, blueInput)
+          << "■■■■■■■■■\n■■■■■■■■■\n■■■■■■■■■",
+      {"R値を入力", "G値を入力", "B値を入力"});
   int choice = keyboard.Open();
   if (choice == 0) {
     redInput = RedInput();
@@ -4009,13 +3577,6 @@ void RGBOutput(MenuEntry *entry) {
     greenInput = GreenInput();
   } else if (choice == 2) {
     blueInput = BlueInput();
-  } else if (choice == 3) {
-    MessageBox(Utils::Format("入力された値です。\nR[%02X]\nG[%02X]\nB[%02X]",
-                             redInput, greenInput, blueInput))();
-  } else if (choice == 4) {
-    MessageBox("出力された色です。\n"
-               << Color(redInput, greenInput, blueInput)
-               << "■■■■■■■■■\n■■■■■■■■■\n■■■■■■■■■")();
   }
 }
 
@@ -4064,14 +3625,13 @@ void MySetToPorchItemCopy(MenuEntry *entry) {
                         StringFormat::Utf8);
   }
   Keyboard keyboard(
-      "アイテムポーチにコピーしたいアイテムマイセットを選んでください。\n"
-      "名前の表示がおかしいのは仕様です。",
+      "アイテムポーチにコピーしたいアイテムマイセットを選んでください。\n",
       list_my_set);
   int choice = keyboard.Open();
   if (choice >= 0) {
     for (int i = 0; i < 32; i++) {
-      Process::Read32(i * 4 + choice * 0xAA + 0x83761BA, item);
-      Process::Write32(i * 4 + choice * 0xAA + 0x8372392, item);
+      Process::Read32(0x83761BA + choice * 0xAA + i * 4, item);
+      Process::Write32(0x8372392 + i * 4, item);
     }
   }
 }
@@ -4105,24 +3665,6 @@ void DeliveryItemToPorchCopy(MenuEntry *entry) {
       Process::Write16(0x8372396, item2);
       Process::Write16(0x8372398, quantity2);
     }
-  }
-}
-
-void PorchToDeliveryItemCopy(MenuEntry *entry) {
-  u16 itemRead1, itemRead2;
-  u16 quantity1, quantity2;
-  Process::Read16(0x8372392, itemRead1);
-  Process::Read16(0x8372394, quantity1);
-  Process::Read16(0x8372396, itemRead2);
-  Process::Read16(0x8372398, quantity2);
-  Keyboard keyboard("アイテムポーチのアイテムを納品アイテムにコピーしますか？",
-                    listToggle);
-  int choice = keyboard.Open();
-  if (choice == 0) {
-    Process::Write16(0x8363F98, itemRead1);
-    Process::Write16(0x8363F98, quantity1);
-    Process::Write16(0x8363F98, itemRead2);
-    Process::Write16(0x8363F98, quantity2);
   }
 }
 

@@ -88,6 +88,7 @@ static MenuEntry *EnableEntry(MenuEntry *entry) {
 // Useful to do code edits safely
 void PatchProcess(FwkSettings &settings) {
   ToggleTouchscreenForceOn();
+  GetPatchColorData(settings);
 
   // プラグインの設定
   // アクションリプレイ
@@ -321,10 +322,10 @@ void InitMenu(PluginMenu &menu) {
                              "HPを無限にします。");
     *player +=
         new MenuEntry("無敵" + stable, nullptr, Invincible, "無敵になります。");
-    *player +=
-        new MenuEntry("スーパーアーマー" + workInProgress, nullptr, SuperArmor,
-                      "スーパーアーマーになります。\n"
-                      "オンにした後オフにして被弾するとエラーになります。");
+    *player += new MenuEntry("スーパーアーマー" + stable, nullptr, SuperArmor,
+                             "スーパーアーマーになります。\n"
+                             "オンにした後オフにすると被弾したときに"
+                             "のけぞりのモーションになります。");
     *player += new MenuEntry("スタミナ無限" + stable, nullptr, InfiniteStamina,
                              "スタミナを無限にします。");
     *player += new MenuEntry("狩技ゲージ無限" + stable, nullptr,
@@ -368,7 +369,7 @@ void InitMenu(PluginMenu &menu) {
                                  "新たに護石を作成できます。");
         *amulet += new MenuEntry("護石種類変更" + stable, nullptr,
                                  AmuletTypeChange, "護石の種類を変更します。");
-        *amulet += new MenuEntry("スキル変更" + workInProgress, nullptr,
+        *amulet += new MenuEntry("スキル変更" + stable, nullptr,
                                  AmuletSkillChange, "スキルを変更します。");
         *amulet += new MenuEntry("スキルポイント変更" + stable, nullptr,
                                  AmuletSkillPointChange,
@@ -418,77 +419,68 @@ void InitMenu(PluginMenu &menu) {
       *equipment += insect;
 
       *equipment += new MenuEntry(
-          "他プレイヤーの装備コピー" + workInProgress, nullptr,
+          "他プレイヤーの装備コピー" + stable, nullptr,
           OtherPlayerEquipmentCopy,
           "コピーしたいプレイヤーが猫の場合、コピーしないでください。");
     }
     *item += equipment;
 
-    *item += new MenuEntry("爆弾を無限に置ける" + workInProgress,
-                           InfiniteBombPut, "見た目だけです。");
-    *item +=
-        new MenuEntry("たんほれアイテムセット" + workInProgress, TanhoreItemSet,
-                      "ポーチの\n"
-                      "1枠目を 燃石炭\n"
-                      "2枠目を ネコタクチケット\n"
-                      "3枠目を モドリ玉\n"
-                      "にします。");
-    *item += new MenuEntry("所持金最大" + workInProgress, nullptr, MoneyChange,
+    *item += new MenuEntry("爆弾を無限に置ける" + stable, InfiniteBombPut,
+                           "見た目だけです。");
+    *item += new MenuEntry("たんほれアイテムセット" + stable, TanhoreItemSet,
+                           "ポーチの\n"
+                           "1枠目を 燃石炭\n"
+                           "2枠目を ネコタクチケット\n"
+                           "3枠目を モドリ玉\n"
+                           "にします。");
+    *item += new MenuEntry("所持金最大" + stable, nullptr, MoneyChange,
                            "所持金を変更できます。");
     *item +=
-        new MenuEntry("龍歴院ポイント最大" + workInProgress, nullptr,
+        new MenuEntry("龍歴院ポイント最大" + stable, nullptr,
                       WycademyPointChange, "龍歴院ポイントを変更できます。");
-    *item += new MenuEntry("アイテム&弾丸無限" + workInProgress, nullptr,
-                           InfiniteItemAmmo,
-                           "アイテムと弾丸を無限にします。\n"
-                           "しゃがみの弾は無限になりません。");
     *item +=
-        new MenuEntry("素材無しで調合可能" + workInProgress, nullptr,
+        new MenuEntry("アイテム&弾丸無限" + stable, nullptr, InfiniteItemAmmo,
+                      "アイテムと弾丸を無限にします。\n"
+                      "しゃがみの弾は無限になりません。");
+    *item +=
+        new MenuEntry("素材無しで調合可能" + stable, nullptr,
                       NoMaterialCompound, "素材無しで調合を可能にします。");
-    *item +=
-        new MenuEntry("運搬物を持たずにポーチに入れる" + workInProgress,
-                      nullptr, CargoPutInPorch, "運搬物がポーチに入ります。");
-    *item +=
-        new MenuEntry("採取無限" + workInProgress, nullptr, InfiniteCollect,
-                      "採集ポイントで無限に採取ができます。");
-    *item += new MenuEntry("装備を素材無しで作れる" + workInProgress, nullptr,
+    *item += new MenuEntry("運搬物を持たずにポーチに入れる" + stable, nullptr,
+                           CargoPutInPorch, "運搬物がポーチに入ります。");
+    *item += new MenuEntry("採取無限" + stable, nullptr, InfiniteCollect,
+                           "採集ポイントで無限に採取ができます。");
+    *item += new MenuEntry("装備を素材無しで作れる" + stable, nullptr,
                            NoMaterialEquipmentCreate,
                            "素材なしで装備生産をすることができます。");
     *item +=
-        new MenuEntry("装備欄全て解放" + workInProgress, nullptr,
-                      EquipmentAllRelease, "装備生産リストを全て解放します。");
-    *item += new MenuEntry(
-        "全てのアイテム販売" + workInProgress, nullptr, AllItemSold,
-        "全てのアイテムがギルドストアや雑貨屋に売り出されます。");
-    *item += new MenuEntry("ボックス1400個に拡張" + workInProgress, nullptr,
+        new MenuEntry("装備欄全て解放" + stable, nullptr, EquipmentAllRelease,
+                      "装備生産リストを全て解放します。");
+    *item +=
+        new MenuEntry("全てのアイテム販売" + stable, nullptr, AllItemSold,
+                      "全てのアイテムがギルドストアや雑貨屋に売り出されます。");
+    *item += new MenuEntry("ボックス1400個に拡張" + stable, nullptr,
                            ItemBox1400Expansion,
                            "ボックスのページを1400個に拡張します。");
-    *item +=
-        new MenuEntry("持てるアイテム99個" + workInProgress, nullptr,
-                      HaveItem99, "持てるアイテムの最大数を99個にします。");
-    *item += new MenuEntry("アイテムボックス編集" + workInProgress, nullptr,
+    *item += new MenuEntry("持てるアイテム99個" + stable, nullptr, HaveItem99,
+                           "持てるアイテムの最大数を99個にします。");
+    *item += new MenuEntry("アイテムボックス編集" + stable, nullptr,
                            ItemBoxEdit, "アイテムボックスの編集をします。");
     *item +=
-        new MenuEntry("アイテムマイセットをポーチにコピー" + workInProgress,
-                      nullptr, MySetToPorchItemCopy,
+        new MenuEntry("アイテムマイセットをポーチにコピー" + stable, nullptr,
+                      MySetToPorchItemCopy,
                       "アイテムマイセットに登録されているアイテムを、アイテムポ"
                       "ーチにコピーします。");
     *item += new MenuEntry(
-        "納品アイテムをポーチにコピー" + workInProgress, nullptr,
+        "納品アイテムをポーチにコピー" + stable, nullptr,
         DeliveryItemToPorchCopy,
         "納品アイテムを、アイテムポーチの1番目と2番目にコピーします。\n"
         "空きを作ってください。");
-    *item += new MenuEntry("ポーチを納品アイテムにコピー" + workInProgress,
-                           nullptr, PorchToDeliveryItemCopy,
-                           "アイテムポーチの1番目をメインの納品に、2番目をサブ"
-                           "の納品にコピーします。\n"
-                           "空きを作ってください。");
-    *item += new MenuEntry("ポーチのアイテム全消去" + workInProgress, nullptr,
-                           PorchAllClear,
-                           "ポーチのアイテムを全消去します。\n"
-                           "消せないアイテムや、ボックスにしまえないアイテムが"
-                           "あるときに実行してください。");
-    *item += new MenuEntry("特殊許可チケットの数変更" + workInProgress, nullptr,
+    *item +=
+        new MenuEntry("ポーチのアイテム全消去" + stable, nullptr, PorchAllClear,
+                      "ポーチのアイテムを全消去します。\n"
+                      "消せないアイテムや、ボックスにしまえないアイテムが"
+                      "あるときに実行してください。");
+    *item += new MenuEntry("特殊許可チケットの数変更" + stable, nullptr,
                            SpecialPermitQuestTicketChange,
                            "特殊許可チケットの枚数を変更します。");
   }
@@ -501,12 +493,12 @@ void InitMenu(PluginMenu &menu) {
       MenuFolder *gunlance = new MenuFolder("ガンランスチート");
       {
         *gunlance +=
-            new MenuEntry("ヒートゲージ固定" + workInProgress, nullptr,
+            new MenuEntry("ヒートゲージ固定" + stable, nullptr,
                           GunlanceHeatGageOption, "ヒートゲージを固定します。");
-        *gunlance += new MenuEntry("ガンランスの弾無限" + workInProgress,
-                                   GunlanceAmmoInfinite,
-                                   "ガンランスの弾を無限にします。");
-        *gunlance += new MenuEntry("オーバーヒート無効" + workInProgress,
+        *gunlance +=
+            new MenuEntry("ガンランスの弾無限" + stable, GunlanceAmmoInfinite,
+                          "ガンランスの弾を無限にします。");
+        *gunlance += new MenuEntry("オーバーヒート無効" + stable,
                                    GunlanceInvalidOverHeat,
                                    "オーバーヒートを無効にします。");
       }
@@ -514,10 +506,10 @@ void InitMenu(PluginMenu &menu) {
 
       MenuFolder *insectGlaive = new MenuFolder("操虫棍チート");
       {
-        *insectGlaive += new MenuEntry("常時トリプルアップ" + workInProgress,
+        *insectGlaive += new MenuEntry("常時トリプルアップ" + stable,
                                        InsectGlaiveAlwaysTripleUp,
                                        "常時トリプルアップになります。");
-        *insectGlaive += new MenuEntry("虫のスタミナ無限" + workInProgress,
+        *insectGlaive += new MenuEntry("虫のスタミナ無限" + stable,
                                        InsectGlaiveInsectStaminaInfinite,
                                        "虫のスタミナが無限になります。");
       }
@@ -526,47 +518,44 @@ void InitMenu(PluginMenu &menu) {
       MenuFolder *bowgun = new MenuFolder("ボウガンチート");
       {
         *bowgun +=
-            new MenuEntry("ボウガンの弾無限" + workInProgress,
-                          BowgunAmmoInfinite, "ボウガンの弾が無限になります。");
-        *bowgun += new MenuEntry("しゃがみの弾無限" + workInProgress,
-                                 BowgunCrouchingShot,
-                                 "しゃがみ撃ちの弾が無限になります。");
+            new MenuEntry("ボウガンの弾無限" + stable, BowgunAmmoInfinite,
+                          "ボウガンの弾が無限になります。");
+        *bowgun +=
+            new MenuEntry("しゃがみの弾無限" + stable, BowgunCrouchingShot,
+                          "しゃがみ撃ちの弾が無限になります。");
       }
       *weaponType += bowgun;
-
       *weaponType +=
-          new MenuEntry("溜め段階固定" + workInProgress, ChargeStageFix,
-                        ChageStageOption, "大剣などの溜め段階を固定します。");
+          new MenuEntry("溜め段階固定" + stable, nullptr, ChageStageOption,
+                        "大剣などの溜め段階を固定します。");
+      *weaponType += new MenuEntry("武器ゲージ固定" + stable, WeaponGageFix,
+                                   "太刀や双剣のゲージを固定します。");
       *weaponType +=
-          new MenuEntry("武器ゲージ固定" + workInProgress, WeaponGageFix,
-                        "太刀や双剣のゲージを固定します。");
-      *weaponType += new MenuEntry("チャージアックスビン固定" + workInProgress,
-                                   ChargeAxeBinFix,
-                                   "チャージアックスのビン数を固定します。");
-      *weaponType += new MenuEntry("狩猟笛の全効果付与" + workInProgress,
+          new MenuEntry("チャージアックスビン固定" + stable, ChargeAxeBinFix,
+                        "チャージアックスのビン数を固定します。");
+      *weaponType += new MenuEntry("狩猟笛の全効果付与" + stable,
                                    HuntingHornAllEffectGrant,
                                    "反映されない効果があります。");
     }
     *weapon += weaponType;
 
-    *weapon += new MenuEntry("属性値変更" + workInProgress, nullptr,
+    *weapon += new MenuEntry("属性値変更" + stable, nullptr,
                              AttributePointChange, "属性値を変更できます。");
-    *weapon += new MenuEntry("モーション無し" + workInProgress, nullptr,
-                             NoMotion, "モーションを無くします。");
-    *weapon += new MenuEntry("会心率100%" + workInProgress, nullptr,
-                             CriticalRate100, "会心率が100%になります。");
+    *weapon += new MenuEntry("モーション無し" + stable, nullptr, NoMotion,
+                             "モーションを無くします。");
+    *weapon += new MenuEntry("会心率100%" + stable, nullptr, CriticalRate100,
+                             "会心率が100%になります。");
     *weapon +=
-        new MenuEntry("ボウガン自動装填" + workInProgress, nullptr,
-                      BowgunAutoReload, "ボウガンの弾が自動で装填されます。");
-    *weapon += new MenuEntry("斬れ味無限" + workInProgress, nullptr,
-                             InfiniteSharpness, "斬れ味が無限になります。");
-    *weapon +=
-        new MenuEntry("斬れ味+2" + workInProgress, nullptr, SharpnessPlus2,
-                      "斬れ味レベル+2の効果を付与します。");
-    *weapon += new MenuEntry("高速溜め短縮" + workInProgress, nullptr,
-                             ChargeSpeedUp, "大剣等の溜めが短縮されます。");
-    *weapon += new MenuEntry("チャージゲージ最大" + workInProgress, nullptr,
-                             ChargeGageMax, "チャージゲージが最大になります。");
+        new MenuEntry("ボウガン自動装填" + stable, nullptr, BowgunAutoReload,
+                      "ボウガンの弾が自動で装填されます。");
+    *weapon += new MenuEntry("斬れ味無限" + stable, nullptr, InfiniteSharpness,
+                             "斬れ味が無限になります。");
+    *weapon += new MenuEntry("斬れ味+2" + stable, nullptr, SharpnessPlus2,
+                             "斬れ味レベル+2の効果を付与します。");
+    *weapon += new MenuEntry("高速溜め短縮" + stable, nullptr, ChargeSpeedUp,
+                             "大剣等の溜めが短縮されます。");
+    *weapon += new MenuEntry("チャージゲージ最大" + stable, nullptr,
+                             ChargeGageMax, "太刀等のゲージが最大になります。");
   }
   menu += weapon;
 
@@ -575,82 +564,76 @@ void InitMenu(PluginMenu &menu) {
   {
     MenuFolder *monsterDisplay = new MenuFolder("モンスター情報画面表示");
     {
+      *monsterDisplay +=
+          new MenuEntry("1番目のモンスターのHP表示" + stable, Monster1HpDisplay,
+                        "1番目のモンスターのHPを画面上に表示します。");
+      *monsterDisplay +=
+          new MenuEntry("2番目のモンスターのHP表示" + stable, Monster2HpDisplay,
+                        "2番目のモンスターのHPを画面上に表示します。");
       *monsterDisplay += new MenuEntry(
-          "1番目のモンスターのHP表示" + workInProgress, Monster1HpDisplay,
-          "1番目のモンスターのHPを画面上に表示します。");
-      *monsterDisplay += new MenuEntry(
-          "2番目のモンスターのHP表示" + workInProgress, Monster2HpDisplay,
-          "2番目のモンスターのHPを画面上に表示します。");
-      *monsterDisplay += new MenuEntry(
-          "1番目のモンスターのサイズ倍率表示" + workInProgress,
+          "1番目のモンスターのサイズ倍率表示" + stable,
           Monster1SizeMagnificationDisplay,
-          "1番目のモンスターのサイズ倍率を画面上に表示します。\n1."
-          "2付近がキンズサイズ、0.9付近がスモールサイズの目安です。");
+          "1番目のモンスターのサイズ倍率を画面上に表示します。\n"
+          "1.2付近がキンズサイズ、0.9付近がスモールサイズの目安です。");
       *monsterDisplay += new MenuEntry(
-          "2番目のモンスターのサイズ倍率表示" + workInProgress,
+          "2番目のモンスターのサイズ倍率表示" + stable,
           Monster2SizeMagnificationDisplay,
-          "2番目のモンスターのサイズ倍率を画面上に表示します。\n1."
-          "2付近がキングサイズ、0.9付近がスモールサイズの目安です。");
+          "2番目のモンスターのサイズ倍率を画面上に表示します。\n"
+          "1.2付近がキングサイズ、0.9付近がスモールサイズの目安です。");
     }
     *monster += monsterDisplay;
 
-    *monster += new MenuEntry("乗り成功" + workInProgress, RideGageMax,
+    *monster += new MenuEntry("乗り成功" + stable, RideGageMax,
                               "ハンターの乗りゲージを最大にします。\nモンス"
                               "ターの乗りゲージが増えないようにします。");
-    *monster += new MenuEntry(
-        "モンスター座標移動" + workInProgress, MonsterCoordinateModifier,
-        "1番目のモンスターはX+"
-        "十字キーで操作できます。\n2番目のモンスターはX+"
-        "スライドパッドで操作できます。\n操作したいモンスターと同じエリアに"
-        "いてください。");
     *monster +=
-        new MenuEntry("モンスターストーカー" + workInProgress, MonsterStalker,
-                      "1番目のモンスターはX+R+"
-                      "↑で追跡有効にできます。\n2番目のモンスターは"
-                      "X+L+↑で追跡有効にできます。\nX+R+"
-                      "↓で追跡停止できます。\n追跡したいモンスター"
-                      "と同じエリアにいてください。");
+        new MenuEntry("モンスター座標移動" + stable, MonsterCoordinateModifier,
+                      "1番目のモンスターはX+十字キーで操作できます。\n"
+                      "2番目のモンスターはX+スライドパッドで操作できます。\n"
+                      "操作したいモンスターと同じエリアにいてください。");
+    *monster +=
+        new MenuEntry("モンスターストーカー" + stable, MonsterStalker,
+                      "1番目のモンスターはX+R+↑で追跡有効にできます。\n"
+                      "2番目のモンスターはX+L+↑で追跡有効にできます。\n"
+                      "X+R+↓で追跡停止できます。\n"
+                      "追跡したいモンスターと同じエリアにいてください。");
     *monster += new MenuEntry(
-        "モンスターリピートムーブ" + workInProgress, MonsterActionRepeat,
-        MonsterActionRepeatOption,
-        "リピートムーブの挙動の変更と、操作のオンオフができます。\n1番目の"
-        "モンスターはX+R+→で操作できます。\n2番目のモンスターはX+L+"
-        "→で操作できます。\n操作したいモンスターと同じエリアにいてください"
-        "。");
-    *monster += new MenuEntry(
-        "1番目と2番目のモンスターの動き停止" + workInProgress, Monster1And2Stop,
-        "動き停止は、速度変更より優先されます。");
-    *monster += new MenuEntry("1番目のモンスターのサイズ変更" + workInProgress,
-                              nullptr, Monster1SizeOption,
+        "モンスターリピートムーブ" + stable, nullptr, MonsterActionRepeatOption,
+        "リピートムーブの挙動の変更と、操作のオンオフができます。\n"
+        "1番目のモンスターはX+R+→で操作できます。\n"
+        "2番目のモンスターはX+L+→で操作できます。\n"
+        "操作したいモンスターと同じエリアにいてください。");
+    *monster += new MenuEntry("1番目と2番目のモンスターの動き停止" + stable,
+                              Monster1And2Stop,
+                              "動き停止は、速度変更より優先されます。\n"
+                              "当たり判定がなくなります。");
+    *monster += new MenuEntry("1番目のモンスターのサイズ変更" + stable, nullptr,
+                              Monster1SizeOption,
                               "1番目のモンスターのサイズの変更ができます。");
-    *monster += new MenuEntry("2番目のモンスターのサイズ変更" + workInProgress,
-                              nullptr, Monster2SizeOption,
+    *monster += new MenuEntry("2番目のモンスターのサイズ変更" + stable, nullptr,
+                              Monster2SizeOption,
                               "2番目のモンスターのサイズの変更ができます。");
+    *monster += new MenuEntry("1番目のモンスターの速度倍率変更" + stable,
+                              nullptr, Monster1SpeedAttributeOption,
+                              "1番目のモンスターの速度の変更ができます。");
+    *monster += new MenuEntry("2番目のモンスターの速度倍率変更" + stable,
+                              nullptr, Monster2SpeedAttributeOption,
+                              "2番目のモンスターの速度の変更ができます。");
+    *monster += new MenuEntry(
+        "1番目と2番目のモンスター常時毒" + stable, Monster1And2AlwaysPoison,
+        "1番目と2番目のモンスターのサイズの変更ができます。");
     *monster +=
-        new MenuEntry("1番目のモンスターの速度倍率変更" + workInProgress,
-                      nullptr, Monster1SpeedAttributeOption,
-                      "1番目のモンスターの速度の変更ができます。");
-    *monster +=
-        new MenuEntry("2番目のモンスターの速度倍率変更" + workInProgress,
-                      nullptr, Monster2SpeedAttributeOption,
-                      "2番目のモンスターの速度の変更ができます。");
-    *monster +=
-        new MenuEntry("1番目と2番目のモンスター常時毒" + workInProgress,
-                      Monster1And2AlwaysPoison,
-                      "1番目と2番目のモンスターのサイズの変更ができます。");
-    *monster +=
-        new MenuEntry("1番目と2番目のモンスター常時麻痺" + workInProgress,
+        new MenuEntry("1番目と2番目のモンスター常時麻痺" + stable,
                       Monster1And2AlwaysParalysis,
                       "1番目と2番目のモンスターのサイズの変更ができます。");
+    *monster += new MenuEntry(
+        "1番目と2番目のモンスター常時睡眠" + stable, Monster1And2AlwaysSleep,
+        "1番目と2番目のモンスターのサイズの変更ができます。");
     *monster +=
-        new MenuEntry("1番目と2番目のモンスター常時睡眠" + workInProgress,
-                      Monster1And2AlwaysSleep,
+        new MenuEntry("1番目と2番目のモンスター透明化" + stable, nullptr,
+                      Monster1And2AlwaysInvisible,
                       "1番目と2番目のモンスターのサイズの変更ができます。");
-    *monster +=
-        new MenuEntry("1番目と2番目のモンスター透明化" + workInProgress,
-                      nullptr, Monster1And2AlwaysInvisible,
-                      "1番目と2番目のモンスターのサイズの変更ができます。");
-    *monster += new MenuEntry("瞬殺" + workInProgress, nullptr, OneAttackKill,
+    *monster += new MenuEntry("瞬殺" + stable, nullptr, OneAttackKill,
                               "モンスターを瞬殺できます。");
   }
   menu += monster;
@@ -659,341 +642,107 @@ void InitMenu(PluginMenu &menu) {
   {
     MenuFolder *palicoEdit = new MenuFolder("ねこ編集");
     {
-      *palicoEdit += new MenuEntry("ねこ選択", nullptr, PalicoChoice,
+      *palicoEdit += new MenuEntry("ねこ選択" + stable, nullptr, PalicoChoice,
                                    "編集するねこを選択します。");
-
-      MenuFolder *palicoEquipmentSupportAction =
-          new MenuFolder("装備サポート行動");
-      {
-        *palicoEquipmentSupportAction +=
-            new MenuEntry("装備サポート行動1番目変更" + workInProgress, nullptr,
-                          PalicoEquipmentSupportAction1Change,
-                          "ねこの装備サポート行動の1番目を変更します。");
-        *palicoEquipmentSupportAction +=
-            new MenuEntry("装備サポート行動2番目変更" + workInProgress, nullptr,
-                          PalicoEquipmentSupportAction2Change,
-                          "ねこの装備サポート行動の2番目を変更します。");
-        *palicoEquipmentSupportAction +=
-            new MenuEntry("装備サポート行動3番目変更" + workInProgress, nullptr,
-                          PalicoEquipmentSupportAction3Change,
-                          "ねこの装備サポート行動の3番目を変更します。");
-        *palicoEquipmentSupportAction +=
-            new MenuEntry("装備サポート行動4番目変更" + workInProgress, nullptr,
-                          PalicoEquipmentSupportAction4Change,
-                          "ねこの装備サポート行動の4番目を変更します。");
-        *palicoEquipmentSupportAction +=
-            new MenuEntry("装備サポート行動5番目変更" + workInProgress, nullptr,
-                          PalicoEquipmentSupportAction5Change,
-                          "ねこの装備サポート行動の5番目を変更します。");
-        *palicoEquipmentSupportAction +=
-            new MenuEntry("装備サポート行動6番目変更" + workInProgress, nullptr,
-                          PalicoEquipmentSupportAction6Change,
-                          "ねこの装備サポート行動の6番目を変更します。");
-        *palicoEquipmentSupportAction +=
-            new MenuEntry("装備サポート行動7番目変更" + workInProgress, nullptr,
-                          PalicoEquipmentSupportAction7Change,
-                          "ねこの装備サポート行動の7番目を変更します。");
-        *palicoEquipmentSupportAction +=
-            new MenuEntry("装備サポート行動8番目変更" + workInProgress, nullptr,
-                          PalicoEquipmentSupportAction8Change,
-                          "ねこの装備サポート行動の8番目を変更します。");
-      }
-      *palicoEdit += palicoEquipmentSupportAction;
-
-      MenuFolder *palicoEquipmentSkill = new MenuFolder("装備オトモスキル");
-      {
-        *palicoEquipmentSkill +=
-            new MenuEntry("装備オトモスキル1番目変更" + workInProgress, nullptr,
-                          PalicoEquipmentSkill1Change,
-                          "ねこの装備オトモスキルの1番目を変更します。");
-        *palicoEquipmentSkill +=
-            new MenuEntry("装備オトモスキル2番目変更" + workInProgress, nullptr,
-                          PalicoEquipmentSkill2Change,
-                          "ねこの装備オトモスキルの2番目を変更します。");
-        *palicoEquipmentSkill +=
-            new MenuEntry("装備オトモスキル3番目変更" + workInProgress, nullptr,
-                          PalicoEquipmentSkill3Change,
-                          "ねこの装備オトモスキルの3番目を変更します。");
-        *palicoEquipmentSkill +=
-            new MenuEntry("装備オトモスキル4番目変更" + workInProgress, nullptr,
-                          PalicoEquipmentSkill4Change,
-                          "ねこの装備オトモスキルの4番目を変更します。");
-        *palicoEquipmentSkill +=
-            new MenuEntry("装備オトモスキル5番目変更" + workInProgress, nullptr,
-                          PalicoEquipmentSkill5Change,
-                          "ねこの装備オトモスキルの5番目を変更します。");
-        *palicoEquipmentSkill +=
-            new MenuEntry("装備オトモスキル6番目変更" + workInProgress, nullptr,
-                          PalicoEquipmentSkill6Change,
-                          "ねこの装備オトモスキルの6番目を変更します。");
-        *palicoEquipmentSkill +=
-            new MenuEntry("装備オトモスキル7番目変更" + workInProgress, nullptr,
-                          PalicoEquipmentSkill7Change,
-                          "ねこの装備オトモスキルの7番目を変更します。");
-        *palicoEquipmentSkill +=
-            new MenuEntry("装備オトモスキル8番目変更" + workInProgress, nullptr,
-                          PalicoEquipmentSkill8Change,
-                          "ねこの装備オトモスキルの8番目を変更します。");
-      }
-      *palicoEdit += palicoEquipmentSkill;
-
-      MenuFolder *palicoLearnSupportAction = new MenuFolder("習得サポート行動");
-      {
-        *palicoLearnSupportAction +=
-            new MenuEntry("習得サポート行動1番目変更" + workInProgress, nullptr,
-                          PalicoLearnSupportAction1Change,
-                          "ねこの習得サポート行動の1番目を変更します。");
-        *palicoLearnSupportAction +=
-            new MenuEntry("習得サポート行動2番目変更" + workInProgress, nullptr,
-                          PalicoLearnSupportAction2Change,
-                          "ねこの習得サポート行動の2番目を変更します。");
-        *palicoLearnSupportAction +=
-            new MenuEntry("習得サポート行動3番目変更" + workInProgress, nullptr,
-                          PalicoLearnSupportAction3Change,
-                          "ねこの習得サポート行動の3番目を変更します。");
-        *palicoLearnSupportAction +=
-            new MenuEntry("習得サポート行動4番目変更" + workInProgress, nullptr,
-                          PalicoLearnSupportAction4Change,
-                          "ねこの習得サポート行動の4番目を変更します。");
-        *palicoLearnSupportAction +=
-            new MenuEntry("習得サポート行動5番目変更" + workInProgress, nullptr,
-                          PalicoLearnSupportAction5Change,
-                          "ねこの習得サポート行動の5番目を変更します。");
-        *palicoLearnSupportAction +=
-            new MenuEntry("習得サポート行動6番目変更" + workInProgress, nullptr,
-                          PalicoLearnSupportAction6Change,
-                          "ねこの習得サポート行動の6番目を変更します。");
-        *palicoLearnSupportAction +=
-            new MenuEntry("習得サポート行動7番目変更" + workInProgress, nullptr,
-                          PalicoLearnSupportAction7Change,
-                          "ねこの習得サポート行動の7番目を変更します。");
-        *palicoLearnSupportAction +=
-            new MenuEntry("習得サポート行動8番目変更" + workInProgress, nullptr,
-                          PalicoLearnSupportAction8Change,
-                          "ねこの習得サポート行動の8番目を変更します。");
-        *palicoLearnSupportAction +=
-            new MenuEntry("習得サポート行動9番目変更" + workInProgress, nullptr,
-                          PalicoLearnSupportAction9Change,
-                          "ねこの習得サポート行動の9番目を変更します。");
-        *palicoLearnSupportAction +=
-            new MenuEntry("習得サポート行動10番目変更" + workInProgress,
-                          nullptr, PalicoLearnSupportAction10Change,
-                          "ねこの習得サポート行動の10番目を変更します。");
-        *palicoLearnSupportAction +=
-            new MenuEntry("習得サポート行動11番目変更" + workInProgress,
-                          nullptr, PalicoLearnSupportAction11Change,
-                          "ねこの習得サポート行動の11番目を変更します。");
-        *palicoLearnSupportAction +=
-            new MenuEntry("習得サポート行動12番目変更" + workInProgress,
-                          nullptr, PalicoLearnSupportAction12Change,
-                          "ねこの習得サポート行動の12番目を変更します。");
-        *palicoLearnSupportAction +=
-            new MenuEntry("習得サポート行動13番目変更" + workInProgress,
-                          nullptr, PalicoLearnSupportAction13Change,
-                          "ねこの習得サポート行動の13番目を変更します。");
-        *palicoLearnSupportAction +=
-            new MenuEntry("習得サポート行動14番目変更" + workInProgress,
-                          nullptr, PalicoLearnSupportAction14Change,
-                          "ねこの習得サポート行動の14番目を変更します。");
-        *palicoLearnSupportAction +=
-            new MenuEntry("習得サポート行動15番目変更" + workInProgress,
-                          nullptr, PalicoLearnSupportAction15Change,
-                          "ねこの習得サポート行動の15番目を変更します。");
-        *palicoLearnSupportAction +=
-            new MenuEntry("習得サポート行動16番目変更" + workInProgress,
-                          nullptr, PalicoLearnSupportAction16Change,
-                          "ねこの習得サポート行動の16番目を変更します。");
-      }
-      *palicoEdit += palicoLearnSupportAction;
-
-      MenuFolder *palicoLearnSkill = new MenuFolder("習得オトモスキル");
-      {
-        *palicoLearnSkill +=
-            new MenuEntry("習得オトモスキル1番目変更" + workInProgress, nullptr,
-                          PalicoLearnSupportSkill1Change,
-                          "ねこの習得オトモスキルの1番目を変更します。");
-        *palicoLearnSkill +=
-            new MenuEntry("習得オトモスキル2番目変更" + workInProgress, nullptr,
-                          PalicoLearnSupportSkill2Change,
-                          "ねこの習得オトモスキルの2番目を変更します。");
-        *palicoLearnSkill +=
-            new MenuEntry("習得オトモスキル3番目変更" + workInProgress, nullptr,
-                          PalicoLearnSupportSkill3Change,
-                          "ねこの習得オトモスキルの3番目を変更します。");
-        *palicoLearnSkill +=
-            new MenuEntry("習得オトモスキル4番目変更" + workInProgress, nullptr,
-                          PalicoLearnSupportSkill4Change,
-                          "ねこの習得オトモスキルの4番目を変更します。");
-        *palicoLearnSkill +=
-            new MenuEntry("習得オトモスキル5番目変更" + workInProgress, nullptr,
-                          PalicoLearnSupportSkill5Change,
-                          "ねこの習得オトモスキルの5番目を変更します。");
-        *palicoLearnSkill +=
-            new MenuEntry("習得オトモスキル6番目変更" + workInProgress, nullptr,
-                          PalicoLearnSupportSkill6Change,
-                          "ねこの習得オトモスキルの6番目を変更します。");
-        *palicoLearnSkill +=
-            new MenuEntry("習得オトモスキル7番目変更" + workInProgress, nullptr,
-                          PalicoLearnSupportSkill7Change,
-                          "ねこの習得オトモスキルの7番目を変更します。");
-        *palicoLearnSkill +=
-            new MenuEntry("習得オトモスキル8番目変更" + workInProgress, nullptr,
-                          PalicoLearnSupportSkill8Change,
-                          "ねこの習得オトモスキルの8番目を変更します。");
-        *palicoLearnSkill +=
-            new MenuEntry("習得オトモスキル9番目変更" + workInProgress, nullptr,
-                          PalicoLearnSupportSkill9Change,
-                          "ねこの習得オトモスキルの9番目を変更します。");
-        *palicoLearnSkill +=
-            new MenuEntry("習得オトモスキル10番目変更" + workInProgress,
-                          nullptr, PalicoLearnSupportSkill10Change,
-                          "ねこの習得オトモスキルの10番目を変更します。");
-        *palicoLearnSkill +=
-            new MenuEntry("習得オトモスキル11番目変更" + workInProgress,
-                          nullptr, PalicoLearnSupportSkill11Change,
-                          "ねこの習得オトモスキルの11番目を変更します。");
-        *palicoLearnSkill +=
-            new MenuEntry("習得オトモスキル12番目変更" + workInProgress,
-                          nullptr, PalicoLearnSupportSkill12Change,
-                          "ねこの習得オトモスキルの12番目を変更します。");
-      }
-      *palicoEdit += palicoLearnSkill;
+      *palicoEdit += new MenuEntry("装備サポート行動変更" + stable, nullptr,
+                                   PalicoEquipmentSupportActionChanger,
+                                   "ねこの装備サポート行動を変更します。");
+      *palicoEdit += new MenuEntry("装備オトモスキル変更" + stable, nullptr,
+                                   PalicoEquipmentSkillChanger,
+                                   "ねこの装備オトモスキルを変更します。\n"
+                                   "最大スキル枠を超えるとエラーになります。");
+      *palicoEdit += new MenuEntry("習得サポート行動変更" + stable, nullptr,
+                                   PalicoLearnSupportActionChanger,
+                                   "ねこの習得サポート行動を変更します。");
+      *palicoEdit += new MenuEntry("習得オトモスキル変更" + stable, nullptr,
+                                   PalicoLearnSkillChanger,
+                                   "ねこの習得オトモスキルを変更します。");
 
       MenuFolder *palicoAppearance = new MenuFolder("見た目");
       {
         MenuFolder *palicoAppearanceColor = new MenuFolder("見た目の色変更");
         {
-          MenuFolder *palicoBodyHairColor = new MenuFolder("毛色");
-          {
-            *palicoBodyHairColor += new MenuEntry(
-                "R値変更" + workInProgress, nullptr,
-                PalicoBodyHairColorRedChange, "ねこの毛色の赤色を変更します。");
-            *palicoBodyHairColor +=
-                new MenuEntry("G値変更" + workInProgress, nullptr,
-                              PalicoBodyHairColorGreenChange,
-                              "ねこの毛色の緑色を変更します。");
-            *palicoBodyHairColor +=
-                new MenuEntry("B値変更" + workInProgress, nullptr,
-                              PalicoBodyHairColorBlueChange,
-                              "ねこの毛色の青色を変更します。");
-          }
-          *palicoAppearanceColor += palicoBodyHairColor;
-
-          MenuFolder *palicoRightEyeColor = new MenuFolder("右目の色");
-          {
-            *palicoRightEyeColor += new MenuEntry(
-                "R値変更" + workInProgress, nullptr,
-                PalicoRightEyeColorRedChange, "ねこの右目の赤色を変更します。");
-            *palicoRightEyeColor +=
-                new MenuEntry("G値変更" + workInProgress, nullptr,
-                              PalicoRightEyeColorGreenChange,
-                              "ねこの右目の緑色を変更します。");
-            *palicoRightEyeColor +=
-                new MenuEntry("B値変更" + workInProgress, nullptr,
-                              PalicoRightEyeColorBlueChange,
-                              "ねこの右目の青色を変更します。");
-          }
-          *palicoAppearanceColor += palicoRightEyeColor;
-
-          MenuFolder *palicoLeftEyeColor = new MenuFolder("左目の色");
-          {
-            *palicoLeftEyeColor += new MenuEntry(
-                "R値変更" + workInProgress, nullptr,
-                PalicoLeftEyeColorRedChange, "ねこの左目の赤色を変更します。");
-            *palicoLeftEyeColor +=
-                new MenuEntry("G値変更" + workInProgress, nullptr,
-                              PalicoLeftEyeColorGreenChange,
-                              "ねこの左目の緑色を変更します。");
-            *palicoLeftEyeColor += new MenuEntry(
-                "B値変更" + workInProgress, nullptr,
-                PalicoLeftEyeColorBlueChange, "ねこの左目の青色を変更します。");
-          }
-          *palicoAppearanceColor += palicoLeftEyeColor;
-
-          MenuFolder *palicoInnerColor = new MenuFolder("インナーの色");
-          {
-            *palicoInnerColor += new MenuEntry(
-                "R値変更" + workInProgress, nullptr, PalicoInnerColorRedChange,
-                "ねこのインナーの色の赤色を変更します。");
-            *palicoInnerColor +=
-                new MenuEntry("G値変更" + workInProgress, nullptr,
-                              PalicoInnerColorGreenChange,
-                              "ねこのインナーの色の緑色を変更します。");
-            *palicoInnerColor += new MenuEntry(
-                "B値変更" + workInProgress, nullptr, PalicoInnerColorBlueChange,
-                "ねこのインナーの色の青色を変更します。");
-          }
-          *palicoAppearanceColor += palicoInnerColor;
+          *palicoAppearanceColor += new MenuEntry("毛色変更" + stable, nullptr,
+                                                  PalicoBodyHairColorChanger,
+                                                  "ねこの毛色を変更します。");
+          *palicoAppearanceColor += new MenuEntry(
+              "右目の色変更" + stable, nullptr, PalicoRightEyeColorChanger,
+              "ねこの右目の色を変更します。");
+          *palicoAppearanceColor += new MenuEntry(
+              "左目の色変更" + stable, nullptr, PalicoLeftEyeColorChanger,
+              "ねこの左目の色を変更します。");
+          *palicoAppearanceColor += new MenuEntry(
+              "インナーの色変更" + stable, nullptr, PalicoInnerColorChanger,
+              "ねこのインナーの色を変更します。");
         }
         *palicoAppearance += palicoAppearanceColor;
 
         *palicoAppearance +=
-            new MenuEntry("声変更" + workInProgress, nullptr, PalicoVoiceChange,
+            new MenuEntry("声変更" + stable, nullptr, PalicoVoiceChange,
                           "ねこの声を変更します。");
         *palicoAppearance +=
-            new MenuEntry("目変更" + workInProgress, nullptr, PalicoEyeChange,
+            new MenuEntry("目変更" + stable, nullptr, PalicoEyeChange,
                           "ねこの目を変更します。");
         *palicoAppearance +=
-            new MenuEntry("インナー変更" + workInProgress, nullptr,
-                          PalicoInnerChange, "ねこのインナーを変更します。");
+            new MenuEntry("インナー変更" + stable, nullptr, PalicoInnerChange,
+                          "ねこのインナーを変更します。");
         *palicoAppearance +=
-            new MenuEntry("毛並み変更" + workInProgress, nullptr,
-                          PalicoFurCoatChange, "ねこの毛並みを変更します。");
+            new MenuEntry("毛並み変更" + stable, nullptr, PalicoFurCoatChange,
+                          "ねこの毛並みを変更します。");
         *palicoAppearance +=
-            new MenuEntry("耳変更" + workInProgress, nullptr, PalicoEarChange,
+            new MenuEntry("耳変更" + stable, nullptr, PalicoEarChange,
                           "ねこの耳を変更します。");
         *palicoAppearance +=
-            new MenuEntry("尻尾変更" + workInProgress, nullptr,
-                          PalicoTailChange, "ねこの尻尾を変更します。");
+            new MenuEntry("尻尾変更" + stable, nullptr, PalicoTailChange,
+                          "ねこの尻尾を変更します。");
       }
       *palicoEdit += palicoAppearance;
 
       *palicoEdit +=
-          new MenuEntry("経験値変更" + workInProgress, nullptr,
-                        PalicoExperienceChange, "ねこの経験値を変更します。");
+          new MenuEntry("経験値変更" + stable, nullptr, PalicoExperienceChange,
+                        "ねこの経験値を変更します。");
       *palicoEdit +=
-          new MenuEntry("レベル変更" + workInProgress, nullptr,
-                        PalicoLevelChange, "ねこのレベルを変更します。");
-      *palicoEdit += new MenuEntry("サポート傾向変更" + workInProgress, nullptr,
+          new MenuEntry("レベル変更" + stable, nullptr, PalicoLevelChange,
+                        "ねこのレベルを変更します。");
+      *palicoEdit += new MenuEntry("サポート傾向変更" + stable, nullptr,
                                    PalicoSupportTrendChange,
                                    "ねこのサポート傾向を変更します。");
       *palicoEdit +=
-          new MenuEntry("親密度変更" + workInProgress, nullptr,
-                        PalicoClosenessChange, "ねこの親密度を変更します。");
+          new MenuEntry("親密度変更" + stable, nullptr, PalicoClosenessChange,
+                        "ねこの親密度を変更します。");
       *palicoEdit +=
-          new MenuEntry("ターゲット変更" + workInProgress, nullptr,
-                        PalicoTargetChange, "ねこのターゲットを変更します。");
+          new MenuEntry("ターゲット変更" + stable, nullptr, PalicoTargetChange,
+                        "ねこのターゲットを変更します。");
       *palicoEdit +=
-          new MenuEntry("オトモコメント編集可能変更" + workInProgress, nullptr,
+          new MenuEntry("オトモコメント編集可能変更" + stable, nullptr,
                         PalicoCommentEditPossibleChange,
                         "ねこのオトモコメントを編集可能にするか選べます。");
-      *palicoEdit += new MenuEntry("特別配信表示変更" + workInProgress, nullptr,
+      *palicoEdit += new MenuEntry("特別配信表示変更" + stable, nullptr,
                                    SpecialDeliveryDisplayChange,
                                    "ねこの特別配信の表示を変更します。");
       *palicoEdit += new MenuEntry(
-          "名前変更" + workInProgress, nullptr, PalicoNameChange,
+          "名前変更" + stable, nullptr, PalicoNameChange,
           "ねこの名前を変更します。\n"
           "定型文では1ページ目の一番左下にある定型文をねこの名前にコピーします"
           "。\n"
           "キーボードでは、メニュー内で直接変更することができます。\n"
           "変換候補変換の改行やタブが使えます。");
       *palicoEdit += new MenuEntry(
-          "コメント変更" + workInProgress, nullptr, PalicoCommentChange,
+          "コメント変更" + stable, nullptr, PalicoCommentChange,
           "ねこのコメントを変更します。\n"
           "定型文では1ページ目の一番左下にある定型文をねこのコメントにコピーし"
           "ます。\n"
           "キーボードでは、メニュー内で直接変更することができます。\n"
           "変換候補変換の改行やタブが使えます。");
       *palicoEdit += new MenuEntry(
-          "名付け親変更" + workInProgress, nullptr, PalicoGodParentChange,
+          "名付け親変更" + stable, nullptr, PalicoGodParentChange,
           "ねこの名付け親を変更します。\n"
           "定型文では1ページ目の一番左下にある定型文をねこの名付け親にコピーし"
           "ます。\n"
           "キーボードでは、メニュー内で直接変更することができます。\n"
           "変換候補変換の改行やタブが使えます。");
       *palicoEdit += new MenuEntry(
-          "先代旦那さん変更" + workInProgress, nullptr,
-          PalicoPredecessorHusbandChange,
+          "先代旦那さん変更" + stable, nullptr, PalicoPredecessorHusbandChange,
           "ねこの先代旦那さんを変更します。\n"
           "定型文では1ページ目の一番左下にある定型文をねこの先代旦那さんにコピ"
           "ーします。\n"
@@ -1002,20 +751,18 @@ void InitMenu(PluginMenu &menu) {
     }
     *palico += palicoEdit;
 
+    *palico += new MenuEntry("ねこの攻撃力倍率変更" + stable, nullptr,
+                             PalicoAttackPowerMagnificationOption,
+                             "ねこの攻撃力の倍率を変更します。");
+    *palico += new MenuEntry("ねこの防御力倍率変更" + stable, nullptr,
+                             PalicoDefencePowerMagnificationOption,
+                             "ねこの防御力変更の倍率を変更します。");
     *palico += new MenuEntry(
-        "ねこの攻撃力倍率変更" + workInProgress, nullptr,
-        PalicoAttackPowerMagnificationOption,
-        "Y+UPでON、Y+DOWNでOFF\nねこの攻撃力の倍率を変更します。");
-    *palico += new MenuEntry(
-        "ねこの防御力倍率変更" + workInProgress, nullptr,
-        PalicoDefencePowerMagnificationOption,
-        "X+UPでON、X+DOWNでOFF\nねこの防御力変更の倍率を変更します。");
-    *palico += new MenuEntry(
-        "ねこ吸収" + workInProgress, PalicoAbsorption,
+        "ねこ吸収" + stable, PalicoAbsorption,
         "ねこをハンターに吸収させます。\n他プレイヤーからは見えません。");
-    *palico += new MenuEntry("サポートゲージ最大" + workInProgress,
-                             ProwlerSupportGageMax,
-                             "ニャンターのサポートゲージを最大にします。");
+    *palico +=
+        new MenuEntry("サポートゲージ最大" + stable, ProwlerSupportGageMax,
+                      "ニャンターのサポートゲージを最大にします。");
   }
   menu += palico;
 
@@ -1023,15 +770,13 @@ void InitMenu(PluginMenu &menu) {
   {
     MenuFolder *chat = new MenuFolder("チャット");
     {
-      *chat += new MenuEntry("チャット無限" + workInProgress, ChatInfinite,
+      *chat += new MenuEntry("チャット無限" + stable, ChatInfinite,
                              "オンラインで赤文字を出現させなくします。");
-      *chat +=
-          new MenuEntry("変換候補変換" + workInProgress, ChatConversionChange,
-                        "キーボードを開いて、Rを押しながら文字を打つ"
-                        "ことで、変換候補の文字が変わります。");
+      *chat += new MenuEntry("変換候補変換" + stable, ChatConversionChange,
+                             "キーボードを開いて、Rを押しながら文字を打つ"
+                             "ことで、変換候補の文字が変わります。");
       *chat += new MenuEntry(
-          "変換候補変換対応文字一覧" + workInProgress, nullptr,
-          ChatConversionList,
+          "変換候補変換対応文字一覧" + stable, nullptr, ChatConversionList,
           "変換対応文字が書かれています。\n"
           "変換しづらい文字や、改造でしか入力できない文字を入れています。");
     }
@@ -1041,31 +786,31 @@ void InitMenu(PluginMenu &menu) {
         new MenuFolder("酔っぱらい", "クエスト中は酔っぱらえません。");
     {
       *drunk +=
-          new MenuEntry("即酔っぱらい" + workInProgress, InstantDrunk,
-                        InstantDrunkOption, "酔っぱらいになるか変更できます。");
-      *drunk += new MenuEntry("1回お酒を飲むと酔っぱらい" + workInProgress,
-                              Drunk1, "1回お酒を飲むと酔っぱらいになります。");
+          new MenuEntry("即酔っぱらい" + stable, nullptr, InstantDrunkOption,
+                        "酔っぱらいになるか変更できます。");
+      *drunk += new MenuEntry("1回お酒を飲むと酔っぱらい" + stable, Drunk1,
+                              "1回お酒を飲むと酔っぱらいになります。");
     }
     *other += drunk;
 
     MenuFolder *hunterRank = new MenuFolder("ハンターランク");
     {
       *hunterRank +=
-          new MenuEntry("ハンターランク変更" + workInProgress, nullptr,
+          new MenuEntry("ハンターランク変更" + stable, nullptr,
                         HunterRankChange, "ハンターランクを変更できます。");
-      *hunterRank += new MenuEntry(
-          "ハンターランクポイント変更" + workInProgress, nullptr,
-          HunterRankPointChange, "ハンターランクポイントを変更できます。");
+      *hunterRank += new MenuEntry("ハンターランクポイント変更" + stable,
+                                   nullptr, HunterRankPointChange,
+                                   "ハンターランクポイントを変更できます。");
     }
     *other += hunterRank;
 
     MenuFolder *fenyAndPugy = new MenuFolder("プーギー&フェニー");
     {
+      *fenyAndPugy += new MenuEntry("フェニー&プーギーの服変更" + stable,
+                                    nullptr, FenyAndPugyClothes,
+                                    "フェニー&プーギーの服を変更できます。");
       *fenyAndPugy += new MenuEntry(
-          "フェニー&プーギーの服変更" + workInProgress, nullptr,
-          FenyAndPugyClothes, "フェニー&プーギーの服を変更できます。");
-      *fenyAndPugy += new MenuEntry(
-          "定型文でフェニー&プーギーの名前変更" + workInProgress, nullptr,
+          "定型文でフェニー&プーギーの名前変更" + stable, nullptr,
           FenyAndPugyNameChange,
           "1ページ目の一番左下にある定型文を名前にコピーします。\nフェニ"
           "ー&プーギーの名前を変更できます。");
@@ -1074,73 +819,73 @@ void InitMenu(PluginMenu &menu) {
 
     MenuFolder *quest = new MenuFolder("クエスト");
     {
-      *quest += new MenuEntry("クエストステータス変更" + workInProgress,
-                              nullptr, QuestClearOption,
+      *quest += new MenuEntry("クエストステータス変更" + stable, nullptr,
+                              QuestClearOption,
                               "クエストクリアか失敗を選択できます。");
-      *quest += new MenuEntry("クエストクリア後即リザルト" + workInProgress,
-                              QuestWaitSkip,
-                              "クエストクリア後の待ち時間をスキップします。");
       *quest +=
-          new MenuEntry("報酬画面スキップ" + workInProgress, QuestResultSkip,
-                        "報酬受取の時間を0にし、スキップします。");
+          new MenuEntry("クエストクリア後即リザルト" + stable, QuestWaitSkip,
+                        "クエストクリア後の待ち時間をスキップします。");
+      *quest += new MenuEntry("報酬画面スキップ" + stable, QuestResultSkip,
+                              "報酬受取の時間を0にし、スキップします。");
       *quest +=
-          new MenuEntry("最大ダウン回数変更" + workInProgress, nullptr,
+          new MenuEntry("最大ダウン回数変更" + stable, nullptr,
                         QuestDownMaxOption, "最大ダウン回数を変更できます。");
       *quest +=
-          new MenuEntry("現在のダウン回数変更" + workInProgress, nullptr,
+          new MenuEntry("現在のダウン回数変更" + stable, nullptr,
                         QuestDownNowOption, "現在のダウン回数を変更します。");
       *quest += new MenuEntry(
-          "クエスト残り時間表示" + workInProgress, QuestTimeDisplay,
+          "クエスト残り時間表示" + stable, QuestTimeDisplay,
           "QT = Quest Timeです。\n時:分:秒:フレーム\nと表示します。");
       *quest +=
-          new MenuEntry("選択肢を固定" + workInProgress, nullptr,
-                        SaveScreenOption, "Rボタンを押すと固定できます。");
-      *quest += new MenuEntry("クエスト時間停止" + workInProgress, nullptr,
+          new MenuEntry("選択肢を固定" + stable, nullptr, SaveScreenOption,
+                        "Rボタンを押すと固定できます。");
+      *quest += new MenuEntry("クエスト時間停止" + stable, nullptr,
                               QuestTimeStop, "クエスト時間を停止します。");
       *quest += new MenuEntry(
-          "全クエストクリア変更" + workInProgress, nullptr, AllQuestClearChange,
+          "全クエストクリア変更" + stable, nullptr, AllQuestClearChange,
           "ストーリーに不具合が起きる可能性があります。\n予めバックアップ"
           "を取ったり、サブキャラクターで実行してください。");
     }
     *other += quest;
 
-    MenuFolder *base = new MenuFolder("集会所");
+    MenuFolder *base =
+        new MenuFolder("集会所", "ベルナ村にいる状態で変更してください。");
     {
       MenuFolder *baseCreate = new MenuFolder("集会所を作る");
       {
-        *baseCreate += new MenuEntry("ターゲット変更" + workInProgress, nullptr,
+        *baseCreate += new MenuEntry("ターゲット変更" + stable, nullptr,
                                      BaseCreateTargetChange,
                                      "ターゲットを？？？？？にできます。");
-        *baseCreate += new MenuEntry("クエスト形式変更" + workInProgress,
-                                     nullptr, BaseCreateQuestTypeChange,
+        *baseCreate += new MenuEntry("クエスト形式変更" + stable, nullptr,
+                                     BaseCreateQuestTypeChange,
                                      "クエスト形式を変更できます。");
         *baseCreate +=
-            new MenuEntry("募集HR下限変更" + workInProgress, nullptr,
+            new MenuEntry("募集HR下限変更" + stable, nullptr,
                           BaseCreateRecruitmentHunterRankMinimumChange,
                           "募集HRの下限を変更できます。");
         *baseCreate +=
-            new MenuEntry("募集HR上限変更" + workInProgress, nullptr,
+            new MenuEntry("募集HR上限変更" + stable, nullptr,
                           BaseCreateRecruitmentHunterRankMaximumChange,
                           "募集HRの上限を変更できます。");
-        *baseCreate += new MenuEntry("入室人数変更" + workInProgress, nullptr,
+        *baseCreate += new MenuEntry("入室人数変更" + stable, nullptr,
                                      BaseCreateEntryPeopleChange,
                                      "入室人数を変更できます。");
-        *baseCreate += new MenuEntry("入室制限変更" + workInProgress, nullptr,
+        *baseCreate += new MenuEntry("入室制限変更" + stable, nullptr,
                                      BaseCreateEntryLimitChange,
                                      "入室制限を変更できます。");
-        *baseCreate += new MenuEntry("パスワード有無変更" + workInProgress,
-                                     nullptr, BaseCreatePasswordExistChange,
+        *baseCreate += new MenuEntry("パスワード有無変更" + stable, nullptr,
+                                     BaseCreatePasswordExistChange,
                                      "パスワードの有無を変更できます。");
-        *baseCreate += new MenuEntry("募集文①変更" + workInProgress, nullptr,
+        *baseCreate += new MenuEntry("募集文①変更" + stable, nullptr,
                                      BaseCreateRecruitmentMessage1Change,
                                      "募集文①を変更できます。");
-        *baseCreate += new MenuEntry("募集文②変更" + workInProgress, nullptr,
+        *baseCreate += new MenuEntry("募集文②変更" + stable, nullptr,
                                      BaseCreateRecruitmentMessage2Change,
                                      "募集文②を変更できます。");
-        *baseCreate += new MenuEntry("募集文③変更" + workInProgress, nullptr,
+        *baseCreate += new MenuEntry("募集文③変更" + stable, nullptr,
                                      BaseCreateRecruitmentMessage3Change,
                                      "募集文③を変更できます。");
-        *baseCreate += new MenuEntry("募集文④変更" + workInProgress, nullptr,
+        *baseCreate += new MenuEntry("募集文④変更" + stable, nullptr,
                                      BaseCreateRecruitmentMessage4Change,
                                      "募集文④を変更できます。");
       }
@@ -1149,63 +894,55 @@ void InitMenu(PluginMenu &menu) {
       MenuFolder *baseSearch = new MenuFolder("集会所を探す");
       {
         *baseSearch +=
-            new MenuEntry("ターゲット変更" + workInProgress, nullptr,
+            new MenuEntry("ターゲット変更" + stable, nullptr,
                           BaseSearchTargetChange, "ターゲットを変更できます。");
-        *baseSearch += new MenuEntry("クエスト形式変更" + workInProgress,
-                                     nullptr, BaseSearchQuestTypeChange,
+        *baseSearch += new MenuEntry("クエスト形式変更" + stable, nullptr,
+                                     BaseSearchQuestTypeChange,
                                      "クエスト形式を変更できます。");
-        *baseSearch +=
-            new MenuEntry("ホストHR下限変更" + workInProgress, nullptr,
-                          BaseSearchHostHunterRankMinimumChange,
-                          "ホストHRの下限を変更できます");
-        *baseSearch +=
-            new MenuEntry("ホストHR上限変更" + workInProgress, nullptr,
-                          BaseSearchHostHunterRankMaximumChange,
-                          "ホストHRの上限を変更できます");
-        *baseSearch += new MenuEntry("クエスト中変更" + workInProgress, nullptr,
+        *baseSearch += new MenuEntry("ホストHR下限変更" + stable, nullptr,
+                                     BaseSearchHostHunterRankMinimumChange,
+                                     "ホストHRの下限を変更できます");
+        *baseSearch += new MenuEntry("ホストHR上限変更" + stable, nullptr,
+                                     BaseSearchHostHunterRankMaximumChange,
+                                     "ホストHRの上限を変更できます");
+        *baseSearch += new MenuEntry("クエスト中変更" + stable, nullptr,
                                      BaseSearchInQuestChange,
                                      "クエスト中を変更できます。");
-        *baseSearch += new MenuEntry("パスワード有無変更" + workInProgress,
-                                     nullptr, BaseSearchPasswordExistChange,
+        *baseSearch += new MenuEntry("パスワード有無変更" + stable, nullptr,
+                                     BaseSearchPasswordExistChange,
                                      "パスワードの有無を変更できます。");
       }
       *base += baseSearch;
     }
     *other += base;
 
-    *other += new MenuEntry("画面に集会所のパス表示" + workInProgress,
-                            DisplayBasePassword,
-                            "現在の部屋のパスワードを表示します。");
-    *other += new MenuEntry("プレイヤーの現在座標表示" + workInProgress,
+    *other += new MenuEntry("プレイヤーの現在座標表示" + stable,
                             DisplayPlayerCoordinate,
                             "プレイヤーの現在座標を表示します。");
-    *other +=
-        new MenuEntry("宙に浮くバグ" + workInProgress, FloatBug,
-                      "L+Selectでオン、R+Selectでオフにできます。\n"
-                      "高確率でエラーになります。注意してオンにしてください。");
-    *other += new MenuEntry("視野角変更" + workInProgress, nullptr,
+    *other += new MenuEntry("クエスト中の視野角変更" + stable, nullptr,
                             ViewingAngleOption,
-                            "視野角を変更します。\n(画面酔い注意)");
-    *other += new MenuEntry("視野角変更改良版" + workInProgress, nullptr,
+                            "クエスト中の視野角を変更します。\n(画面酔い注意)");
+    *other += new MenuEntry("視野角変更" + stable, nullptr,
                             ViewingAngleChangeV2, "視野の倍率を変更できます。");
-    *other += new MenuEntry("武器サイズ変更" + workInProgress, nullptr,
+    *other += new MenuEntry("武器サイズ変更" + stable, nullptr,
                             WeaponSizeChange, "武器のサイズを変更できます。");
-    *other += new MenuEntry("画面の明るさ変更" + workInProgress, nullptr,
+    *other += new MenuEntry("画面の明るさ変更" + stable, nullptr,
                             ContrastChange, "画面の明るさ変更を変更できます。");
     *other +=
-        new MenuEntry("ギルドカード情報変更" + workInProgress, nullptr,
-                      GuildCardChange, "ギルドカードの情報を変更できます。");
+        new MenuEntry("ギルドカード情報変更" + stable, nullptr, GuildCardChange,
+                      "ギルドカードの情報を変更できます。");
     *other += new MenuEntry("リージョン変更" + stable, nullptr, RegionChange,
                             "日本かヨーロッパに変更できます。");
-    *other += new MenuEntry("村の貢献度変更" + workInProgress, nullptr,
+    *other += new MenuEntry("村の貢献度変更" + stable, nullptr,
                             VillageContributionPointChange,
                             "村の貢献度を変更します。");
-    *other += new MenuEntry("ルームサービス変更" + workInProgress, nullptr,
+    *other += new MenuEntry("ルームサービス変更" + stable, nullptr,
                             RoomServiceChange, "ルームサービスを変更します。");
-    *other += new MenuEntry("障害物無視" + workInProgress, nullptr, WallThrough,
-                            "障害物を無視するかどうか選択できます。");
-    *other += new MenuEntry("最大FPS変更" + workInProgress, nullptr,
-                            MaximumFpsChange, "最大FPSを変更できます。");
+    *other +=
+        new MenuEntry("障害物無視" + stable, nullptr, WallThrough,
+                      "クエスト中に障害物を無視するかどうか選択できます。");
+    *other += new MenuEntry("最大FPS変更" + stable, nullptr, MaximumFpsChange,
+                            "最大FPSを変更できます。");
   }
   menu += other;
 
@@ -1288,6 +1025,9 @@ void InitMenu(PluginMenu &menu) {
         *patchProcessEditorKeyboard +=
             new MenuEntry("Key Text Pressed" + stable, nullptr,
                           PatchProcessKeyboardKeyTextPressedColorEditor);
+        *patchProcessEditorKeyboard +=
+            new MenuEntry("Key Text Disabled" + stable, nullptr,
+                          PatchProcessKeyboardKeyTextDisabledColorEditor);
         *patchProcessEditorKeyboard += new MenuEntry(
             "Cursor" + stable, nullptr, PatchProcessKeyboardCursorColorEditor);
         *patchProcessEditorKeyboard += new MenuEntry(
@@ -1330,6 +1070,8 @@ void InitMenu(PluginMenu &menu) {
 
       *patchProcessEditor += new MenuEntry("Set Default Theme" + stable,
                                            nullptr, PatchProcessDefaultTheme);
+      *patchProcessEditor += new MenuEntry("Create Default File" + stable,
+                                           nullptr, CreateDefaultFile);
     }
     *bonus += patchProcessEditor;
 
@@ -1363,7 +1105,7 @@ int main() {
       "github.com/ponpoko094/MHX3gx";
 
   // タイトルやAbout等作成
-  PluginMenu *menu = new PluginMenu(title, 3, 0, 0, about, 0);
+  PluginMenu *menu = new PluginMenu(title, 3, 0, 8, about, 0);
 
   // Synchronize the menu with frame event
   menu->SynchronizeWithFrame(true);

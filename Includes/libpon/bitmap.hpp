@@ -1,5 +1,5 @@
-#ifndef MHX3GX_INCLUDES_PROCESS_PLUS_H_
-#define MHX3GX_INCLUDES_PROCESS_PLUS_H_
+#ifndef LIBPON_PROCESS_PLUS_HPP
+#define LIBPON_PROCESS_PLUS_HPP
 
 namespace CTRPluginFramework {
 
@@ -14,4 +14,4 @@ class Bitmap {
 
 }  // namespace CTRPluginFramework
 
-#endif  // MHX3GX_INCLUDES_PROCESS_PLUS_H_
+#endif  // LIBPON_PROCESS_PLUS_HPP
