@@ -29,17 +29,17 @@
 この3gx自体は主にC++で書かれています。また、pythonを使って3dsに3gxの送信をしています。
 
 ### フレームワークやライブラリは何を使ってるの？
-[CTRPluginFramework](https://github.com/mariohackandglitch/CTRPluginFramework-BlankTemplate)と[nlohmnn-json](https://github.com/nlohmann/json)を使っています。
+[CTRPluginFramework](https://github.com/mariohackandglitch/CTRPluginFramework-BlankTemplate)とC++標準ライブラリを使っています。
 
 ### MHX3gxをコンパイルするには
 
 #### 必要なファイル
 #### [devkitpro](https://github.com/devkitPro/installer/releases/latest)
 exeファイルを開きインストールしてください。
-#### [3gxtool](https://cdn.discordapp.com/attachments/479233979271086090/707634663765573753/3gxtool.exe)
-`C:\devkitPro\tools\bin`にコピーしてください。
-**※CTRPFv0.5.1のコンパイル時に必要となる3gxtool.exeはMHX3gxでは使えません。**
-#### [libCTRPF(v0.7.1)](https://cdn.discordapp.com/attachments/479233979271086090/895012182604021810/libctrpf-0.7.1.tar.bz2)
+#### [3gxtool](https://cdn.discordapp.com/attachments/895927933724688387/896335750898020352/patched3gxtool.7z)
+解凍し、`C:\devkitPro\tools\bin`にコピーしてください。
+**※通常の3gxtool.exeはファイルサイズ制限が掛かっているのでMHX3gxでは使えません。**
+#### [libCTRPF(v0.7.1)](https://cdn.discordapp.com/attachments/895927933724688387/896385805214449684/libctrpf-0.7.1-4bd18725.7z)
 解凍し、中にあるincludeとlibフォルダーを`C:\devkitPro\libctrpf`の中にコピーしてください。もしもフォルダーがなかったら作成してください。
 
 ### コンパイル方法
