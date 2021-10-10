@@ -493,6 +493,38 @@ void PatchProcessKeyboardKeyTextPressedColorEditor(MenuEntry* entry) {
   file.Close();
 }
 
+void PatchProcessKeyboardKeyTextDisabledColorEditor(MenuEntry* entry) {
+  File file;
+  if (!File::Exists(pathToBIN)) {
+    CreateDefaultFile();
+  }
+  PatchColorData color;
+  File::Open(file, pathToBIN);
+  file.Read((char*)&color, sizeof(color));
+  Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
+  u8 value = 0;
+  int choice = key.Open();
+  if (choice == 0) {
+    if (key.Open(value) == 0) {
+      color.keyboardKeyTextDisabledR = value;
+    }
+  } else if (choice == 1) {
+    if (key.Open(value) == 0) {
+      color.keyboardKeyTextDisabledG = value;
+    }
+  } else if (choice == 2) {
+    if (key.Open(value) == 0) {
+      color.keyboardKeyTextDisabledB = value;
+    }
+  }
+  set->Get().Keyboard.KeyTextDisabled =
+      Color(color.keyboardKeyTextDisabledR, color.keyboardKeyTextDisabledG,
+            color.keyboardKeyTextDisabledB);
+  file.Rewind();
+  file.Write((char*)&color, sizeof(color));
+  file.Close();
+}
+
 void PatchProcessKeyboardCursorColorEditor(MenuEntry* entry) {
   File file;
   if (!File::Exists(pathToBIN)) {

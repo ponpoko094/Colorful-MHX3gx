@@ -1025,6 +1025,9 @@ void InitMenu(PluginMenu &menu) {
         *patchProcessEditorKeyboard +=
             new MenuEntry("Key Text Pressed" + stable, nullptr,
                           PatchProcessKeyboardKeyTextPressedColorEditor);
+        *patchProcessEditorKeyboard +=
+            new MenuEntry("Key Text Disabled" + stable, nullptr,
+                          PatchProcessKeyboardKeyTextDisabledColorEditor);
         *patchProcessEditorKeyboard += new MenuEntry(
             "Cursor" + stable, nullptr, PatchProcessKeyboardCursorColorEditor);
         *patchProcessEditorKeyboard += new MenuEntry(
@@ -1067,8 +1070,8 @@ void InitMenu(PluginMenu &menu) {
 
       *patchProcessEditor += new MenuEntry("Set Default Theme" + stable,
                                            nullptr, PatchProcessDefaultTheme);
-      *patchProcessEditor += new MenuEntry(
-          "Create Default File" + stable, nullptr, CreateDefaultFile);
+      *patchProcessEditor += new MenuEntry("Create Default File" + stable,
+                                           nullptr, CreateDefaultFile);
     }
     *bonus += patchProcessEditor;
 

@@ -102,6 +102,7 @@ void PatchProcessKeyboardKeyBackgroundColorEditor(MenuEntry* entry);
 void PatchProcessKeyboardKeyBackgroundPressedColorEditor(MenuEntry* entry);
 void PatchProcessKeyboardKeyTextColorEditor(MenuEntry* entry);
 void PatchProcessKeyboardKeyTextPressedColorEditor(MenuEntry* entry);
+void PatchProcessKeyboardKeyTextDisabledColorEditor(MenuEntry* entry);
 void PatchProcessKeyboardCursorColorEditor(MenuEntry* entry);
 void PatchProcessKeyboardInputColorEditor(MenuEntry* entry);
 
