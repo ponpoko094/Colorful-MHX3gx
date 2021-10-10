@@ -1,9 +1,7 @@
 #ifndef MHX3GX_INCLUDES_TEAM_AND_CONDITIONS_H_
 #define MHX3GX_INCLUDES_TEAM_AND_CONDITIONS_H_
 
-#include <CTRPluginFramework.hpp>
-
-#include "cheats.hpp"
+#include "stdafx.hpp"
 
 namespace CTRPluginFramework {
 

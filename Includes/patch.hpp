@@ -1,8 +1,7 @@
 #ifndef MHX3GX_INCLUDES_PATCH_H_
 #define MHX3GX_INCLUDES_PATCH_H_
 
-#include <CTRPluginFramework.hpp>
-#include <string>
+#include "stdafx.hpp"
 
 namespace CTRPluginFramework {
 
