@@ -12,9 +12,8 @@
 #include <cstring>
 #include <ctime>
 #include <fstream>
-#include <istream>
+#include <iostream>
 #include <iterator>
-#include <ostream>
 #include <random>
 #include <sstream>
 #include <string>
