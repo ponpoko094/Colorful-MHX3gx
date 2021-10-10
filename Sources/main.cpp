@@ -4,7 +4,6 @@
 
 #include "cheats.hpp"
 #include "libpon.hpp"
-#include "offset.hpp"
 #include "patch.hpp"
 #include "team_and_conditions.hpp"
 
