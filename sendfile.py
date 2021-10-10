@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+""" What is sendfile.py
+This module is send 3gx to 3ds via FTP.
+このモジュールはFTPで3gxを3dsに送信します。
+"""
+
 import ftplib
 from ftplib import FTP
 
@@ -22,8 +28,7 @@ try:
     print("Response : " + get_ftp.getwelcome())
     get_ftp.login()
     get_ftp.storbinary("STOR " + PATH + PLUGIN,
-                       open(PLUGIN.replace("/", ""), "rb"), blocksize=8192,
-                       callback=None, rest=None)
+                       open(PLUGIN.replace("/", ""), "rb"))
     print("Sending Plugin to " + PATH + "\n")
 except ftplib.all_errors:
     print("Login Failed!\n")
