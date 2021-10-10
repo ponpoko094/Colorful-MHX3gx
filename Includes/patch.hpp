@@ -86,38 +86,38 @@ struct PatchColorData {
 };
 
 void CreateDefaultFile();
-void CreateDefaultFile(MenuEntry* entry);
-void GetPatchColorData(FwkSettings& settings);
+void CreateDefaultFile(MenuEntry *entry);
+void GetPatchColorData();
 
-void PatchProcessUiMainTextColorEditor(MenuEntry* entry);
-void PatchProcessUiWindowTitleColorEditor(MenuEntry* entry);
-void PatchProcessUiMenuSelectedItemColorEditor(MenuEntry* entry);
-void PatchProcessUiMenuUnselectedItemColorEditor(MenuEntry* entry);
-void PatchProcessUiBackgroundMainColorEditor(MenuEntry* entry);
-void PatchProcessUiBackgroundSecondaryColorEditor(MenuEntry* entry);
-void PatchProcessUiBackgroundBorderColorEditor(MenuEntry* entry);
+void PatchProcessUiMainTextColorEditor(MenuEntry *entry);
+void PatchProcessUiWindowTitleColorEditor(MenuEntry *entry);
+void PatchProcessUiMenuSelectedItemColorEditor(MenuEntry *entry);
+void PatchProcessUiMenuUnselectedItemColorEditor(MenuEntry *entry);
+void PatchProcessUiBackgroundMainColorEditor(MenuEntry *entry);
+void PatchProcessUiBackgroundSecondaryColorEditor(MenuEntry *entry);
+void PatchProcessUiBackgroundBorderColorEditor(MenuEntry *entry);
 
-void PatchProcessKeyboardBackgroundColorEditor(MenuEntry* entry);
-void PatchProcessKeyboardKeyBackgroundColorEditor(MenuEntry* entry);
-void PatchProcessKeyboardKeyBackgroundPressedColorEditor(MenuEntry* entry);
-void PatchProcessKeyboardKeyTextColorEditor(MenuEntry* entry);
-void PatchProcessKeyboardKeyTextPressedColorEditor(MenuEntry* entry);
-void PatchProcessKeyboardKeyTextDisabledColorEditor(MenuEntry* entry);
-void PatchProcessKeyboardCursorColorEditor(MenuEntry* entry);
-void PatchProcessKeyboardInputColorEditor(MenuEntry* entry);
+void PatchProcessKeyboardBackgroundColorEditor(MenuEntry *entry);
+void PatchProcessKeyboardKeyBackgroundColorEditor(MenuEntry *entry);
+void PatchProcessKeyboardKeyBackgroundPressedColorEditor(MenuEntry *entry);
+void PatchProcessKeyboardKeyTextColorEditor(MenuEntry *entry);
+void PatchProcessKeyboardKeyTextPressedColorEditor(MenuEntry *entry);
+void PatchProcessKeyboardKeyTextDisabledColorEditor(MenuEntry *entry);
+void PatchProcessKeyboardCursorColorEditor(MenuEntry *entry);
+void PatchProcessKeyboardInputColorEditor(MenuEntry *entry);
 
-void PatchProcessCustomKeyboardBackgroundMainColorEditor(MenuEntry* entry);
-void PatchProcessCustomKeyboardBackgroundSecondaryColorEditor(MenuEntry* entry);
-void PatchProcessCustomKeyboardBackgroundBorderColorEditor(MenuEntry* entry);
-void PatchProcessCustomKeyboardKeyBackgroundColorEditor(MenuEntry* entry);
+void PatchProcessCustomKeyboardBackgroundMainColorEditor(MenuEntry *entry);
+void PatchProcessCustomKeyboardBackgroundSecondaryColorEditor(MenuEntry *entry);
+void PatchProcessCustomKeyboardBackgroundBorderColorEditor(MenuEntry *entry);
+void PatchProcessCustomKeyboardKeyBackgroundColorEditor(MenuEntry *entry);
 void PatchProcessCustomKeyboardKeyBackgroundPressedColorEditor(
-    MenuEntry* entry);
-void PatchProcessCustomKeyboardKeyTextColorEditor(MenuEntry* entry);
-void PatchProcessCustomKeyboardKeyTextPressedColorEditor(MenuEntry* entry);
-void PatchProcessCustomKeyboardScrollBarBackgroundColorEditor(MenuEntry* entry);
-void PatchProcessCustomKeyboardScrollBarThumbColorEditor(MenuEntry* entry);
+    MenuEntry *entry);
+void PatchProcessCustomKeyboardKeyTextColorEditor(MenuEntry *entry);
+void PatchProcessCustomKeyboardKeyTextPressedColorEditor(MenuEntry *entry);
+void PatchProcessCustomKeyboardScrollBarBackgroundColorEditor(MenuEntry *entry);
+void PatchProcessCustomKeyboardScrollBarThumbColorEditor(MenuEntry *entry);
 
-void PatchProcessDefaultTheme(MenuEntry* entry);
+void PatchProcessDefaultTheme(MenuEntry *entry);
 
 }  // namespace CTRPluginFramework
 

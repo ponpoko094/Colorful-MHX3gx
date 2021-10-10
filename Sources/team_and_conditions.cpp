@@ -1,7 +1,5 @@
 #include "team_and_conditions.hpp"
 
-#include <string>
-
 namespace CTRPluginFramework {
 
 void TeamAndCondition() {
@@ -57,9 +55,9 @@ void TeamAndCondition() {
         MessageBox(openingMessage, thanksMessage).SetClear(ClearScreen::Top)();
         if (MessageBox(teamAndConditionMessageTitle, teamAndConditionMessage,
                        DialogType::DialogYesNo)
-                .SetClear(ClearScreen::Top)()) {
+            .SetClear(ClearScreen::Top)()) {
           if (MessageBox(askOpeningMessageSkipMessage, DialogType::DialogYesNo)
-                  .SetClear(ClearScreen::Top)()) {
+              .SetClear(ClearScreen::Top)()) {
             File::Create(skipSaveFileName);
             MessageBox(createdOpSkipBinMessage).SetClear(ClearScreen::Top)();
             Process::ReturnToHomeMenu();

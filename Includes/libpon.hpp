@@ -2,8 +2,8 @@
 // Created by ponpoko on 2021/03/21.
 //
 
-#ifndef MHX3GX_INCLUDES_PONLIB_H_
-#define MHX3GX_INCLUDES_PONLIB_H_
+#ifndef MHX3GX_INCLUDES_LIBPON_HPP
+#define MHX3GX_INCLUDES_LIBPON_HPP
 
 #include "libpon/bitmap.hpp"
 #include "libpon/keyboard_plus.hpp"
@@ -13,4 +13,4 @@
 
 using namespace libpon;
 
-#endif  // MHX3GX_INCLUDES_PONLIB_H_
+#endif  // MHX3GX_INCLUDES_LIBPON_HPP

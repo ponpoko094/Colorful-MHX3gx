@@ -2,10 +2,8 @@
 
 namespace CTRPluginFramework {
 
-FwkSettings* set;
-std::string patchProcessColorEditorTitle = "どの値に変更しますか？";
-Keyboard keyboard(patchProcessColorEditorTitle);
-const std::string pathToBIN = "patch.bin";
+FwkSettings *set;
+const static std::string pathToBIN = "patch.bin";
 
 void CreateDefaultFile() {
   PatchColorData color;
@@ -16,11 +14,11 @@ void CreateDefaultFile() {
   File::Create(pathToBIN);
   File::Open(file, pathToBIN);
   file.Rewind();
-  file.Write((char*)&color, sizeof(color));
+  file.Write((char *)&color, sizeof(color));
   file.Close();
 }
 
-void CreateDefaultFile(MenuEntry* entry) {
+void CreateDefaultFile(MenuEntry *entry) {
   Keyboard keyboard("patch.binを初期化しますか？", {"はい", "いいえ"});
   int choice = keyboard.Open();
   if (choice == 0) {
@@ -28,98 +26,97 @@ void CreateDefaultFile(MenuEntry* entry) {
   }
 }
 
-void GetPatchColorData(FwkSettings& settings) {
+void GetPatchColorData() {
   PatchColorData color;
   File file;
   if (!File::Exists(pathToBIN)) {
     CreateDefaultFile();
   }
   File::Open(file, pathToBIN);
-  file.Read((char*)&color, sizeof(color));
-  settings.Get().MainTextColor =
+  file.Read((char *)&color, sizeof(color));
+  FwkSettings::Get().MainTextColor =
       Color(color.uiMainTextR, color.uiMainTextG, color.uiMainTextB);
-  settings.Get().WindowTitleColor =
+  FwkSettings::Get().WindowTitleColor =
       Color(color.uiWindowTitleR, color.uiWindowTitleG, color.uiWindowTitleB);
-  settings.Get().MenuSelectedItemColor =
+  FwkSettings::Get().MenuSelectedItemColor =
       Color(color.uiMenuSelectedItemR, color.uiMenuSelectedItemG,
             color.uiMenuSelectedItemB);
-  settings.Get().MenuUnselectedItemColor =
+  FwkSettings::Get().MenuUnselectedItemColor =
       Color(color.uiMenuUnselectedItemR, color.uiMenuUnselectedItemG,
             color.uiMenuUnselectedItemB);
-  settings.Get().BackgroundMainColor =
+  FwkSettings::Get().BackgroundMainColor =
       Color(color.uiBackgroundMainR, color.uiBackgroundMainG,
             color.uiBackgroundMainB);
-  settings.Get().BackgroundSecondaryColor =
+  FwkSettings::Get().BackgroundSecondaryColor =
       Color(color.uiBackgroundSecondaryR, color.uiBackgroundSecondaryG,
             color.uiBackgroundSecondaryB);
-  settings.Get().BackgroundBorderColor =
+  FwkSettings::Get().BackgroundBorderColor =
       Color(color.uiBackgroundBorderR, color.uiBackgroundBorderG,
             color.uiBackgroundBorderB);
-
-  settings.Get().Keyboard.Background =
+  FwkSettings::Get().Keyboard.Background =
       Color(color.keyboardBackgroundR, color.keyboardBackgroundG,
             color.keyboardBackgroundB);
-  settings.Get().Keyboard.KeyBackground =
+  FwkSettings::Get().Keyboard.KeyBackground =
       Color(color.keyboardKeyBackgroundR, color.keyboardKeyBackgroundG,
             color.keyboardKeyBackgroundB);
-  settings.Get().Keyboard.KeyBackgroundPressed = Color(
+  FwkSettings::Get().Keyboard.KeyBackgroundPressed = Color(
       color.keyboardKeyBackgroundPressedR, color.keyboardKeyBackgroundPressedG,
       color.keyboardKeyBackgroundPressedB);
-  settings.Get().Keyboard.KeyText = Color(
+  FwkSettings::Get().Keyboard.KeyText = Color(
       color.keyboardKeyTextR, color.keyboardKeyTextG, color.keyboardKeyTextB);
-  settings.Get().Keyboard.KeyTextPressed =
+  FwkSettings::Get().Keyboard.KeyTextPressed =
       Color(color.keyboardKeyTextPressedR, color.keyboardKeyTextPressedG,
             color.keyboardKeyTextPressedB);
-  settings.Get().Keyboard.KeyTextDisabled =
+  FwkSettings::Get().Keyboard.KeyTextDisabled =
       Color(color.keyboardKeyTextDisabledR, color.keyboardKeyTextDisabledG,
             color.keyboardKeyTextDisabledB);
-  settings.Get().Keyboard.Cursor = Color(
+  FwkSettings::Get().Keyboard.Cursor = Color(
       color.keyboardCursorR, color.keyboardCursorG, color.keyboardCursorB);
-  settings.Get().Keyboard.Input =
+  FwkSettings::Get().Keyboard.Input =
       Color(color.keyboardInputR, color.keyboardInputG, color.keyboardInputB);
 
-  settings.Get().CustomKeyboard.BackgroundMain = Color(
+  FwkSettings::Get().CustomKeyboard.BackgroundMain = Color(
       color.customKeyboardBackgroundMainR, color.customKeyboardBackgroundMainG,
       color.customKeyboardBackgroundMainB);
-  settings.Get().CustomKeyboard.BackgroundSecondary =
+  FwkSettings::Get().CustomKeyboard.BackgroundSecondary =
       Color(color.customKeyboardBackgroundSecondaryR,
             color.customKeyboardBackgroundSecondaryG,
             color.customKeyboardBackgroundSecondaryB);
-  settings.Get().CustomKeyboard.BackgroundBorder =
+  FwkSettings::Get().CustomKeyboard.BackgroundBorder =
       Color(color.customKeyboardBackgroundBorderR,
             color.customKeyboardBackgroundBorderG,
             color.customKeyboardBackgroundBorderB);
-  settings.Get().CustomKeyboard.KeyBackground = Color(
+  FwkSettings::Get().CustomKeyboard.KeyBackground = Color(
       color.customKeyboardKeyBackgroundR, color.customKeyboardKeyBackgroundG,
       color.customKeyboardKeyBackgroundB);
-  settings.Get().CustomKeyboard.KeyBackgroundPressed =
+  FwkSettings::Get().CustomKeyboard.KeyBackgroundPressed =
       Color(color.customKeyboardKeyBackgroundPressedR,
             color.customKeyboardKeyBackgroundPressedG,
             color.customKeyboardKeyBackgroundPressedB);
-  settings.Get().CustomKeyboard.KeyText =
+  FwkSettings::Get().CustomKeyboard.KeyText =
       Color(color.customKeyboardKeyTextR, color.customKeyboardKeyTextG,
             color.customKeyboardKeyTextB);
-  settings.Get().CustomKeyboard.KeyTextPressed = Color(
+  FwkSettings::Get().CustomKeyboard.KeyTextPressed = Color(
       color.customKeyboardKeyTextPressedR, color.customKeyboardKeyTextPressedG,
       color.customKeyboardKeyTextPressedB);
-  settings.Get().CustomKeyboard.ScrollBarBackground =
+  FwkSettings::Get().CustomKeyboard.ScrollBarBackground =
       Color(color.customKeyboardScrollBarBackgroundR,
             color.customKeyboardScrollBarBackgroundG,
             color.customKeyboardScrollBarBackgroundB);
-  settings.Get().CustomKeyboard.ScrollBarThumb = Color(
+  FwkSettings::Get().CustomKeyboard.ScrollBarThumb = Color(
       color.customKeyboardScrollBarThumbR, color.customKeyboardScrollBarThumbG,
       color.customKeyboardScrollBarThumbB);
   file.Close();
 }
 
-void PatchProcessUiMainTextColorEditor(MenuEntry* entry) {
+void PatchProcessUiMainTextColorEditor(MenuEntry *entry) {
   File file;
   if (!File::Exists(pathToBIN)) {
     CreateDefaultFile();
   }
   PatchColorData color;
   File::Open(file, pathToBIN);
-  file.Read((char*)&color, sizeof(color));
+  file.Read((char *)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -136,21 +133,21 @@ void PatchProcessUiMainTextColorEditor(MenuEntry* entry) {
       color.uiMainTextB = value;
     }
   }
-  set->Get().MainTextColor =
+  FwkSettings::Get().MainTextColor =
       Color(color.uiMainTextR, color.uiMainTextG, color.uiMainTextB);
   file.Rewind();
-  file.Write((char*)&color, sizeof(color));
+  file.Write((char *)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessUiWindowTitleColorEditor(MenuEntry* entry) {
+void PatchProcessUiWindowTitleColorEditor(MenuEntry *entry) {
   File file;
   if (!File::Exists(pathToBIN)) {
     CreateDefaultFile();
   }
   PatchColorData color;
   File::Open(file, pathToBIN);
-  file.Read((char*)&color, sizeof(color));
+  file.Read((char *)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -167,21 +164,21 @@ void PatchProcessUiWindowTitleColorEditor(MenuEntry* entry) {
       color.uiWindowTitleB = value;
     }
   }
-  set->Get().WindowTitleColor =
+  FwkSettings::Get().WindowTitleColor =
       Color(color.uiWindowTitleR, color.uiWindowTitleG, color.uiWindowTitleB);
   file.Rewind();
-  file.Write((char*)&color, sizeof(color));
+  file.Write((char *)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessUiMenuSelectedItemColorEditor(MenuEntry* entry) {
+void PatchProcessUiMenuSelectedItemColorEditor(MenuEntry *entry) {
   File file;
   if (!File::Exists(pathToBIN)) {
     CreateDefaultFile();
   }
   PatchColorData color;
   File::Open(file, pathToBIN);
-  file.Read((char*)&color, sizeof(color));
+  file.Read((char *)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -198,22 +195,22 @@ void PatchProcessUiMenuSelectedItemColorEditor(MenuEntry* entry) {
       color.uiMenuSelectedItemB = value;
     }
   }
-  set->Get().MenuSelectedItemColor =
+  FwkSettings::Get().MenuSelectedItemColor =
       Color(color.uiMenuSelectedItemR, color.uiMenuSelectedItemG,
             color.uiMenuSelectedItemB);
   file.Rewind();
-  file.Write((char*)&color, sizeof(color));
+  file.Write((char *)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessUiMenuUnselectedItemColorEditor(MenuEntry* entry) {
+void PatchProcessUiMenuUnselectedItemColorEditor(MenuEntry *entry) {
   File file;
   if (!File::Exists(pathToBIN)) {
     CreateDefaultFile();
   }
   PatchColorData color;
   File::Open(file, pathToBIN);
-  file.Read((char*)&color, sizeof(color));
+  file.Read((char *)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -230,22 +227,22 @@ void PatchProcessUiMenuUnselectedItemColorEditor(MenuEntry* entry) {
       color.uiMenuUnselectedItemB = value;
     }
   }
-  set->Get().MenuUnselectedItemColor =
+  FwkSettings::Get().MenuUnselectedItemColor =
       Color(color.uiMenuUnselectedItemR, color.uiMenuUnselectedItemG,
             color.uiMenuUnselectedItemB);
   file.Rewind();
-  file.Write((char*)&color, sizeof(color));
+  file.Write((char *)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessUiBackgroundMainColorEditor(MenuEntry* entry) {
+void PatchProcessUiBackgroundMainColorEditor(MenuEntry *entry) {
   File file;
   if (!File::Exists(pathToBIN)) {
     CreateDefaultFile();
   }
   PatchColorData color;
   File::Open(file, pathToBIN);
-  file.Read((char*)&color, sizeof(color));
+  file.Read((char *)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -262,22 +259,22 @@ void PatchProcessUiBackgroundMainColorEditor(MenuEntry* entry) {
       color.uiBackgroundMainB = value;
     }
   }
-  set->Get().BackgroundMainColor =
+  FwkSettings::Get().BackgroundMainColor =
       Color(color.uiBackgroundMainR, color.uiBackgroundMainG,
             color.uiBackgroundMainB);
   file.Rewind();
-  file.Write((char*)&color, sizeof(color));
+  file.Write((char *)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessUiBackgroundSecondaryColorEditor(MenuEntry* entry) {
+void PatchProcessUiBackgroundSecondaryColorEditor(MenuEntry *entry) {
   File file;
   if (!File::Exists(pathToBIN)) {
     CreateDefaultFile();
   }
   PatchColorData color;
   File::Open(file, pathToBIN);
-  file.Read((char*)&color, sizeof(color));
+  file.Read((char *)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -294,22 +291,22 @@ void PatchProcessUiBackgroundSecondaryColorEditor(MenuEntry* entry) {
       color.uiBackgroundSecondaryB = value;
     }
   }
-  set->Get().BackgroundSecondaryColor =
+  FwkSettings::Get().BackgroundSecondaryColor =
       Color(color.uiBackgroundSecondaryR, color.uiBackgroundSecondaryG,
             color.uiBackgroundSecondaryB);
   file.Rewind();
-  file.Write((char*)&color, sizeof(color));
+  file.Write((char *)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessUiBackgroundBorderColorEditor(MenuEntry* entry) {
+void PatchProcessUiBackgroundBorderColorEditor(MenuEntry *entry) {
   File file;
   if (!File::Exists(pathToBIN)) {
     CreateDefaultFile();
   }
   PatchColorData color;
   File::Open(file, pathToBIN);
-  file.Read((char*)&color, sizeof(color));
+  file.Read((char *)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -326,22 +323,22 @@ void PatchProcessUiBackgroundBorderColorEditor(MenuEntry* entry) {
       color.uiBackgroundBorderB = value;
     }
   }
-  set->Get().BackgroundBorderColor =
+  FwkSettings::Get().BackgroundBorderColor =
       Color(color.uiBackgroundBorderR, color.uiBackgroundBorderG,
             color.uiBackgroundBorderB);
   file.Rewind();
-  file.Write((char*)&color, sizeof(color));
+  file.Write((char *)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessKeyboardBackgroundColorEditor(MenuEntry* entry) {
+void PatchProcessKeyboardBackgroundColorEditor(MenuEntry *entry) {
   File file;
   if (!File::Exists(pathToBIN)) {
     CreateDefaultFile();
   }
   PatchColorData color;
   File::Open(file, pathToBIN);
-  file.Read((char*)&color, sizeof(color));
+  file.Read((char *)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -358,22 +355,22 @@ void PatchProcessKeyboardBackgroundColorEditor(MenuEntry* entry) {
       color.keyboardBackgroundB = value;
     }
   }
-  set->Get().Keyboard.Background =
+  FwkSettings::Get().Keyboard.Background =
       Color(color.keyboardBackgroundR, color.keyboardBackgroundG,
             color.keyboardBackgroundB);
   file.Rewind();
-  file.Write((char*)&color, sizeof(color));
+  file.Write((char *)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessKeyboardKeyBackgroundColorEditor(MenuEntry* entry) {
+void PatchProcessKeyboardKeyBackgroundColorEditor(MenuEntry *entry) {
   File file;
   if (!File::Exists(pathToBIN)) {
     CreateDefaultFile();
   }
   PatchColorData color;
   File::Open(file, pathToBIN);
-  file.Read((char*)&color, sizeof(color));
+  file.Read((char *)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -390,22 +387,22 @@ void PatchProcessKeyboardKeyBackgroundColorEditor(MenuEntry* entry) {
       color.keyboardKeyBackgroundB = value;
     }
   }
-  set->Get().Keyboard.KeyBackground =
+  FwkSettings::Get().Keyboard.KeyBackground =
       Color(color.keyboardKeyBackgroundR, color.keyboardKeyBackgroundG,
             color.keyboardKeyBackgroundB);
   file.Rewind();
-  file.Write((char*)&color, sizeof(color));
+  file.Write((char *)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessKeyboardKeyBackgroundPressedColorEditor(MenuEntry* entry) {
+void PatchProcessKeyboardKeyBackgroundPressedColorEditor(MenuEntry *entry) {
   File file;
   if (!File::Exists(pathToBIN)) {
     CreateDefaultFile();
   }
   PatchColorData color;
   File::Open(file, pathToBIN);
-  file.Read((char*)&color, sizeof(color));
+  file.Read((char *)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -422,22 +419,22 @@ void PatchProcessKeyboardKeyBackgroundPressedColorEditor(MenuEntry* entry) {
       color.keyboardKeyBackgroundPressedB = value;
     }
   }
-  set->Get().Keyboard.KeyBackgroundPressed = Color(
+  FwkSettings::Get().Keyboard.KeyBackgroundPressed = Color(
       color.keyboardKeyBackgroundPressedR, color.keyboardKeyBackgroundPressedG,
       color.keyboardKeyBackgroundPressedB);
   file.Rewind();
-  file.Write((char*)&color, sizeof(color));
+  file.Write((char *)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessKeyboardKeyTextColorEditor(MenuEntry* entry) {
+void PatchProcessKeyboardKeyTextColorEditor(MenuEntry *entry) {
   File file;
   if (!File::Exists(pathToBIN)) {
     CreateDefaultFile();
   }
   PatchColorData color;
   File::Open(file, pathToBIN);
-  file.Read((char*)&color, sizeof(color));
+  file.Read((char *)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -454,21 +451,21 @@ void PatchProcessKeyboardKeyTextColorEditor(MenuEntry* entry) {
       color.keyboardKeyTextB = value;
     }
   }
-  set->Get().Keyboard.KeyText = Color(
+  FwkSettings::Get().Keyboard.KeyText = Color(
       color.keyboardKeyTextR, color.keyboardKeyTextG, color.keyboardKeyTextB);
   file.Rewind();
-  file.Write((char*)&color, sizeof(color));
+  file.Write((char *)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessKeyboardKeyTextPressedColorEditor(MenuEntry* entry) {
+void PatchProcessKeyboardKeyTextPressedColorEditor(MenuEntry *entry) {
   File file;
   if (!File::Exists(pathToBIN)) {
     CreateDefaultFile();
   }
   PatchColorData color;
   File::Open(file, pathToBIN);
-  file.Read((char*)&color, sizeof(color));
+  file.Read((char *)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -485,22 +482,22 @@ void PatchProcessKeyboardKeyTextPressedColorEditor(MenuEntry* entry) {
       color.keyboardKeyTextPressedB = value;
     }
   }
-  set->Get().Keyboard.KeyTextPressed =
+  FwkSettings::Get().Keyboard.KeyTextPressed =
       Color(color.keyboardKeyTextPressedR, color.keyboardKeyTextPressedG,
             color.keyboardKeyTextPressedB);
   file.Rewind();
-  file.Write((char*)&color, sizeof(color));
+  file.Write((char *)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessKeyboardKeyTextDisabledColorEditor(MenuEntry* entry) {
+void PatchProcessKeyboardKeyTextDisabledColorEditor(MenuEntry *entry) {
   File file;
   if (!File::Exists(pathToBIN)) {
     CreateDefaultFile();
   }
   PatchColorData color;
   File::Open(file, pathToBIN);
-  file.Read((char*)&color, sizeof(color));
+  file.Read((char *)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -517,22 +514,22 @@ void PatchProcessKeyboardKeyTextDisabledColorEditor(MenuEntry* entry) {
       color.keyboardKeyTextDisabledB = value;
     }
   }
-  set->Get().Keyboard.KeyTextDisabled =
+  FwkSettings::Get().Keyboard.KeyTextDisabled =
       Color(color.keyboardKeyTextDisabledR, color.keyboardKeyTextDisabledG,
             color.keyboardKeyTextDisabledB);
   file.Rewind();
-  file.Write((char*)&color, sizeof(color));
+  file.Write((char *)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessKeyboardCursorColorEditor(MenuEntry* entry) {
+void PatchProcessKeyboardCursorColorEditor(MenuEntry *entry) {
   File file;
   if (!File::Exists(pathToBIN)) {
     CreateDefaultFile();
   }
   PatchColorData color;
   File::Open(file, pathToBIN);
-  file.Read((char*)&color, sizeof(color));
+  file.Read((char *)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -549,21 +546,21 @@ void PatchProcessKeyboardCursorColorEditor(MenuEntry* entry) {
       color.keyboardCursorB = value;
     }
   }
-  set->Get().Keyboard.Cursor = Color(
+  FwkSettings::Get().Keyboard.Cursor = Color(
       color.keyboardCursorR, color.keyboardCursorG, color.keyboardCursorB);
   file.Rewind();
-  file.Write((char*)&color, sizeof(color));
+  file.Write((char *)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessKeyboardInputColorEditor(MenuEntry* entry) {
+void PatchProcessKeyboardInputColorEditor(MenuEntry *entry) {
   File file;
   if (!File::Exists(pathToBIN)) {
     CreateDefaultFile();
   }
   PatchColorData color;
   File::Open(file, pathToBIN);
-  file.Read((char*)&color, sizeof(color));
+  file.Read((char *)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -580,21 +577,21 @@ void PatchProcessKeyboardInputColorEditor(MenuEntry* entry) {
       color.keyboardInputB = value;
     }
   }
-  set->Get().Keyboard.Input =
+  FwkSettings::Get().Keyboard.Input =
       Color(color.keyboardInputR, color.keyboardInputG, color.keyboardInputB);
   file.Rewind();
-  file.Write((char*)&color, sizeof(color));
+  file.Write((char *)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessCustomKeyboardBackgroundMainColorEditor(MenuEntry* entry) {
+void PatchProcessCustomKeyboardBackgroundMainColorEditor(MenuEntry *entry) {
   File file;
   if (!File::Exists(pathToBIN)) {
     CreateDefaultFile();
   }
   PatchColorData color;
   File::Open(file, pathToBIN);
-  file.Read((char*)&color, sizeof(color));
+  file.Read((char *)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -611,23 +608,23 @@ void PatchProcessCustomKeyboardBackgroundMainColorEditor(MenuEntry* entry) {
       color.customKeyboardBackgroundMainB = value;
     }
   }
-  set->Get().CustomKeyboard.BackgroundMain = Color(
+  FwkSettings::Get().CustomKeyboard.BackgroundMain = Color(
       color.customKeyboardBackgroundMainR, color.customKeyboardBackgroundMainG,
       color.customKeyboardBackgroundMainB);
   file.Rewind();
-  file.Write((char*)&color, sizeof(color));
+  file.Write((char *)&color, sizeof(color));
   file.Close();
 }
 
 void PatchProcessCustomKeyboardBackgroundSecondaryColorEditor(
-    MenuEntry* entry) {
+    MenuEntry *entry) {
   File file;
   if (!File::Exists(pathToBIN)) {
     CreateDefaultFile();
   }
   PatchColorData color;
   File::Open(file, pathToBIN);
-  file.Read((char*)&color, sizeof(color));
+  file.Read((char *)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -644,23 +641,23 @@ void PatchProcessCustomKeyboardBackgroundSecondaryColorEditor(
       color.customKeyboardBackgroundSecondaryB = value;
     }
   }
-  set->Get().CustomKeyboard.BackgroundSecondary =
+  FwkSettings::Get().CustomKeyboard.BackgroundSecondary =
       Color(color.customKeyboardBackgroundSecondaryR,
             color.customKeyboardBackgroundSecondaryG,
             color.customKeyboardBackgroundSecondaryB);
   file.Rewind();
-  file.Write((char*)&color, sizeof(color));
+  file.Write((char *)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessCustomKeyboardBackgroundBorderColorEditor(MenuEntry* entry) {
+void PatchProcessCustomKeyboardBackgroundBorderColorEditor(MenuEntry *entry) {
   File file;
   if (!File::Exists(pathToBIN)) {
     CreateDefaultFile();
   }
   PatchColorData color;
   File::Open(file, pathToBIN);
-  file.Read((char*)&color, sizeof(color));
+  file.Read((char *)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -677,23 +674,23 @@ void PatchProcessCustomKeyboardBackgroundBorderColorEditor(MenuEntry* entry) {
       color.customKeyboardBackgroundBorderB = value;
     }
   }
-  set->Get().CustomKeyboard.BackgroundBorder =
+  FwkSettings::Get().CustomKeyboard.BackgroundBorder =
       Color(color.customKeyboardBackgroundBorderR,
             color.customKeyboardBackgroundBorderG,
             color.customKeyboardBackgroundBorderB);
   file.Rewind();
-  file.Write((char*)&color, sizeof(color));
+  file.Write((char *)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessCustomKeyboardKeyBackgroundColorEditor(MenuEntry* entry) {
+void PatchProcessCustomKeyboardKeyBackgroundColorEditor(MenuEntry *entry) {
   File file;
   if (!File::Exists(pathToBIN)) {
     CreateDefaultFile();
   }
   PatchColorData color;
   File::Open(file, pathToBIN);
-  file.Read((char*)&color, sizeof(color));
+  file.Read((char *)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -710,23 +707,23 @@ void PatchProcessCustomKeyboardKeyBackgroundColorEditor(MenuEntry* entry) {
       color.customKeyboardKeyBackgroundB = value;
     }
   }
-  set->Get().CustomKeyboard.KeyBackground = Color(
+  FwkSettings::Get().CustomKeyboard.KeyBackground = Color(
       color.customKeyboardKeyBackgroundR, color.customKeyboardKeyBackgroundG,
       color.customKeyboardKeyBackgroundB);
   file.Rewind();
-  file.Write((char*)&color, sizeof(color));
+  file.Write((char *)&color, sizeof(color));
   file.Close();
 }
 
 void PatchProcessCustomKeyboardKeyBackgroundPressedColorEditor(
-    MenuEntry* entry) {
+    MenuEntry *entry) {
   File file;
   if (!File::Exists(pathToBIN)) {
     CreateDefaultFile();
   }
   PatchColorData color;
   File::Open(file, pathToBIN);
-  file.Read((char*)&color, sizeof(color));
+  file.Read((char *)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -743,23 +740,23 @@ void PatchProcessCustomKeyboardKeyBackgroundPressedColorEditor(
       color.customKeyboardKeyBackgroundPressedB = value;
     }
   }
-  set->Get().CustomKeyboard.KeyBackgroundPressed =
+  FwkSettings::Get().CustomKeyboard.KeyBackgroundPressed =
       Color(color.customKeyboardKeyBackgroundPressedR,
             color.customKeyboardKeyBackgroundPressedG,
             color.customKeyboardKeyBackgroundPressedB);
   file.Rewind();
-  file.Write((char*)&color, sizeof(color));
+  file.Write((char *)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessCustomKeyboardKeyTextColorEditor(MenuEntry* entry) {
+void PatchProcessCustomKeyboardKeyTextColorEditor(MenuEntry *entry) {
   File file;
   if (!File::Exists(pathToBIN)) {
     CreateDefaultFile();
   }
   PatchColorData color;
   File::Open(file, pathToBIN);
-  file.Read((char*)&color, sizeof(color));
+  file.Read((char *)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -776,22 +773,22 @@ void PatchProcessCustomKeyboardKeyTextColorEditor(MenuEntry* entry) {
       color.customKeyboardKeyTextB = value;
     }
   }
-  set->Get().CustomKeyboard.KeyText =
+  FwkSettings::Get().CustomKeyboard.KeyText =
       Color(color.customKeyboardKeyTextR, color.customKeyboardKeyTextG,
             color.customKeyboardKeyTextB);
   file.Rewind();
-  file.Write((char*)&color, sizeof(color));
+  file.Write((char *)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessCustomKeyboardKeyTextPressedColorEditor(MenuEntry* entry) {
+void PatchProcessCustomKeyboardKeyTextPressedColorEditor(MenuEntry *entry) {
   File file;
   if (!File::Exists(pathToBIN)) {
     CreateDefaultFile();
   }
   PatchColorData color;
   File::Open(file, pathToBIN);
-  file.Read((char*)&color, sizeof(color));
+  file.Read((char *)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -808,23 +805,23 @@ void PatchProcessCustomKeyboardKeyTextPressedColorEditor(MenuEntry* entry) {
       color.customKeyboardKeyTextPressedB = value;
     }
   }
-  set->Get().CustomKeyboard.KeyTextPressed = Color(
+  FwkSettings::Get().CustomKeyboard.KeyTextPressed = Color(
       color.customKeyboardKeyTextPressedR, color.customKeyboardKeyTextPressedG,
       color.customKeyboardKeyTextPressedB);
   file.Rewind();
-  file.Write((char*)&color, sizeof(color));
+  file.Write((char *)&color, sizeof(color));
   file.Close();
 }
 
 void PatchProcessCustomKeyboardScrollBarBackgroundColorEditor(
-    MenuEntry* entry) {
+    MenuEntry *entry) {
   File file;
   if (!File::Exists(pathToBIN)) {
     CreateDefaultFile();
   }
   PatchColorData color;
   File::Open(file, pathToBIN);
-  file.Read((char*)&color, sizeof(color));
+  file.Read((char *)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -841,23 +838,23 @@ void PatchProcessCustomKeyboardScrollBarBackgroundColorEditor(
       color.customKeyboardScrollBarBackgroundB = value;
     }
   }
-  set->Get().CustomKeyboard.ScrollBarBackground =
+  FwkSettings::Get().CustomKeyboard.ScrollBarBackground =
       Color(color.customKeyboardScrollBarBackgroundR,
             color.customKeyboardScrollBarBackgroundG,
             color.customKeyboardScrollBarBackgroundB);
   file.Rewind();
-  file.Write((char*)&color, sizeof(color));
+  file.Write((char *)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessCustomKeyboardScrollBarThumbColorEditor(MenuEntry* entry) {
+void PatchProcessCustomKeyboardScrollBarThumbColorEditor(MenuEntry *entry) {
   File file;
   if (!File::Exists(pathToBIN)) {
     CreateDefaultFile();
   }
   PatchColorData color;
   File::Open(file, pathToBIN);
-  file.Read((char*)&color, sizeof(color));
+  file.Read((char *)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -874,19 +871,19 @@ void PatchProcessCustomKeyboardScrollBarThumbColorEditor(MenuEntry* entry) {
       color.customKeyboardScrollBarThumbB = value;
     }
   }
-  set->Get().CustomKeyboard.ScrollBarThumb = Color(
+  FwkSettings::Get().CustomKeyboard.ScrollBarThumb = Color(
       color.customKeyboardScrollBarThumbR, color.customKeyboardScrollBarThumbG,
       color.customKeyboardScrollBarThumbB);
   file.Rewind();
-  file.Write((char*)&color, sizeof(color));
+  file.Write((char *)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessDefaultTheme(MenuEntry* entry) {
+void PatchProcessDefaultTheme(MenuEntry *entry) {
   Keyboard keyboard("CTRPFの色を元に戻しますか？", {"はい", "いいえ"});
   int choice = keyboard.Open();
   if (choice == 0) {
-    set->SetThemeDefault();
+    FwkSettings::SetThemeDefault();
   }
 }
 

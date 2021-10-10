@@ -10,18 +10,18 @@ using StringVector = std::vector<std::string>;
 
 class KeyboardPlus {
  public:
-  static bool Set(u32& input, const std::string& message = "",
+  static bool Set(u32 &input, const std::string &message = "",
                   bool hexadecimal = false);
-  static bool Set(u16& input, const std::string& message = "",
+  static bool Set(u16 &input, const std::string &message = "",
                   bool hexadecimal = false);
-  static bool Set(u8& input, const std::string& message = "",
+  static bool Set(u8 &input, const std::string &message = "",
                   bool hexadecimal = false);
-  static bool Toggle32(const std::string& message, const u32& offset,
-                       const u32& enable, const u32& disable);
-  static bool Toggle16(const std::string& message, const u32& offset,
-                       const u16& enable, const u16& disable);
-  static bool Toggle8(const std::string& message, const u32& offset,
-                      const u8& enable, const u8& disable);
+  static bool Toggle32(const std::string &message, const u32 &offset,
+                       const u32 &enable, const u32 &disable);
+  static bool Toggle16(const std::string &message, const u32 &offset,
+                       const u16 &enable, const u16 &disable);
+  static bool Toggle8(const std::string &message, const u32 &offset,
+                      const u8 &enable, const u8 &disable);
 
   // KeyboardPlus::Toggle32の複数版。
   // 主にアセンブリチートの切り替えに使う。
@@ -35,7 +35,7 @@ class KeyboardPlus {
                              u32 base_offset, std::vector<u32> value);
 
   // Delete keyboard object
-  KeyboardPlus(){};
+  KeyboardPlus() {};
   ~KeyboardPlus();
 };
 
