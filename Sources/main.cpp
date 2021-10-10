@@ -88,6 +88,7 @@ static MenuEntry *EnableEntry(MenuEntry *entry) {
 // Useful to do code edits safely
 void PatchProcess(FwkSettings &settings) {
   ToggleTouchscreenForceOn();
+  GetPatchColorData(settings);
 
   // プラグインの設定
   // アクションリプレイ
@@ -1066,6 +1067,8 @@ void InitMenu(PluginMenu &menu) {
 
       *patchProcessEditor += new MenuEntry("Set Default Theme" + stable,
                                            nullptr, PatchProcessDefaultTheme);
+      *patchProcessEditor += new MenuEntry(
+          "Create Default File" + stable, nullptr, CreateDefaultFile);
     }
     *bonus += patchProcessEditor;
 
