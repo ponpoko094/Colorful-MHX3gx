@@ -1,8 +1,5 @@
 #include "cheats.hpp"
 
-#include <string>
-#include <vector>
-
 namespace CTRPluginFramework {
 
 const std::vector<std::string> listPalicoSkill{
@@ -377,7 +374,7 @@ void Always3HunterArtEquip(MenuEntry *entry) {
 void SuperArmor(MenuEntry *entry) {
   static bool flag = false;
   u32 data1, data2;
-  if(!flag) {
+  if (!flag) {
     Process::Read32(0x322C60, data1);
     Process::Read32(0x3322F0, data2);
     flag = true;
@@ -1976,8 +1973,8 @@ void Monster2SizeOption(MenuEntry *entry) {
 }
 
 // クエスト最大ダウン回数設定
-static u8 quedownmax, quedownnow;
 void QuestDownMaxOption(MenuEntry *entry) {
+  u8 quedownmax;
   Process::Read8(0x8365440, quedownmax);
   Keyboard keyboard(Utils::Format(
       "最大ダウン回数を入力してください。\n現在[%u]", quedownmax));
@@ -1989,6 +1986,7 @@ void QuestDownMaxOption(MenuEntry *entry) {
 
 // クエスト現在ダウン回数設定
 void QuestDownNowOption(MenuEntry *entry) {
+  u8 quedownnow;
   Process::Read8(0x8365441, quedownnow);
   Keyboard keyboard(Utils::Format(
       "現在のダウン回数を入力してください。\n現在[%u]", quedownnow));
@@ -2636,20 +2634,6 @@ Result mcuGetBatteryLevel(u8 *out) {
 }
 
 void BatteryLevel() {
-  // u8 percent = 0;
-  // MCUHWC_GetBatteryLevel(&percent);
-  // std::string percent_string = std::to_string(percent) + "%";
-  // MessageBox("バッテリー残量は" + percent_string + "です。")();
-
-  // static float batteryPercentage;
-  // Result res = 0;
-  // u8 data[4];
-  // res = MCUHWC_ReadRegister(0xA, data, 4);
-  // batteryPercentage = data[1] + data[2] / 256.0f;
-  // batteryPercentage = (u32)((batteryPercentage + 0.05f) * 10.0f) / 10.0f;
-  // MessageBox(Utils::Format("バッテリー残量は%3.fです。",
-  // batteryPercentage))();
-
   u8 batteryPercentage;
   mcuInit();
   mcuGetBatteryLevel(&batteryPercentage);

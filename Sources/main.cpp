@@ -88,12 +88,13 @@ static MenuEntry *EnableEntry(MenuEntry *entry) {
 // Useful to do code edits safely
 void PatchProcess(FwkSettings &settings) {
   ToggleTouchscreenForceOn();
+  GetPatchColorData(settings);
 
   // プラグインの設定
   // アクションリプレイ
   settings.AllowActionReplay = true;
   // サーチ
-  settings.AllowSearchEngine = false;
+  settings.AllowSearchEngine = true;
   // 起動時間
   settings.WaitTimeToBoot = Seconds(3);
 
@@ -855,8 +856,8 @@ void InitMenu(PluginMenu &menu) {
         *baseCreate += new MenuEntry("ターゲット変更" + stable, nullptr,
                                      BaseCreateTargetChange,
                                      "ターゲットを？？？？？にできます。");
-        *baseCreate += new MenuEntry("クエスト形式変更" + stable,
-                                     nullptr, BaseCreateQuestTypeChange,
+        *baseCreate += new MenuEntry("クエスト形式変更" + stable, nullptr,
+                                     BaseCreateQuestTypeChange,
                                      "クエスト形式を変更できます。");
         *baseCreate +=
             new MenuEntry("募集HR下限変更" + stable, nullptr,
@@ -872,8 +873,8 @@ void InitMenu(PluginMenu &menu) {
         *baseCreate += new MenuEntry("入室制限変更" + stable, nullptr,
                                      BaseCreateEntryLimitChange,
                                      "入室制限を変更できます。");
-        *baseCreate += new MenuEntry("パスワード有無変更" + stable,
-                                     nullptr, BaseCreatePasswordExistChange,
+        *baseCreate += new MenuEntry("パスワード有無変更" + stable, nullptr,
+                                     BaseCreatePasswordExistChange,
                                      "パスワードの有無を変更できます。");
         *baseCreate += new MenuEntry("募集文①変更" + stable, nullptr,
                                      BaseCreateRecruitmentMessage1Change,
@@ -895,22 +896,20 @@ void InitMenu(PluginMenu &menu) {
         *baseSearch +=
             new MenuEntry("ターゲット変更" + stable, nullptr,
                           BaseSearchTargetChange, "ターゲットを変更できます。");
-        *baseSearch += new MenuEntry("クエスト形式変更" + stable,
-                                     nullptr, BaseSearchQuestTypeChange,
+        *baseSearch += new MenuEntry("クエスト形式変更" + stable, nullptr,
+                                     BaseSearchQuestTypeChange,
                                      "クエスト形式を変更できます。");
-        *baseSearch +=
-            new MenuEntry("ホストHR下限変更" + stable, nullptr,
-                          BaseSearchHostHunterRankMinimumChange,
-                          "ホストHRの下限を変更できます");
-        *baseSearch +=
-            new MenuEntry("ホストHR上限変更" + stable, nullptr,
-                          BaseSearchHostHunterRankMaximumChange,
-                          "ホストHRの上限を変更できます");
+        *baseSearch += new MenuEntry("ホストHR下限変更" + stable, nullptr,
+                                     BaseSearchHostHunterRankMinimumChange,
+                                     "ホストHRの下限を変更できます");
+        *baseSearch += new MenuEntry("ホストHR上限変更" + stable, nullptr,
+                                     BaseSearchHostHunterRankMaximumChange,
+                                     "ホストHRの上限を変更できます");
         *baseSearch += new MenuEntry("クエスト中変更" + stable, nullptr,
                                      BaseSearchInQuestChange,
                                      "クエスト中を変更できます。");
-        *baseSearch += new MenuEntry("パスワード有無変更" + stable,
-                                     nullptr, BaseSearchPasswordExistChange,
+        *baseSearch += new MenuEntry("パスワード有無変更" + stable, nullptr,
+                                     BaseSearchPasswordExistChange,
                                      "パスワードの有無を変更できます。");
       }
       *base += baseSearch;
@@ -1026,6 +1025,9 @@ void InitMenu(PluginMenu &menu) {
         *patchProcessEditorKeyboard +=
             new MenuEntry("Key Text Pressed" + stable, nullptr,
                           PatchProcessKeyboardKeyTextPressedColorEditor);
+        *patchProcessEditorKeyboard +=
+            new MenuEntry("Key Text Disabled" + stable, nullptr,
+                          PatchProcessKeyboardKeyTextDisabledColorEditor);
         *patchProcessEditorKeyboard += new MenuEntry(
             "Cursor" + stable, nullptr, PatchProcessKeyboardCursorColorEditor);
         *patchProcessEditorKeyboard += new MenuEntry(
@@ -1068,6 +1070,8 @@ void InitMenu(PluginMenu &menu) {
 
       *patchProcessEditor += new MenuEntry("Set Default Theme" + stable,
                                            nullptr, PatchProcessDefaultTheme);
+      *patchProcessEditor += new MenuEntry("Create Default File" + stable,
+                                           nullptr, CreateDefaultFile);
     }
     *bonus += patchProcessEditor;
 
@@ -1101,7 +1105,7 @@ int main() {
       "github.com/ponpoko094/MHX3gx";
 
   // タイトルやAbout等作成
-  PluginMenu *menu = new PluginMenu(title, 3, 0, 7, about, 0);
+  PluginMenu *menu = new PluginMenu(title, 3, 0, 8, about, 0);
 
   // Synchronize the menu with frame event
   menu->SynchronizeWithFrame(true);

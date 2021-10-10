@@ -1,5 +1,5 @@
-#ifndef MHX3GX_INCLUDES_KEYBOARD_PLUS_H_
-#define MHX3GX_INCLUDES_KEYBOARD_PLUS_H_
+#ifndef LIBPON_KEYBOARD_PLUS_HPP
+#define LIBPON_KEYBOARD_PLUS_HPP
 #include <CTRPluginFramework.hpp>
 #include <string>
 #include <vector>
@@ -41,4 +41,4 @@ class KeyboardPlus {
 
 }  // namespace CTRPluginFramework
 
-#endif  // MHX3GX_INCLUDES_KEYBOARD_PLUS_H_
+#endif  // LIBPON_KEYBOARD_PLUS_HPP
