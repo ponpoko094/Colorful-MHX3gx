@@ -93,7 +93,7 @@ void PatchProcess(FwkSettings &settings) {
   // アクションリプレイ
   settings.AllowActionReplay = true;
   // サーチ
-  settings.AllowSearchEngine = false;
+  settings.AllowSearchEngine = true;
   // 起動時間
   settings.WaitTimeToBoot = Seconds(3);
 
