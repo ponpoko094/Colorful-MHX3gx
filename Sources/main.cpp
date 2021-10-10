@@ -37,7 +37,6 @@ static void ToggleTouchscreenForceOn() {
   if (R_FAILED(svcMapProcessMemoryEx(CUR_PROCESS_HANDLE, 0x14000000,
                                      process_handle, (u32)start_address,
                                      text_total_size))) {
-                                     text_total_size)))
     goto exit;
   }
 
