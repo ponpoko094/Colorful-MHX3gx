@@ -1683,6 +1683,17 @@ u8 GetItemBoxVerticalIndex() {
   return index;
 }
 
+void ItemBoxCanEquipmentChange(MenuEntry *entry) {
+  u32 offset;
+  Process::Read32(0x83ACA2C, offset);
+  if (offset == 0) {
+    return;
+  }
+  Process::Write8(offset + 0x11C, 0x8);
+  Process::Write8(offset + 0x11E, 0x0);
+  Process::Write8(offset + 0x122, 0x8);
+}
+
 // アイテムボックス編集
 void ItemBoxEdit(MenuEntry *entry) {
   u16 data_16;

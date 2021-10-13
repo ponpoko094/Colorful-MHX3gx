@@ -411,6 +411,9 @@ void InitMenu(PluginMenu &menu) {
                            "ボックスのページを1400個に拡張します。");
     *item += new MenuEntry("持てるアイテム99個" + kStable, nullptr, HaveItem99,
                            "持てるアイテムの最大数を99個にします。");
+    *item += new MenuEntry("アイテムボックスをマイハウス化",
+                           ItemBoxCanEquipmentChange,
+                           "アイテムボックスをマイハウスにあるアイテムボックスと同等の機能をもたせます。");
     *item += new MenuEntry("アイテムボックス編集" + kStable, nullptr,
                            ItemBoxEdit, "アイテムボックスの編集をします。");
     *item +=
