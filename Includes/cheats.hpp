@@ -218,6 +218,7 @@ void ProwlerSupportGageMax(MenuEntry *entry);
 void ChatInfinite(MenuEntry *entry);
 void ChatConversionChange(MenuEntry *entry);
 void ChatConversionList(MenuEntry *entry);
+void ChatInQuest(MenuEntry *entry);
 
 void InstantDrunkOption(MenuEntry *entry);
 void Drunk1(MenuEntry *entry);

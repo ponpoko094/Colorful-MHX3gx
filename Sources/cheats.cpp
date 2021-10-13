@@ -2958,6 +2958,17 @@ void ChatConversionList(MenuEntry *entry) {
   keyboard.Open();
 }
 
+void ChatInQuest(MenuEntry *entry) {
+  Process::Write32(0x2BDB2C, 0xE3A03003);
+  Process::Write32(0x2BDBA4, 0xE3A00001);
+  Process::Write32(0x2BDD60, 0xE3A00001);
+  Process::Write32(0x2BDDD8, 0xE3A00000);
+  Process::Write32(0x2BE010, 0xE3A0201E);
+  Process::Write32(0x2BE074, 0xE3A0101E);
+  Process::Write32(0x373D6C, 0xE3A00001);
+  Process::Write32(0x373D88, 0xE3A0201E);
+}
+
 static int palicoChoice = 0;
 void PalicoChoice(MenuEntry *entry) {
   int index = palicoChoice;

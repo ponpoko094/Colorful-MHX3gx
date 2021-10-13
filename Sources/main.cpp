@@ -730,6 +730,9 @@ void InitMenu(PluginMenu &menu) {
           "変換候補変換対応文字一覧" + kStable, nullptr, ChatConversionList,
           "変換対応文字が書かれています。\n"
           "変換しづらい文字や、改造でしか入力できない文字を入れています。");
+      *chat += new MenuEntry("クエスト中にチャット可能" + kWorkInProgress,
+                             ChatInQuest,
+                             "クエスト中でもキーボードを開いてチャットができます。");
     }
     *other += chat;
 
