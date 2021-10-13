@@ -108,6 +108,8 @@ void EquipmentAllRelease(MenuEntry *entry);
 void AllItemSold(MenuEntry *entry);
 void ItemBox1400Expansion(MenuEntry *entry);
 void HaveItem99(MenuEntry *entry);
+u8 ItemBoxHorizontalIndex();
+u8 ItemBoxVerticalIndex();
 void ItemBoxEdit(MenuEntry *entry);
 void MySetToPorchItemCopy(MenuEntry *entry);
 void DeliveryItemToPorchCopy(MenuEntry *entry);

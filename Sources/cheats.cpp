@@ -194,6 +194,7 @@ void HunterNameChange(MenuEntry *entry) {
   }
 }
 
+// プレイヤーが被弾したときのダメージを変更
 void PlayerReceivedDamageChange(MenuEntry *entry) {
   const std::vector<std::string> kListSelect{
       "即死", "通常", "HP減らない"
@@ -833,6 +834,15 @@ void OtherPlayerEquipmentCopy(MenuEntry *entry) {
       MessageBox("オフラインではコピーできません")();
     }
   }
+}
+
+// 装備ボックスのインデックスを取得
+u16 GetEquipmentBoxIndex() {
+  u32 offset;
+  u16 index;
+  Process::Read32(0x83ACA2C, offset);
+  Process::Read16(offset + 0x240, index);
+  return index;
 }
 
 // プレイヤー座標移動
