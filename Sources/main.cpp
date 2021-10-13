@@ -295,6 +295,10 @@ void InitMenu(PluginMenu &menu) {
         "定型文では1ページ目の一番左下にある定型文を名前にコピーします。\n"
         "キーボードでは、メニュー内で直接変更することができます。\n"
         "変換候補変換の改行やタブが使えます。");
+    *player += new MenuEntry("プレイヤーが被弾したときのダメージ変更",
+                             nullptr, PlayerReceivedDamageChange,
+                             "プレイヤーが被弾したときのダメージを変更します。\n"
+                             "即死を選ぶと他のプレイヤーの攻撃でも即死します。");
   }
   menu += player;
 

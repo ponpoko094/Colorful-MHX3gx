@@ -74,6 +74,7 @@ void SpeedHack(MenuEntry *entry);
 void InQuestSpeedHack(MenuEntry *entry);
 void IfRunMoonWalk(MenuEntry *entry);
 void HunterNameChange(MenuEntry *entry);
+void PlayerReceivedDamageChange(MenuEntry *entry);
 
 void AmuletCreate(MenuEntry *entry);
 void AmuletTypeChange(MenuEntry *entry);

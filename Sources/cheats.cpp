@@ -194,6 +194,17 @@ void HunterNameChange(MenuEntry *entry) {
   }
 }
 
+void PlayerReceivedDamageChange(MenuEntry *entry) {
+  const std::vector<std::string> kListSelect{
+      "即死", "通常", "HP減らない"
+  };
+  Keyboard keyboard("プレイヤーが被弾したときにどうしますか？", kListSelect);
+  int choice = keyboard.Open();
+  if (choice >= 0) {
+    Process::Write32(0x322C5C, 0xE285B02B + choice);
+  }
+}
+
 // 障害物無視
 void WallThrough(MenuEntry *entry) {
   KeyboardPlus::Toggle32("障害物無視しますか？", 0x3246F4, 0xEA00001E,
