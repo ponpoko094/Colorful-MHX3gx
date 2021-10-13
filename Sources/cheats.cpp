@@ -3940,4 +3940,12 @@ void LocalTimeDisplay(MenuEntry *entry) {
       am_or_pm.c_str(), hour_12, minute, second))();
 }
 
+u16 GetEquipmentBoxIndex() {
+  u32 offset;
+  u16 index;
+  Process::Read32(0x83ACA2C, offset);
+  Process::Read16(offset + 0x240, index);
+  return index;
+}
+
 }  // namespace CTRPluginFramework
