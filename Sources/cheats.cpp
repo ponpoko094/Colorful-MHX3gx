@@ -1660,6 +1660,29 @@ void SaveScreenOption(MenuEntry *entry) {
   });
 }
 
+// アイテムボックスの横のインデックスを取得
+u8 GetItemBoxHorizontalIndex() {
+  u32 offset;
+  u8 index;
+  Process::Read32(0x83ACA2C, offset);
+  if (offset == 0) {
+    return 0;
+  }
+  Process::Read8(offset + 0x148, index);
+  return index;
+}
+
+u8 GetItemBoxVerticalIndex() {
+  u32 offset;
+  u8 index;
+  Process::Read32(0x83ACA2C, offset);
+  if (offset == 0) {
+    return 0;
+  }
+  Process::Read8(offset + 0x149, index);
+  return index;
+}
+
 // アイテムボックス編集
 void ItemBoxEdit(MenuEntry *entry) {
   u16 data_16;
