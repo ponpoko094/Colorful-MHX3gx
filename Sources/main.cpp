@@ -597,8 +597,8 @@ void InitMenu(PluginMenu &menu) {
                                     "ねこの装備サポート行動を変更します。");
       *palico_edit += new MenuEntry("装備オトモスキル変更" + kStable, nullptr,
                                     PalicoEquipmentSkillChanger,
-                                   "ねこの装備オトモスキルを変更します。\n"
-                                   "最大スキル枠を超えるとエラーになります。");
+                                    "ねこの装備オトモスキルを変更します。\n"
+                                    "最大スキル枠を超えるとエラーになります。");
       *palico_edit += new MenuEntry("習得サポート行動変更" + kStable, nullptr,
                                     PalicoLearnSupportActionChanger,
                                     "ねこの習得サポート行動を変更します。");
