@@ -35,7 +35,7 @@ class KeyboardPlus {
                              u32 base_offset, std::vector<u32> value);
 
   // Delete keyboard object
-  KeyboardPlus() = default;;
+  KeyboardPlus() = default;
   ~KeyboardPlus();
 };
 

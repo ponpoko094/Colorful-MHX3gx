@@ -1426,10 +1426,10 @@ void GuildCardPlayTimeChange() {
 }
 
 void GuildCardBigMonsterHuntingCountChange(
-    const std::vector<std::string> &list_guild_card_change_monster_hunting_big) {
+    const std::vector<std::string> &list_guild_card_change_monster_hunt_big) {
   u16 value;
   Keyboard monster_choice("モンスターを選んでください。",
-                          list_guild_card_change_monster_hunting_big);
+                          list_guild_card_change_monster_hunt_big);
   int big_monster = monster_choice.Open();
   Keyboard keyboard("討伐数を入力してください。");
   keyboard.IsHexadecimal(false);
