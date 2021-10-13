@@ -6,39 +6,39 @@
 
 namespace libpon {
 
-u32 OSDPlus::Draw(const std::string &str, u32 posX, u32 posY, bool isTop,
+u32 OsdPlus::Draw(const std::string &str, u32 pos_x, u32 pos_y, bool is_top,
                   const Color &foreground, const Color &background) {
   const Screen &top_screen = OSD::GetTopScreen();
   const Screen &bottom_screen = OSD::GetBottomScreen();
-  if (isTop) {
+  if (is_top) {
     OSDManager.Lock();
-    top_screen.Draw(str, posX, posY, foreground, background);
+    top_screen.Draw(str, pos_x, pos_y, foreground, background);
     OSDManager.Unlock();
   } else {
     OSDManager.Lock();
-    bottom_screen.Draw(str, posX, posY, foreground, background);
+    bottom_screen.Draw(str, pos_x, pos_y, foreground, background);
     OSDManager.Unlock();
   }
-  return posY + 10;
+  return pos_y + 10;
 }
 
-u32 OSDPlus::DrawSystemFont(const std::string &str, u32 posX, u32 posY,
-                            bool isTop, const Color &foreground,
+u32 OsdPlus::DrawSystemFont(const std::string &str, u32 pos_x, u32 pos_y,
+                            bool is_top, const Color &foreground,
                             const Color &background) {
   float text_width = OSD::GetTextWidth(true, str);
   const Screen &top_screen = OSD::GetTopScreen();
   const Screen &bottom_screen = OSD::GetBottomScreen();
-  if (isTop) {
+  if (is_top) {
     OSDManager.Lock();
-    top_screen.DrawRect(posX, posY, (u32)text_width, 16, background);
-    top_screen.DrawSysfont(str, posX, posY, foreground);
+    top_screen.DrawRect(pos_x, pos_y, (u32)text_width, 16, background);
+    top_screen.DrawSysfont(str, pos_x, pos_y, foreground);
     OSDManager.Unlock();
   } else {
     OSDManager.Lock();
-    bottom_screen.DrawRect(posX, posY, (u32)text_width, 16, background);
-    bottom_screen.DrawSysfont(str, posX, posY, foreground);
+    bottom_screen.DrawRect(pos_x, pos_y, (u32)text_width, 16, background);
+    bottom_screen.DrawSysfont(str, pos_x, pos_y, foreground);
     OSDManager.Unlock();
   }
-  return posY + 16;
+  return pos_y + 16;
 }
 }  // namespace libpon

@@ -2,11 +2,11 @@
 
 namespace CTRPluginFramework {
 
-Keyboard* KB = new Keyboard("ダミー");
-Keyboard* OptionsKB = new Keyboard("ダミー");
+Keyboard *KB = new Keyboard("ダミー");
+Keyboard *OptionsKB = new Keyboard("ダミー");
 const StringVector listToggle{"はい", "いいえ"};
 
-bool KeyboardPlus::Set(u32& input, const std::string& message,
+bool KeyboardPlus::Set(u32 &input, const std::string &message,
                        bool hexadecimal) {
   KB->GetMessage() = message;
   KB->IsHexadecimal(hexadecimal);
@@ -16,7 +16,7 @@ bool KeyboardPlus::Set(u32& input, const std::string& message,
   return (false);
 }
 
-bool KeyboardPlus::Set(u16& input, const std::string& message,
+bool KeyboardPlus::Set(u16 &input, const std::string &message,
                        bool hexadecimal) {
   KB->GetMessage() = message;
   KB->IsHexadecimal(hexadecimal);
@@ -26,7 +26,7 @@ bool KeyboardPlus::Set(u16& input, const std::string& message,
   return (false);
 }
 
-bool KeyboardPlus::Set(u8& input, const std::string& message,
+bool KeyboardPlus::Set(u8 &input, const std::string &message,
                        bool hexadecimal) {
   KB->GetMessage() = message;
   KB->IsHexadecimal(hexadecimal);
@@ -36,8 +36,8 @@ bool KeyboardPlus::Set(u8& input, const std::string& message,
   return (false);
 }
 
-bool KeyboardPlus::Toggle32(const std::string& message, const u32& offset,
-                            const u32& enable, const u32& disable) {
+bool KeyboardPlus::Toggle32(const std::string &message, const u32 &offset,
+                            const u32 &enable, const u32 &disable) {
   OptionsKB->GetMessage() = message;
   OptionsKB->Populate(listToggle);
   int choice = OptionsKB->Open();
@@ -54,8 +54,8 @@ bool KeyboardPlus::Toggle32(const std::string& message, const u32& offset,
   return choice;
 }
 
-bool KeyboardPlus::Toggle16(const std::string& message, const u32& offset,
-                            const u16& enable, const u16& disable) {
+bool KeyboardPlus::Toggle16(const std::string &message, const u32 &offset,
+                            const u16 &enable, const u16 &disable) {
   OptionsKB->GetMessage() = message;
   OptionsKB->Populate(listToggle);
   int choice = OptionsKB->Open();
@@ -72,8 +72,8 @@ bool KeyboardPlus::Toggle16(const std::string& message, const u32& offset,
   return choice;
 }
 
-bool KeyboardPlus::Toggle8(const std::string& message, const u32& offset,
-                           const u8& enable, const u8& disable) {
+bool KeyboardPlus::Toggle8(const std::string &message, const u32 &offset,
+                           const u8 &enable, const u8 &disable) {
   OptionsKB->GetMessage() = message;
   OptionsKB->Populate(listToggle);
   int choice = OptionsKB->Open();

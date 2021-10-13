@@ -1,5 +1,5 @@
-#ifndef LIBPON_SECURITY_HPP
-#define LIBPON_SECURITY_HPP
+#ifndef MHX3GX_INCLUDES_LIBPON_SECURITY_HPP_
+#define MHX3GX_INCLUDES_LIBPON_SECURITY_HPP_
 
 #include <3ds.h>
 
@@ -15,4 +15,4 @@ class Security {
 
 }  // namespace CTRPluginFramework
 
-#endif  // LIBPON_SECURITY_HPP
+#endif  // MHX3GX_INCLUDES_LIBPON_SECURITY_HPP_
