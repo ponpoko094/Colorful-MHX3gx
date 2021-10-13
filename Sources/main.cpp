@@ -295,7 +295,7 @@ void InitMenu(PluginMenu &menu) {
         "定型文では1ページ目の一番左下にある定型文を名前にコピーします。\n"
         "キーボードでは、メニュー内で直接変更することができます。\n"
         "変換候補変換の改行やタブが使えます。");
-    *player += new MenuEntry("プレイヤーが被弾したときのダメージ変更" + kWorkInProgress,
+    *player += new MenuEntry("被弾したときのダメージ変更" + kStable,
                              nullptr, PlayerReceivedDamageChange,
                              "プレイヤーが被弾したときのダメージを変更します。\n"
                              "即死を選ぶと他のプレイヤーの攻撃でも即死します。");
@@ -411,7 +411,7 @@ void InitMenu(PluginMenu &menu) {
                            "ボックスのページを1400個に拡張します。");
     *item += new MenuEntry("持てるアイテム99個" + kStable, nullptr, HaveItem99,
                            "持てるアイテムの最大数を99個にします。");
-    *item += new MenuEntry("アイテムボックスをマイハウス化" + kWorkInProgress,
+    *item += new MenuEntry("アイテムボックスをマイハウス化" + kStable,
                            ItemBoxCanEquipmentChange,
                            "アイテムボックスをマイハウスにあるアイテムボックスと同等の機能をもたせます。");
     *item += new MenuEntry("アイテムボックス編集" + kStable, nullptr,
@@ -730,7 +730,7 @@ void InitMenu(PluginMenu &menu) {
           "変換候補変換対応文字一覧" + kStable, nullptr, ChatConversionList,
           "変換対応文字が書かれています。\n"
           "変換しづらい文字や、改造でしか入力できない文字を入れています。");
-      *chat += new MenuEntry("クエスト中にチャット可能" + kWorkInProgress,
+      *chat += new MenuEntry("クエスト中にチャット可能" + kStable,
                              ChatInQuest,
                              "クエスト中でもキーボードを開いてチャットができます。");
     }
