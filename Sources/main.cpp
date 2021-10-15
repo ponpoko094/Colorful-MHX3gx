@@ -474,6 +474,15 @@ void InitMenu(PluginMenu &menu) {
         *bowgun +=
             new MenuEntry("しゃがみの弾無限" + kStable, BowgunCrouchingShot,
                           "しゃがみ撃ちの弾が無限になります。");
+        *bowgun += new MenuEntry("ブレなし" + kWorkInProgress,
+                                 BowgunNoDeviation,
+                                 "ボウガンのブレが無くなります。");
+        *bowgun += new MenuEntry("装填速度最速" + kWorkInProgress,
+                                 BowgunFastReload,
+                                 "ボウガンの装填速度が最速になります。");
+        *bowgun += new MenuEntry("反動最小" + kWorkInProgress,
+                                 BowgunRecoilReduction,
+                                 "ボウガンの反動が最小になります。");
       }
       *weapon_type += bowgun;
       *weapon_type +=
@@ -1059,7 +1068,7 @@ int main() {
       "github.com/ponpoko094/MHX3gx";
 
   // タイトルやAbout等作成
-  auto *menu = new PluginMenu(kTitle, 3, 0, 10, kAbout, 0);
+  auto *menu = new PluginMenu(kTitle, 3, 1, 0, kAbout, 0);
 
   // Synchronize the menu with frame event
   menu->SynchronizeWithFrame(true);

@@ -150,7 +150,7 @@ std::vector<std::string> GetListToggle() {
 // クエスト中か？
 bool IsInQuest() {
   u32 quest_frame;
-  Process::Read32(0x8360ED4, quest_frame);
+  Process::Read32(0x8363ED4, quest_frame);
   if (quest_frame != 0) {
     return true;
   }
@@ -1850,6 +1850,27 @@ void BowgunCrouchingShot(MenuEntry *entry) {
   Process::Read32(0x8360F24, offset);
   Process::Read32(offset + 0xB4, offset);
   Process::Write8(offset + 0x1FF6, 0x7F);
+}
+
+void BowgunNoDeviation(MenuEntry *entry) {
+  if (!IsInQuest()) {
+    return;
+  }
+  Process::Write32(0x831B46A, 0x0);
+}
+
+void BowgunFastReload(MenuEntry *entry) {
+  if (!IsInQuest()) {
+    return;
+  }
+  Process::Write8(0x831B46C, 0xF);
+}
+
+void BowgunRecoilReduction(MenuEntry *entry) {
+  if (!IsInQuest()) {
+    return;
+  }
+  Process::Write8(0x831B46E, 0x0);
 }
 
 // 1番目のモンスターサイズ表示
