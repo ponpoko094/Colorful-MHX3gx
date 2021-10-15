@@ -2902,26 +2902,18 @@ void ChatConversionChange(MenuEntry *entry) {
       {"たぶ", "\t"}, {"かいぎょう", "\n"}, {"ごう", "爻"}};
   const std::vector<u32> kListAddr{0x878CF80, 0x8790F80, 0x8791F80};
   std::vector<u32> list_values(kListAddr.size());
-  std::string target_character;
-  int index = 0;
+  std::vector<std::string> list_target_character(kListAddr.size());
   for (int i = 0; i < kListAddr.size(); i++) {
     Process::Read32(kListAddr.at(i), list_values.at(i));
-    if (list_values.at(i) < 0x30000000) {
-      continue;
-    }
-    Process::ReadString(list_values.at(i) + 0x18, target_character, 12,
-                        StringFormat::Utf16);
-    index = i;
-  }
-  if (index == kListAddr.size()) {
-    return;
+    Process::ReadString(list_values.at(i) + 0x18, list_target_character.at(i),
+                        12, StringFormat::Utf16);
   }
   if (Controller::IsKeysDown(R)) {
     for (const auto &i: kListPredictiveConversion) {
-      if (i.at(0) == target_character) {
-        Process::WriteString(list_values.at(index) + 0xF8,
-                             i.at(1),
-                             StringFormat::Utf16);
+      for (int j = 0; j < kListAddr.size(); j++) {
+        if (list_target_character.at(j) == i.at(0))
+          Process::WriteString(list_values.at(j) + 0xF8, i.at(1),
+                               StringFormat::Utf16);
       }
     }
   }
@@ -3571,7 +3563,10 @@ void AttributeOption(MenuEntry *entry) {
   keyboard.IsHexadecimal(false);
   if (keyboard.Open(attribute_point) == 0) {
     entry->SetGameFunc(
-        [](MenuEntry *entry) { Process::Write16(0x831B45A, attribute_point); });
+        [](MenuEntry *entry) {
+          Process::Write16(0x831B45A,
+                           attribute_point);
+        });
   }
 }
 
@@ -3853,7 +3848,10 @@ void MealAttackPowerUp(MenuEntry *entry) { Process::Write8(0x83A6E6A, 127); }
 
 void MealDefencePowerUp(MenuEntry *entry) { Process::Write8(0x83A6E6B, 127); }
 
-void MealFireResistanceUp(MenuEntry *entry) { Process::Write8(0x83A6E6C, 127); }
+void MealFireResistanceUp(MenuEntry *entry) {
+  Process::Write8(0x83A6E6C,
+                  127);
+}
 
 void MealWaterResistanceUp(MenuEntry *entry) {
   Process::Write8(0x83A6E6D, 127);
@@ -3863,7 +3861,10 @@ void MealThunderResistanceUp(MenuEntry *entry) {
   Process::Write8(0x83A6E6E, 127);
 }
 
-void MealIceResistanceUp(MenuEntry *entry) { Process::Write8(0x83A6E6F, 127); }
+void MealIceResistanceUp(MenuEntry *entry) {
+  Process::Write8(0x83A6E6F,
+                  127);
+}
 
 void MealDragonResistanceUp(MenuEntry *entry) {
   Process::Write8(0x83A6E70, 127);

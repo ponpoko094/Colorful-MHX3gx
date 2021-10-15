@@ -14,9 +14,10 @@ get_ftp = FTP()
 
 HOST_ADDRESS = "192.168.0.50"
 PORT = 5000
+TIME_OUT = 30.0
 
 try:
-    get_ftp.connect(HOST_ADDRESS, PORT)
+    get_ftp.connect(HOST_ADDRESS, PORT, TIME_OUT)
 except ftplib.all_errors:
     print("Failed to Connect on " + HOST_ADDRESS + " : " + str(PORT))
 
