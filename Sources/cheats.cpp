@@ -1852,6 +1852,27 @@ void BowgunCrouchingShot(MenuEntry *entry) {
   Process::Write8(offset + 0x1FF6, 0x7F);
 }
 
+void BowgunNoDeviation(MenuEntry *entry) {
+  if (!IsInQuest()) {
+    return;
+  }
+  Process::Write32(0x831B46A, 0x0);
+}
+
+void BowgunFastReload(MenuEntry *entry) {
+  if (!IsInQuest()) {
+    return;
+  }
+  Process::Write8(0x831B46C, 0xF);
+}
+
+void BowgunRecoilReduction(MenuEntry *entry) {
+  if (!IsInQuest()) {
+    return;
+  }
+  Process::Write8(0x831B46E, 0x0);
+}
+
 // 1番目のモンスターサイズ表示
 void Monster1SizeMagnificationDisplay(MenuEntry *entry) {
   u32 offset;

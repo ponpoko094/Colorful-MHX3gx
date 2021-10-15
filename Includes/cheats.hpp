@@ -126,6 +126,9 @@ void InsectGlaiveInsectStaminaInfinite(MenuEntry *entry);
 
 void BowgunAmmoInfinite(MenuEntry *entry);
 void BowgunCrouchingShot(MenuEntry *entry);
+void BowgunNoDeviation(MenuEntry *entry);
+void BowgunFastReload(MenuEntry *entry);
+void BowgunRecoilReduction(MenuEntry *entry);
 
 void ChargeStageOption(MenuEntry *entry);
 void WeaponGageFix(MenuEntry *entry);

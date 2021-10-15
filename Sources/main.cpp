@@ -474,6 +474,15 @@ void InitMenu(PluginMenu &menu) {
         *bowgun +=
             new MenuEntry("しゃがみの弾無限" + kStable, BowgunCrouchingShot,
                           "しゃがみ撃ちの弾が無限になります。");
+        *bowgun += new MenuEntry("ブレなし" + kWorkInProgress,
+                                 BowgunNoDeviation,
+                                 "ボウガンのブレが無くなります。");
+        *bowgun += new MenuEntry("装填速度最速" + kWorkInProgress,
+                                 BowgunFastReload,
+                                 "ボウガンの装填速度が最速になります。");
+        *bowgun += new MenuEntry("反動最小" + kWorkInProgress,
+                                 BowgunRecoilReduction,
+                                 "ボウガンの反動が最小になります。");
       }
       *weapon_type += bowgun;
       *weapon_type +=
