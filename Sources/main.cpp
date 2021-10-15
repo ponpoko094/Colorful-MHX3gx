@@ -1068,7 +1068,7 @@ int main() {
       "github.com/ponpoko094/MHX3gx";
 
   // タイトルやAbout等作成
-  auto *menu = new PluginMenu(kTitle, 3, 0, 10, kAbout, 0);
+  auto *menu = new PluginMenu(kTitle, 3, 1, 0, kAbout, 0);
 
   // Synchronize the menu with frame event
   menu->SynchronizeWithFrame(true);
