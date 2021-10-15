@@ -150,7 +150,7 @@ std::vector<std::string> GetListToggle() {
 // クエスト中か？
 bool IsInQuest() {
   u32 quest_frame;
-  Process::Read32(0x8360ED4, quest_frame);
+  Process::Read32(0x8363ED4, quest_frame);
   if (quest_frame != 0) {
     return true;
   }
