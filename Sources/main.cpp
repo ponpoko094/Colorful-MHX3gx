@@ -474,7 +474,7 @@ void InitMenu(PluginMenu &menu) {
         *bowgun +=
             new MenuEntry("しゃがみの弾無限" + kStable, BowgunCrouchingShot,
                           "しゃがみ撃ちの弾が無限になります。");
-        *bowgun += new MenuEntry("ブレなし" + kWorkInProgress,
+        *bowgun += new MenuEntry("ブレなし" + kStable,
                                  BowgunNoDeviation,
                                  "ボウガンのブレが無くなります。");
         *bowgun += new MenuEntry("装填速度最速" + kWorkInProgress,
