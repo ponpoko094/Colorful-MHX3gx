@@ -149,12 +149,7 @@ std::vector<std::string> GetListToggle() {
 
 // クエスト中か？
 bool IsInQuest() {
-  u32 quest_frame;
-  Process::Read32(0x8363ED4, quest_frame);
-  if (quest_frame != 0) {
-    return true;
-  }
-  return false;
+  return static_cast<bool>(*(u32 *)0x8363ED4);
 }
 
 // スーパーノヴァ連射等
