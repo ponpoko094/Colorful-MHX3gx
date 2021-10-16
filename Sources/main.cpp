@@ -477,7 +477,7 @@ void InitMenu(PluginMenu &menu) {
         *bowgun += new MenuEntry("ブレなし" + kStable,
                                  BowgunNoDeviation,
                                  "ボウガンのブレが無くなります。");
-        *bowgun += new MenuEntry("装填速度最速" + kWorkInProgress,
+        *bowgun += new MenuEntry("装填速度最速" + kStable,
                                  BowgunFastReload,
                                  "ボウガンの装填速度が最速になります。");
         *bowgun += new MenuEntry("反動最小" + kWorkInProgress,
