@@ -480,7 +480,7 @@ void InitMenu(PluginMenu &menu) {
         *bowgun += new MenuEntry("装填速度最速" + kStable,
                                  BowgunFastReload,
                                  "ボウガンの装填速度が最速になります。");
-        *bowgun += new MenuEntry("反動最小" + kWorkInProgress,
+        *bowgun += new MenuEntry("反動最小" + kStable,
                                  BowgunRecoilReduction,
                                  "ボウガンの反動が最小になります。");
       }
