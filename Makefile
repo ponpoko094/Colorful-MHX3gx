@@ -15,8 +15,8 @@ PLGINFO 	:= 	CTRPluginFramework.plgInfo
 BUILD		:= 	Build
 INCLUDES	:= 	Includes
 SOURCES 	:= 	Sources \
-				Sources\Helpers \
-				Sources\libpon
+				Sources/Helpers \
+				Sources/libpon
 
 #---------------------------------------------------------------------------------
 # options for code generation
