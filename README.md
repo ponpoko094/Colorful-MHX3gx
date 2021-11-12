@@ -36,7 +36,7 @@
 #### 必要なファイル
 #### [devkitpro](https://github.com/devkitPro/installer/releases/latest)
 exeファイルを開きインストールしてください。
-#### [3gxtool](https://cdn.discordapp.com/attachments/895927933724688387/896335750898020352/patched3gxtool.7z)
+#### [3gxtool (for Windows User)](https://cdn.discordapp.com/attachments/895927933724688387/896335750898020352/patched3gxtool.7z)
 #### [3gxtool (for Linux User)](https://cdn.discordapp.com/attachments/479233444249862174/908696881297760296/3gxtool) by @HIDE810
 解凍し、`C:\devkitPro\tools\bin`にコピーしてください。
 **※通常の3gxtool.exeはファイルサイズ制限が掛かっているのでMHX3gxでは使えません。**
