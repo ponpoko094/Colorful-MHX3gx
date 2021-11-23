@@ -474,13 +474,13 @@ void InitMenu(PluginMenu &menu) {
         *bowgun +=
             new MenuEntry("しゃがみの弾無限" + kStable, BowgunCrouchingShot,
                           "しゃがみ撃ちの弾が無限になります。");
-        *bowgun += new MenuEntry("ブレなし" + kWorkInProgress,
+        *bowgun += new MenuEntry("ブレなし" + kStable,
                                  BowgunNoDeviation,
                                  "ボウガンのブレが無くなります。");
-        *bowgun += new MenuEntry("装填速度最速" + kWorkInProgress,
+        *bowgun += new MenuEntry("装填速度最速" + kStable,
                                  BowgunFastReload,
                                  "ボウガンの装填速度が最速になります。");
-        *bowgun += new MenuEntry("反動最小" + kWorkInProgress,
+        *bowgun += new MenuEntry("反動最小" + kStable,
                                  BowgunRecoilReduction,
                                  "ボウガンの反動が最小になります。");
       }
@@ -1060,15 +1060,14 @@ void InitMenu(PluginMenu &menu) {
 
 // Plugin menu
 int main() {
-  const std::string kTitle = "MHX3gx";
+  const std::string kTitle = "Colorful-MHX3gx";
   const std::string kAbout =
       "データのバックアップは取ってください。\n"
       "プラグインを楽しんでください！\n"
       "Twitter @ponpoko094\n"
-      "github.com/ponpoko094/MHX3gx";
+      "github.com/ponpoko094/Colorful-MHX3gx";
 
-  // タイトルやAbout等作成
-  auto *menu = new PluginMenu(kTitle, 3, 1, 0, kAbout, 0);
+  auto *menu = new PluginMenu(kTitle, 4, 0, 0, kAbout, 0);
 
   // Synchronize the menu with frame event
   menu->SynchronizeWithFrame(true);

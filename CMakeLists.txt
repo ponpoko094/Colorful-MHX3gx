@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(MHX3gx)
+project(Colorful-MHX3gx)
 
 set(CMAKE_CXX_STANDARD 14)
 
@@ -8,7 +8,7 @@ include_directories(C:/devkitPro/libctru/include)
 include_directories(Includes)
 include_directories(Sources)
 
-add_executable(MHX3gx
+add_executable(Colorful-MHX3gx
         Sources/main.cpp
         Sources/cheats.cpp
         Sources/patch.cpp
