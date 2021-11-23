@@ -70,7 +70,6 @@ all: $(BUILD)
 $(BUILD):
 	@[ -d $@ ] || mkdir -p $@
 	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
-	@mv MHX3gx.3gx Colorful-MHX3gx.3gx
 
 #---------------------------------------------------------------------------------
 clean:

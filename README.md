@@ -66,11 +66,19 @@ exeファイルを開きインストールしてください。
 
 ### コンパイル方法
 
-build.batを起動してください。または、**MHX3gxフォルダー上**で`make re`コマンドを動かしてください。
+フォルダの名前に括弧等の一部の記号が含まれているとコンパイルエラーを起こします。
+
+|結果|フォルダ名|
+|:---:|:---:|
+|✅|`Colorful-MHX3gx`|
+|✅|`Colorful-MHX3gx_1`|
+|❌|`Colorful-MHX3gx (1)`|
+
+build.batを起動してください。または、**Colorful-MHX3gxフォルダー上**で`make re`コマンドを動かしてください。
 
 ### どうやって3dsに3gxを送信すればいいの？
 
-3ds側で[FTPD](https://github.com/mtheall/ftpd/releases/latest)や[3DShell](https://github.com/joel16/3DShell/releases/latest)を使ってFTPサーバーを立てた状態で、
+3ds側で[FTPD](https://github.com/mtheall/ftpd/releases/latest) を使ってFTPサーバーを立てた状態で、
 
 `make ftp`コマンドを動かすと、ファイルの送信が行われます。
 
