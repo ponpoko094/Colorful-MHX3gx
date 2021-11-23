@@ -22,7 +22,7 @@ except ftplib.all_errors:
     print("Failed to Connect on " + HOST_ADDRESS + " : " + str(PORT))
 
 PATH = "luma/plugins/0004000000155400"
-PLUGIN = "/MHX3gx.3gx"
+PLUGIN = "/Colorful-MHX3gx.3gx"
 
 try:
     print("Successfully Logged in " + HOST_ADDRESS + "\n")

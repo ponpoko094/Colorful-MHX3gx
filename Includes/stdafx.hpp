@@ -1,5 +1,5 @@
-#ifndef MHX3GX_INCLUDES_STDAFX_HPP_
-#define MHX3GX_INCLUDES_STDAFX_HPP_
+#ifndef COLORFUL_MHX3GX_INCLUDES_STDAFX_HPP_
+#define COLORFUL_MHX3GX_INCLUDES_STDAFX_HPP_
 
 #include <3ds.h>
 
@@ -24,10 +24,11 @@
 #include "csvc.h"
 #include "libpon.hpp"
 #include "types.h"
+#include "unicode.h"
 
 namespace CTRPluginFramework {
 using CallbackPointer = void (*)();
 using StringVector = std::vector<std::string>;
 }  // namespace CTRPluginFramework
 
-#endif  // MHX3GX_INCLUDES_STDAFX_HPP_
+#endif  // COLORFUL_MHX3GX_INCLUDES_STDAFX_HPP_

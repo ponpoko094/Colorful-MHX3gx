@@ -1060,12 +1060,12 @@ void InitMenu(PluginMenu &menu) {
 
 // Plugin menu
 int main() {
-  const std::string kTitle = "MHX3gx";
+  const std::string kTitle = "Colorful-MHX3gx";
   const std::string kAbout =
       "データのバックアップは取ってください。\n"
       "プラグインを楽しんでください！\n"
       "Twitter @ponpoko094\n"
-      "github.com/ponpoko094/MHX3gx";
+      "github.com/ponpoko094/Colorful-MHX3gx";
 
   // タイトルやAbout等作成
   auto *menu = new PluginMenu(kTitle, 3, 1, 0, kAbout, 0);

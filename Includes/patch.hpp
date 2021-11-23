@@ -1,5 +1,5 @@
-#ifndef MHX3GX_INCLUDES_PATCH_HPP_
-#define MHX3GX_INCLUDES_PATCH_HPP_
+#ifndef COLORFUL_MHX3GX_INCLUDES_PATCH_HPP_
+#define COLORFUL_MHX3GX_INCLUDES_PATCH_HPP_
 
 #include "stdafx.hpp"
 
@@ -123,4 +123,4 @@ void PatchProcessDefaultTheme(MenuEntry *entry);
 
 }  // namespace CTRPluginFramework
 
-#endif  // MHX3GX_INCLUDES_PATCH_HPP_
+#endif  // COLORFUL_MHX3GX_INCLUDES_PATCH_HPP_
