@@ -26,7 +26,7 @@
    からboot.firmをダウンロードし、SDカードの一番上の階層にコピーしてください。
 2. [Colorful-MHX3gx/releases](https://github.com/ponpoko094/Colorful-MHX3gx/releases)
    からMHX3gx.3gxをダウンロードしてください。
-3. MHX3gx.3gxをSDカードの`luma\plugins\0004000000155400`
+3. Colorful-MHX3gx.3gxをSDカードの`luma\plugins\0004000000155400`
    の中にコピーしてください。もしもフォルダーがなかったら作成してください。
 4. 3DSを起動し、ホームメニューで`L+↓+Select`を押しRosalina menuを開き、Plugin Loaderの項目を**Enabled**
    にしてください。
