@@ -24,7 +24,7 @@
 #include "csvc.h"
 #include "libpon.hpp"
 #include "types.h"
-#include "unicode.h"
+#include "Unicode.h"
 
 namespace CTRPluginFramework {
 using CallbackPointer = void (*)();
