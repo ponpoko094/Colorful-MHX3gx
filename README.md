@@ -57,12 +57,29 @@ exeファイルを開きインストールしてください。
 #### [3gxtool (for Linux User)](https://cdn.discordapp.com/attachments/479233444249862174/908696881297760296/3gxtool) by @HIDE810
 
 解凍し、`C:\devkitPro\tools\bin`にコピーしてください。
-**※通常の3gxtool.exeはファイルサイズ制限が掛かっているのでMHX3gxでは使えません。**
+**※通常の3gxtool.exeはファイルサイズ制限が掛かっているのでColorful-MHX3gxでは使えません。**
 
 #### [libCTRPF(v0.7.1)](https://cdn.discordapp.com/attachments/895927933724688387/896385805214449684/libctrpf-0.7.1-4bd18725.7z)
 
 解凍し、中にあるincludeとlibフォルダーを`C:\devkitPro\libctrpf`
 の中にコピーしてください。もしもフォルダーがなかったら作成してください。
+
+### gxman by @HIDE810
+gxmanは、3gxtoolのインストールを簡単に行うためのプロジェクトです。
+
+Windows & Linux に対応しています。
+
+Golang(1.16以上) がお使いのシステムにインストールされている場合、以下のコマンドでインストールができます。
+
+```
+go install github.com/HIDE810/gxman@latest
+```
+
+1 MiBの制限がない最新の3gxtoolをインストールしたい場合は、以下のコマンドを使用します。
+
+```
+gxman get -u
+```
 
 ### コンパイル方法
 
@@ -119,4 +136,8 @@ build.batを起動してください。または、**Colorful-MHX3gxフォルダ
 
 バグ報告等はTwitter [@ponpoko094](https://twitter.com/ponpoko094) までどうぞ！
 
-MHX3gx 2019-2021
+## License
+
+Colorful-MHX3gx is licenced under the [MIT License](https://github.com/ponpoko094/Colorful-MHX3gx/blob/master/LICENSE)
+
+Colorful-MHX3gx 2019-2021
