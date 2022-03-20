@@ -1,6 +1,6 @@
 # Colorful-MHX3gx
 
-![](https://user-images.githubusercontent.com/46832957/142984867-329de07d-47a5-4a1d-8ca4-634eedf1ddd8.png) ![](https://img.shields.io/github/downloads/ponpoko094/Colorful-MHX3gx/total) ![](https://img.shields.io/github/languages/code-size/ponpoko094/Colorful-MHX3gx)
+![](https://user-images.githubusercontent.com/46832957/142984867-329de07d-47a5-4a1d-8ca4-634eedf1ddd8.png) ![](https://img.shields.io/github/downloads/ponpoko094/Colorful-MHX3gx/total) ![](https://img.shields.io/github/languages/code-size/ponpoko094/Colorful-MHX3gx) ![visitor badge](https://visitor-badge.glitch.me/badge?page_id=ponpoko094.Colorful-MHX3gx)
 
 ## とりあえずチートしたい方へ
 
