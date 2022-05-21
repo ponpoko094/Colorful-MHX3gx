@@ -1,5 +1,5 @@
-#ifndef MHX3GX_INCLUDES_CHEATS_HPP_
-#define MHX3GX_INCLUDES_CHEATS_HPP_
+#ifndef COLORFUL_MHX3GX_INCLUDES_CHEATS_HPP_
+#define COLORFUL_MHX3GX_INCLUDES_CHEATS_HPP_
 
 #include "stdafx.hpp"
 
@@ -322,4 +322,4 @@ void BatteryLevel();
 
 }  // namespace CTRPluginFramework
 
-#endif  // MHX3GX_INCLUDES_CHEATS_HPP_
+#endif  // COLORFUL_MHX3GX_INCLUDES_CHEATS_HPP_
