@@ -14,7 +14,7 @@ void ProcessPlus::Write8(u32 address, u8 value) {
 }
 
 void ProcessPlus::Write8(const std::vector<u32> &address, u8 value) {
-  for (unsigned int addr: address) {
+  for (unsigned int addr : address) {
     Process::Write8(addr, value);
   }
 }
@@ -31,11 +31,10 @@ void ProcessPlus::Write8(u32 pointer, u32 offset, u8 value) {
   Process::Write8(address + offset, value);
 }
 
-void ProcessPlus::Write8(const std::vector<u32> &pointer,
-                         u32 offset,
+void ProcessPlus::Write8(const std::vector<u32> &pointer, u32 offset,
                          u8 value) {
   u32 address;
-  for (unsigned int addr: pointer) {
+  for (unsigned int addr : pointer) {
     Process::Read32(addr, address);
     Process::Write8(address + offset, value);
   }
@@ -76,13 +75,11 @@ void ProcessPlus::Write8(u32 pointer, u32 offset_1, u32 offset_2, u8 value) {
   Process::Write8(address_2 + offset_2, value);
 }
 
-void ProcessPlus::Write8(const std::vector<u32> &pointer,
-                         u32 offset_1,
-                         u32 offset_2,
-                         u8 value) {
+void ProcessPlus::Write8(const std::vector<u32> &pointer, u32 offset_1,
+                         u32 offset_2, u8 value) {
   u32 address_1;
   u32 address_2;
-  for (unsigned int addr: pointer) {
+  for (unsigned int addr : pointer) {
     Process::Read32(addr, address_1);
     Process::Read32(address_1 + offset_1, address_2);
     Process::Write8(address_2 + offset_2, value);
@@ -94,7 +91,7 @@ void ProcessPlus::Write16(u32 address, u16 value) {
 }
 
 void ProcessPlus::Write16(const std::vector<u32> &address, u16 value) {
-  for (unsigned int addr: address) {
+  for (unsigned int addr : address) {
     Process::Write16(addr, value);
   }
 }
@@ -111,11 +108,10 @@ void ProcessPlus::Write16(u32 pointer, u32 offset, u16 value) {
   Process::Write16(address + offset, value);
 }
 
-void ProcessPlus::Write16(const std::vector<u32> &pointer,
-                          u32 offset,
+void ProcessPlus::Write16(const std::vector<u32> &pointer, u32 offset,
                           u16 value) {
   u32 address;
-  for (unsigned int addr: pointer) {
+  for (unsigned int addr : pointer) {
     Process::Read32(addr, address);
     Process::Write16(address + offset, value);
   }
@@ -156,13 +152,11 @@ void ProcessPlus::Write16(u32 pointer, u32 offset_1, u32 offset_2, u16 value) {
   Process::Write16(address_2 + offset_2, value);
 }
 
-void ProcessPlus::Write16(const std::vector<u32> &pointer,
-                          u32 offset_1,
-                          u32 offset_2,
-                          u16 value) {
+void ProcessPlus::Write16(const std::vector<u32> &pointer, u32 offset_1,
+                          u32 offset_2, u16 value) {
   u32 address_1;
   u32 address_2;
-  for (unsigned int addr: pointer) {
+  for (unsigned int addr : pointer) {
     Process::Read32(addr, address_1);
     Process::Read32(address_1 + offset_1, address_2);
     Process::Write16(address_2 + offset_2, value);
@@ -174,7 +168,7 @@ void ProcessPlus::Write32(u32 address, u32 value) {
 }
 
 void ProcessPlus::Write32(const std::vector<u32> &address, u32 value) {
-  for (unsigned int addr: address) {
+  for (unsigned int addr : address) {
     Process::Write32(addr, value);
   }
 }
@@ -191,11 +185,10 @@ void ProcessPlus::Write32(u32 pointer, u32 offset, u32 value) {
   Process::Write32(address + offset, value);
 }
 
-void ProcessPlus::Write32(const std::vector<u32> &pointer,
-                          u32 offset,
+void ProcessPlus::Write32(const std::vector<u32> &pointer, u32 offset,
                           u32 value) {
   u32 address;
-  for (unsigned int addr: pointer) {
+  for (unsigned int addr : pointer) {
     Process::Read32(addr, address);
     Process::Write32(address + offset, value);
   }
@@ -236,13 +229,11 @@ void ProcessPlus::Write32(u32 pointer, u32 offset_1, u32 offset_2, u32 value) {
   Process::Write32(address_2 + offset_2, value);
 }
 
-void ProcessPlus::Write32(const std::vector<u32> &pointer,
-                          u32 offset_1,
-                          u32 offset_2,
-                          u32 value) {
+void ProcessPlus::Write32(const std::vector<u32> &pointer, u32 offset_1,
+                          u32 offset_2, u32 value) {
   u32 address_1;
   u32 address_2;
-  for (unsigned int addr: pointer) {
+  for (unsigned int addr : pointer) {
     Process::Read32(addr, address_1);
     Process::Read32(address_1 + offset_1, address_2);
     Process::Write32(address_2 + offset_2, value);
@@ -254,7 +245,7 @@ void ProcessPlus::Write64(u32 address, u64 value) {
 }
 
 void ProcessPlus::Write64(const std::vector<u32> &address, u64 value) {
-  for (unsigned int addr: address) {
+  for (unsigned int addr : address) {
     Process::Write64(addr, value);
   }
 }
@@ -271,11 +262,10 @@ void ProcessPlus::Write64(u32 pointer, u32 offset, u64 value) {
   Process::Write64(address + offset, value);
 }
 
-void ProcessPlus::Write64(const std::vector<u32> &pointer,
-                          u32 offset,
+void ProcessPlus::Write64(const std::vector<u32> &pointer, u32 offset,
                           u64 value) {
   u32 address;
-  for (unsigned int addr: pointer) {
+  for (unsigned int addr : pointer) {
     Process::Read32(addr, address);
     Process::Write64(address + offset, value);
   }
@@ -316,13 +306,11 @@ void ProcessPlus::Write64(u32 pointer, u32 offset_1, u32 offset_2, u64 value) {
   Process::Write64(address_2 + offset_2, value);
 }
 
-void ProcessPlus::Write64(const std::vector<u32> &pointer,
-                          u32 offset_1,
-                          u32 offset_2,
-                          u64 value) {
+void ProcessPlus::Write64(const std::vector<u32> &pointer, u32 offset_1,
+                          u32 offset_2, u64 value) {
   u32 address_1;
   u32 address_2;
-  for (unsigned int addr: pointer) {
+  for (unsigned int addr : pointer) {
     Process::Read32(addr, address_1);
     Process::Read32(address_1 + offset_1, address_2);
     Process::Write64(address_2 + offset_2, value);
@@ -334,7 +322,7 @@ void ProcessPlus::WriteFloat(u32 address, float value) {
 }
 
 void ProcessPlus::WriteFloat(const std::vector<u32> &address, float value) {
-  for (unsigned int addr: address) {
+  for (unsigned int addr : address) {
     Process::WriteFloat(addr, value);
   }
 }
@@ -355,7 +343,7 @@ void ProcessPlus::WriteFloat(u32 pointer, u32 offset, float value) {
 void ProcessPlus::WriteFloat(const std::vector<u32> &pointer, u32 offset,
                              float value) {
   u32 address;
-  for (unsigned int addr: pointer) {
+  for (unsigned int addr : pointer) {
     Process::Read32(addr, address);
     Process::WriteFloat(address + offset, value);
   }
@@ -397,13 +385,11 @@ void ProcessPlus::WriteFloat(u32 pointer, u32 offset_1, u32 offset_2,
   Process::WriteFloat(address_2 + offset_2, value);
 }
 
-void ProcessPlus::WriteFloat(const std::vector<u32> &pointer,
-                             u32 offset_1,
-                             u32 offset_2,
-                             float value) {
+void ProcessPlus::WriteFloat(const std::vector<u32> &pointer, u32 offset_1,
+                             u32 offset_2, float value) {
   u32 address_1;
   u32 address_2;
-  for (unsigned int addr: pointer) {
+  for (unsigned int addr : pointer) {
     Process::Read32(addr, address_1);
     Process::Read32(address_1 + offset_1, address_2);
     Process::WriteFloat(address_2 + offset_2, value);
@@ -415,7 +401,7 @@ void ProcessPlus::WriteDouble(u32 address, double value) {
 }
 
 void ProcessPlus::WriteDouble(const std::vector<u32> &address, double value) {
-  for (unsigned int addr: address) {
+  for (unsigned int addr : address) {
     Process::WriteDouble(addr, value);
   }
 }
@@ -436,7 +422,7 @@ void ProcessPlus::WriteDouble(u32 pointer, u32 offset, double value) {
 void ProcessPlus::WriteDouble(const std::vector<u32> &pointer, u32 offset,
                               double value) {
   u32 address;
-  for (unsigned int addr: pointer) {
+  for (unsigned int addr : pointer) {
     Process::Read32(addr, address);
     Process::WriteDouble(address + offset, value);
   }
@@ -482,7 +468,7 @@ void ProcessPlus::WriteDouble(const std::vector<u32> &pointer, u32 offset_1,
                               u32 offset_2, double value) {
   u32 address_1;
   u32 address_2;
-  for (unsigned int addr: pointer) {
+  for (unsigned int addr : pointer) {
     Process::Read32(addr, address_1);
     Process::Read32(address_1 + offset_1, address_2);
     Process::WriteDouble(address_2 + offset_2, value);

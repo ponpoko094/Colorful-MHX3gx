@@ -49,7 +49,7 @@ static void ToggleTouchscreenForceOn() {
   }
 
   svcUnmapProcessMemoryEx(CUR_PROCESS_HANDLE, 0x14000000, text_total_size);
-  exit:
+exit:
   svcCloseHandle(process_handle);
 }
 
@@ -68,7 +68,7 @@ static MenuEntry *EntryWithHotkey(MenuEntry *entry, const Hotkey &hotkey) {
 
 static MenuEntry *EntryWithHotkey(MenuEntry *entry,
                                   const std::vector<Hotkey> &hotkeys) {
-  for (const Hotkey &hotkey: hotkeys) {
+  for (const Hotkey &hotkey : hotkeys) {
     entry->Hotkeys += hotkey;
   }
   return (entry);
@@ -99,9 +99,7 @@ void PatchProcess(FwkSettings &settings) {
 
 // This function is called when the process exits
 // Useful to save settings, undo patchs or clean up things
-void OnProcessExit() {
-  ToggleTouchscreenForceOn();
-}
+void OnProcessExit() { ToggleTouchscreenForceOn(); }
 
 // チートメニュー作成
 void InitMenu(PluginMenu &menu) {
@@ -114,8 +112,9 @@ void InitMenu(PluginMenu &menu) {
     {
       *status_v_2 += new MenuEntry("攻撃力変更" + kStable, nullptr,
                                    AttackPowerOption, "攻撃力を変更できます。");
-      *status_v_2 += new MenuEntry("防御力変更" + kStable, nullptr,
-                                   DefencePowerOption, "防御力を変更できます。");
+      *status_v_2 +=
+          new MenuEntry("防御力変更" + kStable, nullptr, DefencePowerOption,
+                        "防御力を変更できます。");
       *status_v_2 += new MenuEntry("属性値変更" + kStable, nullptr,
                                    AttributeOption, "属性値を変更できます。");
       *status_v_2 += new MenuEntry("耐性値変更" + kStable, nullptr,
@@ -143,8 +142,8 @@ void InitMenu(PluginMenu &menu) {
           "肌の色変更",
           "RGBの値は、\nbit.ly/GetRGB\nを見て、入力してください。");
       {
-        *skin += new MenuEntry("肌の色R値変更" + kStable, nullptr, SkinRedChange,
-                               "肌の色の赤色を変更します。");
+        *skin += new MenuEntry("肌の色R値変更" + kStable, nullptr,
+                               SkinRedChange, "肌の色の赤色を変更します。");
         *skin += new MenuEntry("肌の色G値変更" + kStable, nullptr,
                                SkinGreenChange, "肌の色の緑色を変更します。");
         *skin += new MenuEntry("肌の色B値変更" + kStable, nullptr,
@@ -197,8 +196,8 @@ void InitMenu(PluginMenu &menu) {
                                         "スタミナが上昇します。");
           *meal_status += new MenuEntry("攻撃力UP" + kStable, MealAttackPowerUp,
                                         "攻撃力が上昇します。");
-          *meal_status += new MenuEntry("防御力UP" + kStable, MealDefencePowerUp,
-                                        "防御力が上昇します。");
+          *meal_status += new MenuEntry(
+              "防御力UP" + kStable, MealDefencePowerUp, "防御力が上昇します。");
         }
         *meal += meal_status;
 
@@ -265,8 +264,8 @@ void InitMenu(PluginMenu &menu) {
                       PlayerSizeOption, "ハンターのサイズを変更できます。");
     *player += new MenuEntry("HP無限" + kStable, nullptr, InfiniteHp,
                              "HPを無限にします。");
-    *player +=
-        new MenuEntry("無敵" + kStable, nullptr, Invincible, "無敵になります。");
+    *player += new MenuEntry("無敵" + kStable, nullptr, Invincible,
+                             "無敵になります。");
     *player += new MenuEntry("スーパーアーマー" + kStable, nullptr, SuperArmor,
                              "スーパーアーマーになります。\n"
                              "オンにした後オフにすると被弾したときに"
@@ -278,8 +277,8 @@ void InitMenu(PluginMenu &menu) {
     *player += new MenuEntry("全スタイルで狩技3つ装着可能" + kStable, nullptr,
                              Always3HunterArtEquip,
                              "全スタイルで狩技を3つ装着可能になります。");
-    *player += new MenuEntry("常時地図表示" + kStable, nullptr, AlwaysDisplayMap,
-                             "常に地図を表示します。");
+    *player += new MenuEntry("常時地図表示" + kStable, nullptr,
+                             AlwaysDisplayMap, "常に地図を表示します。");
     *player +=
         new MenuEntry("常にモンスターペイント" + kStable, nullptr, AlwaysPaint,
                       "常にマップにモンスターが表示されます。");
@@ -296,10 +295,11 @@ void InitMenu(PluginMenu &menu) {
         "定型文では1ページ目の一番左下にある定型文を名前にコピーします。\n"
         "キーボードでは、メニュー内で直接変更することができます。\n"
         "変換候補変換の改行やタブが使えます。");
-    *player += new MenuEntry("被弾したときのダメージ変更" + kStable,
-                             nullptr, PlayerReceivedDamageChange,
-                             "プレイヤーが被弾したときのダメージを変更します。\n"
-                             "即死を選ぶと他のプレイヤーの攻撃でも即死します。");
+    *player +=
+        new MenuEntry("被弾したときのダメージ変更" + kStable, nullptr,
+                      PlayerReceivedDamageChange,
+                      "プレイヤーが被弾したときのダメージを変更します。\n"
+                      "即死を選ぶと他のプレイヤーの攻撃でも即死します。");
   }
   menu += player;
 
@@ -338,8 +338,8 @@ void InitMenu(PluginMenu &menu) {
         *insect += new MenuEntry("猟虫種類変更" + kStable, nullptr,
                                  InsectTypeChange, "猟虫の種類を変更します。");
         *insect +=
-            new MenuEntry("猟虫レベル変更" + kStable, nullptr, InsectLevelChange,
-                          "猟虫のレベルを変更します。");
+            new MenuEntry("猟虫レベル変更" + kStable, nullptr,
+                          InsectLevelChange, "猟虫のレベルを変更します。");
         *insect +=
             new MenuEntry("猟虫パワー補正変更" + kStable, nullptr,
                           InsectPowerChange, "猟虫のパワー補正を変更します。");
@@ -414,7 +414,8 @@ void InitMenu(PluginMenu &menu) {
                            "持てるアイテムの最大数を99個にします。");
     *item += new MenuEntry("アイテムボックスをマイハウス化" + kStable,
                            ItemBoxCanEquipmentChange,
-                           "アイテムボックスをマイハウスにあるアイテムボックスと同等の機能をもたせます。");
+                           "アイテムボックスをマイハウスにあるアイテムボックス"
+                           "と同等の機能をもたせます。");
     *item += new MenuEntry("アイテムボックス編集" + kStable, nullptr,
                            ItemBoxEdit, "アイテムボックスの編集をします。");
     *item +=
@@ -427,11 +428,11 @@ void InitMenu(PluginMenu &menu) {
         DeliveryItemToPorchCopy,
         "納品アイテムを、アイテムポーチの1番目と2番目にコピーします。\n"
         "空きを作ってください。");
-    *item +=
-        new MenuEntry("ポーチのアイテム全消去" + kStable, nullptr, PorchAllClear,
-                      "ポーチのアイテムを全消去します。\n"
-                      "消せないアイテムや、ボックスにしまえないアイテムが"
-                      "あるときに実行してください。");
+    *item += new MenuEntry("ポーチのアイテム全消去" + kStable, nullptr,
+                           PorchAllClear,
+                           "ポーチのアイテムを全消去します。\n"
+                           "消せないアイテムや、ボックスにしまえないアイテムが"
+                           "あるときに実行してください。");
     *item += new MenuEntry("特殊許可チケットの数変更" + kStable, nullptr,
                            SpecialPermitQuestTicketChange,
                            "特殊許可チケットの枚数を変更します。");
@@ -475,14 +476,11 @@ void InitMenu(PluginMenu &menu) {
         *bowgun +=
             new MenuEntry("しゃがみの弾無限" + kStable, BowgunCrouchingShot,
                           "しゃがみ撃ちの弾が無限になります。");
-        *bowgun += new MenuEntry("ブレなし" + kStable,
-                                 BowgunNoDeviation,
+        *bowgun += new MenuEntry("ブレなし" + kStable, BowgunNoDeviation,
                                  "ボウガンのブレが無くなります。");
-        *bowgun += new MenuEntry("装填速度最速" + kStable,
-                                 BowgunFastReload,
+        *bowgun += new MenuEntry("装填速度最速" + kStable, BowgunFastReload,
                                  "ボウガンの装填速度が最速になります。");
-        *bowgun += new MenuEntry("反動最小" + kStable,
-                                 BowgunRecoilReduction,
+        *bowgun += new MenuEntry("反動最小" + kStable, BowgunRecoilReduction,
                                  "ボウガンの反動が最小になります。");
       }
       *weapon_type += bowgun;
@@ -525,12 +523,12 @@ void InitMenu(PluginMenu &menu) {
   {
     auto *monster_display = new MenuFolder("モンスター情報画面表示");
     {
-      *monster_display +=
-          new MenuEntry("1番目のモンスターのHP表示" + kStable, Monster1HpDisplay,
-                        "1番目のモンスターのHPを画面上に表示します。");
-      *monster_display +=
-          new MenuEntry("2番目のモンスターのHP表示" + kStable, Monster2HpDisplay,
-                        "2番目のモンスターのHPを画面上に表示します。");
+      *monster_display += new MenuEntry(
+          "1番目のモンスターのHP表示" + kStable, Monster1HpDisplay,
+          "1番目のモンスターのHPを画面上に表示します。");
+      *monster_display += new MenuEntry(
+          "2番目のモンスターのHP表示" + kStable, Monster2HpDisplay,
+          "2番目のモンスターのHPを画面上に表示します。");
       *monster_display += new MenuEntry(
           "1番目のモンスターのサイズ倍率表示" + kStable,
           Monster1SizeMagnificationDisplay,
@@ -559,7 +557,8 @@ void InitMenu(PluginMenu &menu) {
                       "X+R+↓で追跡停止できます。\n"
                       "追跡したいモンスターと同じエリアにいてください。");
     *monster += new MenuEntry(
-        "モンスターリピートムーブ" + kStable, nullptr, MonsterActionRepeatOption,
+        "モンスターリピートムーブ" + kStable, nullptr,
+        MonsterActionRepeatOption,
         "リピートムーブの挙動の変更と、操作のオンオフができます。\n"
         "1番目のモンスターはX+R+→で操作できます。\n"
         "2番目のモンスターはX+L+→で操作できます。\n"
@@ -568,11 +567,11 @@ void InitMenu(PluginMenu &menu) {
                               Monster1And2Stop,
                               "動き停止は、速度変更より優先されます。\n"
                               "当たり判定がなくなります。");
-    *monster += new MenuEntry("1番目のモンスターのサイズ変更" + kStable, nullptr,
-                              Monster1SizeOption,
+    *monster += new MenuEntry("1番目のモンスターのサイズ変更" + kStable,
+                              nullptr, Monster1SizeOption,
                               "1番目のモンスターのサイズの変更ができます。");
-    *monster += new MenuEntry("2番目のモンスターのサイズ変更" + kStable, nullptr,
-                              Monster2SizeOption,
+    *monster += new MenuEntry("2番目のモンスターのサイズ変更" + kStable,
+                              nullptr, Monster2SizeOption,
                               "2番目のモンスターのサイズの変更ができます。");
     *monster += new MenuEntry("1番目のモンスターの速度倍率変更" + kStable,
                               nullptr, Monster1SpeedAttributeOption,
@@ -623,9 +622,9 @@ void InitMenu(PluginMenu &menu) {
       {
         auto *palico_appearance_color = new MenuFolder("見た目の色変更");
         {
-          *palico_appearance_color += new MenuEntry("毛色変更" + kStable, nullptr,
-                                                    PalicoBodyHairColorChanger,
-                                                    "ねこの毛色を変更します。");
+          *palico_appearance_color += new MenuEntry(
+              "毛色変更" + kStable, nullptr, PalicoBodyHairColorChanger,
+              "ねこの毛色を変更します。");
           *palico_appearance_color += new MenuEntry(
               "右目の色変更" + kStable, nullptr, PalicoRightEyeColorChanger,
               "ねこの右目の色を変更します。");
@@ -740,9 +739,9 @@ void InitMenu(PluginMenu &menu) {
           "変換候補変換対応文字一覧" + kStable, nullptr, ChatConversionList,
           "変換対応文字が書かれています。\n"
           "変換しづらい文字や、改造でしか入力できない文字を入れています。");
-      *chat += new MenuEntry("クエスト中にチャット可能" + kStable,
-                             ChatInQuest,
-                             "クエスト中でもキーボードを開いてチャットができます。");
+      *chat +=
+          new MenuEntry("クエスト中にチャット可能" + kStable, ChatInQuest,
+                        "クエスト中でもキーボードを開いてチャットができます。");
     }
     *other += chat;
 
@@ -893,8 +892,8 @@ void InitMenu(PluginMenu &menu) {
     *other += new MenuEntry("画面の明るさ変更" + kStable, nullptr,
                             ContrastChange, "画面の明るさ変更を変更できます。");
     *other +=
-        new MenuEntry("ギルドカード情報変更" + kStable, nullptr, GuildCardChange,
-                      "ギルドカードの情報を変更できます。");
+        new MenuEntry("ギルドカード情報変更" + kStable, nullptr,
+                      GuildCardChange, "ギルドカードの情報を変更できます。");
     *other += new MenuEntry("リージョン変更" + kStable, nullptr, RegionChange,
                             "日本かヨーロッパに変更できます。");
     *other += new MenuEntry("村の貢献度変更" + kStable, nullptr,
@@ -926,7 +925,8 @@ void InitMenu(PluginMenu &menu) {
                                    nullptr, HexToDecD8);
       *conversion += new MenuEntry("8bit版符号なし16進数→10進数" + kStable,
                                    nullptr, HexToDecU8);
-      *conversion += new MenuEntry("10進数→16進数" + kStable, nullptr, DecToHex);
+      *conversion +=
+          new MenuEntry("10進数→16進数" + kStable, nullptr, DecToHex);
     }
     *bonus += conversion;
 

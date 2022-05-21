@@ -49,13 +49,12 @@ void TeamAndCondition() {
   Process::GetTitleID(title_id);
   if (title_id == kMhxTitleId) {
     if (!File::Exists(kSkipSaveFileName)) {
-      MessageBox(kOpeningMessage,
-                 kThanksMessage).SetClear(ClearScreen::Top)();
+      MessageBox(kOpeningMessage, kThanksMessage).SetClear(ClearScreen::Top)();
       if (MessageBox(kTeamAndConditionMessageTitle, kTeamAndConditionMessage,
                      DialogType::DialogYesNo)
-          .SetClear(ClearScreen::Top)()) {
+              .SetClear(ClearScreen::Top)()) {
         if (MessageBox(kAskOpeningMessageSkipMessage, DialogType::DialogYesNo)
-            .SetClear(ClearScreen::Top)()) {
+                .SetClear(ClearScreen::Top)()) {
           File::Create(kSkipSaveFileName);
           MessageBox(kCreatedOpSkipBinMessage).SetClear(ClearScreen::Top)();
           Process::ReturnToHomeMenu();

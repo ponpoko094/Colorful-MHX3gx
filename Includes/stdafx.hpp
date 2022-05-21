@@ -21,10 +21,10 @@
 #include <vector>
 
 #include "Helpers.hpp"
+#include "Unicode.h"
 #include "csvc.h"
 #include "libpon.hpp"
 #include "types.h"
-#include "Unicode.h"
 
 namespace CTRPluginFramework {
 using CallbackPointer = void (*)();
