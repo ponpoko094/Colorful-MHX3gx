@@ -1072,7 +1072,7 @@ int main() {
       "Twitter @ponpoko094\n"
       "github.com/ponpoko094/Colorful-MHX3gx";
 
-  auto *menu = new PluginMenu(kTitle, 4, 0, 0, kAbout, 0);
+  auto *menu = new PluginMenu(kTitle, 4, 1, 0, kAbout, 0);
 
   // Synchronize the menu with frame event
   menu->SynchronizeWithFrame(true);
