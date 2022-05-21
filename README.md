@@ -50,7 +50,7 @@ exeファイルを開きインストールしてください。
 
 解凍し、中にあるincludeとlibフォルダーを`C:\devkitPro\libctrpf` の中にコピーしてください。もしもフォルダーがなかったら作成してください。
 
-### gxman by @HIDE810
+<details><summary>gxman by @HIDE810 （※v0.7.1以下のソースをコンパイルする時に使用してください。）</summary>
 
 gxmanは、3gxtoolのインストールを簡単に行うためのプロジェクトです。
 
@@ -58,15 +58,13 @@ Windows & Linux に対応しています。
 
 Golang(1.16以上) がお使いのシステムにインストールされている場合、以下のコマンドでインストールができます。
 
-```
-go install github.com/HIDE810/gxman@latest
-```
+`go install github.com/HIDE810/gxman@latest`
 
 1 MiBの制限がない最新の3gxtoolをインストールしたい場合は、以下のコマンドを使用します。
 
-```
-gxman get -u
-```
+`gxman get -u`
+
+</details>
 
 ### コンパイル方法
 
