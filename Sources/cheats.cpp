@@ -3968,38 +3968,5 @@ void Teleport(MenuEntry *entry) {
   }
 }
 
-void LocalTimeDisplay(MenuEntry *entry) {
-  std::time_t unix_time = std::time(nullptr);
-  struct tm *time_struct = gmtime((const time_t *)&unix_time);
-  std::string am_or_pm;
-  const std::vector<std::string> kListTimeOfTheWeek{
-      "日", "月", "火", "水", "木", "金", "土",
-  };
-  int time_of_the_week = time_struct->tm_wday;
-  const int kStartYear = 1900;
-  const int kStartMonth = 1;
-  int year = time_struct->tm_year + kStartYear;
-  int month = time_struct->tm_mon + kStartMonth;
-  int day = time_struct->tm_mday;
-  int hour_24 = time_struct->tm_hour;
-  int hour_12;
-  int minute = time_struct->tm_min;
-  int second = time_struct->tm_sec;
-  if (hour_24 / 12) {
-    am_or_pm = "午後";
-  } else {
-    am_or_pm = "午前";
-  }
-  if (hour_24 % 12) {
-    hour_12 = hour_24 % 12;
-  } else {
-    hour_12 = 12;
-  }
-  MessageBox(Utils::Format(
-      "%d年:%02d月:%02d日:%s曜日\n"
-      "%s%02d時:%02d分:%02d秒",
-      year, month, day, kListTimeOfTheWeek[time_of_the_week].c_str(),
-      am_or_pm.c_str(), hour_12, minute, second))();
-}
 
 }  // namespace CTRPluginFramework
