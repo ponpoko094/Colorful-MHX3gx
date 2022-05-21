@@ -1060,7 +1060,7 @@ void InitMenu(PluginMenu &menu) {
 }
 
 // Plugin menu
-int main() {
+int Main() {
   const std::string kTitle = "Colorful-MHX3gx";
   const std::string kAbout =
       "データのバックアップは取ってください。\n"
