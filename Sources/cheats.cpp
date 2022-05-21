@@ -2736,7 +2736,7 @@ void Information(MenuEntry *entry) {
                                        "バッテリー残量確認"};
   Keyboard keyboard("確認したい情報を選んでください。", kInfo);
   int choice = keyboard.Open();
-  if (choice >= 0) {
+  if (choice == 0) {
     TitleId();
   } else if (choice == 1) {
     ProcessNameId();
