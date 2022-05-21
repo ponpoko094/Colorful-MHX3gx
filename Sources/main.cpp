@@ -984,8 +984,6 @@ void InitMenu(PluginMenu &menu) {
                       "アドレスと値の監視ができます。\nA+"
                       "↑で上に移動できます。\nA+↓で下に移動できます。"),
         {Hotkey(Key::R | A, "アドレス変更"), Hotkey(Key::R | B, "値を入力")});
-    *bonus += new MenuEntry("時刻を確認", nullptr, LocalTimeDisplay,
-                            "時刻を表示します。");
     *bonus += new MenuEntry("3DSの情報を確認", nullptr, Information,
                             "3DSの情報を確認できます。");
     *bonus += new MenuEntry(
@@ -994,6 +992,75 @@ void InitMenu(PluginMenu &menu) {
         });
   }
   menu += bonus;
+}
+
+void LocalTimeDisplay(Time ttime) {
+  FwkSettings &settings = FwkSettings::Get();
+  const Screen &top_screen = OSD::GetTopScreen();
+  std::string am_or_pm;
+  const std::vector<std::string> kListDayOfTheWeek{
+      "日", "月", "火", "水", "木", "金", "土",
+  };
+  u32 seconds, minutes, hours_24, hours_12, days, year, month,
+      day_of_the_week_index;
+  u64 milliseconds = osGetTime();
+  seconds = milliseconds / 1000;
+  minutes = seconds / 60;
+  seconds %= 60;
+  hours_24 = minutes / 60;
+  minutes %= 60;
+  days = hours_24 / 24;
+  hours_24 %= 24;
+
+  year = 1900;  // osGetTime starts in 1900
+
+  while (true) {
+    bool leap_year = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
+    u16 days_in_year = leap_year ? 366 : 365;
+    if (days >= days_in_year) {
+      days -= days_in_year;
+      ++year;
+    } else {
+      static const u8 days_in_month[12] = {31, 28, 31, 30, 31, 30,
+                                           31, 31, 30, 31, 30, 31};
+      for (month = 0; month < 12; ++month) {
+        u8 dim = days_in_month[month];
+
+        if (month == 1 && leap_year) ++dim;
+
+        if (days >= dim)
+          days -= dim;
+        else
+          break;
+      }
+      break;
+    }
+  }
+  days++;
+  month++;
+
+  if (hours_24 / 12) {
+    am_or_pm = "午後";
+  } else {
+    am_or_pm = "午前";
+  }
+  if (hours_24 % 12) {
+    hours_12 = hours_24 % 12;
+  } else {
+    hours_12 = 12;
+  }
+
+  day_of_the_week_index = (year + year / 4 - year / 100 + year / 400 +
+                           (int)(2.6 * month + 1.6) + days) %
+                          7;
+  top_screen.DrawRect(30, 0, 340, 20, settings.BackgroundMainColor, true);
+  top_screen.DrawRect(32, 1, 336, 19, settings.BackgroundBorderColor, false);
+  OsdPlus::DrawSystemFont(
+      Utils::Format("%04lu年%02lu月%02lu日(%s)%s%02lu時%02lu分%02lu秒", year,
+                    month, days,
+                    kListDayOfTheWeek.at(day_of_the_week_index).c_str(),
+                    am_or_pm.c_str(), hours_12, minutes, seconds),
+      34, 3, true, Color::White, settings.BackgroundMainColor);
 }
 
 // Plugin menu
@@ -1021,6 +1088,8 @@ int main() {
 
   // Plugin Ready!の代わり
   OSD::Notify(Color(234, 145, 152) << "ponpoko094's 3gx!");
+
+  menu->OnNewFrame = LocalTimeDisplay;
 
   // Init our menu entries & folders
   InitMenu(*menu);
