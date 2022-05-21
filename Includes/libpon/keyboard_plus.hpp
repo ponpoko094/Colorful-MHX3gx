@@ -26,13 +26,13 @@ class KeyboardPlus {
   // KeyboardPlus::Toggle32の複数版。
   // 主にアセンブリチートの切り替えに使う。
   // \param value [offset] = [0], [enabled_value] = [1], [disable_value] = [2]
-  static bool MultiToggle32(std::string message,
+  static bool MultiToggle32(const std::string &message,
                             std::vector<std::vector<u32>> value);
 
   // KeyboardPlus::Toggle32ベース。アドレスが一定量増加し続き、値だけが変わる版。
   // 主にルーチンの書き込みの切り替えに使う。
-  static bool LengthToggle32(std::string message, int length, u32 base_offset,
-                             std::vector<u32> value);
+  static bool LengthToggle32(const std::string &message, int length,
+                             u32 base_offset, std::vector<u32> value);
 
   // Delete keyboard object
   KeyboardPlus() = default;
