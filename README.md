@@ -128,4 +128,4 @@ build.batを起動してください。または、**Colorful-MHX3gxフォルダ
 
 Colorful-MHX3gx is licensed under the [MIT License](LICENSE/)
 
-Colorful-MHX3gx 2019-2021
+Colorful-MHX3gx 2019-2022
