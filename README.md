@@ -42,13 +42,11 @@
 
 exeファイルを開きインストールしてください。
 
-#### [3gxtool (for Windows User)](https://cdn.discordapp.com/attachments/895927933724688387/896335750898020352/patched3gxtool.7z)
+#### [3gxtool](https://gitlab.com/thepixellizeross/3gxtool/-/releases)
 
-#### [3gxtool (for Linux User)](https://cdn.discordapp.com/attachments/479233444249862174/908696881297760296/3gxtool) by @HIDE810
+解凍し、`C:\devkitPro\tools\bin`にコピーしてください。 
 
-解凍し、`C:\devkitPro\tools\bin`にコピーしてください。 **※通常の3gxtool.exeはファイルサイズ制限が掛かっているのでColorful-MHX3gxでは使えません。**
-
-#### [libCTRPF(v0.7.1)](https://cdn.discordapp.com/attachments/895927933724688387/896385805214449684/libctrpf-0.7.1-4bd18725.7z)
+#### [libCTRPF(v0.7.3)](https://gitlab.com/thepixellizeross/ctrpluginframework/-/releases)
 
 解凍し、中にあるincludeとlibフォルダーを`C:\devkitPro\libctrpf` の中にコピーしてください。もしもフォルダーがなかったら作成してください。
 
