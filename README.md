@@ -18,7 +18,7 @@
 
 ## Colorful-MHX3gxを使うためには
 
-1. [Luma3ds v10.2.1](https://github.com/Nanquitas/Luma3DS/releases/tag/v10.2.1) からboot.firmをダウンロードし、SDカードの一番上の階層にコピーしてください。
+1. [Luma3ds v10.3](https://github.com/Nanquitas/Luma3DS/releases/) からboot.firmをダウンロードし、SDカードの一番上の階層にコピーしてください。
 2. [Colorful-MHX3gx/releases](https://github.com/ponpoko094/Colorful-MHX3gx/releases) からMHX3gx.3gxをダウンロードしてください。
 3. Colorful-MHX3gx.3gxをSDカードの`luma\plugins\0004000000155400` の中にコピーしてください。もしもフォルダーがなかったら作成してください。
 4. 3DSを起動し、ホームメニューで`L+↓+Select`を押しRosalina menuを開き、Plugin Loaderの項目を**Enabled** にしてください。
