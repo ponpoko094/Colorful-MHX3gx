@@ -232,13 +232,14 @@ void InitMenu(PluginMenu &menu) {
     *player += player_change;
 
     *player += new MenuEntry("攻撃力倍率変更" + kStable, nullptr,
-                             PlayerAttackPowerMagnificationOption,
+                             PlayerAttackPowerMagnificationChange,
                              "攻撃力の倍率を変更します。");
     *player += new MenuEntry("防御力倍率変更" + kStable, nullptr,
-                             PlayerDefencePowerMagnificationOption,
+                             PlayerDefencePowerMagnificationChange,
                              "防御力の倍率を変更します。");
-    *player += new MenuEntry("速度変更" + kStable, nullptr, PlayerSpeedOption,
-                             "速度を変更します。");
+    *player +=
+        new MenuEntry("速度変更" + kStable, nullptr,
+                      PlayerSpeedMagnificationChange, "速度を変更します。");
     *player +=
         new MenuEntry("プレイヤー座標移動" + kStable, PlayerCoordinateModifier,
                       "A+十字キーで移動できます。");
@@ -261,7 +262,7 @@ void InitMenu(PluginMenu &menu) {
                              "時間経過でスタミナが減らなくなります。");
     *player +=
         new MenuEntry("プレイヤーサイズ変更" + kStable, nullptr,
-                      HunterSizeOption, "ハンターのサイズを変更できます。");
+                      PlayerSizeOption, "ハンターのサイズを変更できます。");
     *player += new MenuEntry("HP無限" + kStable, nullptr, InfiniteHp,
                              "HPを無限にします。");
     *player +=
@@ -291,7 +292,7 @@ void InitMenu(PluginMenu &menu) {
         new MenuEntry("走った時にムーンウォーク" + kStable, nullptr,
                       IfRunMoonWalk, "走った時にムーンウォークをします。");
     *player += new MenuEntry(
-        "プレイヤー名前変更" + kStable, nullptr, HunterNameChange,
+        "プレイヤー名前変更" + kStable, nullptr, PlayerNameChange,
         "定型文では1ページ目の一番左下にある定型文を名前にコピーします。\n"
         "キーボードでは、メニュー内で直接変更することができます。\n"
         "変換候補変換の改行やタブが使えます。");

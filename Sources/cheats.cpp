@@ -165,7 +165,7 @@ void QuestTimeStop(MenuEntry *entry) {
 }
 
 // 名前変更
-void HunterNameChange(MenuEntry *entry) {
+void PlayerNameChange(MenuEntry *entry) {
   const std::vector<std::string> kListFixKeyboard{"定型文", "キーボード"};
   std::string hunter_name_fix, hunter_name_now, hunter_name_keyboard;
   Process::ReadString(0x83AE380, hunter_name_fix, 0x1E, StringFormat::Utf8);
@@ -491,7 +491,7 @@ void ChargeSpeedUp(MenuEntry *entry) {
   }
 }
 
-void PlayerSpeedOption(MenuEntry *entry) {
+void PlayerSpeedMagnificationChange(MenuEntry *entry) {
   static float player_speed = 1;
   Keyboard keyboard("速度を何倍にしますか？");
   if (keyboard.Open(player_speed) == 0) {
@@ -513,7 +513,7 @@ void PlayerSpeedOption(MenuEntry *entry) {
 }
 
 // 攻撃力倍率変更設定
-void PlayerAttackPowerMagnificationOption(MenuEntry *entry) {
+void PlayerAttackPowerMagnificationChange(MenuEntry *entry) {
   static u8 player_attack_power_magnification = 0x1;
   Keyboard keyboard("攻撃力を何倍にしますか?");
   keyboard.IsHexadecimal(false);
@@ -532,7 +532,7 @@ void PlayerAttackPowerMagnificationOption(MenuEntry *entry) {
 }
 
 // 防御力倍率変更設定
-void PlayerDefencePowerMagnificationOption(MenuEntry *entry) {
+void PlayerDefencePowerMagnificationChange(MenuEntry *entry) {
   static u8 player_defence_power_magnification = 0x1;
   Keyboard keyboard("防御力を何倍にしますか?");
   keyboard.IsHexadecimal(false);
@@ -3799,7 +3799,7 @@ void InQuestSpeedHack(MenuEntry *entry) {
   }
 }
 
-void HunterSizeOption(MenuEntry *entry) {
+void PlayerSizeOption(MenuEntry *entry) {
   static float hunter_size_x = 1, hunter_size_y = 1, hunter_size_z = 1;
   static u32 offset;
   Process::Read32(0x8195350, offset);
