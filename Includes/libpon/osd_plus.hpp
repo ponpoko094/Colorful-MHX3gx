@@ -3,8 +3,6 @@
 
 #include <CTRPluginFramework.hpp>
 
-#include "Helpers.hpp"
-
 namespace CTRPluginFramework {
 
 namespace libpon {

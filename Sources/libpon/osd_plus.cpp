@@ -2,7 +2,8 @@
 // Created by ponpoko on 2021/03/21.
 //
 
-#include "libpon.hpp"
+#include "libpon/osd_plus.hpp"
+
 namespace CTRPluginFramework {
 
 namespace libpon {

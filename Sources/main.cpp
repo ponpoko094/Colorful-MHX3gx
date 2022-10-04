@@ -3,7 +3,9 @@
 #include <CTRPluginFramework.hpp>
 
 #include "cheats.hpp"
-#include "libpon.hpp"
+#include "csvc.h"
+#include "libpon/osd_plus.hpp"
+#include "libpon/security.hpp"
 #include "patch.hpp"
 #include "team_and_conditions.hpp"
 

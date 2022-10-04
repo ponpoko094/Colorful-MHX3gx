@@ -2,7 +2,6 @@
 #define COLORFUL_MHX3GX_INCLUDES_LIBPON_PROCESS_PLUS_HPP_
 
 #include <CTRPluginFramework.hpp>
-#include <vector>
 
 namespace CTRPluginFramework {
 
