@@ -1,8 +1,6 @@
 #ifndef COLORFUL_MHX3GX_INCLUDES_LIBPON_KEYBOARD_PLUS_HPP_
 #define COLORFUL_MHX3GX_INCLUDES_LIBPON_KEYBOARD_PLUS_HPP_
 #include <CTRPluginFramework.hpp>
-#include <string>
-#include <vector>
 
 namespace CTRPluginFramework {
 

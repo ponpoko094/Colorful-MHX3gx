@@ -1,5 +1,8 @@
 #include "cheats.hpp"
 
+#include "libpon/keyboard_plus.hpp"
+#include "libpon/osd_plus.hpp"
+
 namespace CTRPluginFramework {
 
 std::vector<std::string> GetListPalicoSkill() {

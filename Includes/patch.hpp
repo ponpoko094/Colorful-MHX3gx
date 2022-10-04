@@ -1,7 +1,7 @@
 #ifndef COLORFUL_MHX3GX_INCLUDES_PATCH_HPP_
 #define COLORFUL_MHX3GX_INCLUDES_PATCH_HPP_
 
-#include "stdafx.hpp"
+#include <CTRPluginFramework.hpp>
 
 namespace CTRPluginFramework {
 
