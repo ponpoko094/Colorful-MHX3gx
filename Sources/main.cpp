@@ -1055,7 +1055,7 @@ void LocalTimeDisplay(Time ttime) {
                           7;
   top_screen.DrawRect(30, 0, 340, 20, settings.BackgroundMainColor, true);
   top_screen.DrawRect(32, 1, 336, 19, settings.BackgroundBorderColor, false);
-  OsdPlus::DrawSystemFont(
+  libpon::OsdPlus::DrawSystemFont(
       Utils::Format("%04lu年%02lu月%02lu日(%s)%s%02lu時%02lu分%02lu秒", year,
                     month, days,
                     kListDayOfTheWeek.at(day_of_the_week_index).c_str(),

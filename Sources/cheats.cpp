@@ -1106,8 +1106,8 @@ void Monster1HpDisplay(MenuEntry* entry) {
     } else {
       foreground_color = Color::Green;
     }
-    OsdPlus::Draw(Utils::Format("Mon1HP %u", mon_1_hp), 10, 100, true,
-                  foreground_color);
+    libpon::OsdPlus::Draw(Utils::Format("Mon1HP %u", mon_1_hp), 10, 100, true,
+                          foreground_color);
   }
 }
 
@@ -1129,8 +1129,8 @@ void Monster2HpDisplay(MenuEntry* entry) {
     } else {
       foreground_color = Color::Green;
     }
-    OsdPlus::Draw(Utils::Format("Mon2HP %u", mon_2_hp), 10, 110, true,
-                  foreground_color);
+    libpon::OsdPlus::Draw(Utils::Format("Mon2HP %u", mon_2_hp), 10, 110, true,
+                          foreground_color);
   }
 }
 
@@ -1142,8 +1142,8 @@ void DisplayPlayerCoordinate(MenuEntry* entry) {
   Process::ReadFloat(offset + 0x40, x);
   Process::ReadFloat(offset + 0x44, y);
   Process::ReadFloat(offset + 0x48, z);
-  OsdPlus::Draw(Utils::Format("Player X=%.f Y=%.f Z=%.f", x, y, z), 10, 50,
-                true, Color::Yellow);
+  libpon::OsdPlus::Draw(Utils::Format("Player X=%.f Y=%.f Z=%.f", x, y, z), 10,
+                        50, true, Color::Yellow);
 }
 
 // リージョン変更
@@ -1872,8 +1872,8 @@ void Monster1SizeMagnificationDisplay(MenuEntry* entry) {
   Process::Read32(0x8325244, offset);
   Process::ReadFloat(offset + 0x1168, mon_1_size);
   if (offset != 0) {
-    OsdPlus::Draw(Utils::Format("Mon1SZ %.2f", mon_1_size), 10, 120, true,
-                  Color::Yellow);
+    libpon::OsdPlus::Draw(Utils::Format("Mon1SZ %.2f", mon_1_size), 10, 120,
+                          true, Color::Yellow);
   }
 }
 
@@ -1884,8 +1884,8 @@ void Monster2SizeMagnificationDisplay(MenuEntry* entry) {
   Process::Read32(0x8325248, offset);
   Process::ReadFloat(offset + 0x1168, mon_2_size);
   if (offset != 0) {
-    OsdPlus::Draw(Utils::Format("Mon2SZ %.2f", mon_2_size), 10, 130, true,
-                  Color::Yellow);
+    libpon::OsdPlus::Draw(Utils::Format("Mon2SZ %.2f", mon_2_size), 10, 130,
+                          true, Color::Yellow);
   }
 }
 
@@ -2102,9 +2102,10 @@ void QuestTimeDisplay(MenuEntry* entry) {
     } else {
       foreground_color = Color::Yellow;
     }
-    OsdPlus::Draw(Utils::Format("QT %d:%02d:%02d:%02d", quest_hour_2,
-                                quest_minute_2, quest_second_2, quest_frame_2),
-                  10, 180, true, foreground_color);
+    libpon::OsdPlus::Draw(
+        Utils::Format("QT %d:%02d:%02d:%02d", quest_hour_2, quest_minute_2,
+                      quest_second_2, quest_frame_2),
+        10, 180, true, foreground_color);
   }
 }
 
@@ -3705,12 +3706,13 @@ void HexEditor(MenuEntry* entry) {
   Process::Read32(ad_3, hex_3);
   Process::Read32(ad_4, hex_4);
   address_on = true;
-  OsdPlus::Draw(Utils::Format("%08X  03020100", ad_1), 0, 0, true);
-  OsdPlus::Draw(Utils::Format("%08X  ", ad_1), 0, 10, true);
-  OsdPlus::Draw(Utils::Format("%08X", hex_1), 60, 10, true, Color::Yellow);
-  OsdPlus::Draw(Utils::Format("%08X  %08X", ad_2, hex_2), 0, 20, true);
-  OsdPlus::Draw(Utils::Format("%08X  %08X", ad_3, hex_3), 0, 30, true);
-  OsdPlus::Draw(Utils::Format("%08X  %08X", ad_4, hex_4), 0, 40, true);
+  libpon::OsdPlus::Draw(Utils::Format("%08X  03020100", ad_1), 0, 0, true);
+  libpon::OsdPlus::Draw(Utils::Format("%08X  ", ad_1), 0, 10, true);
+  libpon::OsdPlus::Draw(Utils::Format("%08X", hex_1), 60, 10, true,
+                        Color::Yellow);
+  libpon::OsdPlus::Draw(Utils::Format("%08X  %08X", ad_2, hex_2), 0, 20, true);
+  libpon::OsdPlus::Draw(Utils::Format("%08X  %08X", ad_3, hex_3), 0, 30, true);
+  libpon::OsdPlus::Draw(Utils::Format("%08X  %08X", ad_4, hex_4), 0, 40, true);
 }
 
 void MySetToPorchItemCopy(MenuEntry* entry) {

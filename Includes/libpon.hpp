@@ -11,6 +11,4 @@
 #include "libpon/process_plus.hpp"
 #include "libpon/security.hpp"
 
-using namespace libpon;
-
 #endif  // COLORFUL_MHX3GX_INCLUDES_LIBPON_HPP_
