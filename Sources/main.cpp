@@ -1062,7 +1062,7 @@ void LocalTimeDisplay(Time ttime) {
                     month, days,
                     kListDayOfTheWeek.at(day_of_the_week_index).c_str(),
                     am_or_pm.c_str(), hours_12, minutes, seconds),
-      34, 3, true, Color::White, settings.BackgroundMainColor);
+      34, 3, top_screen, Color::White, settings.BackgroundMainColor);
 }
 
 // Plugin menu
