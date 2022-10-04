@@ -3,13 +3,14 @@
 //
 
 #include "libpon.hpp"
+namespace CTRPluginFramework {
 
 namespace libpon {
 
-u32 OsdPlus::Draw(const std::string &str, u32 pos_x, u32 pos_y, bool is_top,
-                  const Color &foreground, const Color &background) {
-  const Screen &top_screen = OSD::GetTopScreen();
-  const Screen &bottom_screen = OSD::GetBottomScreen();
+u32 OsdPlus::Draw(const std::string& str, u32 pos_x, u32 pos_y, bool is_top,
+                  const Color& foreground, const Color& background) {
+  const Screen& top_screen = OSD::GetTopScreen();
+  const Screen& bottom_screen = OSD::GetBottomScreen();
   if (is_top) {
     OSDManager.Lock();
     top_screen.Draw(str, pos_x, pos_y, foreground, background);
@@ -22,12 +23,12 @@ u32 OsdPlus::Draw(const std::string &str, u32 pos_x, u32 pos_y, bool is_top,
   return pos_y + 10;
 }
 
-u32 OsdPlus::DrawSystemFont(const std::string &str, u32 pos_x, u32 pos_y,
-                            bool is_top, const Color &foreground,
-                            const Color &background) {
+u32 OsdPlus::DrawSystemFont(const std::string& str, u32 pos_x, u32 pos_y,
+                            bool is_top, const Color& foreground,
+                            const Color& background) {
   float text_width = OSD::GetTextWidth(true, str);
-  const Screen &top_screen = OSD::GetTopScreen();
-  const Screen &bottom_screen = OSD::GetBottomScreen();
+  const Screen& top_screen = OSD::GetTopScreen();
+  const Screen& bottom_screen = OSD::GetBottomScreen();
   if (is_top) {
     OSDManager.Lock();
     top_screen.DrawRect(pos_x, pos_y, (u32)text_width, 16, background);
@@ -42,3 +43,5 @@ u32 OsdPlus::DrawSystemFont(const std::string &str, u32 pos_x, u32 pos_y,
   return pos_y + 16;
 }
 }  // namespace libpon
+
+}  // namespace CTRPluginFramework
