@@ -17,11 +17,11 @@ void CreateDefaultFile() {
   File::Create(kPathToBin);
   File::Open(file, kPathToBin);
   file.Rewind();
-  file.Write((char *)&color, sizeof(color));
+  file.Write((char*)&color, sizeof(color));
   file.Close();
 }
 
-void CreateDefaultFile(MenuEntry *entry) {
+void CreateDefaultFile(MenuEntry* entry) {
   Keyboard keyboard("patch.binを初期化しますか？", {"はい", "いいえ"});
   int choice = keyboard.Open();
   if (choice == 0) {
@@ -37,7 +37,7 @@ void GetPatchColorData() {
     CreateDefaultFile();
   }
   File::Open(file, kPathToBin);
-  file.Read((char *)&color, sizeof(color));
+  file.Read((char*)&color, sizeof(color));
   FwkSettings::Get().MainTextColor =
       Color(color.ui_main_text_r, color.ui_main_text_g, color.ui_main_text_b);
   FwkSettings::Get().WindowTitleColor =
@@ -121,7 +121,7 @@ void GetPatchColorData() {
   file.Close();
 }
 
-void PatchProcessUiMainTextColorEditor(MenuEntry *entry) {
+void PatchProcessUiMainTextColorEditor(MenuEntry* entry) {
   const std::string kPathToBin = GetPathToBin();
   File file;
   if (!File::Exists(kPathToBin)) {
@@ -129,7 +129,7 @@ void PatchProcessUiMainTextColorEditor(MenuEntry *entry) {
   }
   PatchColorData color;
   File::Open(file, kPathToBin);
-  file.Read((char *)&color, sizeof(color));
+  file.Read((char*)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -143,11 +143,11 @@ void PatchProcessUiMainTextColorEditor(MenuEntry *entry) {
   FwkSettings::Get().MainTextColor =
       Color(color.ui_main_text_r, color.ui_main_text_g, color.ui_main_text_b);
   file.Rewind();
-  file.Write((char *)&color, sizeof(color));
+  file.Write((char*)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessUiWindowTitleColorEditor(MenuEntry *entry) {
+void PatchProcessUiWindowTitleColorEditor(MenuEntry* entry) {
   const std::string kPathToBin = GetPathToBin();
   File file;
   if (!File::Exists(kPathToBin)) {
@@ -155,7 +155,7 @@ void PatchProcessUiWindowTitleColorEditor(MenuEntry *entry) {
   }
   PatchColorData color;
   File::Open(file, kPathToBin);
-  file.Read((char *)&color, sizeof(color));
+  file.Read((char*)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -170,11 +170,11 @@ void PatchProcessUiWindowTitleColorEditor(MenuEntry *entry) {
       Color(color.ui_window_title_r, color.ui_window_title_g,
             color.ui_window_title_b);
   file.Rewind();
-  file.Write((char *)&color, sizeof(color));
+  file.Write((char*)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessUiMenuSelectedItemColorEditor(MenuEntry *entry) {
+void PatchProcessUiMenuSelectedItemColorEditor(MenuEntry* entry) {
   const std::string kPathToBin = GetPathToBin();
   File file;
   if (!File::Exists(kPathToBin)) {
@@ -182,7 +182,7 @@ void PatchProcessUiMenuSelectedItemColorEditor(MenuEntry *entry) {
   }
   PatchColorData color;
   File::Open(file, kPathToBin);
-  file.Read((char *)&color, sizeof(color));
+  file.Read((char*)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -197,11 +197,11 @@ void PatchProcessUiMenuSelectedItemColorEditor(MenuEntry *entry) {
       Color(color.ui_menu_selected_item_r, color.ui_menu_selected_item_g,
             color.ui_menu_selected_item_b);
   file.Rewind();
-  file.Write((char *)&color, sizeof(color));
+  file.Write((char*)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessUiMenuUnselectedItemColorEditor(MenuEntry *entry) {
+void PatchProcessUiMenuUnselectedItemColorEditor(MenuEntry* entry) {
   const std::string kPathToBin = GetPathToBin();
   File file;
   if (!File::Exists(kPathToBin)) {
@@ -209,7 +209,7 @@ void PatchProcessUiMenuUnselectedItemColorEditor(MenuEntry *entry) {
   }
   PatchColorData color;
   File::Open(file, kPathToBin);
-  file.Read((char *)&color, sizeof(color));
+  file.Read((char*)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -224,11 +224,11 @@ void PatchProcessUiMenuUnselectedItemColorEditor(MenuEntry *entry) {
       Color(color.ui_menu_unselected_item_r, color.ui_menu_unselected_item_g,
             color.ui_menu_unselected_item_b);
   file.Rewind();
-  file.Write((char *)&color, sizeof(color));
+  file.Write((char*)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessUiBackgroundMainColorEditor(MenuEntry *entry) {
+void PatchProcessUiBackgroundMainColorEditor(MenuEntry* entry) {
   const std::string kPathToBin = GetPathToBin();
   File file;
   if (!File::Exists(kPathToBin)) {
@@ -236,7 +236,7 @@ void PatchProcessUiBackgroundMainColorEditor(MenuEntry *entry) {
   }
   PatchColorData color;
   File::Open(file, kPathToBin);
-  file.Read((char *)&color, sizeof(color));
+  file.Read((char*)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -251,11 +251,11 @@ void PatchProcessUiBackgroundMainColorEditor(MenuEntry *entry) {
       Color(color.ui_background_main_r, color.ui_background_main_g,
             color.ui_background_main_b);
   file.Rewind();
-  file.Write((char *)&color, sizeof(color));
+  file.Write((char*)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessUiBackgroundSecondaryColorEditor(MenuEntry *entry) {
+void PatchProcessUiBackgroundSecondaryColorEditor(MenuEntry* entry) {
   const std::string kPathToBin = GetPathToBin();
   File file;
   if (!File::Exists(kPathToBin)) {
@@ -263,7 +263,7 @@ void PatchProcessUiBackgroundSecondaryColorEditor(MenuEntry *entry) {
   }
   PatchColorData color;
   File::Open(file, kPathToBin);
-  file.Read((char *)&color, sizeof(color));
+  file.Read((char*)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -278,11 +278,11 @@ void PatchProcessUiBackgroundSecondaryColorEditor(MenuEntry *entry) {
       Color(color.ui_background_secondary_r, color.ui_background_secondary_g,
             color.ui_background_secondary_b);
   file.Rewind();
-  file.Write((char *)&color, sizeof(color));
+  file.Write((char*)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessUiBackgroundBorderColorEditor(MenuEntry *entry) {
+void PatchProcessUiBackgroundBorderColorEditor(MenuEntry* entry) {
   const std::string kPathToBin = GetPathToBin();
   File file;
   if (!File::Exists(kPathToBin)) {
@@ -290,7 +290,7 @@ void PatchProcessUiBackgroundBorderColorEditor(MenuEntry *entry) {
   }
   PatchColorData color;
   File::Open(file, kPathToBin);
-  file.Read((char *)&color, sizeof(color));
+  file.Read((char*)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -305,11 +305,11 @@ void PatchProcessUiBackgroundBorderColorEditor(MenuEntry *entry) {
       Color(color.ui_background_border_r, color.ui_background_border_g,
             color.ui_background_border_b);
   file.Rewind();
-  file.Write((char *)&color, sizeof(color));
+  file.Write((char*)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessKeyboardBackgroundColorEditor(MenuEntry *entry) {
+void PatchProcessKeyboardBackgroundColorEditor(MenuEntry* entry) {
   const std::string kPathToBin = GetPathToBin();
   File file;
   if (!File::Exists(kPathToBin)) {
@@ -317,7 +317,7 @@ void PatchProcessKeyboardBackgroundColorEditor(MenuEntry *entry) {
   }
   PatchColorData color;
   File::Open(file, kPathToBin);
-  file.Read((char *)&color, sizeof(color));
+  file.Read((char*)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -332,11 +332,11 @@ void PatchProcessKeyboardBackgroundColorEditor(MenuEntry *entry) {
       Color(color.keyboard_background_r, color.keyboard_background_g,
             color.keyboard_background_b);
   file.Rewind();
-  file.Write((char *)&color, sizeof(color));
+  file.Write((char*)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessKeyboardKeyBackgroundColorEditor(MenuEntry *entry) {
+void PatchProcessKeyboardKeyBackgroundColorEditor(MenuEntry* entry) {
   const std::string kPathToBin = GetPathToBin();
   File file;
   if (!File::Exists(kPathToBin)) {
@@ -344,7 +344,7 @@ void PatchProcessKeyboardKeyBackgroundColorEditor(MenuEntry *entry) {
   }
   PatchColorData color;
   File::Open(file, kPathToBin);
-  file.Read((char *)&color, sizeof(color));
+  file.Read((char*)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -359,11 +359,11 @@ void PatchProcessKeyboardKeyBackgroundColorEditor(MenuEntry *entry) {
       Color(color.keyboard_key_background_r, color.keyboard_key_background_g,
             color.keyboard_key_background_b);
   file.Rewind();
-  file.Write((char *)&color, sizeof(color));
+  file.Write((char*)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessKeyboardKeyBackgroundPressedColorEditor(MenuEntry *entry) {
+void PatchProcessKeyboardKeyBackgroundPressedColorEditor(MenuEntry* entry) {
   const std::string kPathToBin = GetPathToBin();
   File file;
   if (!File::Exists(kPathToBin)) {
@@ -371,7 +371,7 @@ void PatchProcessKeyboardKeyBackgroundPressedColorEditor(MenuEntry *entry) {
   }
   PatchColorData color;
   File::Open(file, kPathToBin);
-  file.Read((char *)&color, sizeof(color));
+  file.Read((char*)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -387,11 +387,11 @@ void PatchProcessKeyboardKeyBackgroundPressedColorEditor(MenuEntry *entry) {
             color.keyboard_key_background_pressed_g,
             color.keyboard_key_background_pressed_b);
   file.Rewind();
-  file.Write((char *)&color, sizeof(color));
+  file.Write((char*)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessKeyboardKeyTextColorEditor(MenuEntry *entry) {
+void PatchProcessKeyboardKeyTextColorEditor(MenuEntry* entry) {
   const std::string kPathToBin = GetPathToBin();
   File file;
   if (!File::Exists(kPathToBin)) {
@@ -399,7 +399,7 @@ void PatchProcessKeyboardKeyTextColorEditor(MenuEntry *entry) {
   }
   PatchColorData color;
   File::Open(file, kPathToBin);
-  file.Read((char *)&color, sizeof(color));
+  file.Read((char*)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -414,11 +414,11 @@ void PatchProcessKeyboardKeyTextColorEditor(MenuEntry *entry) {
       Color(color.keyboard_key_text_r, color.keyboard_key_text_g,
             color.keyboard_key_text_b);
   file.Rewind();
-  file.Write((char *)&color, sizeof(color));
+  file.Write((char*)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessKeyboardKeyTextPressedColorEditor(MenuEntry *entry) {
+void PatchProcessKeyboardKeyTextPressedColorEditor(MenuEntry* entry) {
   const std::string kPathToBin = GetPathToBin();
   File file;
   if (!File::Exists(kPathToBin)) {
@@ -426,7 +426,7 @@ void PatchProcessKeyboardKeyTextPressedColorEditor(MenuEntry *entry) {
   }
   PatchColorData color;
   File::Open(file, kPathToBin);
-  file.Read((char *)&color, sizeof(color));
+  file.Read((char*)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -441,11 +441,11 @@ void PatchProcessKeyboardKeyTextPressedColorEditor(MenuEntry *entry) {
       color.keyboard_key_text_pressed_r, color.keyboard_key_text_pressed_g,
       color.keyboard_key_text_pressed_b);
   file.Rewind();
-  file.Write((char *)&color, sizeof(color));
+  file.Write((char*)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessKeyboardKeyTextDisabledColorEditor(MenuEntry *entry) {
+void PatchProcessKeyboardKeyTextDisabledColorEditor(MenuEntry* entry) {
   const std::string kPathToBin = GetPathToBin();
   File file;
   if (!File::Exists(kPathToBin)) {
@@ -453,7 +453,7 @@ void PatchProcessKeyboardKeyTextDisabledColorEditor(MenuEntry *entry) {
   }
   PatchColorData color;
   File::Open(file, kPathToBin);
-  file.Read((char *)&color, sizeof(color));
+  file.Read((char*)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -468,11 +468,11 @@ void PatchProcessKeyboardKeyTextDisabledColorEditor(MenuEntry *entry) {
       color.keyboard_key_text_disabled_r, color.keyboard_key_text_disabled_g,
       color.keyboard_key_text_disabled_b);
   file.Rewind();
-  file.Write((char *)&color, sizeof(color));
+  file.Write((char*)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessKeyboardCursorColorEditor(MenuEntry *entry) {
+void PatchProcessKeyboardCursorColorEditor(MenuEntry* entry) {
   const std::string kPathToBin = GetPathToBin();
   File file;
   if (!File::Exists(kPathToBin)) {
@@ -480,7 +480,7 @@ void PatchProcessKeyboardCursorColorEditor(MenuEntry *entry) {
   }
   PatchColorData color;
   File::Open(file, kPathToBin);
-  file.Read((char *)&color, sizeof(color));
+  file.Read((char*)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -495,11 +495,11 @@ void PatchProcessKeyboardCursorColorEditor(MenuEntry *entry) {
       Color(color.keyboard_cursor_r, color.keyboard_cursor_g,
             color.keyboard_cursor_b);
   file.Rewind();
-  file.Write((char *)&color, sizeof(color));
+  file.Write((char*)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessKeyboardInputColorEditor(MenuEntry *entry) {
+void PatchProcessKeyboardInputColorEditor(MenuEntry* entry) {
   const std::string kPathToBin = GetPathToBin();
   File file;
   if (!File::Exists(kPathToBin)) {
@@ -507,7 +507,7 @@ void PatchProcessKeyboardInputColorEditor(MenuEntry *entry) {
   }
   PatchColorData color;
   File::Open(file, kPathToBin);
-  file.Read((char *)&color, sizeof(color));
+  file.Read((char*)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -521,11 +521,11 @@ void PatchProcessKeyboardInputColorEditor(MenuEntry *entry) {
   FwkSettings::Get().Keyboard.Input = Color(
       color.keyboard_input_r, color.keyboard_input_g, color.keyboard_input_b);
   file.Rewind();
-  file.Write((char *)&color, sizeof(color));
+  file.Write((char*)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessCustomKeyboardBackgroundMainColorEditor(MenuEntry *entry) {
+void PatchProcessCustomKeyboardBackgroundMainColorEditor(MenuEntry* entry) {
   const std::string kPathToBin = GetPathToBin();
   File file;
   if (!File::Exists(kPathToBin)) {
@@ -533,7 +533,7 @@ void PatchProcessCustomKeyboardBackgroundMainColorEditor(MenuEntry *entry) {
   }
   PatchColorData color;
   File::Open(file, kPathToBin);
-  file.Read((char *)&color, sizeof(color));
+  file.Read((char*)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -549,12 +549,12 @@ void PatchProcessCustomKeyboardBackgroundMainColorEditor(MenuEntry *entry) {
             color.custom_keyboard_background_main_g,
             color.custom_keyboard_background_main_b);
   file.Rewind();
-  file.Write((char *)&color, sizeof(color));
+  file.Write((char*)&color, sizeof(color));
   file.Close();
 }
 
 void PatchProcessCustomKeyboardBackgroundSecondaryColorEditor(
-    MenuEntry *entry) {
+    MenuEntry* entry) {
   const std::string kPathToBin = GetPathToBin();
   File file;
   if (!File::Exists(kPathToBin)) {
@@ -562,7 +562,7 @@ void PatchProcessCustomKeyboardBackgroundSecondaryColorEditor(
   }
   PatchColorData color;
   File::Open(file, kPathToBin);
-  file.Read((char *)&color, sizeof(color));
+  file.Read((char*)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -578,11 +578,11 @@ void PatchProcessCustomKeyboardBackgroundSecondaryColorEditor(
             color.custom_keyboard_background_secondary_g,
             color.custom_keyboard_background_secondary_b);
   file.Rewind();
-  file.Write((char *)&color, sizeof(color));
+  file.Write((char*)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessCustomKeyboardBackgroundBorderColorEditor(MenuEntry *entry) {
+void PatchProcessCustomKeyboardBackgroundBorderColorEditor(MenuEntry* entry) {
   const std::string kPathToBin = GetPathToBin();
   File file;
   if (!File::Exists(kPathToBin)) {
@@ -590,7 +590,7 @@ void PatchProcessCustomKeyboardBackgroundBorderColorEditor(MenuEntry *entry) {
   }
   PatchColorData color;
   File::Open(file, kPathToBin);
-  file.Read((char *)&color, sizeof(color));
+  file.Read((char*)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -606,11 +606,11 @@ void PatchProcessCustomKeyboardBackgroundBorderColorEditor(MenuEntry *entry) {
             color.custom_keyboard_background_border_g,
             color.custom_keyboard_background_border_b);
   file.Rewind();
-  file.Write((char *)&color, sizeof(color));
+  file.Write((char*)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessCustomKeyboardKeyBackgroundColorEditor(MenuEntry *entry) {
+void PatchProcessCustomKeyboardKeyBackgroundColorEditor(MenuEntry* entry) {
   const std::string kPathToBin = GetPathToBin();
   File file;
   if (!File::Exists(kPathToBin)) {
@@ -618,7 +618,7 @@ void PatchProcessCustomKeyboardKeyBackgroundColorEditor(MenuEntry *entry) {
   }
   PatchColorData color;
   File::Open(file, kPathToBin);
-  file.Read((char *)&color, sizeof(color));
+  file.Read((char*)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -634,12 +634,12 @@ void PatchProcessCustomKeyboardKeyBackgroundColorEditor(MenuEntry *entry) {
             color.custom_keyboard_key_background_g,
             color.custom_keyboard_key_background_b);
   file.Rewind();
-  file.Write((char *)&color, sizeof(color));
+  file.Write((char*)&color, sizeof(color));
   file.Close();
 }
 
 void PatchProcessCustomKeyboardKeyBackgroundPressedColorEditor(
-    MenuEntry *entry) {
+    MenuEntry* entry) {
   const std::string kPathToBin = GetPathToBin();
   File file;
   if (!File::Exists(kPathToBin)) {
@@ -647,7 +647,7 @@ void PatchProcessCustomKeyboardKeyBackgroundPressedColorEditor(
   }
   PatchColorData color;
   File::Open(file, kPathToBin);
-  file.Read((char *)&color, sizeof(color));
+  file.Read((char*)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -663,11 +663,11 @@ void PatchProcessCustomKeyboardKeyBackgroundPressedColorEditor(
             color.custom_keyboard_key_background_pressed_g,
             color.custom_keyboard_key_background_pressed_b);
   file.Rewind();
-  file.Write((char *)&color, sizeof(color));
+  file.Write((char*)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessCustomKeyboardKeyTextColorEditor(MenuEntry *entry) {
+void PatchProcessCustomKeyboardKeyTextColorEditor(MenuEntry* entry) {
   const std::string kPathToBin = GetPathToBin();
   File file;
   if (!File::Exists(kPathToBin)) {
@@ -675,7 +675,7 @@ void PatchProcessCustomKeyboardKeyTextColorEditor(MenuEntry *entry) {
   }
   PatchColorData color;
   File::Open(file, kPathToBin);
-  file.Read((char *)&color, sizeof(color));
+  file.Read((char*)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -690,11 +690,11 @@ void PatchProcessCustomKeyboardKeyTextColorEditor(MenuEntry *entry) {
       Color(color.custom_keyboard_key_text_r, color.custom_keyboard_key_text_g,
             color.custom_keyboard_key_text_b);
   file.Rewind();
-  file.Write((char *)&color, sizeof(color));
+  file.Write((char*)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessCustomKeyboardKeyTextPressedColorEditor(MenuEntry *entry) {
+void PatchProcessCustomKeyboardKeyTextPressedColorEditor(MenuEntry* entry) {
   const std::string kPathToBin = GetPathToBin();
   File file;
   if (!File::Exists(kPathToBin)) {
@@ -702,7 +702,7 @@ void PatchProcessCustomKeyboardKeyTextPressedColorEditor(MenuEntry *entry) {
   }
   PatchColorData color;
   File::Open(file, kPathToBin);
-  file.Read((char *)&color, sizeof(color));
+  file.Read((char*)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -718,12 +718,12 @@ void PatchProcessCustomKeyboardKeyTextPressedColorEditor(MenuEntry *entry) {
             color.custom_keyboard_key_text_pressed_g,
             color.custom_keyboard_key_text_pressed_b);
   file.Rewind();
-  file.Write((char *)&color, sizeof(color));
+  file.Write((char*)&color, sizeof(color));
   file.Close();
 }
 
 void PatchProcessCustomKeyboardScrollBarBackgroundColorEditor(
-    MenuEntry *entry) {
+    MenuEntry* entry) {
   const std::string kPathToBin = GetPathToBin();
   File file;
   if (!File::Exists(kPathToBin)) {
@@ -731,7 +731,7 @@ void PatchProcessCustomKeyboardScrollBarBackgroundColorEditor(
   }
   PatchColorData color;
   File::Open(file, kPathToBin);
-  file.Read((char *)&color, sizeof(color));
+  file.Read((char*)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -747,11 +747,11 @@ void PatchProcessCustomKeyboardScrollBarBackgroundColorEditor(
             color.custom_keyboard_scroll_bar_background_g,
             color.custom_keyboard_scroll_bar_background_b);
   file.Rewind();
-  file.Write((char *)&color, sizeof(color));
+  file.Write((char*)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessCustomKeyboardScrollBarThumbColorEditor(MenuEntry *entry) {
+void PatchProcessCustomKeyboardScrollBarThumbColorEditor(MenuEntry* entry) {
   const std::string kPathToBin = GetPathToBin();
   File file;
   if (!File::Exists(kPathToBin)) {
@@ -759,7 +759,7 @@ void PatchProcessCustomKeyboardScrollBarThumbColorEditor(MenuEntry *entry) {
   }
   PatchColorData color;
   File::Open(file, kPathToBin);
-  file.Read((char *)&color, sizeof(color));
+  file.Read((char*)&color, sizeof(color));
   Keyboard key("どの値を変更しますか？", {"R", "G", "B"});
   u8 value = 0;
   int choice = key.Open();
@@ -775,11 +775,11 @@ void PatchProcessCustomKeyboardScrollBarThumbColorEditor(MenuEntry *entry) {
             color.custom_keyboard_scroll_bar_thumb_g,
             color.custom_keyboard_scroll_bar_thumb_b);
   file.Rewind();
-  file.Write((char *)&color, sizeof(color));
+  file.Write((char*)&color, sizeof(color));
   file.Close();
 }
 
-void PatchProcessDefaultTheme(MenuEntry *entry) {
+void PatchProcessDefaultTheme(MenuEntry* entry) {
   Keyboard keyboard("CTRPFの色を元に戻しますか？", {"はい", "いいえ"});
   int choice = keyboard.Open();
   if (choice == 0) {

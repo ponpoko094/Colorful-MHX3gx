@@ -12,10 +12,10 @@ class ProcessPlus {
                                std::vector<u32> address);
 
   static void Write8(u32 address, u8 value);
-  static void Write8(const std::vector<u32> &address, u8 value);
+  static void Write8(const std::vector<u32>& address, u8 value);
   static void Write8(std::vector<u32> address, std::vector<u8> value);
   static void Write8(u32 pointer, u32 offset, u8 value);
-  static void Write8(const std::vector<u32> &pointer, u32 offset, u8 value);
+  static void Write8(const std::vector<u32>& pointer, u32 offset, u8 value);
   static void Write8(std::vector<u32> pointer, u32 offset,
                      std::vector<u8> value);
   static void Write8(std::vector<u32> pointer, std::vector<u32> offset,
@@ -23,14 +23,14 @@ class ProcessPlus {
   static void Write8(std::vector<u32> pointer, std::vector<u32> offset,
                      std::vector<u8> value);
   static void Write8(u32 pointer, u32 offset_1, u32 offset_2, u8 value);
-  static void Write8(const std::vector<u32> &pointer, u32 offset_1,
+  static void Write8(const std::vector<u32>& pointer, u32 offset_1,
                      u32 offset_2, u8 value);
 
   static void Write16(u32 address, u16 value);
-  static void Write16(const std::vector<u32> &address, u16 value);
+  static void Write16(const std::vector<u32>& address, u16 value);
   static void Write16(std::vector<u32> address, std::vector<u16> value);
   static void Write16(u32 pointer, u32 offset, u16 value);
-  static void Write16(const std::vector<u32> &pointer, u32 offset, u16 value);
+  static void Write16(const std::vector<u32>& pointer, u32 offset, u16 value);
   static void Write16(std::vector<u32> pointer, u32 offset,
                       std::vector<u16> value);
   static void Write16(std::vector<u32> pointer, std::vector<u32> offset,
@@ -38,14 +38,14 @@ class ProcessPlus {
   static void Write16(std::vector<u32> pointer, std::vector<u32> offset,
                       std::vector<u16> value);
   static void Write16(u32 pointer, u32 offset_1, u32 offset_2, u16 value);
-  static void Write16(const std::vector<u32> &pointer, u32 offset_1,
+  static void Write16(const std::vector<u32>& pointer, u32 offset_1,
                       u32 offset_2, u16 value);
 
   static void Write32(u32 address, u32 value);
-  static void Write32(const std::vector<u32> &address, u32 value);
+  static void Write32(const std::vector<u32>& address, u32 value);
   static void Write32(std::vector<u32> address, std::vector<u32> value);
   static void Write32(u32 pointer, u32 offset, u32 value);
-  static void Write32(const std::vector<u32> &pointer, u32 offset, u32 value);
+  static void Write32(const std::vector<u32>& pointer, u32 offset, u32 value);
   static void Write32(std::vector<u32> pointer, u32 offset,
                       std::vector<u32> value);
   static void Write32(std::vector<u32> pointer, std::vector<u32> offset,
@@ -53,14 +53,14 @@ class ProcessPlus {
   static void Write32(std::vector<u32> pointer, std::vector<u32> offset,
                       std::vector<u32> value);
   static void Write32(u32 pointer, u32 offset_1, u32 offset_2, u32 value);
-  static void Write32(const std::vector<u32> &pointer, u32 offset_1,
+  static void Write32(const std::vector<u32>& pointer, u32 offset_1,
                       u32 offset_2, u32 value);
 
   static void Write64(u32 address, u64 value);
-  static void Write64(const std::vector<u32> &address, u64 value);
+  static void Write64(const std::vector<u32>& address, u64 value);
   static void Write64(std::vector<u32> address, std::vector<u64> value);
   static void Write64(u32 pointer, u32 offset, u64 value);
-  static void Write64(const std::vector<u32> &pointer, u32 offset, u64 value);
+  static void Write64(const std::vector<u32>& pointer, u32 offset, u64 value);
   static void Write64(std::vector<u32> pointer, u32 offset,
                       std::vector<u64> value);
   static void Write64(std::vector<u32> pointer, std::vector<u32> offset,
@@ -68,14 +68,14 @@ class ProcessPlus {
   static void Write64(std::vector<u32> pointer, std::vector<u32> offset,
                       std::vector<u64> value);
   static void Write64(u32 pointer, u32 offset_1, u32 offset_2, u64 value);
-  static void Write64(const std::vector<u32> &pointer, u32 offset_1,
+  static void Write64(const std::vector<u32>& pointer, u32 offset_1,
                       u32 offset_2, u64 value);
 
   static void WriteFloat(u32 address, float value);
-  static void WriteFloat(const std::vector<u32> &address, float value);
+  static void WriteFloat(const std::vector<u32>& address, float value);
   static void WriteFloat(std::vector<u32> address, std::vector<float> value);
   static void WriteFloat(u32 pointer, u32 offset, float value);
-  static void WriteFloat(const std::vector<u32> &pointer, u32 offset,
+  static void WriteFloat(const std::vector<u32>& pointer, u32 offset,
                          float value);
   static void WriteFloat(std::vector<u32> pointer, u32 offset,
                          std::vector<float> value);
@@ -84,14 +84,14 @@ class ProcessPlus {
   static void WriteFloat(std::vector<u32> pointer, std::vector<u32> offset,
                          std::vector<float> value);
   static void WriteFloat(u32 pointer, u32 offset_1, u32 offset_2, float value);
-  static void WriteFloat(const std::vector<u32> &pointer, u32 offset_1,
+  static void WriteFloat(const std::vector<u32>& pointer, u32 offset_1,
                          u32 offset_2, float value);
 
   static void WriteDouble(u32 address, double value);
-  static void WriteDouble(const std::vector<u32> &address, double value);
+  static void WriteDouble(const std::vector<u32>& address, double value);
   static void WriteDouble(std::vector<u32> address, std::vector<double> value);
   static void WriteDouble(u32 pointer, u32 offset, double value);
-  static void WriteDouble(const std::vector<u32> &pointer, u32 offset,
+  static void WriteDouble(const std::vector<u32>& pointer, u32 offset,
                           double value);
   static void WriteDouble(std::vector<u32> pointer, u32 offset,
                           std::vector<double> value);
@@ -101,7 +101,7 @@ class ProcessPlus {
                           std::vector<double> value);
   static void WriteDouble(u32 pointer, u32 offset_1, u32 offset_2,
                           double value);
-  static void WriteDouble(const std::vector<u32> &pointer, u32 offset_1,
+  static void WriteDouble(const std::vector<u32>& pointer, u32 offset_1,
                           u32 offset_2, double value);
 
   static u8 Read8(u32 address);

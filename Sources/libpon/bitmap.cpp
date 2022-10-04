@@ -8,7 +8,7 @@ void Bitmap::Draw() {
   File bmp;
   File::Open(bmp, "*.bmp", File::READ);
   static bool is_draw = true;
-  OSD::Run([](const Screen &screen) {
+  OSD::Run([](const Screen& screen) {
     if (!screen.IsTop) {
       return (false);
     }
