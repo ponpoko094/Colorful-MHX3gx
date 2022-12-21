@@ -32,10 +32,7 @@ void TeamAndCondition() {
       "次回からオープニングメッセージを\n"
       "スキップしますか？";
 
-  const std::string kCreatedOpSkipBinMessage =
-      "opskip.binを作成しました。\n"
-      "設定を変更するために\n"
-      "再起動をお願いします。";
+  const std::string kCreatedOpSkipBinMessage = "opskip.binを作成しました。";
 
   const std::string kEnjoyPluginMessage = "プラグインを楽しんでください！";
 
