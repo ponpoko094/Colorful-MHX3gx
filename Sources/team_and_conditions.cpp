@@ -32,10 +32,7 @@ void TeamAndCondition() {
       "次回からオープニングメッセージを\n"
       "スキップしますか？";
 
-  const std::string kCreatedOpSkipBinMessage =
-      "opskip.binを作成しました。\n"
-      "設定を変更するために\n"
-      "再起動をお願いします。";
+  const std::string kCreatedOpSkipBinMessage = "opskip.binを作成しました。";
 
   const std::string kEnjoyPluginMessage = "プラグインを楽しんでください！";
 
@@ -47,31 +44,27 @@ void TeamAndCondition() {
 
   Process::Pause();
   Process::GetTitleID(title_id);
-  if (title_id == kMhxTitleId) {
-    if (!File::Exists(kSkipSaveFileName)) {
-      MessageBox(kOpeningMessage, kThanksMessage).SetClear(ClearScreen::Top)();
-      if (MessageBox(kTeamAndConditionMessageTitle, kTeamAndConditionMessage,
-                     DialogType::DialogYesNo)
-              .SetClear(ClearScreen::Top)()) {
-        if (MessageBox(kAskOpeningMessageSkipMessage, DialogType::DialogYesNo)
-                .SetClear(ClearScreen::Top)()) {
-          File::Create(kSkipSaveFileName);
-          MessageBox(kCreatedOpSkipBinMessage).SetClear(ClearScreen::Top)();
-          Process::ReturnToHomeMenu();
-        } else {
-          MessageBox(kEnjoyPluginMessage).SetClear(ClearScreen::Top)();
-        }
-      } else {
-        MessageBox(kTeamAndConditionAgreementMessage)
-            .SetClear(ClearScreen::Top)();
-        Process::ReturnToHomeMenu();
-      }
-    }
-
-  } else {
+  if (title_id != kMhxTitleId) {
     MessageBox(kOtherGameMessage).SetClear(ClearScreen::Top)();
     Process::ReturnToHomeMenu();
   }
+  if (File::Exists(kSkipSaveFileName) == 1) {
+    return;
+  }
+  MessageBox(kOpeningMessage, kThanksMessage).SetClear(ClearScreen::Top)();
+  if (!MessageBox(kTeamAndConditionMessageTitle, kTeamAndConditionMessage,
+                  DialogType::DialogYesNo)
+           .SetClear(ClearScreen::Top)()) {
+    MessageBox(kTeamAndConditionAgreementMessage).SetClear(ClearScreen::Top)();
+    Process::ReturnToHomeMenu();
+  }
+  if (!MessageBox(kAskOpeningMessageSkipMessage, DialogType::DialogYesNo)
+           .SetClear(ClearScreen::Top)()) {
+    MessageBox(kEnjoyPluginMessage).SetClear(ClearScreen::Top)();
+    return;
+  }
+  File::Create(kSkipSaveFileName);
+  MessageBox(kCreatedOpSkipBinMessage).SetClear(ClearScreen::Top)();
   Process::Play();
 }
 
