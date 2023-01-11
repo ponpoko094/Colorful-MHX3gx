@@ -8,7 +8,8 @@
 
 ## はじめに
 
-このプラグインはもともと舞姫氏のActionReplayチートがベースとなっています。 ぽこはそれをフォークし、3gxならではの機能（キーボードやOSD等）を用いてさらに使いやすくしようとしました。しかし、最初の頃はバグだらけでコンパイル時にはいつもエラー文が出ていました。ですが、ぽこは多くの3gx開発者にアドバイスを頂き、ここまで成長できました。本当に感謝しています。
+このプラグインはもともと舞姫氏のActionReplayチートがベースとなっています。
+ぽこはそれをフォークし、3gxならではの機能（キーボードやOSD等）を用いてさらに使いやすくしようとしました。しかし、最初の頃はバグだらけでコンパイル時にはいつもエラー文が出ていました。ですが、ぽこは多くの3gx開発者にアドバイスを頂き、ここまで成長できました。本当に感謝しています。
 
 ## プラグインの紹介
 
@@ -18,10 +19,14 @@
 
 ## Colorful-MHX3gxを使うためには
 
-1. [Luma3ds v10.3](https://github.com/Nanquitas/Luma3DS/releases/) からboot.firmをダウンロードし、SDカードの一番上の階層にコピーしてください。
-2. [Colorful-MHX3gx/releases](https://github.com/ponpoko094/Colorful-MHX3gx/releases) からMHX3gx.3gxをダウンロードしてください。
-3. Colorful-MHX3gx.3gxをSDカードの`luma\plugins\0004000000155400` の中にコピーしてください。もしもフォルダーがなかったら作成してください。
-4. 3DSを起動し、ホームメニューで`L+↓+Select`を押しRosalina menuを開き、Plugin Loaderの項目を**Enabled** にしてください。
+1. [Luma3ds v10.3](https://github.com/Nanquitas/Luma3DS/releases/)
+   からboot.firmをダウンロードし、SDカードの一番上の階層にコピーしてください。
+2. [Colorful-MHX3gx/releases](https://github.com/ponpoko094/Colorful-MHX3gx/releases)
+   からMHX3gx.3gxをダウンロードしてください。
+3. Colorful-MHX3gx.3gxをSDカードの`luma\plugins\0004000000155400`
+   の中にコピーしてください。もしもフォルダーがなかったら作成してください。
+4. 3DSを起動し、ホームメニューで`L+↓+Select`を押しRosalina menuを開き、Plugin Loaderの項目を*
+   *Enabled** にしてください。
 5. MHXを起動し、画面が一瞬青く光ったら使えます。
 
 ## 開発者向け
@@ -32,7 +37,8 @@
 
 ### フレームワークやライブラリは何を使ってるの？
 
-[CTRPluginFramework](https://github.com/mariohackandglitch/CTRPluginFramework-BlankTemplate) と [libctru](https://github.com/devkitPro/libctru) を使っています。
+[CTRPluginFramework](https://github.com/mariohackandglitch/CTRPluginFramework-BlankTemplate)
+と [libctru](https://github.com/devkitPro/libctru) を使っています。
 
 ### MHX3gxをコンパイルするにはどうすればいいの？
 
@@ -44,11 +50,12 @@ exeファイルを開きインストールしてください。
 
 #### [3gxtool](https://gitlab.com/thepixellizeross/3gxtool/-/releases)
 
-解凍し、`C:\devkitPro\tools\bin`にコピーしてください。 
+解凍し、`C:\devkitPro\tools\bin`にコピーしてください。
 
 #### [libCTRPF(v0.7.3)](https://gitlab.com/thepixellizeross/ctrpluginframework/-/releases)
 
-解凍し、中にあるincludeとlibフォルダーを`C:\devkitPro\libctrpf` の中にコピーしてください。もしもフォルダーがなかったら作成してください。
+解凍し、中にあるincludeとlibフォルダーを`C:\devkitPro\libctrpf`
+の中にコピーしてください。もしもフォルダーがなかったら作成してください。
 
 <details><summary>gxman by @HIDE810 （※v0.7.1以下のソースをコンパイルする時に使用してください。）</summary>
 
@@ -70,17 +77,18 @@ Golang(1.16以上) がお使いのシステムにインストールされてい�
 
 フォルダの名前に括弧等の一部の記号が含まれているとコンパイルエラーを起こします。
 
-|  結果 |         フォルダ名         |
+| 結果 | フォルダ名 |
 | :-: | :-------------------: |
-|  ✅  |   `Colorful-MHX3gx`   |
-|  ✅  |  `Colorful-MHX3gx_1`  |
-|  ❌  | `Colorful-MHX3gx (1)` |
+| ✅ |   `Colorful-MHX3gx`   |
+| ✅ |  `Colorful-MHX3gx_1`  |
+| ❌ | `Colorful-MHX3gx (1)` |
 
 build.batを起動してください。または、**Colorful-MHX3gxフォルダー上**で`make re`コマンドを動かしてください。
 
 ### どうやって3dsに3gxを送信すればいいの？
 
-3ds側で[FTPD](https://github.com/mtheall/ftpd/releases/latest) を使ってFTPサーバーを立てた状態で、
+3ds側で[FTPD](https://github.com/mtheall/ftpd/releases/latest)
+を使ってFTPサーバーを立てた状態で、
 
 `make ftp`コマンドを動かすと、ファイルの送信が行われます。
 
