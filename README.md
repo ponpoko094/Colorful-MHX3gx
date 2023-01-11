@@ -142,4 +142,4 @@ CTRPFがv0.7.4になったことで、3DSエミュレータである[Citra Night
 
 Colorful-MHX3gx is licensed under the [MIT License](LICENSE)
 
-Colorful-MHX3gx 2019-2022
+Colorful-MHX3gx 2019-2023
