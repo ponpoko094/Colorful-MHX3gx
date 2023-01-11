@@ -884,142 +884,79 @@ void PlayerMoonJump(MenuEntry* /*entry*/) {
   }
 }
 
+bool IsOnline() { return *reinterpret_cast<u16*>(0x80913EC) == 0x100; }
+
+u8 ReadPlayerRoomPosition() { return *reinterpret_cast<u8*>(0x831B1C8); }
+
+std::array<u32, 4> ReadAllPlayerPointers() {
+  std::array<u32, 4> player_pointer;
+  for (int i = 0; i < player_pointer.size(); i++) {
+    Process::Read32(0x831B284 + i * 0x4, player_pointer.at(i));
+  }
+  return player_pointer;
+}
+
+u32 ReadPlayerPointer() { return *reinterpret_cast<u32*>(0x8195350); }
+
+std::array<std::array<float, 3>, 4> ReadAllPlayerCoordinates(
+    std::array<u32, 4> player_pointers) {
+  std::array<std::array<float, 3>, 4> player_coordinates;
+  for (int i = 0; i < player_pointers.size(); i++) {
+    for (int j = 0; j < player_coordinates.at(0).size(); j++) {
+      Process::ReadFloat(player_pointers.at(i) + 0x40 + j * 0x4,
+                         player_coordinates.at(i).at(j));
+    }
+  }
+  return player_coordinates;
+}
+
+void SelectStalkerTarget(std::array<bool, 3>& is_player_stalker) {
+  if (Controller::IsKeysPressed(R + DPadUp)) {
+    is_player_stalker.fill(false);
+    is_player_stalker.at(0) = true;
+    OSD::Notify("StalkerP1:" << Color::Green << "ON!");
+  }
+  if (Controller::IsKeysPressed(R + DPadRight)) {
+    is_player_stalker.fill(false);
+    is_player_stalker.at(1) = true;
+    OSD::Notify("StalkerP2:" << Color::Green << "ON!");
+  }
+  if (Controller::IsKeysPressed(R + DPadDown)) {
+    is_player_stalker.fill(false);
+    is_player_stalker.at(2) = true;
+    OSD::Notify("StalkerP3:" << Color::Green << "ON!");
+  }
+  if (Controller::IsKeysPressed(R + DPadLeft)) {
+    is_player_stalker.fill(false);
+    OSD::Notify("Stalker:" << Color::Red << "OFF!");
+  }
+}
+
 // 他プレイヤーストーカー
 void Stalker(MenuEntry* /*entry*/) {
-  u16 online;
-  u32 player;
-  u32 p_1;
-  u32 p_2;
-  u32 p_3;
-  u32 p_4;
-  u32 p_1_x;
-  u32 p_2_x;
-  u32 p_3_x;
-  u32 p_4_x;
-  u32 p_1_y;
-  u32 p_2_y;
-  u32 p_3_y;
-  u32 p_4_y;
-  u32 p_1_z;
-  u32 p_2_z;
-  u32 p_3_z;
-  u32 p_4_z;
-  static u8 player_room_position;
-  static bool is_player_1_stalker = false;
-  static bool is_player_2_stalker = false;
-  static bool is_player_3_stalker = false;
-  Process::Read32(0x8195350, player);
-  Process::Read16(0x80913EC, online);
-  Process::Read32(0x831B284, p_1);
-  Process::Read32(0x831B288, p_2);
-  Process::Read32(0x831B28C, p_3);
-  Process::Read32(0x831B290, p_4);
-  Process::Read32(p_1 + 0x40, p_1_x);
-  Process::Read32(p_1 + 0x44, p_1_y);
-  Process::Read32(p_1 + 0x48, p_1_z);
-  Process::Read32(p_2 + 0x40, p_2_x);
-  Process::Read32(p_2 + 0x44, p_2_y);
-  Process::Read32(p_2 + 0x48, p_2_z);
-  Process::Read32(p_3 + 0x40, p_3_x);
-  Process::Read32(p_3 + 0x44, p_3_y);
-  Process::Read32(p_3 + 0x48, p_3_z);
-  Process::Read32(p_4 + 0x40, p_4_x);
-  Process::Read32(p_4 + 0x44, p_4_y);
-  Process::Read32(p_4 + 0x48, p_4_z);
-  Process::Read8(0x831B1C8, player_room_position);
-  if (online == 0x100) {
-    if (Controller::IsKeysPressed(R + DPadUp)) {
-      is_player_1_stalker = true;
-      is_player_2_stalker = false;
-      is_player_3_stalker = false;
-      OSD::Notify("StalkerP1:" << Color::Green << "ON!");
-    }
-    if (Controller::IsKeysPressed(R + DPadRight)) {
-      is_player_1_stalker = false;
-      is_player_2_stalker = true;
-      is_player_3_stalker = false;
-      OSD::Notify("StalkerP2:" << Color::Green << "ON!");
-    }
-    if (Controller::IsKeysPressed(R + DPadDown)) {
-      is_player_1_stalker = false;
-      is_player_2_stalker = false;
-      is_player_3_stalker = true;
-      OSD::Notify("StalkerP3:" << Color::Green << "ON!");
-    }
-    if (Controller::IsKeysPressed(R + DPadLeft)) {
-      is_player_1_stalker = false;
-      is_player_2_stalker = false;
-      is_player_3_stalker = false;
-      OSD::Notify("Stalker:" << Color::Red << "OFF!");
-    }
+  if (!IsOnline()) {
+    return;
+  }
+  const auto kPlayerRoomPosition = ReadPlayerRoomPosition();
+  const auto kPlayerPointers = ReadAllPlayerPointers();
+  const auto kPlayerCoordinates = ReadAllPlayerCoordinates(kPlayerPointers);
+  const auto kPlayer = ReadPlayerPointer();
+  static std::array<bool, 3> is_player_stalker{false, false, false};
+  SelectStalkerTarget(is_player_stalker);
 
-    if (player_room_position == 0x0) {
-      if (is_player_1_stalker && p_2 != 0x0) {
-        Process::Write32(player + 0x40, p_2_x);
-        Process::Write32(player + 0x44, p_2_y);
-        Process::Write32(player + 0x48, p_2_z);
-      }
-      if (is_player_2_stalker && p_3 != 0x0) {
-        Process::Write32(player + 0x40, p_3_x);
-        Process::Write32(player + 0x44, p_3_y);
-        Process::Write32(player + 0x48, p_3_z);
-      }
-      if (is_player_3_stalker && p_4 != 0x0) {
-        Process::Write32(player + 0x40, p_4_x);
-        Process::Write32(player + 0x44, p_4_y);
-        Process::Write32(player + 0x48, p_4_z);
-      }
+  int offset = 0;
+  for (int i = 0; i < kPlayerCoordinates.size() - 1; i++) {
+    if (i + offset == kPlayerRoomPosition) {
+      offset++;
     }
-    if (player_room_position == 0x1) {
-      if (is_player_1_stalker && p_1 != 0x0) {
-        Process::Write32(player + 0x40, p_1_x);
-        Process::Write32(player + 0x44, p_1_y);
-        Process::Write32(player + 0x48, p_1_z);
-      }
-      if (is_player_2_stalker && p_3 != 0x0) {
-        Process::Write32(player + 0x40, p_3_x);
-        Process::Write32(player + 0x44, p_3_y);
-        Process::Write32(player + 0x48, p_3_z);
-      }
-      if (is_player_3_stalker && p_4 != 0x0) {
-        Process::Write32(player + 0x40, p_4_x);
-        Process::Write32(player + 0x44, p_4_y);
-        Process::Write32(player + 0x48, p_4_z);
-      }
+    if (kPlayerPointers.at(i + offset) == 0x0) {
+      continue;
     }
-    if (player_room_position == 0x2) {
-      if (is_player_1_stalker && p_1 != 0x0) {
-        Process::Write32(player + 0x40, p_1_x);
-        Process::Write32(player + 0x44, p_1_y);
-        Process::Write32(player + 0x48, p_1_z);
-      }
-      if (is_player_2_stalker && p_2 != 0x0) {
-        Process::Write32(player + 0x40, p_2_x);
-        Process::Write32(player + 0x44, p_2_y);
-        Process::Write32(player + 0x48, p_2_z);
-      }
-      if (is_player_3_stalker && p_4 != 0x0) {
-        Process::Write32(player + 0x40, p_4_x);
-        Process::Write32(player + 0x44, p_4_y);
-        Process::Write32(player + 0x48, p_4_z);
-      }
+    if (!is_player_stalker.at(i)) {
+      continue;
     }
-    if (player_room_position == 0x3) {
-      if (is_player_1_stalker && p_1 != 0x0) {
-        Process::Write32(player + 0x40, p_1_x);
-        Process::Write32(player + 0x44, p_1_y);
-        Process::Write32(player + 0x48, p_1_z);
-      }
-      if (is_player_2_stalker && p_2 != 0x0) {
-        Process::Write32(player + 0x40, p_2_x);
-        Process::Write32(player + 0x44, p_2_y);
-        Process::Write32(player + 0x48, p_2_z);
-      }
-      if (is_player_3_stalker && p_3 != 0x0) {
-        Process::Write32(player + 0x40, p_3_x);
-        Process::Write32(player + 0x44, p_3_y);
-        Process::Write32(player + 0x48, p_3_z);
-      }
+    for (int j = 0; j < kPlayerCoordinates.at(0).size(); j++) {
+      Process::WriteFloat(kPlayer + 0x40 + j * 0x4, kPlayerCoordinates.at(i + offset).at(j));
     }
   }
 }
@@ -1150,8 +1087,7 @@ void Monster1HpDisplay(MenuEntry* /*entry*/) {
       foreground_color = Color::Green;
     }
     libpon::OsdPlus::Draw(Utils::Format("Mon1HP %u", mon_1_hp), 10, 100,
-                          kScreen,
-                          foreground_color);
+                          kScreen, foreground_color);
   }
 }
 
@@ -1176,8 +1112,7 @@ void Monster2HpDisplay(MenuEntry* /*entry*/) {
       foreground_color = Color::Green;
     }
     libpon::OsdPlus::Draw(Utils::Format("Mon2HP %u", mon_2_hp), 10, 110,
-                          kScreen,
-                          foreground_color);
+                          kScreen, foreground_color);
   }
 }
 
@@ -2791,8 +2726,9 @@ Result McuGetBatteryLevel(u8* out) {
   u32* ipc = getThreadCommandBuffer();
   ipc[0] = 0x50000;
   Result ret = svcSendSyncRequest(mcuhwcHandle);
-  if (ret < 0) { return ret;
-}
+  if (ret < 0) {
+    return ret;
+  }
   *out = ipc[2];
   return static_cast<Result>(ipc[1]);
 }
@@ -3900,7 +3836,8 @@ void InQuestSpeedHack(MenuEntry* /*entry*/) {
                     {"クエスト中武器適応", "クエスト中武器無適応"});
   int const kChoice = keyboard.Open();
   if (kChoice == 0) {
-    Keyboard const kInputFloat("クエスト中の移動速度(武器適応)を入力してください。");
+    Keyboard const kInputFloat(
+        "クエスト中の移動速度(武器適応)を入力してください。");
     if (kInputFloat.Open(quest_true) == 0) {
       Process::WriteFloat(0x3250C8, quest_true);
     }
