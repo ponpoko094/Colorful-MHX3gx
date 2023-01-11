@@ -19,7 +19,7 @@
 
 ## Colorful-MHX3gxを使うためには
 
-1. [Luma3ds v10.3](https://github.com/Nanquitas/Luma3DS/releases/)
+1. [Luma3ds](https://github.com/Nanquitas/Luma3DS/releases/)
    からboot.firmをダウンロードし、SDカードの一番上の階層にコピーしてください。
 2. [Colorful-MHX3gx/releases](https://github.com/ponpoko094/Colorful-MHX3gx/releases)
    からMHX3gx.3gxをダウンロードしてください。
@@ -48,11 +48,11 @@
 
 exeファイルを開きインストールしてください。
 
-#### [3gxtool](https://gitlab.com/thepixellizeross/3gxtool/-/releases)
+#### [3gxtool(v1.1)](https://gitlab.com/thepixellizeross/3gxtool/-/releases)
 
 解凍し、`C:\devkitPro\tools\bin`にコピーしてください。
 
-#### [libCTRPF(v0.7.3)](https://gitlab.com/thepixellizeross/ctrpluginframework/-/releases)
+#### [libCTRPF(v0.7.4)](https://gitlab.com/thepixellizeross/ctrpluginframework/-/releases)
 
 解凍し、中にあるincludeとlibフォルダーを`C:\devkitPro\libctrpf`
 の中にコピーしてください。もしもフォルダーがなかったら作成してください。
@@ -83,7 +83,7 @@ Golang(1.16以上) がお使いのシステムにインストールされてい�
 | ✅ |  `Colorful-MHX3gx_1`  |
 | ❌ | `Colorful-MHX3gx (1)` |
 
-build.batを起動してください。または、**Colorful-MHX3gxフォルダー上**で`make re`コマンドを動かしてください。
+`build.bat`を起動してください。または、**Colorful-MHX3gxフォルダー上**で`make re`コマンドを動かしてください。
 
 ### どうやって3dsに3gxを送信すればいいの？
 
@@ -93,6 +93,16 @@ build.batを起動してください。または、**Colorful-MHX3gxフォルダ
 `make ftp`コマンドを動かすと、ファイルの送信が行われます。
 
 `make send`コマンドを動かすと、コンパイルとファイルの送信が同時に行われます。
+
+### どうやってCitraに3gxを送信すればいいの？
+
+CTRPFがv0.7.4になったことで、3DSエミュレータである[Citra Nightly](https://citra-emu.org/download/)
+上で3gxが動かせられるようになりました。
+
+`make citra`コマンドを動かすと、`%APPDATA%\Citra\sdmc\luma\plugins\0004000000155400`
+にファイルの送信が行われます。
+
+また、`sendcitra.bat`を起動することでもファイルの送信ができます。
 
 ## クレジット（協力して頂いた人たち、また参考にしたサイト）
 
