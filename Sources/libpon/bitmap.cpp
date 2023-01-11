@@ -12,7 +12,7 @@ void Bitmap::Draw() {
     if (!screen.IsTop) {
       return (false);
     }
-    if (is_draw == true) {
+    if (is_draw) {
       // for (int i = 0; i <) screen.DrawPixel(0, 0, );
       is_draw = false;
     }

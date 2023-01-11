@@ -18,8 +18,8 @@ u32 OsdPlus::Draw(const std::string& str, u32 pos_x, u32 pos_y,
 u32 OsdPlus::DrawSystemFont(const std::string& str, u32 pos_x, u32 pos_y,
                             const Screen& screen, const Color& foreground,
                             const Color& background) {
-  float text_width = OSD::GetTextWidth(true, str);
-  screen.DrawRect(pos_x, pos_y, (u32)text_width, 16, background);
+  const float kTextWidth = OSD::GetTextWidth(true, str);
+  screen.DrawRect(pos_x, pos_y, static_cast<u32>(kTextWidth), 16, background);
   screen.DrawSysfont(str, pos_x, pos_y, foreground);
   return pos_y + 16;
 }

@@ -40,8 +40,8 @@ bool KeyboardPlus::Toggle32(const std::string& message, const u32& offset,
                             const u32& enable, const u32& disable) {
   OptionsKB->GetMessage() = message;
   OptionsKB->Populate(kListToggle);
-  int choice = OptionsKB->Open();
-  switch (choice) {
+  const int kChoice = OptionsKB->Open();
+  switch (kChoice) {
     case 0:
       Process::Write32(offset, enable);
       break;
@@ -51,15 +51,15 @@ bool KeyboardPlus::Toggle32(const std::string& message, const u32& offset,
     default:
       break;
   }
-  return choice;
+  return kChoice != 0;
 }
 
 bool KeyboardPlus::Toggle16(const std::string& message, const u32& offset,
                             const u16& enable, const u16& disable) {
   OptionsKB->GetMessage() = message;
   OptionsKB->Populate(kListToggle);
-  int choice = OptionsKB->Open();
-  switch (choice) {
+  const int kChoice = OptionsKB->Open();
+  switch (kChoice) {
     case 0:
       Process::Write16(offset, enable);
       break;
@@ -69,15 +69,15 @@ bool KeyboardPlus::Toggle16(const std::string& message, const u32& offset,
     default:
       break;
   }
-  return choice;
+  return kChoice != 0;
 }
 
 bool KeyboardPlus::Toggle8(const std::string& message, const u32& offset,
                            const u8& enable, const u8& disable) {
   OptionsKB->GetMessage() = message;
   OptionsKB->Populate(kListToggle);
-  int choice = OptionsKB->Open();
-  switch (choice) {
+  const int kChoice = OptionsKB->Open();
+  switch (kChoice) {
     case 0:
       Process::Write8(offset, enable);
       break;
@@ -87,37 +87,29 @@ bool KeyboardPlus::Toggle8(const std::string& message, const u32& offset,
     default:
       break;
   }
-  return choice;
+  return kChoice != 0;
 }
 
 bool KeyboardPlus::MultiToggle32(const std::string& message,
                                  std::vector<std::vector<u32>> value) {
   OptionsKB->GetMessage() = message;
   OptionsKB->Populate(kListToggle);
-  int choice = OptionsKB->Open();
-  switch (choice) {
-    case 0:
-      for (auto& i : value) {
-        Process::Write32(i[0], i[1]);
-      }
-      break;
-    case 1:
-      for (auto& i : value) {
-        Process::Write32(i[0], i[2]);
-      }
-      break;
-    default:
-      break;
+  const int kChoice = OptionsKB->Open();
+  if (kChoice == -1) {
+    return false;
   }
-  return choice;
+  for (auto& i : value) {
+    Process::Write32(i.at(0), i.at(1 + kChoice));
+  }
+  return kChoice != 0;
 }
 
 bool KeyboardPlus::LengthToggle32(const std::string& message, const int length,
                                   u32 base_address, std::vector<u32> value) {
   OptionsKB->GetMessage() = message;
   OptionsKB->Populate(kListToggle);
-  int choice = OptionsKB->Open();
-  switch (choice) {
+  const int kChoice = OptionsKB->Open();
+  switch (kChoice) {
     case 0:
       for (int i = 0; i < length; i++) {
         Process::Write32(base_address + i * 0x4, value[i]);
@@ -130,7 +122,7 @@ bool KeyboardPlus::LengthToggle32(const std::string& message, const int length,
     default:
       break;
   }
-  return choice;
+  return kChoice != 0;
 }
 
 KeyboardPlus::~KeyboardPlus() {
