@@ -76,11 +76,14 @@ clean:
 	@echo clean ... 
 	@rm -fr $(BUILD) $(OUTPUT).3gx
 
+re: clean all
+
 ftp:
 	@echo;
 	@python .\sendfile.py
 
-re: clean all
+citra:
+	@.\sendcitra.bat
 
 send: clean all ftp
 
