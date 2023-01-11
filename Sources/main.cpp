@@ -17,7 +17,7 @@ static void ToggleTouchscreenForceOn() {
   static u32 original = 0;
   static u32* patch_address = nullptr;
 
-  if (patch_address && original) {
+  if ((patch_address != nullptr) && (original != 0U)) {
     *patch_address = original;
     return;
   }
@@ -32,7 +32,9 @@ static void ToggleTouchscreenForceOn() {
   s64 start_address = 0;
   u32* found;
 
-  if (R_FAILED(svcOpenProcess(&process_handle, 16))) return;
+  if (R_FAILED(svcOpenProcess(&process_handle, 16))) {
+    return;
+  }
 
   svcGetProcessInfo(&text_total_size, process_handle, 0x10002);
   svcGetProcessInfo(&start_address, process_handle, 0x10005);
@@ -42,11 +44,12 @@ static void ToggleTouchscreenForceOn() {
     goto exit;
   }
 
-  found = (u32*)Utils::Search<u32>(0x14000000, (u32)text_total_size, kPattern);
+  found = reinterpret_cast<u32*>(
+      Utils::Search<u32>(0x14000000, (u32)text_total_size, kPattern));
 
   if (found != nullptr) {
     original = found[13];
-    patch_address = (u32*)PA_FROM_VA((found + 13));
+    patch_address = reinterpret_cast<u32*>(PA_FROM_VA((found + 13)));
     found[13] = 0xE1A00000;
   }
 
@@ -70,8 +73,8 @@ static MenuEntry* EntryWithHotkey(MenuEntry* entry, const Hotkey& hotkey) {
 
 static MenuEntry* EntryWithHotkey(MenuEntry* entry,
                                   const std::vector<Hotkey>& hotkeys) {
-  for (const Hotkey& hotkey : hotkeys) {
-    entry->Hotkeys += hotkey;
+  for (const Hotkey& kHotkey : hotkeys) {
+    entry->Hotkeys += kHotkey;
   }
   return (entry);
 }
@@ -989,24 +992,30 @@ void InitMenu(PluginMenu& menu) {
     *bonus += new MenuEntry("3DSの情報を確認", nullptr, Information,
                             "3DSの情報を確認できます。");
     *bonus += new MenuEntry(
-        "フレンドコードシード値確認", nullptr, [](MenuEntry* entry) {
+        "フレンドコードシード値確認", nullptr, [](MenuEntry* /*entry*/) {
           MessageBox(Utils::Format("%X", Security::GetFriendCodeSeed))();
         });
   }
   menu += bonus;
 }
 
-void LocalTimeDisplay(Time ttime) {
-  FwkSettings& settings = FwkSettings::Get();
-  const Screen& top_screen = OSD::GetTopScreen();
+void LocalTimeDisplay(Time /*time*/) {
+  const FwkSettings& kSettings = FwkSettings::Get();
+  const Screen& kTopScreen = OSD::GetTopScreen();
   std::string am_or_pm;
   const std::vector<std::string> kListDayOfTheWeek{
       "日", "月", "火", "水", "木", "金", "土",
   };
-  u32 seconds, minutes, hours_24, hours_12, days, year, month,
-      day_of_the_week_index;
-  u64 milliseconds = osGetTime();
-  seconds = milliseconds / 1000;
+  u32 seconds;
+  u32 minutes;
+  u32 hours_24;
+  u32 hours_12;
+  u32 days;
+  u32 year;
+  u32 month;
+  u32 day_of_the_week_index;
+  const u64 kMilliseconds = osGetTime();
+  seconds = kMilliseconds / 1000;
   minutes = seconds / 60;
   seconds %= 60;
   hours_24 = minutes / 60;
@@ -1017,23 +1026,27 @@ void LocalTimeDisplay(Time ttime) {
   year = 1900;  // osGetTime starts in 1900
 
   while (true) {
-    bool leap_year = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
-    u16 days_in_year = leap_year ? 366 : 365;
-    if (days >= days_in_year) {
-      days -= days_in_year;
+    const bool kLeapYear =
+        (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
+    const u16 kDaysInYear = kLeapYear ? 366 : 365;
+    if (days >= kDaysInYear) {
+      days -= kDaysInYear;
       ++year;
     } else {
-      static const u8 days_in_month[12] = {31, 28, 31, 30, 31, 30,
-                                           31, 31, 30, 31, 30, 31};
+      static const std::array<u8, 12> kDaysInMonth{31, 28, 31, 30, 31, 30,
+                                                   31, 31, 30, 31, 30, 31};
       for (month = 0; month < 12; ++month) {
-        u8 dim = days_in_month[month];
+        u8 dim = kDaysInMonth.at(month);
 
-        if (month == 1 && leap_year) ++dim;
+        if (month == 1 && kLeapYear) {
+          ++dim;
+        }
 
-        if (days >= dim)
+        if (days >= dim) {
           days -= dim;
-        else
+        } else {
           break;
+        }
       }
       break;
     }
@@ -1041,28 +1054,28 @@ void LocalTimeDisplay(Time ttime) {
   days++;
   month++;
 
-  if (hours_24 / 12) {
+  if ((hours_24 / 12) != 0U) {
     am_or_pm = "午後";
   } else {
     am_or_pm = "午前";
   }
-  if (hours_24 % 12) {
+  if ((hours_24 % 12) != 0U) {
     hours_12 = hours_24 % 12;
   } else {
     hours_12 = 12;
   }
 
   day_of_the_week_index = (year + year / 4 - year / 100 + year / 400 +
-                           (int)(2.6 * month + 1.6) + days) %
+                           static_cast<int>(2.6 * month + 1.6) + days) %
                           7;
-  top_screen.DrawRect(30, 0, 340, 20, settings.BackgroundMainColor, true);
-  top_screen.DrawRect(32, 1, 336, 19, settings.BackgroundBorderColor, false);
+  kTopScreen.DrawRect(30, 0, 340, 20, kSettings.BackgroundMainColor, true);
+  kTopScreen.DrawRect(32, 1, 336, 19, kSettings.BackgroundBorderColor, false);
   libpon::OsdPlus::DrawSystemFont(
       Utils::Format("%04lu年%02lu月%02lu日(%s)%s%02lu時%02lu分%02lu秒", year,
                     month, days,
                     kListDayOfTheWeek.at(day_of_the_week_index).c_str(),
                     am_or_pm.c_str(), hours_12, minutes, seconds),
-      34, 3, top_screen, Color::White, settings.BackgroundMainColor);
+      34, 3, kTopScreen, Color::White, kSettings.BackgroundMainColor);
 }
 
 // Plugin menu
