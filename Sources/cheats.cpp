@@ -956,7 +956,8 @@ void Stalker(MenuEntry* /*entry*/) {
       continue;
     }
     for (int j = 0; j < kPlayerCoordinates.at(0).size(); j++) {
-      Process::WriteFloat(kPlayer + 0x40 + j * 0x4, kPlayerCoordinates.at(i + offset).at(j));
+      Process::WriteFloat(kPlayer + 0x40 + j * 0x4,
+                          kPlayerCoordinates.at(i + offset).at(j));
     }
   }
 }
