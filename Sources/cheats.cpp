@@ -932,17 +932,11 @@ void SelectStalkerTarget(std::array<bool, 3>& is_player_stalker) {
   }
 }
 
-// 他プレイヤーストーカー
-void Stalker(MenuEntry* /*entry*/) {
-  if (!IsOnline()) {
-    return;
-  }
+void CopyOtherHunterCoodinateToPlayer(std::array<bool, 3>& is_player_stalker) {
   const auto kPlayerRoomPosition = ReadPlayerRoomPosition();
   const auto kPlayerPointers = ReadAllPlayerPointers();
   const auto kPlayerCoordinates = ReadAllPlayerCoordinates(kPlayerPointers);
   const auto kPlayer = ReadPlayerPointer();
-  static std::array<bool, 3> is_player_stalker{false, false, false};
-  SelectStalkerTarget(is_player_stalker);
 
   int offset = 0;
   for (int i = 0; i < kPlayerCoordinates.size() - 1; i++) {
@@ -960,6 +954,16 @@ void Stalker(MenuEntry* /*entry*/) {
                           kPlayerCoordinates.at(i + offset).at(j));
     }
   }
+}
+
+// 他プレイヤーストーカー
+void Stalker(MenuEntry* /*entry*/) {
+  if (!IsOnline()) {
+    return;
+  }
+  static std::array<bool, 3> is_player_stalker{false, false, false};
+  SelectStalkerTarget(is_player_stalker);
+  CopyOtherHunterCoodinateToPlayer(is_player_stalker);
 }
 
 // モンスター座標移動
