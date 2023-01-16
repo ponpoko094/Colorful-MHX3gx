@@ -970,6 +970,10 @@ void Stalker(MenuEntry* /*entry*/) {
   CopyOtherHunterCoordinateToPlayer(is_player_stalker);
 }
 
+u8 CountMonsterSameArea() {
+  return *reinterpret_cast<u8*>(0x832526C);
+}
+
 u32 ReadMonsterPointer(const int& index) {
   return *reinterpret_cast<u32*>(0x8325244 + index * 0x4);
 }
