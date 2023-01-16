@@ -932,7 +932,7 @@ void SelectStalkerTarget(std::array<bool, 3>& is_player_stalker) {
   }
 }
 
-void CopyOtherHunterCoodinateToPlayer(std::array<bool, 3>& is_player_stalker) {
+void CopyOtherHunterCoordinateToPlayer(std::array<bool, 3>& is_player_stalker) {
   const auto kPlayerRoomPosition = ReadPlayerRoomPosition();
   const auto kPlayerPointers = ReadAllPlayerPointers();
   const auto kPlayerCoordinates = ReadAllPlayerCoordinates(kPlayerPointers);
@@ -963,7 +963,7 @@ void Stalker(MenuEntry* /*entry*/) {
   }
   static std::array<bool, 3> is_player_stalker{false, false, false};
   SelectStalkerTarget(is_player_stalker);
-  CopyOtherHunterCoodinateToPlayer(is_player_stalker);
+  CopyOtherHunterCoordinateToPlayer(is_player_stalker);
 }
 
 // モンスター座標移動
