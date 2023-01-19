@@ -212,7 +212,8 @@ void PlayerNameChange(MenuEntry* /*entry*/) {
   if (kChoice == 1) {
     std::string player_before_name = ReadPlayerName();
     ClearPlayerName();
-    Process::WriteString(0x831B72A, InputPlayerName(player_before_name), StringFormat::Utf8);
+    Process::WriteString(0x831B72A, InputPlayerName(player_before_name),
+                         StringFormat::Utf8);
   }
 }
 
@@ -870,38 +871,38 @@ u16 GetEquipmentBoxIndex() {
   return index;
 }
 
+u32 ReadPlayerPointer() { return *reinterpret_cast<u32*>(0x8195350); }
+
+Coordinate ReadPlayerCoordinates(const u32& player_pointer) {
+  return {.x = *reinterpret_cast<float*>(player_pointer + 0x40),
+          .y = *reinterpret_cast<float*>(player_pointer + 0x44),
+          .z = *reinterpret_cast<float*>(player_pointer + 0x48)};
+}
+
 // プレイヤー座標移動
 void PlayerCoordinateModifier(MenuEntry* /*entry*/) {
-  u32 offset;
-  float player_x;
-  float player_z;
-  Process::Read32(0x8195350, offset);
-  Process::ReadFloat(offset + 0x40, player_x);
-  Process::ReadFloat(offset + 0x48, player_z);
-
+  const auto kPlayerPointer = ReadPlayerPointer();
+  const auto [kX, kY, kZ] = ReadPlayerCoordinates(kPlayerPointer);
   if (Controller::IsKeysDown(A + DPadUp)) {
-    Process::WriteFloat(offset + 0x48, player_z - 50);
+    Process::WriteFloat(kPlayerPointer + 0x48, kZ - 50);
   }
   if (Controller::IsKeysDown(A + DPadDown)) {
-    Process::WriteFloat(offset + 0x48, player_z + 50);
+    Process::WriteFloat(kPlayerPointer + 0x48, kZ + 50);
   }
   if (Controller::IsKeysDown(A + DPadLeft)) {
-    Process::WriteFloat(offset + 0x40, player_x - 50);
+    Process::WriteFloat(kPlayerPointer + 0x40, kX - 50);
   }
   if (Controller::IsKeysDown(A + DPadRight)) {
-    Process::WriteFloat(offset + 0x40, player_x + 50);
+    Process::WriteFloat(kPlayerPointer + 0x40, kX + 50);
   }
 }
 
 // ムーンジャンプ
 void PlayerMoonJump(MenuEntry* /*entry*/) {
-  u32 offset;
-  float player_y;
-  Process::Read32(0x8195350, offset);
-  Process::ReadFloat(offset + 0x44, player_y);
-
+  const auto kPlayerPointer = ReadPlayerPointer();
+  const auto [kX, kY, kZ] = ReadPlayerCoordinates(kPlayerPointer);
   if (Controller::IsKeysDown(R + B)) {
-    Process::WriteFloat(offset + 0x44, player_y + 50);
+    Process::WriteFloat(kPlayerPointer + 0x44, kY + 50);
   }
 }
 
@@ -911,14 +912,6 @@ u8 ReadPlayerRoomPosition() { return *reinterpret_cast<u8*>(0x831B1C8); }
 
 u32 ReadOnlinePlayerPointers(const int& index) {
   return *reinterpret_cast<u32*>(0x831B284 + index * 0x4);
-}
-
-u32 ReadPlayerPointer() { return *reinterpret_cast<u32*>(0x8195350); }
-
-Coordinate ReadPlayerCoordinates(const u32& player_pointer) {
-  return {.x = *reinterpret_cast<float*>(player_pointer + 0x40),
-          .y = *reinterpret_cast<float*>(player_pointer + 0x44),
-          .z = *reinterpret_cast<float*>(player_pointer + 0x48)};
 }
 
 void SelectStalkerTarget(std::array<bool, 3>& is_player_stalker) {
