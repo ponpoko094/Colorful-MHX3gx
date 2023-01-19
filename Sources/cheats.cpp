@@ -171,31 +171,48 @@ void QuestTimeStop(MenuEntry* /*entry*/) {
                          0xBA000008);
 }
 
+void ClearPlayerName() {
+  for (int i = 0; i < 8; i++) {
+    Process::Write32(i * 4 + 0x831B72A, 0);
+  }
+}
+
+std::string ReadPlayerName() {
+  std::string name;
+  Process::ReadString(0x831B72A, name, 0x1E, StringFormat::Utf8);
+  return name;
+}
+
+std::string ReadPhrase(const int& index) {
+  std::string phrase;
+  Process::ReadString(0x83AE218 + index * 0x3C, phrase, 0x1E,
+                      StringFormat::Utf8);
+  return phrase;
+}
+
+std::string InputPlayerName(const std::string& player_before_name) {
+  std::string player_name;
+  if (Keyboard("名前を入力してください。").Open(player_name) != 0) {
+    return player_before_name;
+  };
+  return player_name;
+}
+
 // 名前変更
 void PlayerNameChange(MenuEntry* /*entry*/) {
   const std::vector<std::string> kListFixKeyboard{"定型文", "キーボード"};
-  std::string hunter_name_fix;
-  std::string hunter_name_now;
-  std::string hunter_name_keyboard;
-  Process::ReadString(0x83AE380, hunter_name_fix, 0x1E, StringFormat::Utf8);
-  Process::ReadString(0x831B72A, hunter_name_now, 0x1E, StringFormat::Utf8);
   Keyboard keyboard(
-      "どちらで変更しますか？\n現在の名前[" + hunter_name_now + "]",
+      "どちらで変更しますか？\n現在の名前[" + ReadPlayerName() + "]",
       kListFixKeyboard);
   const int kChoice = keyboard.Open();
   if (kChoice == 0) {
-    for (int i = 0; i < 8; i++) {
-      Process::Write32(i * 4 + 0x831B72A, 0);
-    }
-    Process::WriteString(0x831B72A, hunter_name_fix, StringFormat::Utf8);
-  } else if (kChoice == 1) {
-    const Keyboard kKeyboard("名前を入力してください。");
-    if (kKeyboard.Open(hunter_name_keyboard) == 0) {
-      for (int i = 0; i < 8; i++) {
-        Process::Write32(i * 4 + 0x831B72A, 0);
-      }
-      Process::WriteString(0x831B72A, hunter_name_keyboard, StringFormat::Utf8);
-    }
+    ClearPlayerName();
+    Process::WriteString(0x831B72A, ReadPhrase(6), StringFormat::Utf8);
+  }
+  if (kChoice == 1) {
+    std::string player_before_name = ReadPlayerName();
+    ClearPlayerName();
+    Process::WriteString(0x831B72A, InputPlayerName(player_before_name), StringFormat::Utf8);
   }
 }
 
