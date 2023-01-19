@@ -892,45 +892,36 @@ bool IsOnline() { return *reinterpret_cast<u16*>(0x80913EC) == 0x100; }
 
 u8 ReadPlayerRoomPosition() { return *reinterpret_cast<u8*>(0x831B1C8); }
 
-std::array<u32, 4> ReadAllPlayerPointers() {
-  std::array<u32, 4> player_pointer;
-  for (int i = 0; i < player_pointer.size(); i++) {
-    Process::Read32(0x831B284 + i * 0x4, player_pointer.at(i));
-  }
-  return player_pointer;
+u32 ReadOnlinePlayerPointers(const int& index) {
+  return *reinterpret_cast<u32*>(0x831B284 + index * 0x4);
 }
 
 u32 ReadPlayerPointer() { return *reinterpret_cast<u32*>(0x8195350); }
 
-std::array<std::array<float, 3>, 4> ReadAllPlayerCoordinates(
-    std::array<u32, 4> player_pointers) {
-  std::array<std::array<float, 3>, 4> player_coordinates;
-  for (int i = 0; i < player_pointers.size(); i++) {
-    for (int j = 0; j < player_coordinates.at(0).size(); j++) {
-      Process::ReadFloat(player_pointers.at(i) + 0x40 + j * 0x4,
-                         player_coordinates.at(i).at(j));
-    }
-  }
-  return player_coordinates;
+Coordinate ReadPlayerCoordinates(const u32& player_pointer) {
+  return {.x = *reinterpret_cast<float*>(player_pointer + 0x40),
+          .y = *reinterpret_cast<float*>(player_pointer + 0x44),
+          .z = *reinterpret_cast<float*>(player_pointer + 0x48)};
 }
 
 void SelectStalkerTarget(std::array<bool, 3>& is_player_stalker) {
-  if (Controller::IsKeysPressed(R + DPadUp)) {
+  if (Controller::IsKeysPressed(R + DPadUp) && !is_player_stalker.at(0)) {
     is_player_stalker.fill(false);
     is_player_stalker.at(0) = true;
     OSD::Notify("StalkerP1:" << Color::Green << "ON!");
   }
-  if (Controller::IsKeysPressed(R + DPadRight)) {
+  if (Controller::IsKeysPressed(R + DPadRight) && !is_player_stalker.at(1)) {
     is_player_stalker.fill(false);
     is_player_stalker.at(1) = true;
     OSD::Notify("StalkerP2:" << Color::Green << "ON!");
   }
-  if (Controller::IsKeysPressed(R + DPadDown)) {
+  if (Controller::IsKeysPressed(R + DPadDown) && !is_player_stalker.at(2)) {
     is_player_stalker.fill(false);
     is_player_stalker.at(2) = true;
     OSD::Notify("StalkerP3:" << Color::Green << "ON!");
   }
-  if (Controller::IsKeysPressed(R + DPadLeft)) {
+  if (Controller::IsKeysPressed(R + DPadLeft) &&
+      std::ranges::any_of(is_player_stalker, std::identity())) {
     is_player_stalker.fill(false);
     OSD::Notify("Stalker:" << Color::Red << "OFF!");
   }
@@ -938,25 +929,23 @@ void SelectStalkerTarget(std::array<bool, 3>& is_player_stalker) {
 
 void CopyOtherHunterCoordinateToPlayer(std::array<bool, 3>& is_player_stalker) {
   const auto kPlayerRoomPosition = ReadPlayerRoomPosition();
-  const auto kPlayerPointers = ReadAllPlayerPointers();
-  const auto kPlayerCoordinates = ReadAllPlayerCoordinates(kPlayerPointers);
-  const auto kPlayer = ReadPlayerPointer();
+  const auto kPlayerPointer = ReadPlayerPointer();
 
-  int offset = 0;
-  for (int i = 0; i < kPlayerCoordinates.size() - 1; i++) {
+  for (int i = 0, offset = 0; i < 3; i++) {
     if (i + offset == kPlayerRoomPosition) {
-      offset++;
+      offset = 1;
     }
-    if (kPlayerPointers.at(i + offset) == 0x0) {
+    const auto kOnlinePlayerPointers = ReadOnlinePlayerPointers(i + offset);
+    if (kOnlinePlayerPointers == 0x0) {
       continue;
     }
     if (!is_player_stalker.at(i)) {
       continue;
     }
-    for (int j = 0; j < kPlayerCoordinates.at(0).size(); j++) {
-      Process::WriteFloat(kPlayer + 0x40 + j * 0x4,
-                          kPlayerCoordinates.at(i + offset).at(j));
-    }
+    const auto [kX, kY, kZ] = ReadPlayerCoordinates(kOnlinePlayerPointers);
+    Process::WriteFloat(kPlayerPointer + 0x40, kX);
+    Process::WriteFloat(kPlayerPointer + 0x44, kY);
+    Process::WriteFloat(kPlayerPointer + 0x48, kZ);
   }
 }
 
@@ -970,9 +959,7 @@ void Stalker(MenuEntry* /*entry*/) {
   CopyOtherHunterCoordinateToPlayer(is_player_stalker);
 }
 
-u8 CountMonsterSameArea() {
-  return *reinterpret_cast<u8*>(0x832526C);
-}
+u8 CountMonsterSameArea() { return *reinterpret_cast<u8*>(0x832526C); }
 
 u32 ReadMonsterPointer(const int& index) {
   return *reinterpret_cast<u32*>(0x8325244 + index * 0x4);
@@ -994,20 +981,16 @@ void MonsterDPadCoordinate(const u32& monster_pointer) {
   if (IsMonsterSameArea(monster_pointer)) {
     const auto kMonsterCoordinate = ReadMonsterCoordinate(monster_pointer);
     if (Controller::IsKeysDown(DPadUp)) {
-      Process::WriteFloat(monster_pointer + 0x1000,
-                          kMonsterCoordinate.z - 50);
+      Process::WriteFloat(monster_pointer + 0x1000, kMonsterCoordinate.z - 50);
     }
     if (Controller::IsKeysDown(DPadDown)) {
-      Process::WriteFloat(monster_pointer + 0x1000,
-                          kMonsterCoordinate.z + 50);
+      Process::WriteFloat(monster_pointer + 0x1000, kMonsterCoordinate.z + 50);
     }
     if (Controller::IsKeysDown(DPadLeft)) {
-      Process::WriteFloat(monster_pointer + 0xFF8,
-                          kMonsterCoordinate.x - 50);
+      Process::WriteFloat(monster_pointer + 0xFF8, kMonsterCoordinate.x - 50);
     }
     if (Controller::IsKeysDown(DPadRight)) {
-      Process::WriteFloat(monster_pointer + 0xFF8,
-                          kMonsterCoordinate.x + 50);
+      Process::WriteFloat(monster_pointer + 0xFF8, kMonsterCoordinate.x + 50);
     }
   }
 }
@@ -1016,20 +999,16 @@ void MonsterCPadCoordinate(const u32& monster_pointer) {
   if (IsMonsterSameArea(monster_pointer)) {
     const auto kMonsterCoordinate = ReadMonsterCoordinate(monster_pointer);
     if (Controller::IsKeysDown(CPadUp)) {
-      Process::WriteFloat(monster_pointer + 0x1000,
-                          kMonsterCoordinate.z - 50);
+      Process::WriteFloat(monster_pointer + 0x1000, kMonsterCoordinate.z - 50);
     }
     if (Controller::IsKeysDown(CPadDown)) {
-      Process::WriteFloat(monster_pointer + 0x1000,
-                          kMonsterCoordinate.z + 50);
+      Process::WriteFloat(monster_pointer + 0x1000, kMonsterCoordinate.z + 50);
     }
     if (Controller::IsKeysDown(CPadLeft)) {
-      Process::WriteFloat(monster_pointer + 0xFF8,
-                          kMonsterCoordinate.x - 50);
+      Process::WriteFloat(monster_pointer + 0xFF8, kMonsterCoordinate.x - 50);
     }
     if (Controller::IsKeysDown(CPadRight)) {
-      Process::WriteFloat(monster_pointer + 0xFF8,
-                          kMonsterCoordinate.x + 50);
+      Process::WriteFloat(monster_pointer + 0xFF8, kMonsterCoordinate.x + 50);
     }
   }
 }
