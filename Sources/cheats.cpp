@@ -988,44 +988,48 @@ Coordinate ReadMonsterCoordinate(const u32& monster_pointer) {
 }
 
 void MonsterDPadCoordinate(const u32& monster_pointer) {
-  if (IsMonsterSameArea(monster_pointer)) {
-    const auto kMonsterCoordinate = ReadMonsterCoordinate(monster_pointer);
-    if (Controller::IsKeysDown(DPadUp)) {
-      Process::WriteFloat(monster_pointer + 0x1000, kMonsterCoordinate.z - 50);
-    }
-    if (Controller::IsKeysDown(DPadDown)) {
-      Process::WriteFloat(monster_pointer + 0x1000, kMonsterCoordinate.z + 50);
-    }
-    if (Controller::IsKeysDown(DPadLeft)) {
-      Process::WriteFloat(monster_pointer + 0xFF8, kMonsterCoordinate.x - 50);
-    }
-    if (Controller::IsKeysDown(DPadRight)) {
-      Process::WriteFloat(monster_pointer + 0xFF8, kMonsterCoordinate.x + 50);
-    }
+  if (!IsMonsterSameArea(monster_pointer)) {
+    return;
+  }
+  const auto [kX, kY, kZ] = ReadMonsterCoordinate(monster_pointer);
+  if (Controller::IsKeysDown(DPadUp)) {
+    Process::WriteFloat(monster_pointer + 0x1000, kZ - 50);
+  }
+  if (Controller::IsKeysDown(DPadDown)) {
+    Process::WriteFloat(monster_pointer + 0x1000, kZ + 50);
+  }
+  if (Controller::IsKeysDown(DPadLeft)) {
+    Process::WriteFloat(monster_pointer + 0xFF8, kX - 50);
+  }
+  if (Controller::IsKeysDown(DPadRight)) {
+    Process::WriteFloat(monster_pointer + 0xFF8, kX + 50);
   }
 }
 
 void MonsterCPadCoordinate(const u32& monster_pointer) {
-  if (IsMonsterSameArea(monster_pointer)) {
-    const auto kMonsterCoordinate = ReadMonsterCoordinate(monster_pointer);
-    if (Controller::IsKeysDown(CPadUp)) {
-      Process::WriteFloat(monster_pointer + 0x1000, kMonsterCoordinate.z - 50);
-    }
-    if (Controller::IsKeysDown(CPadDown)) {
-      Process::WriteFloat(monster_pointer + 0x1000, kMonsterCoordinate.z + 50);
-    }
-    if (Controller::IsKeysDown(CPadLeft)) {
-      Process::WriteFloat(monster_pointer + 0xFF8, kMonsterCoordinate.x - 50);
-    }
-    if (Controller::IsKeysDown(CPadRight)) {
-      Process::WriteFloat(monster_pointer + 0xFF8, kMonsterCoordinate.x + 50);
-    }
+  if (!IsMonsterSameArea(monster_pointer)) {
+    return;
+  }
+  const auto [kX, kY, kZ] = ReadMonsterCoordinate(monster_pointer);
+  if (Controller::IsKeysDown(CPadUp)) {
+    Process::WriteFloat(monster_pointer + 0x1000, kZ - 50);
+  }
+  if (Controller::IsKeysDown(CPadDown)) {
+    Process::WriteFloat(monster_pointer + 0x1000, kZ + 50);
+  }
+  if (Controller::IsKeysDown(CPadLeft)) {
+    Process::WriteFloat(monster_pointer + 0xFF8, kX - 50);
+  }
+  if (Controller::IsKeysDown(CPadRight)) {
+    Process::WriteFloat(monster_pointer + 0xFF8, kX + 50);
   }
 }
 
 // モンスター座標移動
 void MonsterCoordinateModifier(MenuEntry* /*entry*/) {
-  if (!Controller::IsKeysDown(X)) return;
+  if (!Controller::IsKeysDown(X)) {
+    return;
+  }
   MonsterDPadCoordinate(ReadMonsterPointer(0));
   MonsterCPadCoordinate(ReadMonsterPointer(1));
 }
