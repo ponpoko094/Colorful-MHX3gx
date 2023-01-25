@@ -21,7 +21,7 @@ jobs:
         run: make
 
       - name: Upload Plugin
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Plugin 3GX File
           path: Colorful-MHX3gx.3gx
