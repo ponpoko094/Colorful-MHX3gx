@@ -1,6 +1,6 @@
-#include <bitset>
-
 #include "cheats.hpp"
+
+#include <bitset>
 
 #include "libpon/keyboard_plus.hpp"
 #include "libpon/osd_plus.hpp"
@@ -175,7 +175,7 @@ void QuestTimeStop(MenuEntry* /*entry*/) {
 
 void ClearPlayerName() {
   for (int i = 0; i < 8; i++) {
-    Process::Write32(i * 4 + 0x831B72A, 0);
+    Process::Write32(0x831B72A + i * 4, 0);
   }
 }
 
@@ -924,7 +924,7 @@ void SelectStalkerTarget(std::bitset<3>& is_player_stalker) {
   }
   if (Controller::IsKeysPressed(R + DPadRight) && !is_player_stalker.test(1)) {
     is_player_stalker.reset();
-    is_player_stalker.set(1) ;
+    is_player_stalker.set(1);
     OSD::Notify("StalkerP2:" << Color::Green << "ON!");
   }
   if (Controller::IsKeysPressed(R + DPadDown) && !is_player_stalker.test(2)) {
