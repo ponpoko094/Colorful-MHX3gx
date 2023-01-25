@@ -175,7 +175,7 @@ void QuestTimeStop(MenuEntry* /*entry*/) {
 
 void ClearPlayerName() {
   for (int i = 0; i < 8; i++) {
-    Process::Write32(0x831B72A + i * 4, 0);
+    Process::Write32(0x831B72A + i * 0x4, 0);
   }
 }
 
