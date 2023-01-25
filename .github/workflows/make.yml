@@ -12,16 +12,16 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: pablomk7/libctrpf:0.7.3
+      image: pablomk7/libctrpf:0.7.4
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Build Plugin
         run: make
 
       - name: Upload Plugin
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Plugin 3GX File
           path: Colorful-MHX3gx.3gx
