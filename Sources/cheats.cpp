@@ -1,3 +1,5 @@
+#include <bitset>
+
 #include "cheats.hpp"
 
 #include "libpon/keyboard_plus.hpp"
@@ -914,30 +916,29 @@ u32 ReadOnlinePlayerPointers(const int& index) {
   return *reinterpret_cast<u32*>(0x831B284 + index * 0x4);
 }
 
-void SelectStalkerTarget(std::array<bool, 3>& is_player_stalker) {
-  if (Controller::IsKeysPressed(R + DPadUp) && !is_player_stalker.at(0)) {
-    is_player_stalker.fill(false);
-    is_player_stalker.at(0) = true;
+void SelectStalkerTarget(std::bitset<3>& is_player_stalker) {
+  if (Controller::IsKeysPressed(R + DPadUp) && !is_player_stalker.test(0)) {
+    is_player_stalker.reset();
+    is_player_stalker.set(0);
     OSD::Notify("StalkerP1:" << Color::Green << "ON!");
   }
-  if (Controller::IsKeysPressed(R + DPadRight) && !is_player_stalker.at(1)) {
-    is_player_stalker.fill(false);
-    is_player_stalker.at(1) = true;
+  if (Controller::IsKeysPressed(R + DPadRight) && !is_player_stalker.test(1)) {
+    is_player_stalker.reset();
+    is_player_stalker.set(1) ;
     OSD::Notify("StalkerP2:" << Color::Green << "ON!");
   }
-  if (Controller::IsKeysPressed(R + DPadDown) && !is_player_stalker.at(2)) {
-    is_player_stalker.fill(false);
-    is_player_stalker.at(2) = true;
+  if (Controller::IsKeysPressed(R + DPadDown) && !is_player_stalker.test(2)) {
+    is_player_stalker.reset();
+    is_player_stalker.set(2);
     OSD::Notify("StalkerP3:" << Color::Green << "ON!");
   }
-  if (Controller::IsKeysPressed(R + DPadLeft) &&
-      std::ranges::any_of(is_player_stalker, std::identity())) {
-    is_player_stalker.fill(false);
+  if (Controller::IsKeysPressed(R + DPadLeft) && is_player_stalker.any()) {
+    is_player_stalker.reset(false);
     OSD::Notify("Stalker:" << Color::Red << "OFF!");
   }
 }
 
-void CopyOtherHunterCoordinateToPlayer(std::array<bool, 3>& is_player_stalker) {
+void CopyOtherHunterCoordinateToPlayer(std::bitset<3>& is_player_stalker) {
   const auto kPlayerRoomPosition = ReadPlayerRoomPosition();
   const auto kPlayerPointer = ReadPlayerPointer();
 
@@ -949,7 +950,7 @@ void CopyOtherHunterCoordinateToPlayer(std::array<bool, 3>& is_player_stalker) {
     if (kOnlinePlayerPointers == 0x0) {
       continue;
     }
-    if (!is_player_stalker.at(i)) {
+    if (!is_player_stalker.test(i)) {
       continue;
     }
     const auto [kX, kY, kZ] = ReadPlayerCoordinates(kOnlinePlayerPointers);
@@ -964,7 +965,7 @@ void Stalker(MenuEntry* /*entry*/) {
   if (!IsOnline()) {
     return;
   }
-  static std::array<bool, 3> is_player_stalker{false, false, false};
+  static std::bitset<3> is_player_stalker;
   SelectStalkerTarget(is_player_stalker);
   CopyOtherHunterCoordinateToPlayer(is_player_stalker);
 }

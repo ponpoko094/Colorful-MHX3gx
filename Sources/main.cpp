@@ -9,6 +9,8 @@
 #include "patch.hpp"
 #include "team_and_conditions.hpp"
 
+#include <array>
+
 namespace CTRPluginFramework {
 
 // This patch the NFC disabling the touchscreen when scanning an amiibo, which
