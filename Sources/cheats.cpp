@@ -843,24 +843,25 @@ void AmuletSlotChange(MenuEntry* /*entry*/) {
 // チャット無限
 void ChatInfinite(MenuEntry* /*entry*/) { Process::Write8(0xDD4CA0, 0x0); }
 
+bool IsOnline() { return *reinterpret_cast<u16*>(0x80913EC) == 0x100; }
+
 // 装備コピー
 void OtherPlayerEquipmentCopy(MenuEntry* /*entry*/) {
   const std::vector<std::string> kList1To4Player{"P1", "P2", "P3", "P4"};
   u32 equip;
-  u32 online;
-  Process::Read32(0x80913EC, online);
   Keyboard keyboard("装備をコピーしたいプレイヤーを選んで下さい",
                     kList1To4Player);
   const int kChoice = keyboard.Open();
-  if (kChoice >= 0) {
-    if (online == 0x100) {
-      for (int i = 0; i < 0x138; i++) {
-        Process::Read32(kChoice * 0x494 + i * 0x4 + 0x831C9E4, equip);
-        Process::Write32(i * 0x4 + 0x8386C58, equip);
-      }
-    } else {
-      MessageBox("オフラインではコピーできません")();
-    }
+  if (kChoice < 0) {
+    return;
+  }
+  if (!IsOnline()) {
+    MessageBox("オフラインではコピーできません")();
+    return;
+  }
+  for (int i = 0; i < 0x138; i++) {
+    Process::Read32(0x831C9E4 + kChoice * 0x494 + i * 0x4, equip);
+    Process::Write32(0x8386C58 + i * 0x4, equip);
   }
 }
 
@@ -907,8 +908,6 @@ void PlayerMoonJump(MenuEntry* /*entry*/) {
     Process::WriteFloat(kPlayerPointer + 0x44, kY + 50);
   }
 }
-
-bool IsOnline() { return *reinterpret_cast<u16*>(0x80913EC) == 0x100; }
 
 u8 ReadPlayerRoomPosition() { return *reinterpret_cast<u8*>(0x831B1C8); }
 
