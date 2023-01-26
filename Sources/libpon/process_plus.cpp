@@ -1,4 +1,5 @@
 #include "libpon/process_plus.hpp"
+#include <iterator>
 
 namespace CTRPluginFramework {
 
@@ -20,7 +21,7 @@ void ProcessPlus::Write8(const std::vector<u32>& address, u8 value) {
 }
 
 void ProcessPlus::Write8(std::vector<u32> address, std::vector<u8> value) {
-  for (int i = 0; i < address.size(); i++) {
+  for (int i = 0; i < std::ssize(address); i++) {
     Process::Write8(address[i], value[i]);
   }
 }
@@ -43,7 +44,7 @@ void ProcessPlus::Write8(const std::vector<u32>& pointer, u32 offset,
 void ProcessPlus::Write8(std::vector<u32> pointer, u32 offset,
                          std::vector<u8> value) {
   u32 address;
-  for (int i = 0; i < pointer.size(); i++) {
+  for (int i = 0; i < std::ssize(pointer); i++) {
     Process::Read32(pointer[i], address);
     Process::Write8(address + offset, value[i]);
   }
@@ -52,7 +53,7 @@ void ProcessPlus::Write8(std::vector<u32> pointer, u32 offset,
 void ProcessPlus::Write8(std::vector<u32> pointer, std::vector<u32> offset,
                          u8 value) {
   u32 address;
-  for (int i = 0; i < pointer.size(); i++) {
+  for (int i = 0; i < std::ssize(pointer); i++) {
     Process::Read32(pointer[i], address);
     Process::Write8(address + offset[i], value);
   }
@@ -61,7 +62,7 @@ void ProcessPlus::Write8(std::vector<u32> pointer, std::vector<u32> offset,
 void ProcessPlus::Write8(std::vector<u32> pointer, std::vector<u32> offset,
                          std::vector<u8> value) {
   u32 address;
-  for (int i = 0; i < pointer.size(); i++) {
+  for (int i = 0; i < std::ssize(pointer); i++) {
     Process::Read32(pointer[i], address);
     Process::Write8(address + offset[i], value[i]);
   }
@@ -97,7 +98,7 @@ void ProcessPlus::Write16(const std::vector<u32>& address, u16 value) {
 }
 
 void ProcessPlus::Write16(std::vector<u32> address, std::vector<u16> value) {
-  for (int i = 0; i < address.size(); i++) {
+  for (int i = 0; i < std::ssize(address); i++) {
     Process::Write16(address[i], value[i]);
   }
 }
@@ -120,7 +121,7 @@ void ProcessPlus::Write16(const std::vector<u32>& pointer, u32 offset,
 void ProcessPlus::Write16(std::vector<u32> pointer, u32 offset,
                           std::vector<u16> value) {
   u32 address;
-  for (int i = 0; i < pointer.size(); i++) {
+  for (int i = 0; i < std::ssize(pointer); i++) {
     Process::Read32(pointer[i], address);
     Process::Write16(address + offset, value[i]);
   }
@@ -129,7 +130,7 @@ void ProcessPlus::Write16(std::vector<u32> pointer, u32 offset,
 void ProcessPlus::Write16(std::vector<u32> pointer, std::vector<u32> offset,
                           u16 value) {
   u32 address;
-  for (int i = 0; i < pointer.size(); i++) {
+  for (int i = 0; i < std::ssize(pointer); i++) {
     Process::Read32(pointer[i], address);
     Process::Write16(address + offset[i], value);
   }
@@ -138,7 +139,7 @@ void ProcessPlus::Write16(std::vector<u32> pointer, std::vector<u32> offset,
 void ProcessPlus::Write16(std::vector<u32> pointer, std::vector<u32> offset,
                           std::vector<u16> value) {
   u32 address;
-  for (int i = 0; i < pointer.size(); i++) {
+  for (int i = 0; i < std::ssize(pointer); i++) {
     Process::Read32(pointer[i], address);
     Process::Write16(address + offset[i], value[i]);
   }
@@ -174,7 +175,7 @@ void ProcessPlus::Write32(const std::vector<u32>& address, u32 value) {
 }
 
 void ProcessPlus::Write32(std::vector<u32> address, std::vector<u32> value) {
-  for (int i = 0; i < address.size(); i++) {
+  for (int i = 0; i < std::ssize(address); i++) {
     Process::Write32(address[i], value[i]);
   }
 }
@@ -197,7 +198,7 @@ void ProcessPlus::Write32(const std::vector<u32>& pointer, u32 offset,
 void ProcessPlus::Write32(std::vector<u32> pointer, u32 offset,
                           std::vector<u32> value) {
   u32 address;
-  for (int i = 0; i < pointer.size(); i++) {
+  for (int i = 0; i < std::ssize(pointer); i++) {
     Process::Read32(pointer[i], address);
     Process::Write32(address + offset, value[i]);
   }
@@ -206,7 +207,7 @@ void ProcessPlus::Write32(std::vector<u32> pointer, u32 offset,
 void ProcessPlus::Write32(std::vector<u32> pointer, std::vector<u32> offset,
                           u32 value) {
   u32 address;
-  for (int i = 0; i < pointer.size(); i++) {
+  for (int i = 0; i < std::ssize(pointer); i++) {
     Process::Read32(pointer[i], address);
     Process::Write32(address + offset[i], value);
   }
@@ -215,7 +216,7 @@ void ProcessPlus::Write32(std::vector<u32> pointer, std::vector<u32> offset,
 void ProcessPlus::Write32(std::vector<u32> pointer, std::vector<u32> offset,
                           std::vector<u32> value) {
   u32 address;
-  for (int i = 0; i < pointer.size(); i++) {
+  for (int i = 0; i < std::ssize(pointer); i++) {
     Process::Read32(pointer[i], address);
     Process::Write32(address + offset[i], value[i]);
   }
@@ -251,7 +252,7 @@ void ProcessPlus::Write64(const std::vector<u32>& address, u64 value) {
 }
 
 void ProcessPlus::Write64(std::vector<u32> address, std::vector<u64> value) {
-  for (int i = 0; i < address.size(); i++) {
+  for (int i = 0; i < std::ssize(address); i++) {
     Process::Write64(address[i], value[i]);
   }
 }
@@ -274,7 +275,7 @@ void ProcessPlus::Write64(const std::vector<u32>& pointer, u32 offset,
 void ProcessPlus::Write64(std::vector<u32> pointer, u32 offset,
                           std::vector<u64> value) {
   u32 address;
-  for (int i = 0; i < pointer.size(); i++) {
+  for (int i = 0; i < std::ssize(pointer); i++) {
     Process::Read32(pointer[i], address);
     Process::Write64(address + offset, value[i]);
   }
@@ -283,7 +284,7 @@ void ProcessPlus::Write64(std::vector<u32> pointer, u32 offset,
 void ProcessPlus::Write64(std::vector<u32> pointer, std::vector<u32> offset,
                           u64 value) {
   u32 address;
-  for (int i = 0; i < pointer.size(); i++) {
+  for (int i = 0; i < std::ssize(pointer); i++) {
     Process::Read32(pointer[i], address);
     Process::Write64(address + offset[i], value);
   }
@@ -292,7 +293,7 @@ void ProcessPlus::Write64(std::vector<u32> pointer, std::vector<u32> offset,
 void ProcessPlus::Write64(std::vector<u32> pointer, std::vector<u32> offset,
                           std::vector<u64> value) {
   u32 address;
-  for (int i = 0; i < pointer.size(); i++) {
+  for (int i = 0; i < std::ssize(pointer); i++) {
     Process::Read32(pointer[i], address);
     Process::Write64(address + offset[i], value[i]);
   }
@@ -329,7 +330,7 @@ void ProcessPlus::WriteFloat(const std::vector<u32>& address, float value) {
 
 void ProcessPlus::WriteFloat(std::vector<u32> address,
                              std::vector<float> value) {
-  for (int i = 0; i < address.size(); i++) {
+  for (int i = 0; i < std::ssize(address); i++) {
     Process::WriteFloat(address[i], value[i]);
   }
 }
@@ -352,7 +353,7 @@ void ProcessPlus::WriteFloat(const std::vector<u32>& pointer, u32 offset,
 void ProcessPlus::WriteFloat(std::vector<u32> pointer, u32 offset,
                              std::vector<float> value) {
   u32 address;
-  for (int i = 0; i < pointer.size(); i++) {
+  for (int i = 0; i < std::ssize(pointer); i++) {
     Process::Read32(pointer[i], address);
     Process::WriteFloat(address + offset, value[i]);
   }
@@ -361,7 +362,7 @@ void ProcessPlus::WriteFloat(std::vector<u32> pointer, u32 offset,
 void ProcessPlus::WriteFloat(std::vector<u32> pointer, std::vector<u32> offset,
                              float value) {
   u32 address;
-  for (int i = 0; i < pointer.size(); i++) {
+  for (int i = 0; i < std::ssize(pointer); i++) {
     Process::Read32(pointer[i], address);
     Process::WriteFloat(address + offset[i], value);
   }
@@ -370,7 +371,7 @@ void ProcessPlus::WriteFloat(std::vector<u32> pointer, std::vector<u32> offset,
 void ProcessPlus::WriteFloat(std::vector<u32> pointer, std::vector<u32> offset,
                              std::vector<float> value) {
   u32 address;
-  for (int i = 0; i < pointer.size(); i++) {
+  for (int i = 0; i < std::ssize(pointer); i++) {
     Process::Read32(pointer[i], address);
     Process::WriteFloat(address + offset[i], value[i]);
   }
@@ -408,7 +409,7 @@ void ProcessPlus::WriteDouble(const std::vector<u32>& address, double value) {
 
 void ProcessPlus::WriteDouble(std::vector<u32> address,
                               std::vector<double> value) {
-  for (int i = 0; i < address.size(); i++) {
+  for (int i = 0; i < std::ssize(address); i++) {
     Process::WriteDouble(address[i], value[i]);
   }
 }
@@ -431,7 +432,7 @@ void ProcessPlus::WriteDouble(const std::vector<u32>& pointer, u32 offset,
 void ProcessPlus::WriteDouble(std::vector<u32> pointer, u32 offset,
                               std::vector<double> value) {
   u32 address;
-  for (int i = 0; i < pointer.size(); i++) {
+  for (int i = 0; i < std::ssize(pointer); i++) {
     Process::Read32(pointer[i], address);
     Process::WriteDouble(address + offset, value[i]);
   }
@@ -440,7 +441,7 @@ void ProcessPlus::WriteDouble(std::vector<u32> pointer, u32 offset,
 void ProcessPlus::WriteDouble(std::vector<u32> pointer, std::vector<u32> offset,
                               double value) {
   u32 address;
-  for (int i = 0; i < pointer.size(); i++) {
+  for (int i = 0; i < std::ssize(pointer); i++) {
     Process::Read32(pointer[i], address);
     Process::WriteDouble(address + offset[i], value);
   }
@@ -449,7 +450,7 @@ void ProcessPlus::WriteDouble(std::vector<u32> pointer, std::vector<u32> offset,
 void ProcessPlus::WriteDouble(std::vector<u32> pointer, std::vector<u32> offset,
                               std::vector<double> value) {
   u32 address;
-  for (int i = 0; i < pointer.size(); i++) {
+  for (int i = 0; i < std::ssize(pointer); i++) {
     Process::Read32(pointer[i], address);
     Process::WriteDouble(address + offset[i], value[i]);
   }

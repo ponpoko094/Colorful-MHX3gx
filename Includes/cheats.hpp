@@ -5,6 +5,13 @@
 
 namespace CTRPluginFramework {
 
+enum Operator {
+    PLUS,
+    MINUS,
+    MULTIPLY,
+    DIVIDE
+};
+
 std::vector<std::string> GetListPalicoSkill();
 std::vector<std::string> GetListPalicoAction();
 std::vector<std::string> GetListToggle();

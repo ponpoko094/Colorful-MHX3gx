@@ -35,6 +35,12 @@ class KeyboardPlus {
   // Delete keyboard object
   KeyboardPlus() = default;
   ~KeyboardPlus();
+
+ private:
+  enum Toggle {
+    ENABLE,
+    DISABLE
+  };
 };
 
 }  // namespace CTRPluginFramework

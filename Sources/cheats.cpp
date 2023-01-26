@@ -1,6 +1,7 @@
 #include "cheats.hpp"
 
 #include <bitset>
+#include <iterator>
 
 #include "libpon/keyboard_plus.hpp"
 #include "libpon/osd_plus.hpp"
@@ -1275,7 +1276,7 @@ void VillageContributionPointChange(MenuEntry* /*entry*/) {
                                               "ポッケ村", "ユクモ村"};
   Keyboard keyboard("貢献度を変更したい村を選んでください。", kListVillage);
   const int kChoice = keyboard.Open();
-  for (int i = 0; i < kListVillage.size(); i++) {
+  for (int i = 0; i < std::ssize(kListVillage); i++) {
     if (i == kChoice) {
       Keyboard key("貢献度を入力してください。");
       key.IsHexadecimal(false);
@@ -1460,7 +1461,7 @@ void GuildCardBigMonsterHuntingCountChange(
   const int kBigMonster = monster_choice.Open();
   Keyboard keyboard("討伐数を入力してください。");
   keyboard.IsHexadecimal(false);
-  if (keyboard.Open(value) == 0 && value >= 0) {
+  if (keyboard.Open(value) == 0) {
     Process::Write16(kBigMonster * 2 + 0x83B3D6C, value);
   }
 }
@@ -1481,7 +1482,7 @@ void GuildCardSmallMonsterHuntingCountChange() {
   const int kSmallMonster = monster_choice.Open();
   Keyboard keyboard("討伐数を入力してください。");
   keyboard.IsHexadecimal(false);
-  if (keyboard.Open(value) == 0 && value >= 0) {
+  if (keyboard.Open(value) == 0) {
     Process::Write16(kSmallMonster * 2 + 0x83B3E06, value);
   }
 }
@@ -1510,7 +1511,7 @@ void GuildCardMonsterCaptureCountChange(
   const int kBigMonster = monster_choice.Open();
   Keyboard keyboard("捕獲数を入力してください。");
   keyboard.IsHexadecimal(false);
-  if (keyboard.Open(value) == 0 && value >= 0) {
+  if (keyboard.Open(value) == 0) {
     Process::Write16(kBigMonster * 2 + 0x83B3E4C, value);
   }
 }
@@ -2851,7 +2852,7 @@ void HexadecimalCalculator(MenuEntry* /*entry*/) {
   u32 data;
   int hex_1;
   int hex_2;
-  int ans;
+  int ans = 0;
   int choice;
   Keyboard const kInput1("1番目の16進数を入力してください。");
   if (kInput1.Open(data) == 0) {
@@ -2863,14 +2864,20 @@ void HexadecimalCalculator(MenuEntry* /*entry*/) {
       Keyboard const kInput2("2番目の16進数を入力してください。");
       if (kInput2.Open(data) == 0) {
         hex_2 = static_cast<int>(data);
-        if (choice == 0) {
-          ans = hex_1 + hex_2;
-        } else if (choice == 1) {
-          ans = hex_1 - hex_2;
-        } else if (choice == 2) {
-          ans = hex_1 * hex_2;
-        } else if (choice == 3) {
-          ans = hex_1 / hex_2;
+        switch (choice)
+        {
+          case PLUS:
+            ans = hex_1 + hex_2;
+            break;
+          case MINUS:
+            ans = hex_1 - hex_2;
+            break;
+          case MULTIPLY:
+            ans = hex_1 * hex_2;
+            break;
+          case DIVIDE:
+            ans = hex_1 / hex_2;
+            break; 
         }
         MessageBox(Utils::Format("結果は %X です。", ans))();
       }
@@ -2882,7 +2889,7 @@ void DecimalCalculator(MenuEntry* /*entry*/) {
   u32 data;
   int dec_1;
   int dec_2;
-  int ans;
+  int ans = 0;
   int choice;
   Keyboard input_1("1番目の10進数を入力してください。");
   input_1.IsHexadecimal(false);
@@ -2896,14 +2903,20 @@ void DecimalCalculator(MenuEntry* /*entry*/) {
       input_2.IsHexadecimal(false);
       if (input_2.Open(data) == 0) {
         dec_2 = static_cast<int>(data);
-        if (choice == 0) {
-          ans = dec_1 + dec_2;
-        } else if (choice == 1) {
-          ans = dec_1 - dec_2;
-        } else if (choice == 2) {
-          ans = dec_1 * dec_2;
-        } else if (choice == 3) {
-          ans = dec_1 / dec_2;
+        switch (choice)
+        {
+          case PLUS:
+            ans = dec_1 + dec_2;
+            break;
+          case MINUS:
+            ans = dec_1 - dec_2;
+            break;
+          case MULTIPLY:
+            ans = dec_1 * dec_2;
+            break;
+          case DIVIDE:
+            ans = dec_1 / dec_2;
+            break; 
         }
         MessageBox(Utils::Format("結果は %d です。", ans))();
       }
@@ -2915,7 +2928,7 @@ void DoubleCalculator(MenuEntry* /*entry*/) {
   int choice;
   double double_1;
   double double_2;
-  double ans;
+  double ans = 0;
   Keyboard const kInput1("1番目の浮動小数点数を入力してください。");
   if (kInput1.Open(double_1) == 0) {
     Keyboard select_operator("算術演算子を選んでください。",
@@ -2924,14 +2937,19 @@ void DoubleCalculator(MenuEntry* /*entry*/) {
     if (choice >= 0) {
       Keyboard const kInput2("2番目の浮動小数点数を入力してください。");
       if (kInput2.Open(double_2) == 0) {
-        if (choice == 0) {
-          ans = double_1 + double_2;
-        } else if (choice == 1) {
-          ans = double_1 - double_2;
-        } else if (choice == 2) {
-          ans = double_1 * double_2;
-        } else if (choice == 3) {
-          ans = double_1 / double_2;
+        switch (choice) {
+          case PLUS:
+            ans = double_1 + double_2;
+            break;
+          case MINUS:
+            ans = double_1 - double_2;
+            break;
+          case MULTIPLY:
+            ans = double_1 * double_2;
+            break;
+          case DIVIDE:
+            ans = double_1 / double_2;
+            break;
         }
         MessageBox(Utils::Format("結果は %f です。", ans))();
       }
@@ -2961,14 +2979,14 @@ void ChatConversionChange(MenuEntry* /*entry*/) {
   const std::vector<u32> kListAddr{0x878CF80, 0x8790F80, 0x8791F80};
   std::vector<u32> list_values(kListAddr.size());
   std::vector<std::string> list_target_character(kListAddr.size());
-  for (int i = 0; i < kListAddr.size(); i++) {
+  for (int i = 0; i < std::ssize(kListAddr); i++) {
     Process::Read32(kListAddr.at(i), list_values.at(i));
     Process::ReadString(list_values.at(i) + 0x18, list_target_character.at(i),
                         12, StringFormat::Utf16);
   }
   if (Controller::IsKeysDown(R)) {
     for (const auto& kI : kListPredictiveConversion) {
-      for (int j = 0; j < kListAddr.size(); j++) {
+      for (int j = 0; j < std::ssize(kListAddr); j++) {
         if (list_target_character.at(j) == kI.at(0))
           Process::WriteString(list_values.at(j) + 0xF8, kI.at(1),
                                StringFormat::Utf16);
@@ -3152,7 +3170,7 @@ std::vector<std::string> GetPalicoEquipmentSupportAction() {
   std::vector<std::string> list_palico_action = GetListPalicoAction();
   std::vector<u8> list_support_action_id(8);
   std::vector<std::string> list_display_support_action_name(8);
-  for (int i = 0; i < list_support_action_id.size(); i++) {
+  for (int i = 0; i < std::ssize(list_support_action_id); i++) {
     Process::Read8(0x83388E8 + palicoChoice * 0x494 + i,
                    list_support_action_id.at(i));
     list_display_support_action_name.at(i) =
@@ -3187,7 +3205,7 @@ std::vector<std::string> GetPalicoEquipmentSkill() {
   std::vector<std::string> list_palico_skill = GetListPalicoSkill();
   std::vector<u8> list_skill_id(8);
   std::vector<std::string> list_display_skill_name(8);
-  for (int i = 0; i < list_skill_id.size(); i++) {
+  for (int i = 0; i < std::ssize(list_skill_id); i++) {
     Process::Read8(0x83388F0 + palicoChoice * 0x494 + i, list_skill_id.at(i));
     list_display_skill_name.at(i) = list_palico_skill.at(list_skill_id.at(i));
   }
@@ -3220,7 +3238,7 @@ std::vector<std::string> GetPalicoLearnSupportAction() {
   std::vector<std::string> list_palico_action = GetListPalicoAction();
   std::vector<u8> list_support_action_id(16);
   std::vector<std::string> list_display_support_action_name(16);
-  for (int i = 0; i < list_support_action_id.size(); i++) {
+  for (int i = 0; i < std::ssize(list_support_action_id); i++) {
     Process::Read8(0x83388F8 + palicoChoice * 0x494 + i,
                    list_support_action_id.at(i));
     list_display_support_action_name.at(i) =
@@ -3255,7 +3273,7 @@ std::vector<std::string> GetPalicoLearnSkill() {
   std::vector<std::string> list_palico_skill = GetListPalicoSkill();
   std::vector<u8> list_skill_id(12);
   std::vector<std::string> list_display_skill_name(12);
-  for (int i = 0; i < list_skill_id.size(); i++) {
+  for (int i = 0; i < std::ssize(list_skill_id); i++) {
     Process::Read8(0x8338908 + palicoChoice * 0x494 + i, list_skill_id.at(i));
     list_display_skill_name.at(i) = list_palico_skill.at(list_skill_id.at(i));
   }
@@ -3789,7 +3807,7 @@ void HexEditor(MenuEntry* entry) {
 void MySetToPorchItemCopy(MenuEntry* /*entry*/) {
   u32 item;
   std::vector<std::string> list_my_set(8);
-  for (int i = 0; i < list_my_set.size(); i++) {
+  for (int i = 0; i < std::ssize(list_my_set); i++) {
     Process::ReadString(0x8376190 + i * 0xAA, list_my_set.at(i), 30,
                         StringFormat::Utf8);
   }

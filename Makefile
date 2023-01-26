@@ -15,7 +15,6 @@ PLGINFO 	:= 	CTRPluginFramework.plgInfo
 BUILD		:= 	Build
 INCLUDES	:= 	Includes
 SOURCES 	:= 	Sources \
-				Sources/Helpers \
 				Sources/libpon
 
 #---------------------------------------------------------------------------------
@@ -24,7 +23,7 @@ SOURCES 	:= 	Sources \
 ARCH		:=	-march=armv6k -mtune=mpcore -mfloat-abi=hard -mtp=soft
 
 CFLAGS		:=	$(ARCH) -Os -mword-relocations \
-				-fomit-frame-pointer -ffunction-sections -fno-strict-aliasing
+				-fomit-frame-pointer -ffunction-sections -fno-strict-aliasing -Wall -Wextra -Wno-unused
 
 CFLAGS		+=	$(INCLUDE) -D__3DS__
 
