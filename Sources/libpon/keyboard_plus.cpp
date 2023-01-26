@@ -42,10 +42,10 @@ bool KeyboardPlus::Toggle32(const std::string& message, const u32& offset,
   OptionsKB->Populate(kListToggle);
   const int kChoice = OptionsKB->Open();
   switch (kChoice) {
-    case 0:
+    case ENABLE:
       Process::Write32(offset, enable);
       break;
-    case 1:
+    case DISABLE:
       Process::Write32(offset, disable);
       break;
     default:
@@ -60,10 +60,10 @@ bool KeyboardPlus::Toggle16(const std::string& message, const u32& offset,
   OptionsKB->Populate(kListToggle);
   const int kChoice = OptionsKB->Open();
   switch (kChoice) {
-    case 0:
+    case ENABLE:
       Process::Write16(offset, enable);
       break;
-    case 1:
+    case DISABLE:
       Process::Write16(offset, disable);
       break;
     default:
@@ -78,10 +78,10 @@ bool KeyboardPlus::Toggle8(const std::string& message, const u32& offset,
   OptionsKB->Populate(kListToggle);
   const int kChoice = OptionsKB->Open();
   switch (kChoice) {
-    case 0:
+    case ENABLE:
       Process::Write8(offset, enable);
       break;
-    case 1:
+    case DISABLE:
       Process::Write8(offset, disable);
       break;
     default:
@@ -110,15 +110,16 @@ bool KeyboardPlus::LengthToggle32(const std::string& message, const int length,
   OptionsKB->Populate(kListToggle);
   const int kChoice = OptionsKB->Open();
   switch (kChoice) {
-    case 0:
+    case ENABLE:
       for (int i = 0; i < length; i++) {
         Process::Write32(base_address + i * 0x4, value[i]);
       }
       break;
-    case 1:
+    case DISABLE:
       for (int i = 0; i < length; i++) {
         Process::Write32(base_address + i * 0x4, 0);
       }
+      break;
     default:
       break;
   }
