@@ -1,6 +1,7 @@
 #include <3ds.h>
 
 #include <CTRPluginFramework.hpp>
+#include <array>
 
 #include "cheats.hpp"
 #include "csvc.h"
@@ -8,8 +9,6 @@
 #include "libpon/security.hpp"
 #include "patch.hpp"
 #include "team_and_conditions.hpp"
-
-#include <array>
 
 namespace CTRPluginFramework {
 
@@ -1001,9 +1000,42 @@ void InitMenu(PluginMenu& menu) {
   menu += bonus;
 }
 
-void LocalTimeDisplay(Time /*time*/) {
-  const FwkSettings& kSettings = FwkSettings::Get();
-  const Screen& kTopScreen = OSD::GetTopScreen();
+u64 ReadFriendCode() {
+  u64 friend_code;
+  frdInit();
+  FriendKey key;
+  FRD_GetMyFriendKey(&key);
+  FRD_PrincipalIdToFriendCode(key.principalId, &friend_code);
+  frdExit();
+  return friend_code;
+}
+
+std::string MakeStringFriendCode(const u64& friend_code) {
+  return Utils::Format("%012lld", friend_code);
+}
+
+std::array<std::string, 3> SplitFriendCode(const u64& friend_code) {
+  const auto kFriendCode = MakeStringFriendCode(friend_code);
+  return {kFriendCode.substr(0, 4), kFriendCode.substr(4, 4),
+          kFriendCode.substr(8, 4)};
+}
+
+std::string ConvertFriendCodeForDisplay() {
+  const auto kSplitFriendCode = SplitFriendCode(ReadFriendCode());
+  return Utils::Format("フレンドコード: %s - %s - %s", kSplitFriendCode.at(0).c_str(),
+                       kSplitFriendCode.at(1).c_str(),
+                       kSplitFriendCode.at(2).c_str());
+}
+
+void ShowFriendCode(const FwkSettings& fwk_settings, const Screen& top_screen) {
+  top_screen.DrawRect(30, 220, 340, 20, fwk_settings.BackgroundMainColor, true);
+  top_screen.DrawRect(32, 221, 336, 19, fwk_settings.BackgroundBorderColor,
+                      false);
+  top_screen.DrawSysfont(ConvertFriendCodeForDisplay(), 34, 223);
+}
+
+void ShowLocalTime(const FwkSettings& fwk_settings,
+                      const Screen& top_screen) {
   std::string am_or_pm;
   const std::vector<std::string> kListDayOfTheWeek{
       "日", "月", "火", "水", "木", "金", "土",
@@ -1056,12 +1088,12 @@ void LocalTimeDisplay(Time /*time*/) {
   days++;
   month++;
 
-  if ((hours_24 / 12) != 0U) {
+  if (hours_24 / 12 != 0) {
     am_or_pm = "午後";
   } else {
     am_or_pm = "午前";
   }
-  if ((hours_24 % 12) != 0U) {
+  if (hours_24 % 12 != 0) {
     hours_12 = hours_24 % 12;
   } else {
     hours_12 = 12;
@@ -1070,14 +1102,26 @@ void LocalTimeDisplay(Time /*time*/) {
   day_of_the_week_index = (year + year / 4 - year / 100 + year / 400 +
                            static_cast<int>(2.6 * month + 1.6) + days) %
                           7;
-  kTopScreen.DrawRect(30, 0, 340, 20, kSettings.BackgroundMainColor, true);
-  kTopScreen.DrawRect(32, 1, 336, 19, kSettings.BackgroundBorderColor, false);
+  top_screen.DrawRect(30, 0, 340, 20, fwk_settings.BackgroundMainColor, true);
+  top_screen.DrawRect(32, 1, 336, 19, fwk_settings.BackgroundBorderColor,
+                      false);
   libpon::OsdPlus::DrawSystemFont(
       Utils::Format("%04lu年%02lu月%02lu日(%s)%s%02lu時%02lu分%02lu秒", year,
                     month, days,
                     kListDayOfTheWeek.at(day_of_the_week_index).c_str(),
                     am_or_pm.c_str(), hours_12, minutes, seconds),
-      34, 3, kTopScreen, Color::White, kSettings.BackgroundMainColor);
+      34, 3, top_screen, Color::White, fwk_settings.BackgroundMainColor);
+}
+
+void ShowOnTopScreen(const FwkSettings& fwk_settings) {
+  const auto kTopScreen = OSD::GetTopScreen();
+  ShowLocalTime(fwk_settings, kTopScreen);
+  ShowFriendCode(fwk_settings, kTopScreen);
+}
+
+void ShowOnNewFrame(Time /*time*/) {
+  const auto kFwkSettings = FwkSettings::Get();
+  ShowOnTopScreen(kFwkSettings);
 }
 
 // Plugin menu
@@ -1106,7 +1150,7 @@ int main() {
   // Plugin Ready!の代わり
   OSD::Notify(Color(234, 145, 152) << "ponpoko094's 3gx!");
 
-  menu->OnNewFrame = LocalTimeDisplay;
+  menu->OnNewFrame = ShowOnNewFrame;
 
   // Init our menu entries & folders
   InitMenu(*menu);
