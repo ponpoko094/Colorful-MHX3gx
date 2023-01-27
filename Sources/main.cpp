@@ -1022,9 +1022,9 @@ std::array<std::string, 3> SplitFriendCode(const u64& friend_code) {
 
 std::string ConvertFriendCodeForDisplay() {
   const auto kSplitFriendCode = SplitFriendCode(ReadFriendCode());
-  return Utils::Format("フレンドコード: %s - %s - %s", kSplitFriendCode.at(0).c_str(),
-                       kSplitFriendCode.at(1).c_str(),
-                       kSplitFriendCode.at(2).c_str());
+  return Utils::Format(
+      "フレンドコード: %s - %s - %s", kSplitFriendCode.at(0).c_str(),
+      kSplitFriendCode.at(1).c_str(), kSplitFriendCode.at(2).c_str());
 }
 
 void ShowFriendCode(const FwkSettings& fwk_settings, const Screen& top_screen) {
@@ -1034,18 +1034,35 @@ void ShowFriendCode(const FwkSettings& fwk_settings, const Screen& top_screen) {
   top_screen.DrawSysfont(ConvertFriendCodeForDisplay(), 34, 223);
 }
 
-void ShowLocalTime(const FwkSettings& fwk_settings,
-                      const Screen& top_screen) {
+bool IsLeapYear(const u32& year) {
+  return (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
+}
+
+bool IsAm(const u32& hour) { return hour / 12 == 0; }
+
+u32 Convert24HourTo12Hour(const u32& hour) { return hour % 12; }
+
+u32 CalculateDayOfTheWeek(u32 year, u32 month, u32 day) {
+  const std::array<u8, 12> kTable = {0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4};
+  year -= static_cast<u32>(month < 3);
+  return (year + year / 4 - year / 100 + year / 400 + kTable.at(month - 1) +
+          day) %
+         7;
+}
+
+void ShowLocalTime(const FwkSettings& fwk_settings, const Screen& top_screen) {
   std::string am_or_pm;
   const std::vector<std::string> kListDayOfTheWeek{
       "日", "月", "火", "水", "木", "金", "土",
   };
+  const std::array<u8, 12> kDaysInMonth{31, 28, 31, 30, 31, 30,
+                                        31, 31, 30, 31, 30, 31};
   u32 seconds;
   u32 minutes;
   u32 hours_24;
   u32 hours_12;
   u32 days;
-  u32 year;
+  u32 year = 1900;  // osGetTime starts in 1900
   u32 month;
   u32 day_of_the_week_index;
   const u64 kMilliseconds = osGetTime();
@@ -1057,51 +1074,35 @@ void ShowLocalTime(const FwkSettings& fwk_settings,
   days = hours_24 / 24;
   hours_24 %= 24;
 
-  year = 1900;  // osGetTime starts in 1900
-
   while (true) {
-    const bool kLeapYear =
-        (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
+    const bool kLeapYear = IsLeapYear(year);
     const u16 kDaysInYear = kLeapYear ? 366 : 365;
     if (days >= kDaysInYear) {
       days -= kDaysInYear;
       ++year;
-    } else {
-      static const std::array<u8, 12> kDaysInMonth{31, 28, 31, 30, 31, 30,
-                                                   31, 31, 30, 31, 30, 31};
-      for (month = 0; month < 12; ++month) {
-        u8 dim = kDaysInMonth.at(month);
-
-        if (month == 1 && kLeapYear) {
-          ++dim;
-        }
-
-        if (days >= dim) {
-          days -= dim;
-        } else {
-          break;
-        }
-      }
-      break;
+      continue;
     }
+    for (month = 0; month < kDaysInMonth.size(); month++) {
+      u8 dim = kDaysInMonth.at(month);
+
+      if (month == 1 && kLeapYear) {
+        dim++;
+      }
+
+      if (days < dim) {
+        break;
+      }
+      days -= dim;
+    }
+    break;
   }
   days++;
   month++;
 
-  if (hours_24 / 12 != 0) {
-    am_or_pm = "午後";
-  } else {
-    am_or_pm = "午前";
-  }
-  if (hours_24 % 12 != 0) {
-    hours_12 = hours_24 % 12;
-  } else {
-    hours_12 = 12;
-  }
+  am_or_pm = IsAm(hours_24) ? "午前" : "午後";
+  hours_12 = Convert24HourTo12Hour(hours_24);
 
-  day_of_the_week_index = (year + year / 4 - year / 100 + year / 400 +
-                           static_cast<int>(2.6 * month + 1.6) + days) %
-                          7;
+  day_of_the_week_index = CalculateDayOfTheWeek(year, month, days);
   top_screen.DrawRect(30, 0, 340, 20, fwk_settings.BackgroundMainColor, true);
   top_screen.DrawRect(32, 1, 336, 19, fwk_settings.BackgroundBorderColor,
                       false);
