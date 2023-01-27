@@ -2,7 +2,6 @@
 
 #include <CTRPluginFramework.hpp>
 #include <array>
-#include <chrono>
 
 #include "cheats.hpp"
 #include "csvc.h"
