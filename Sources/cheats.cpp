@@ -1916,30 +1916,26 @@ void MonsterActionRepeatOption(MenuEntry* entry) {
     return;
   }
   entry->SetGameFunc([](MenuEntry* /*entry*/) {
-    if (Controller::IsKeysDown(X + DPadRight)) {
-      auto monster_pointer = ReadMonsterPointer(0);
-      if (Controller::IsKeysDown(R)) {
-        if (IsMonsterSameArea(monster_pointer)) {
-          if (is_action_monster.test(0)) {
-            Process::Write16(monster_pointer + 0x1158, 0x0);
-          }
-          if (!is_action_monster.test(0)) {
-            Process::Write8(monster_pointer + 0x1159, 0x0);
-          }
-        }
-      }
-      monster_pointer = ReadMonsterPointer(1);
-      if (Controller::IsKeysDown(L)) {
-        if (IsMonsterSameArea(monster_pointer)) {
-          if (is_action_monster.test(1)) {
-            Process::Write16(monster_pointer + 0x1158, 0x0);
-          }
-          if (!is_action_monster.test(1)) {
-            Process::Write8(monster_pointer + 0x1159, 0x0);
-          }
-        }
-      }
+    if (!Controller::IsKeysDown(X + DPadRight)) {
+      return;
     }
+    int index = 0;
+    if (Controller::IsKeysDown(R)) {
+      index = 0;
+    } else if (Controller::IsKeysDown(L)) {
+      index = 1;
+    } else {
+      return;
+    }
+    auto monster_pointer = ReadMonsterPointer(index);
+    if (!IsMonsterSameArea(monster_pointer)) {
+      return;
+    }
+    if (is_action_monster.test(index)) {
+      Process::Write16(monster_pointer + 0x1158, 0x0);
+      return;
+    }
+    Process::Write8(monster_pointer + 0x1159, 0x0);
   });
 }
 
