@@ -21,5 +21,5 @@ jobs:
       - name: Upload Plugin
         uses: actions/upload-artifact@v3
         with:
-          name: Plugin 3GX File
+          name: Colorful-MHX3gx.3gx
           path: Colorful-MHX3gx.3gx
