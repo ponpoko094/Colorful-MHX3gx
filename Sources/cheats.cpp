@@ -1907,8 +1907,7 @@ void Monster2SizeMagnificationDisplay(MenuEntry* /*entry*/) {
 void MonsterActionRepeatOption(MenuEntry* entry) {
   static bool mon_1_act;
   static bool mon_2_act;
-  Keyboard keyboard("挙動を選んでください。", {"固まる", "なめらか"});
-  const int kChoice = keyboard.Open();
+  const int kChoice = Keyboard("挙動を選んでください。", {"固まる", "なめらか"}).Open();
   if (kChoice == 0) {
     mon_1_act = true;
     mon_2_act = true;
