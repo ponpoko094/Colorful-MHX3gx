@@ -1908,12 +1908,15 @@ void MonsterActionRepeatOption(MenuEntry* entry) {
   static std::bitset<2> is_action_monster;
   const int kChoice =
       Keyboard("挙動を選んでください。", {"固まる", "なめらか"}).Open();
-  if (kChoice == 0) {
-    is_action_monster.set();
-  } else if (kChoice == 1) {
-    is_action_monster.reset();
-  } else {
-    return;
+  switch (kChoice) {
+    case 0:
+      is_action_monster.set();
+      break;
+    case 1:
+      is_action_monster.reset();
+      break;
+    default:
+      return;
   }
   entry->SetGameFunc([](MenuEntry* /*entry*/) {
     if (!Controller::IsKeysDown(X + DPadRight)) {
