@@ -1905,16 +1905,13 @@ void Monster2SizeMagnificationDisplay(MenuEntry* /*entry*/) {
 
 // モンスターリピート設定
 void MonsterActionRepeatOption(MenuEntry* entry) {
-  static bool mon_1_act;
-  static bool mon_2_act;
+  static std::bitset<2> is_action_monster;
   const int kChoice =
       Keyboard("挙動を選んでください。", {"固まる", "なめらか"}).Open();
   if (kChoice == 0) {
-    mon_1_act = true;
-    mon_2_act = true;
+    is_action_monster.set();
   } else if (kChoice == 1) {
-    mon_1_act = false;
-    mon_2_act = false;
+    is_action_monster.reset();
   } else {
     return;
   }
@@ -1923,10 +1920,10 @@ void MonsterActionRepeatOption(MenuEntry* entry) {
       auto monster_pointer = ReadMonsterPointer(0);
       if (Controller::IsKeysDown(R)) {
         if (IsMonsterSameArea(monster_pointer)) {
-          if (mon_1_act) {
+          if (is_action_monster.test(0)) {
             Process::Write16(monster_pointer + 0x1158, 0x0);
           }
-          if (!mon_1_act) {
+          if (!is_action_monster.test(0)) {
             Process::Write8(monster_pointer + 0x1159, 0x0);
           }
         }
@@ -1934,10 +1931,10 @@ void MonsterActionRepeatOption(MenuEntry* entry) {
       monster_pointer = ReadMonsterPointer(1);
       if (Controller::IsKeysDown(L)) {
         if (IsMonsterSameArea(monster_pointer)) {
-          if (mon_2_act) {
+          if (is_action_monster.test(1)) {
             Process::Write16(monster_pointer + 0x1158, 0x0);
           }
-          if (!mon_2_act) {
+          if (!is_action_monster.test(1)) {
             Process::Write8(monster_pointer + 0x1159, 0x0);
           }
         }
