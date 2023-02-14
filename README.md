@@ -29,6 +29,13 @@
    *Enabled** にしてください。
 5. MHXを起動し、画面が一瞬青く光ったら使えます。
 
+## Colorful-MHX3gxのベータ版を使うためには
+
+1. [Github Actions](https://github.com/ponpoko094/Colorful-MHX3gx/actions/workflows/make.yml)
+   の一番上にある✅アイコンの横のリンクに飛んでください。
+2. `Artifacts`の`Colorful-MHX3gx.3gx`を押すと、自動的に3gxのダウンロードが開始されます。
+3. zip形式で保存されるため、`7-zip`等の解凍ソフトを使い3gxを取り出してください。
+
 ## 開発者向け
 
 ### 何のプログラミング言語で開発しているの？
