@@ -1907,7 +1907,8 @@ void Monster2SizeMagnificationDisplay(MenuEntry* /*entry*/) {
 void MonsterActionRepeatOption(MenuEntry* entry) {
   static bool mon_1_act;
   static bool mon_2_act;
-  const int kChoice = Keyboard("挙動を選んでください。", {"固まる", "なめらか"}).Open();
+  const int kChoice =
+      Keyboard("挙動を選んでください。", {"固まる", "なめらか"}).Open();
   if (kChoice == 0) {
     mon_1_act = true;
     mon_2_act = true;
@@ -1918,32 +1919,26 @@ void MonsterActionRepeatOption(MenuEntry* entry) {
     return;
   }
   entry->SetGameFunc([](MenuEntry* /*entry*/) {
-    u32 mon_1;
-    u32 mon_2;
-    u8 area_1;
-    u8 area_2;
-    Process::Read32(0x8325244, mon_1);
-    Process::Read32(0x8325248, mon_2);
-    Process::Read8(mon_1 + 0xD, area_1);
-    Process::Read8(mon_2 + 0xD, area_2);
     if (Controller::IsKeysDown(X + DPadRight)) {
+      auto monster_pointer = ReadMonsterPointer(0);
       if (Controller::IsKeysDown(R)) {
-        if (area_1 == 0x4C) {
+        if (IsMonsterSameArea(monster_pointer)) {
           if (mon_1_act) {
-            Process::Write16(mon_1 + 0x1158, 0x0);
+            Process::Write16(monster_pointer + 0x1158, 0x0);
           }
           if (!mon_1_act) {
-            Process::Write8(mon_1 + 0x1159, 0x0);
+            Process::Write8(monster_pointer + 0x1159, 0x0);
           }
         }
       }
+      monster_pointer = ReadMonsterPointer(1);
       if (Controller::IsKeysDown(L)) {
-        if (area_2 == 0x4C) {
+        if (IsMonsterSameArea(monster_pointer)) {
           if (mon_2_act) {
-            Process::Write16(mon_2 + 0x1158, 0x0);
+            Process::Write16(monster_pointer + 0x1158, 0x0);
           }
           if (!mon_2_act) {
-            Process::Write8(mon_2 + 0x1159, 0x0);
+            Process::Write8(monster_pointer + 0x1159, 0x0);
           }
         }
       }
@@ -2863,8 +2858,7 @@ void HexadecimalCalculator(MenuEntry* /*entry*/) {
       Keyboard const kInput2("2番目の16進数を入力してください。");
       if (kInput2.Open(data) == 0) {
         hex_2 = static_cast<int>(data);
-        switch (choice)
-        {
+        switch (choice) {
           case PLUS:
             ans = hex_1 + hex_2;
             break;
@@ -2876,7 +2870,7 @@ void HexadecimalCalculator(MenuEntry* /*entry*/) {
             break;
           case DIVIDE:
             ans = hex_1 / hex_2;
-            break; 
+            break;
         }
         MessageBox(Utils::Format("結果は %X です。", ans))();
       }
@@ -2902,8 +2896,7 @@ void DecimalCalculator(MenuEntry* /*entry*/) {
       input_2.IsHexadecimal(false);
       if (input_2.Open(data) == 0) {
         dec_2 = static_cast<int>(data);
-        switch (choice)
-        {
+        switch (choice) {
           case PLUS:
             ans = dec_1 + dec_2;
             break;
@@ -2915,7 +2908,7 @@ void DecimalCalculator(MenuEntry* /*entry*/) {
             break;
           case DIVIDE:
             ans = dec_1 / dec_2;
-            break; 
+            break;
         }
         MessageBox(Utils::Format("結果は %d です。", ans))();
       }
