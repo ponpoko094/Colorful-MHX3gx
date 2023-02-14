@@ -594,7 +594,7 @@ void SkinColorChange(MenuEntry* /*entry*/) {
   Keyboard keyboard("肌の色を何色にしますか？", kListSkinColor);
   const int kChoice = keyboard.Open();
   if (kChoice >= 0) {
-    Process::Write32(0x831B70C, kListSkinColorHex[kChoice]);
+    Process::Write32(0x831B70C, kListSkinColorHex.at(kChoice));
   }
 }
 
@@ -2587,7 +2587,7 @@ void PlayerVoiceChange(MenuEntry* /*entry*/) {
       "TYPE 18", "TYPE 19", "TYPE 20"};
   Process::Read8(0x831B6ED, current_voice);
   Keyboard keyboard(
-      "声を選んでください。\n現在[" + kListVoiceType[current_voice] + "]",
+      "声を選んでください。\n現在[" + kListVoiceType.at(current_voice) + "]",
       kListVoiceType);
   const int kChoice = keyboard.Open();
   if (kChoice >= 0) {
@@ -2602,7 +2602,7 @@ void PlayerEyeColorChange(MenuEntry* /*entry*/) {
       "紫色", "白色", "黒色", "全部白色", "全部黒色"};
   Process::Read8(0x831B6EE, current_eye);
   Keyboard keyboard(
-      "目の色を選んでください。\n現在[" + kListEyeType[current_eye] + "]",
+      "目の色を選んでください。\n現在[" + kListEyeType.at(current_eye) + "]",
       kListEyeType);
   const int kChoice = keyboard.Open();
   if (kChoice >= 0) {
@@ -2616,7 +2616,7 @@ void PlayerInnerChange(MenuEntry* /*entry*/) {
       "TYPE 1", "TYPE 2", "TYPE 3", "TYPE 4", "TYPE 5", "TYPE 6", "TYPE 7"};
   Process::Read8(0x831B6EF, current_inner);
   Keyboard keyboard(
-      "インナーを選んでください。\n現在[" + kListInnerType[current_inner] + "]",
+      "インナーを選んでください。\n現在[" + kListInnerType.at(current_inner) + "]",
       kListInnerType);
   const int kChoice = keyboard.Open();
   if (kChoice >= 0) {
@@ -2629,7 +2629,7 @@ void PlayerGenderChange(MenuEntry* /*entry*/) {
   const std::vector<std::string> kListGender{"男", "女"};
   Process::Read8(0x831B6F0, current_gender);
   Keyboard keyboard(
-      "性別を選んでください。\n現在[" + kListGender[current_gender] + "]",
+      "性別を選んでください。\n現在[" + kListGender.at(current_gender) + "]",
       kListGender);
   const int kChoice = keyboard.Open();
   if (kChoice >= 0) {
@@ -2644,7 +2644,7 @@ void PlayerHuntingStyleChange(MenuEntry* /*entry*/) {
       "ブシドースタイル"};
   Process::Read8(0x831B6F1, current_hunting_style);
   Keyboard keyboard("狩猟スタイルを選んでください。\n現在[" +
-                        kListHuntingStyle[current_hunting_style] + "]",
+                        kListHuntingStyle.at(current_hunting_style) + "]",
                     kListHuntingStyle);
   const int kChoice = keyboard.Open();
   if (kChoice >= 0) {
@@ -2662,7 +2662,7 @@ void PlayerHearStyleChange(MenuEntry* /*entry*/) {
       "TYPE 25", "TYPE 26", "TYPE 27", "TYPE 28", "TYPE 29", "TYPE 30"};
   Process::Read8(0x831B6F2, current_hear_style);
   Keyboard keyboard("髪型を選んでください。\n現在[" +
-                        kListHearStyleType[current_hear_style] + "]",
+                        kListHearStyleType.at(current_hear_style) + "]",
                     kListHearStyleType);
   const int kChoice = keyboard.Open();
   if (kChoice >= 0) {
@@ -2678,7 +2678,7 @@ void PlayerFaceChange(MenuEntry* /*entry*/) {
       "TYPE 13", "TYPE 14", "TYPE 15", "TYPE 16", "TYPE 17", "TYPE 18"};
   Process::Read8(0x831B6F3, current_face);
   Keyboard keyboard(
-      "顔を選んでください。\n現在[" + kListFaceType[current_face] + "]",
+      "顔を選んでください。\n現在[" + kListFaceType.at(current_face) + "]",
       kListFaceType);
   const int kChoice = keyboard.Open();
   if (kChoice >= 0) {
@@ -2694,7 +2694,7 @@ void PlayerCosmeticsChange(MenuEntry* /*entry*/) {
       "TYPE 11", "TYPE 12", "TYPE 13", "TYPE 14", "メイクなし"};
   Process::Read8(0x831B6F4, current_cosmetics);
   Keyboard keyboard("メイクを選んでください。\n現在[" +
-                        kListMakeType[current_cosmetics] + "]",
+                        kListMakeType.at(current_cosmetics) + "]",
                     kListMakeType);
   const int kChoice = keyboard.Open();
   if (kChoice >= 0) {
@@ -3295,7 +3295,7 @@ void PalicoVoiceChange(MenuEntry* /*entry*/) {
                                                   "TYPE3"};
   Process::Read8(0x8338AC1 + palicoChoice * 0x494, voice);
   Keyboard keyboard(
-      "声を選んでください。\n現在[" + kListPalicoVoice[voice] + "]",
+      "声を選んでください。\n現在[" + kListPalicoVoice.at(voice) + "]",
       kListPalicoVoice);
   const int kChoice = keyboard.Open();
   if (kChoice >= 0) {
@@ -3308,7 +3308,7 @@ void PalicoEyeChange(MenuEntry* /*entry*/) {
   const std::vector<std::string> kListPalicoEye{
       "ふつう", "ほそ目", "つり目", "ニヤケ目", "閉じ目", "キズ目", "透明"};
   Process::Read8(0x8338AC2 + palicoChoice * 0x494, eye);
-  Keyboard keyboard("目を選んでください。\n現在[" + kListPalicoEye[eye] + "]",
+  Keyboard keyboard("目を選んでください。\n現在[" + kListPalicoEye.at(eye) + "]",
                     kListPalicoEye);
   const int kChoice = keyboard.Open();
   if (kChoice >= 0) {
@@ -3322,7 +3322,7 @@ void PalicoInnerChange(MenuEntry* /*entry*/) {
       "TYPE1", "TYPE2", "ファラオ", "ゴア", "シャガル", "透明"};
   Process::Read8(0x8338AC3 + palicoChoice * 0x494, inner);
   Keyboard keyboard(
-      "インナーを選んでください。\n現在[" + kListPalicoInner[inner] + "]",
+      "インナーを選んでください。\n現在[" + kListPalicoInner.at(inner) + "]",
       kListPalicoInner);
   const int kChoice = keyboard.Open();
   if (kChoice >= 0) {
@@ -3337,7 +3337,7 @@ void PalicoFurCoatChange(MenuEntry* /*entry*/) {
       "ツートーン", "ミケ",     "ハンテン"};
   Process::Read8(0x8338AC6 + palicoChoice * 0x494, coat);
   Keyboard keyboard(
-      "毛並みを選んでください。\n現在[" + kListPalicoFurCoat[coat] + "]",
+      "毛並みを選んでください。\n現在[" + kListPalicoFurCoat.at(coat) + "]",
       kListPalicoFurCoat);
   const int kChoice = keyboard.Open();
   if (kChoice >= 0) {
@@ -3350,7 +3350,7 @@ void PalicoEarChange(MenuEntry* /*entry*/) {
   const std::vector<std::string> kListPalicoEar{"ふつう", "たれ耳", "聞き耳",
                                                 "立ち耳", "まる耳", "透明"};
   Process::Read8(0x8338AC7 + palicoChoice * 0x494, ear);
-  Keyboard keyboard("耳を選んでください。\n現在[" + kListPalicoEar[ear] + "]",
+  Keyboard keyboard("耳を選んでください。\n現在[" + kListPalicoEar.at(ear) + "]",
                     kListPalicoEar);
   const int kChoice = keyboard.Open();
   if (kChoice >= 0) {
@@ -3364,7 +3364,7 @@ void PalicoTailChange(MenuEntry* /*entry*/) {
       "ふつう", "ダンゴ", "カギ", "ふさふさ", "ながまる", "透明"};
   Process::Read8(0x8338AC8 + palicoChoice * 0x494, tail);
   Keyboard keyboard(
-      "尻尾を選んでください。\n現在[" + kListPalicoTail[tail] + "]",
+      "尻尾を選んでください。\n現在[" + kListPalicoTail.at(tail) + "]",
       kListPalicoTail);
   const int kChoice = keyboard.Open();
   if (kChoice >= 0) {
