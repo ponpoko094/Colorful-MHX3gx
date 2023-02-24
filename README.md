@@ -25,8 +25,8 @@
    からMHX3gx.3gxをダウンロードしてください。
 3. Colorful-MHX3gx.3gxをSDカードの`luma\plugins\0004000000155400`
    の中にコピーしてください。もしもフォルダーがなかったら作成してください。
-4. 3DSを起動し、ホームメニューで`L+↓+Select`を押しRosalina menuを開き、Plugin Loaderの項目を*
-   *Enabled** にしてください。
+4. 3DSを起動し、ホームメニューで`L+↓+Select`を押しRosalina menuを開き、Plugin Loaderの項目を
+   **Enabled** にしてください。
 5. MHXを起動し、画面が一瞬青く光ったら使えます。
 
 ## Colorful-MHX3gxのベータ版を使うためには
