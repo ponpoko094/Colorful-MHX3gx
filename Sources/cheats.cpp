@@ -1274,17 +1274,17 @@ void VillageContributionPointChange(MenuEntry* /*entry*/) {
   u32 contribution_point;
   const std::vector<std::string> kListVillage{"ベルナ村", "ココット村",
                                               "ポッケ村", "ユクモ村"};
-  Keyboard keyboard("貢献度を変更したい村を選んでください。", kListVillage);
-  const int kChoice = keyboard.Open();
-  for (int i = 0; i < std::ssize(kListVillage); i++) {
-    if (i == kChoice) {
-      Keyboard key("貢献度を入力してください。");
-      key.IsHexadecimal(false);
-      if (key.Open(contribution_point) == 0) {
-        Process::Write32(0x83B3824 + i * 0x4, contribution_point);
-      }
-    }
+  const int kChoice =
+      Keyboard("貢献度を変更したい村を選んでください。", kListVillage).Open();
+  if (kChoice < 0) {
+    return;
   }
+  Keyboard key("貢献度を入力してください。");
+  key.IsHexadecimal(false);
+  if (key.Open(contribution_point) != 0) {
+    return;
+  }
+  Process::Write32(0x83B3824 + kChoice * 0x4, contribution_point);
 }
 
 // ルームサービス変更
@@ -1709,27 +1709,27 @@ void ItemBoxEdit(MenuEntry* /*entry*/) {
   if (kChoice == 0) {
     Process::Write16(0x8372562, 0x1);
     for (int i = 0; i < 1400; i++) {
-      Process::Read16(0x8372562 + i * 4 , data_16);
-      Process::Write16(0x8372566 + i * 4 , data_16 + 1);
+      Process::Read16(0x8372562 + i * 4, data_16);
+      Process::Write16(0x8372566 + i * 4, data_16 + 1);
     }
   } else if (kChoice == 1) {
     Process::Write16(0x8372562, 0x579);
     for (int i = 0; i < 548; i++) {
-      Process::Read16(0x8372562 + i * 4 , data_16);
-      Process::Write16(0x8372566 + i * 4 , data_16 + 1);
+      Process::Read16(0x8372562 + i * 4, data_16);
+      Process::Write16(0x8372566 + i * 4, data_16 + 1);
     }
     for (int i = 0; i < 851; i++) {
-      Process::Write32(0x8372DF6 + i * 4 , 0x0);
+      Process::Write32(0x8372DF6 + i * 4, 0x0);
     }
   } else if (kChoice == 2) {
     for (int i = 0; i < 1400; i++) {
-      Process::Write16(0x8372564 + i * 4 , 99);
+      Process::Write16(0x8372564 + i * 4, 99);
     }
   } else if (kChoice == 3) {
     if (MessageBox("確認です", "全て削除してもいいですか？",
                    DialogType::DialogYesNo)()) {
       for (int i = 0; i < 1400; i++) {
-        Process::Write32(0x8372562 + i * 4 , 0x0);
+        Process::Write32(0x8372562 + i * 4, 0x0);
       }
     }
   }
