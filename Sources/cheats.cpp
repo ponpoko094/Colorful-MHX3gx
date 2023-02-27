@@ -3925,10 +3925,18 @@ void PlayerSizeOption(MenuEntry* entry) {
 
 void MaximumFpsChange(MenuEntry* /*entry*/) {
   float fps;
-  Keyboard const kKeyboard("最大FPSを入力してください。");
-  if (kKeyboard.Open(fps) == 0) {
-    Process::WriteFloat(0x87E24E0, fps);
+  Keyboard keyboard("最大FPSを入力してください。");
+  if (keyboard.Open(fps) != 0) {
+    return;
   }
+  if (fps < 10.F) {
+    bool is_selected = MessageBox(
+        "動作が不安定になる場合があります。\nそれでも変更しますか？")();
+    if (!is_selected) {
+      return;
+    }
+  }
+  Process::WriteFloat(0x87E24E0, fps);
 }
 
 void MealInfinite(MenuEntry* /*entry*/) { Process::Write8(0x8480827, 0); }
