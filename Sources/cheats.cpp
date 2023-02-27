@@ -4060,7 +4060,7 @@ void MealSkillChange(MenuEntry* /*entry*/) {
 
 void Teleport(MenuEntry* /*entry*/) {
   auto player_pointer = ReadPlayerPointer();
-  auto [x, y, z] = ReadPlayerCoordinates(player_pointer);
+  static auto [x, y, z] = ReadPlayerCoordinates(player_pointer);
   if (Controller::IsKeysDown(X + DPadRight)) {
     Process::ReadFloat(player_pointer + 0x40, x);
     Process::ReadFloat(player_pointer + 0x44, y);
