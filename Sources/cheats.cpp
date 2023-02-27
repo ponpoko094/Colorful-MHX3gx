@@ -4059,20 +4059,17 @@ void MealSkillChange(MenuEntry* /*entry*/) {
 }
 
 void Teleport(MenuEntry* /*entry*/) {
-  u32 offset;
-  static float player_x;
-  static float player_y;
-  static float player_z;
-  Process::Read32(0x8195350, offset);
+  auto player_pointer = ReadPlayerPointer();
+  auto [x, y, z] = ReadPlayerCoordinates(player_pointer);
   if (Controller::IsKeysDown(X + DPadRight)) {
-    Process::ReadFloat(offset + 0x40, player_x);
-    Process::ReadFloat(offset + 0x44, player_y);
-    Process::ReadFloat(offset + 0x48, player_z);
+    Process::ReadFloat(player_pointer + 0x40, x);
+    Process::ReadFloat(player_pointer + 0x44, y);
+    Process::ReadFloat(player_pointer + 0x48, z);
   }
   if (Controller::IsKeysDown(X + DPadLeft)) {
-    Process::WriteFloat(offset + 0x40, player_x);
-    Process::WriteFloat(offset + 0x44, player_y);
-    Process::WriteFloat(offset + 0x48, player_z);
+    Process::WriteFloat(player_pointer + 0x40, x);
+    Process::WriteFloat(player_pointer + 0x44, y);
+    Process::WriteFloat(player_pointer + 0x48, z);
   }
 }
 
