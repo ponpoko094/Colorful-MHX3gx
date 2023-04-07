@@ -1098,7 +1098,7 @@ void ShowLocalTime(const FwkSettings& fwk_settings, const Screen& top_screen) {
   }
   days++;
   month++;
-
+  
   am_or_pm = IsAm(hours_24) ? "午前" : "午後";
   hours_12 = Convert24HourTo12Hour(hours_24);
 
@@ -1138,9 +1138,6 @@ int main() {
 
   // Synchronize the menu with frame event
   menu->SynchronizeWithFrame(true);
-
-  // HexEditorを無効化
-  menu->SetHexEditorState(true);
 
   // Plugin Ready!を無効化
   menu->ShowWelcomeMessage(false);
